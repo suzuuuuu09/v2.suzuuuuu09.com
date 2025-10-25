@@ -1,0 +1,32 @@
+---
+import { css } from "styled-system/css";
+---
+
+<footer
+  class={css({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    mx: "auto",
+    my: "10",
+    pt: "4",
+    px: "auto",
+    width: "100%",
+    "&::before": {
+      content: '""',
+      width: "80%",
+      borderTopWidth: "1",
+      borderTopColor: "s.border",
+      mb: "4",
+    },
+  })}
+>
+  <span class={css({
+    textAlign: "center",
+    fontSize: "sm",
+    color: "s.text",
+  })}>
+    Copyright © 2025 suzuuuuu09 All Rights Reserved.
+  </span>
+</footer>

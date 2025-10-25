@@ -2,11 +2,16 @@
 import { css } from "styled-system/css"
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ContentContainer from "@/components/shared/ContentContainer.astro";
+import Footer from "@/components/bases/Footer.astro";
 import ProfileSection from "@/components/sections/ProfileSection.astro";
+import SkillSection from "@/components/sections/SkillSection.astro";
 ---
 
 <BaseLayout>
 	<ContentContainer>
 		<ProfileSection />
+		<SkillSection />
+		
+		<Footer />
 	</ContentContainer>
 </BaseLayout>

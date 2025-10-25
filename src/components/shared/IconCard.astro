@@ -1,0 +1,9 @@
+---
+interface Props {
+  iconKey: string;
+  name?: boolean;
+  size?: number;
+}
+
+const { iconKey, name = false, size = 60 } = Astro.props;
+---

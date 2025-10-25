@@ -30,7 +30,8 @@ export default defineConfig({
             500: { value: "#f4f2f5" },
             800: { value: "#f5f3f7" },
           },
-          "s.text.main": { value: "#474554" }
+          "s.text.main": { value: "#474554" },
+          "s.border": { value: "{colors.gray.300}" },
         },
       }
     },

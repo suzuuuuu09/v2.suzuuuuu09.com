@@ -1,0 +1,78 @@
+---
+import { cva } from "styled-system/css";
+import { Image } from "astro:assets";
+import defaultAvatar from "@/assets/icon.svg";
+
+interface Props {
+  avatar?: ImageMetadata;
+  size?: number;
+  alt?: string;
+  square?: boolean;
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+  border?: boolean;
+}
+
+const {
+  avatar = defaultAvatar,
+  size = 20,
+  alt = "suzuのあばたー",
+  square = false,
+  objectFit = "contain",
+  border = false,
+} = Astro.props;
+
+const avatarStyles = cva({
+	base: {
+		display: "block",
+		maxWidth: "none",
+		width: `${size}px`,
+		height: `${size}px`,
+	},
+	variants: {
+		border: {
+			false: {
+				width: "100%",
+				height: "100%",
+			},
+			true: {
+				borderWidth: "2px",
+				borderStyle: "solid",
+				borderColor: "s.border",
+				borderRadius: "lg",
+				padding: "2",
+				boxSizing: "border-box",
+				width: "100%",
+				height: "100%",
+			},
+		},
+		square: {
+			false: {},
+			true: {
+				aspectRatio: "1 / 1",
+				backgroundColor: "var(--colors-background, transparent)",
+			},
+		},
+		fit: {
+			cover: { objectFit: "cover" },
+			contain: { objectFit: "contain" },
+			fill: { objectFit: "fill" },
+			none: { objectFit: "none" },
+			"scale-down": { objectFit: "scale-down" },
+		},
+	},
+	defaultVariants: {
+		fit: "contain",
+	},
+});
+---
+
+<div style={`width: ${size}px; height: ${size}px;`}>
+	<Image
+		src={avatar}
+		alt={alt}
+		width={size}
+		height={size}
+		loading="eager"
+		class={avatarStyles({ border, square, fit: objectFit })}
+	/>
+</div>
