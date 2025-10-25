@@ -1,10 +1,12 @@
 ---
 import { css } from "styled-system/css";
-import { Flex } from "styled-system/jsx";
+import { Flex, styled as s } from "styled-system/jsx";
+import { Icon } from "astro-iconify";
 import { CONTACT_LINKS } from "@/consts";
-import { Content as ProfileContent } from "@/contents/profile.md";
+import { Content as ProfileContent } from "@/content/profile.md";
 import SectionLayout from "@/components/shared/SectionLayout.astro";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
+import Avatar from "@/components/shared/Avatar.astro";
 ---
 
 <SectionLayout>
@@ -15,6 +17,42 @@ import SectionTitle from "@/components/shared/SectionTitle.astro";
     alignItems={{ base: "center", md: "start" }}
     gap="24"
   >
-    <ProfileContent />
+    <div>
+      <Avatar square border size={200} alt="suzuのプロフィール画像"/>
+      <Flex
+        px="4"
+        mt="4"
+        dir="row"
+        justifyContent="center"
+        alignItems="center"
+        gap="4"
+      >
+      {CONTACT_LINKS.map((link) => (
+        <a
+          href={link.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Icon size={24} color={link.color} name={link.icon} />
+        </a>
+      ))}
+      </Flex>
+    </div>
+    <div>
+      <s.h3
+        my="1"
+        pb="1"
+        borderBottomWidth="1"
+        borderBottomColor="s.border"
+        fontWeight="bold"
+        fontSize="2xl"
+      >suzu / @suzuuuuu09</s.h3>
+      <ProfileContent class="markdown-content"/>
+      <s.a
+        href="/about"
+        color="s.brand"
+        _hover={{ textDecoration: 'underline' }}
+      > もっと見る </s.a>
+    </div>
   </Flex>
 </SectionLayout>
