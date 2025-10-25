@@ -1,0 +1,20 @@
+---
+import { css } from "styled-system/css";
+import { Flex } from "styled-system/jsx";
+import { CONTACT_LINKS } from "@/consts";
+import { Content as ProfileContent } from "@/contents/profile.md";
+import SectionLayout from "@/components/shared/SectionLayout.astro";
+import SectionTitle from "@/components/shared/SectionTitle.astro";
+---
+
+<SectionLayout>
+  <SectionTitle>Profile</SectionTitle>
+  <Flex
+    flexDir={{ base: 'column', md: "row" }}
+    justifyContent={{ base: "center", md: "start" }}
+    alignItems={{ base: "center", md: "start" }}
+    gap="24"
+  >
+    <ProfileContent />
+  </Flex>
+</SectionLayout>
