@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "prepare": "panda codegen",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -10,9 +11,17 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.8",
+    "@astrojs/react": "^4.4.0",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "astro": "^5.15.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^1.4.3"
   }
 }
