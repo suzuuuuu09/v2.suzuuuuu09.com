@@ -6,7 +6,7 @@ import { CONTACT_LINKS } from "@/consts";
 import { Content as ProfileContent } from "@/content/profile.md";
 import SectionLayout from "@/components/shared/SectionLayout.astro";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
-import Avatar from "@/components/shared/Avatar.astro";
+import Avatar from "@/components/ui/Avatar.astro";
 ---
 
 <SectionLayout>
@@ -15,7 +15,7 @@ import Avatar from "@/components/shared/Avatar.astro";
     flexDir={{ base: 'column', md: "row" }}
     justifyContent={{ base: "center", md: "start" }}
     alignItems={{ base: "center", md: "start" }}
-    gap="24"
+    gap="6"
   >
     <div>
       <Avatar square border size={200} alt="suzuのプロフィール画像"/>
@@ -43,14 +43,14 @@ import Avatar from "@/components/shared/Avatar.astro";
         my="1"
         pb="1"
         borderBottomWidth="1"
-        borderBottomColor="s.border"
+        borderBottomColor="sz.border"
         fontWeight="bold"
         fontSize="2xl"
       >suzu / @suzuuuuu09</s.h3>
       <ProfileContent class="markdown-content"/>
       <s.a
         href="/about"
-        color="s.brand"
+        color="sz.primary"
         _hover={{ textDecoration: 'underline' }}
       > もっと見る </s.a>
     </div>

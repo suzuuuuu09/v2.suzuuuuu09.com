@@ -1,32 +1,26 @@
 ---
-import { css } from "styled-system/css";
+import { styled as s } from "styled-system/jsx";
 ---
 
-<footer
-  class={css({
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    mx: "auto",
-    my: "10",
-    pt: "4",
-    px: "auto",
-    width: "100%",
-    "&::before": {
-      content: '""',
-      width: "80%",
-      borderTopWidth: "1",
-      borderTopColor: "s.border",
-      mb: "4",
-    },
-  })}
+<s.footer
+  display="flex"
+  flexDir="column"
+  justifyContent="center"
+  alignItems="center"
+  mx="auto"
+  my="10"
+  pt="4"
+  px="auto"
+  width="80%"
+  borderTopWidth="1"
+  borderTopColor="sz.border"
+  textAlign="center"
+  pt="4"
 >
-  <span class={css({
-    textAlign: "center",
-    fontSize: "sm",
-    color: "s.text",
-  })}>
+  <s.span
+    fontSize="sm"
+    color="sz.text"
+  >
     Copyright © 2025 suzuuuuu09 All Rights Reserved.
-  </span>
-</footer>
+  </s.span>
+</s.footer>

@@ -1,17 +1,18 @@
 ---
-import { css } from "styled-system/css"
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ContentContainer from "@/components/shared/ContentContainer.astro";
-import Footer from "@/components/bases/Footer.astro";
 import ProfileSection from "@/components/sections/ProfileSection.astro";
 import SkillSection from "@/components/sections/SkillSection.astro";
+import CareerSection from "@/components/sections/CareerSection.astro";
+import AwardSection from "@/components/sections/AwardSection.astro";
+import ProductSection from "@/components/sections/ProductSection.astro";
+import BlogSection from "@/components/sections/BlogSection.astro";
 ---
 
-<BaseLayout>
-	<ContentContainer>
-		<ProfileSection />
-		<SkillSection />
-		
-		<Footer />
-	</ContentContainer>
+<BaseLayout title="Home">
+	<ProfileSection />
+	<SkillSection />
+	<CareerSection />
+	<AwardSection />
+	<ProductSection />
+	<BlogSection />
 </BaseLayout>

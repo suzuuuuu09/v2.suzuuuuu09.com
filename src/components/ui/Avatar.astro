@@ -25,31 +25,28 @@ const avatarStyles = cva({
 	base: {
 		display: "block",
 		maxWidth: "none",
+		minWidth: `${size}px`,
+		minHeight: `${size}px`,
 		width: `${size}px`,
 		height: `${size}px`,
 	},
 	variants: {
 		border: {
-			false: {
-				width: "100%",
-				height: "100%",
-			},
+			false: {},
 			true: {
 				borderWidth: "2px",
 				borderStyle: "solid",
-				borderColor: "s.border",
+				borderColor: "sz.border",
 				borderRadius: "lg",
 				padding: "2",
 				boxSizing: "border-box",
-				width: "100%",
-				height: "100%",
 			},
 		},
 		square: {
 			false: {},
 			true: {
 				aspectRatio: "1 / 1",
-				backgroundColor: "var(--colors-background, transparent)",
+				bg: "sz.bg",
 			},
 		},
 		fit: {
@@ -66,13 +63,11 @@ const avatarStyles = cva({
 });
 ---
 
-<div style={`width: ${size}px; height: ${size}px;`}>
-	<Image
-		src={avatar}
-		alt={alt}
-		width={size}
-		height={size}
-		loading="eager"
-		class={avatarStyles({ border, square, fit: objectFit })}
-	/>
-</div>
+<Image
+	src={avatar}
+	alt={alt}
+	width={size}
+	height={size}
+	loading="eager"
+	class={avatarStyles({ border, square, fit: objectFit })}
+/>

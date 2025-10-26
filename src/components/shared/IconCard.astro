@@ -1,9 +1,70 @@
 ---
+import { ICON_CARDS } from '@/consts';
+import { css } from 'styled-system/css';
+import { Flex, VStack, styled as s } from 'styled-system/jsx';
+import Icon from 'astro-iconify';
+
 interface Props {
   iconKey: string;
-  name?: boolean;
+  showName?: boolean;
   size?: number;
 }
 
-const { iconKey, name = false, size = 60 } = Astro.props;
+const { iconKey, showName = true, size = 60 } = Astro.props;
+
+const iconData = ICON_CARDS[iconKey];
+if (!iconData) {
+  console.warn(`Icon "${iconKey}" not found in ICON_CARDS`);
+}
+
+function calculateCardLayout(iconSize: number, showName: boolean) {
+  const containerWidth = Math.max(iconSize + 16, 90);
+  const iconAreaHeight = iconSize + 8;
+  const textAreaHeight = showName ? 42 : 0;
+  const containerHeight = iconAreaHeight + textAreaHeight + 16;
+  
+  return {
+    containerWidth,
+    containerHeight,
+    iconAreaHeight,
+    textAreaHeight
+  };
+}
+
+const iconName = iconData?.icon || iconKey;
+const displayName = iconData?.name || iconKey;
+const iconColor = iconData?.color;
+const layout = calculateCardLayout(size, showName);
 ---
+
+<Flex
+  flexDir="column"
+  rounded="lg"
+  gap="2"
+  alignItems="center"
+  width={`${layout.containerWidth}px`}
+  height={`${layout.containerHeight}px`}
+>
+  <Flex
+    flexDir="column"
+    alignItems="center"
+    justifyContent="center"
+    height={`${layout.iconAreaHeight}px`}
+    p="2"
+  >
+    <Icon
+      name={iconName}
+      size={size}
+      style={iconColor ? `color: ${iconColor}` : undefined}
+    />
+  </Flex>
+  {showName && (
+    <s.span
+      fontSize="base"
+      color="sz.text.main"
+      fontWeight="medium"
+      textAlign="center"
+      height={`${layout.textAreaHeight}px`}
+    >{displayName}</s.span>
+  )}
+</p>

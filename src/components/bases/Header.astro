@@ -1,3 +1,118 @@
 ---
-import { Flex } from "styled-system/jsx";
+import { NAVIGATION_LINKS } from '@/consts';
+import { css } from 'styled-system/css';
+import { styled as s } from 'styled-system/jsx';
+import Avatar from '@/components/ui/Avatar.astro';
+import Navigation from './Navigation';
+// import HamburgerMenu from '../HamburgerMenu';
 ---
+
+<s.header
+  position="fixed"
+  top="1rem"
+  left="50%"
+  transform="translateX(-50%)"
+  width="calc(100% - 2rem)"
+  maxWidth="7xl"
+  overflow="visible"
+  zIndex="1000"
+  background="slate.800/90"
+  border="1px solid"
+  borderColor="white/20"
+  borderRadius="xl"
+  color="white"
+  boxShadow="2xl"
+  backdropFilter="blur(12px)"
+  transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+>
+  <s.nav
+    display="flex"
+    alignItems="center"
+    justifyContent="space-between"
+    px="6"
+    py="3"
+    position="relative"
+  >
+    <s.a
+      href="/"
+      display="flex"
+      alignItems="center"
+      gap="3"
+    >
+      <Avatar size={24} />
+      <s.h3
+        fontSize="xl"
+        m="0"
+        opacity="0.9"
+        fontWeight="bold"
+      >suzuuuuu09</s.h3>
+    </s.a>
+    <s.div
+      display="flex"
+      alignItems="center"
+      position="relative"
+    >
+      <!-- <HamburgerMenu client:load /> 仮置き -->
+      <button class={css({ display: 'block', md: { display: 'none' } })}>Menu</button>
+      <Navigation links={NAVIGATION_LINKS} client:load />
+    </s.div>
+  </s.nav>
+  <div 
+    class={`mobile-content ${css({
+      opacity: 0,
+      transform: 'translateY(-10px)',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      height: 0,
+      overflow: 'hidden',
+      padding: 0,
+      '&.show': {
+        opacity: 1,
+        transform: 'translateY(0)',
+        height: 'auto',
+        overflow: 'visible',
+        padding: '0.5rem 1.5rem 1.5rem',
+      },
+    })}`}
+  >
+    <s.div
+      display="flex"
+      flexDir="column"
+      gap="3"
+    >
+      {NAVIGATION_LINKS.map((link) => (
+        <a
+          href={link.href}
+          class={`mobile-nav-item ${css({
+            display: 'flex',
+            position: 'relative',
+            width: 'full',
+            padding: '0.75rem 1.5rem',
+            textAlign: 'center',
+            color: 'gray.300',
+            backgroundColor: 'transparent',
+            borderRadius: 'lg',
+            overflow: 'hidden',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            _hover: {
+              color: 'blue.400',
+              backgroundColor: 'blue.500/20',
+            },
+            _before: {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+              transition: 'all 0.1s ease',
+            },
+          })}`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </s.div>
+  </div>
+</s.header>
+  

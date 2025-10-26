@@ -14,12 +14,17 @@
     "@astrojs/react": "^4.4.0",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
+    "@mantine/core": "^8.3.5",
+    "@mantine/hooks": "^8.3.5",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "astro": "^5.15.1",
     "astro-iconify": "^1.2.0",
+    "framer-motion": "^12.23.24",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
     "sharp": "^0.34.3"
   },
   "devDependencies": {

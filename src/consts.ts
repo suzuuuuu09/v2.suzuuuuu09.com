@@ -1,6 +1,6 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
-import type { ContactLink } from "@/types";
+import type { ContactLink, IconCard } from "@/types";
 
 export const SITE_TITLE = "suzuuuuu09.com";
 export const SITE_DESCRIPTION = "Welcome to suzuuuuu09.com!";
@@ -25,3 +25,63 @@ export const CONTACT_LINKS: ContactLink[] =[
     color: "#55C500"
   }
 ]
+
+export const NAVIGATION_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/product", label: "Products" },
+  { href: "/award", label: "Awards" },
+  { href: "/blog", label: "Blogs" },
+]
+
+export const ICON_CARDS: Record<string, IconCard> = {
+  javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
+  astro: { icon: "material-icon-theme:astro", name: "Astro" },
+  bun: { icon: "material-icon-theme:bun", name: "Bun" },
+  c: { icon: "material-icon-theme:c", name: "C" },
+  cpp: { icon: "material-icon-theme:cpp", name: "C++" },
+  css: { icon: "material-icon-theme:css", name: "CSS" },
+  cs: { icon: "devicon:csharp", name: "C#" },
+  cloudflarepages: { icon: "simple-icons:cloudflarepages", name: "Cloudflare Pages", color: "#F38020" },
+  django: { icon: "material-icon-theme:django", name: "Django", },
+  expressjs: { icon: "simple-icons:express", name: "Express.js" },
+  ffmpeg: { icon: "file-icons:ffmpeg", name: "FFmpeg", color: "#13802d" },
+  flutter: { icon: "devicon:flutter", name: "Flutter" },
+  flask: { icon: "devicon:flask", name: "Flask" },
+  fastapi: { icon: "devicon:fastapi", name: "FastAPI" },
+  git: { icon: "material-icon-theme:git", name: "Git" },
+  github: { icon: "simple-icons:github", name: "GitHub" },
+  githubactions: { icon: "simple-icons:githubactions", name: "GitHub Actions", color: "#2088FF" },
+  gsap: { icon: "simple-icons:gsap", name: "GSAP", color: "#0AE448" },
+  hono: { icon: "logos:hono", name: "Hono.js" },
+  html: { icon: "material-icon-theme:html", name: "HTML" },
+  jupyter: { icon: "material-icon-theme:jupyter", name: "Jupyter" },
+  lua: { icon: "material-icon-theme:lua", name: "Lua" },
+  leaflet: { icon: "file-icons:leaflet", name: "Leaflet", color: "#199900" },
+  mantine: { icon: "simple-icons:mantine", name: "Mantine", color: "#339AF0" },
+  markdown: { icon: "material-icon-theme:markdown", name: "Markdown" },
+  mediapipe: { icon: "simple-icons:mediapipe", name: "MediaPipe", color: "#0497A7" },
+  nodejs: { icon: "vscode-icons:file-type-node", name: "Node.js" },
+  neovim: { icon: "simple-icons:neovim", name: "Neovim", color: "#57A143" },
+  nuxt: { icon: "material-icon-theme:nuxt", name: "Nuxt.js" },
+  opencv: { icon: "devicon:opencv", name: "OpenCV" },
+  obsidian: { icon: "simple-icons:obsidian", name: "Obsidian", color: "#7C3AED" },
+  pandas: { icon: "devicon:pandas", name: "Pandas" },
+  python: { icon: "material-icon-theme:python", name: "Python" },
+  selenium: { icon: "logos:selenium", name: "Selenium" },
+  svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
+  tailwindcss: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
+  typescript: { icon: "material-icon-theme:typescript", name: "TypeScript" },
+  unocss: { icon: "material-icon-theme:unocss", name: "UnoCSS" },
+  unity: { icon: "material-icon-theme:unity", name: "Unity" },
+  vercel: { icon: "material-icon-theme:vercel", name: "Vercel" },
+  vscode: { icon: "material-icon-theme:vscode", name: "VSCode" },
+  visualstudio: { icon: "material-icon-theme:visualstudio", name: "Visual Studio" },
+  vite: { icon: "material-icon-theme:vite", name: "Vite" },
+  vim: { icon: "material-icon-theme:vim", name: "Vim" },
+  vuejs: { icon: "material-icon-theme:vue", name: "Vue.js" },
+  vuetify: { icon: "simple-icons:vuetify", name: "Vuetify", color: "#1867C0" },
+  zenn: { icon: "material-icon-theme:zenn", name: "Zenn" },
+  qiita: { icon: "material-icon-theme:qiita", name: "Qiita" }
+
+}

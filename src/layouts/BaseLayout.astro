@@ -1,14 +1,19 @@
 ---
 import "@/styles/global.css";
 import { SITE_TITLE } from "@/consts";
+import Header from "@/components/bases/Header.astro";
 import Footer from "@/components/bases/Footer.astro";
+import { ContentContainer } from "@/components/shared/ContentContainer";
+import FloatingBackground from "@/components/bases/FloatingBackground";
+import { css } from "styled-system/css";
 
 interface Props {
 	title?: string;
+	maxW?: any;
 }
 
-const { title } = Astro.props;
-const siteTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
+const { title, maxW } = Astro.props;
+const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 ---
 
 <!doctype html>
@@ -20,7 +25,12 @@ const siteTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 		<meta name="generator" content={Astro.generator} />
 		<title>{siteTitle}</title>
 	</head>
-	<body>
-    <slot />
+	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
+		<FloatingBackground client:load />
+		<Header />
+		<ContentContainer maxW={maxW}>
+    	<slot />
+		</ContentContainer>
+    <Footer />
 	</body>
 </html>

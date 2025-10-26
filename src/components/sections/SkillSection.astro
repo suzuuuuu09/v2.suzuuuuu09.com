@@ -1,9 +1,51 @@
 ---
-import { css } from "styled-system/css";
+import { styled as s } from "styled-system/jsx";
 import SectionLayout from "@/components/shared/SectionLayout.astro";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
+import IconCard from "@/components/shared/IconCard.astro";
+import { SkillGrid } from "@/components/features/skill/SkillGrid";
+import { css } from "styled-system/css";
+
+const programmingLanguages = [
+  "python", "html", "css", "javascript", "typescript",
+  "c", "cpp", "cs", "lua",
+];
+
+const frameworksAndLibraries = [
+  "fastapi", "pandas", "opencv", "django", "flask",
+  "ffmpeg", "mediapipe", "selenium", "flutter",
+  "leaflet", "astro", "svelte", "vuejs", "nuxt",
+  "bun", "nodejs", "gsap", "hono", "expressjs",
+  "tailwindcss", "unocss", "vite", "vuetify", "mantine",
+];
+
+const toolAndOthers = [
+  "git", "github", "githubactions", "vscode", "visualstudio",
+  "neovim", "vim", "jupyter", "obsidian", "unity",
+  "vercel", "cloudflarepages",
+]
 ---
 
 <SectionLayout>
   <SectionTitle>Skills</SectionTitle>
+  <s.h3 mb="4" fontWeight="bold" fontSize="2xl">プログラミング言語</s.h3>
+  <SkillGrid>
+    {programmingLanguages.map((lang) => (
+      <IconCard iconKey={lang} />
+    ))}
+  </SkillGrid>
+
+  <s.h3 mb="4" fontWeight="bold" fontSize="2xl">フレームワーク・ライブラリ</s.h3>
+  <SkillGrid>
+    {frameworksAndLibraries.map((fw) => (
+      <IconCard iconKey={fw} />
+    ))}
+  </SkillGrid>
+
+  <s.h3 mb="4" fontWeight="bold" fontSize="2xl">ツール・その他</s.h3>
+  <SkillGrid>
+    {toolAndOthers.map((tool) => (
+      <IconCard iconKey={tool} />
+    ))}
+  </SkillGrid>
 </SectionLayout>
