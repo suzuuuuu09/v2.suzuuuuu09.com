@@ -39,7 +39,9 @@ import Navigation from './Navigation';
       alignItems="center"
       gap="3"
     >
-      <Avatar size={24} />
+      <div id="avatar-wrapper">
+        <Avatar size={24} />
+      </div>
       <s.h3
         fontSize="xl"
         m="0"
@@ -115,4 +117,61 @@ import Navigation from './Navigation';
     </s.div>
   </div>
 </s.header>
+
+<script>
+import { gsap } from 'gsap';
+
+// 「↑↑↓↓←→←→BA」を検出するためのKONAMIコマンド入力値
+let konamiCode = [38,38,40,40,37,39,37,39,66,65];
+let konamiIndex = 0;
+
+const keyMap: { [key: string]: number } = {
+  'ArrowUp': 38,
+  'ArrowDown': 40,
+  'ArrowLeft': 37,
+  'ArrowRight': 39,
+  'b': 66,
+  'B': 66,
+  'a': 65,
+  'A': 65
+};
+
+// KONAMIコマンドを検出
+document.addEventListener('keydown', function(e) {
+
+  const keyValue = keyMap[e.key];
   
+  if (keyValue === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      // アバターのwrapperを取得
+      const avatarWrapper = document.getElementById('avatar-wrapper');
+      if (!avatarWrapper) return; // アバターが存在しない場合は実行しない
+
+      // タイムラインを作成
+      const tl = gsap.timeline();
+      
+      // 回転とスケールアニメーション
+      tl.to(avatarWrapper, {
+        // rotationが360だと2回目以降に回転しなくなる
+        // 相対的に回転させられる'+=360'を使用
+        rotation: '+=360',
+        scale: 1.3,
+        duration: 0.6,
+        ease: 'power2.inOut',
+      })
+      
+      // リセット
+      .to(avatarWrapper, {
+        scale: 1,
+        duration: 0.4,
+        ease: 'power2.out',
+      });
+      
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+</script>
