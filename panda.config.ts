@@ -11,6 +11,9 @@ export default defineConfig({
   exclude: [],
   
   globalCss: {
+    ":root": {
+      fontFamily: "var(--ibm-plex-sans-jp)",
+    },
     "body": {
       bg: "sz.bg",
     },
@@ -103,6 +106,34 @@ export default defineConfig({
         },
       }
     }
+  },
+
+  // フォントの設定
+  globalFontface: {
+    "IBM Plex Sans JP": [
+      {
+        src: "url('/fonts/IBMPlexSansJP-Regular.ttf') format('truetype')",
+        fontWeight: "400",
+        fontStyle: "normal",
+        fontDisplay: "swap",
+      },
+      {
+        src: "url('/fonts/IBMPlexSansJP-Bold.ttf') format('truetype')",
+        fontWeight: "700",
+        fontStyle: "normal",
+        fontDisplay: "swap",
+      }
+    ],
+    "Moralerspace Neon": {
+      src: "url('/fonts/MoralerspaceNeon-Regular.ttf') format('truetype')",
+      fontWeight: "400",
+      fontStyle: "normal",
+      fontDisplay: "swap",
+    }
+  },
+  globalVars: {
+    "--ibm-plex-sans-jp": '"IBM Plex Sans JP", -apple-system, system-ui, sans-serif',
+    "--moralerspace-neon": '"Moralerspace Neon", -apple-system, system-ui, sans-serif',
   },
 
   // Useful for theme customization
