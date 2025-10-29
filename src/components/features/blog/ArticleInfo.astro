@@ -1,9 +1,9 @@
 ---
-import Tag from "./Tag.astro";
+import Tag from "@/components/ui/Tag.astro";
 import dayjs from "dayjs";
-import { Flex, styled as s } from "styled-system/jsx";
-import { css } from "styled-system/css";
+import { Flex, VStack, styled as s } from "styled-system/jsx";
 import Icon from "astro-iconify";
+import { getReadingTime } from "@/utils/reading-time";
 
 interface Props {
   title: string;
@@ -12,6 +12,7 @@ interface Props {
   tags?: string[];
   emoji?: string;
   description?: string;
+  content?: string;
 }
 
 const {
@@ -21,28 +22,27 @@ const {
   tags = [],
   emoji,
   description,
+  content,
 } = Astro.props;
+
+const readingTime = content ? getReadingTime(content) : undefined;
 ---
 
-<s.div
-  display="flex"
-  flexDir="column"
+<VStack
   alignItems="center"
   mb="8"
   gap="4"
 >
   <!-- 絵文字 -->
-  {
-    emoji && (
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        fontSize={{ base: "6xl", lg: "7xl" }}
-      >
-        {emoji}
-      </Flex>
-    )
-  }
+  {emoji && (
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      fontSize={{ base: "7xl", lg: "8xl" }}
+    >
+      {emoji}
+    </Flex>
+  )}
 
   <!-- タイトル -->
   <s.h1
@@ -62,21 +62,19 @@ const {
   </s.h1>
 
   <!-- タグ -->
-  {
-    tags.length > 0 && (
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="wrap"
-        gap="2"
-        mb="4"
-      >
-        {tags.map((tag) => (
-          <Tag useHashTag name={tag} />
-        ))}
-      </Flex>
-    )
-  }
+  {tags.length > 0 && (
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      flexWrap="wrap"
+      gap="2"
+      mb="4"
+    >
+      {tags.map((tag) => (
+        <Tag useHashTag name={tag} />
+      ))}
+    </Flex>
+  )}
 
   <!-- メタデータ -->
   <s.div
@@ -93,38 +91,40 @@ const {
       color="sz.text.main"
     >
       <!-- 公開日 -->
-      {
-        publishDate && (
-          <Flex alignItems="center" gap="1.5">
-            <Icon name="mdi:calendar" size={16} />
-            <span>{dayjs(publishDate).format("YYYY.MM.DD")}</span>
-          </Flex>
-        )
-      }
+      {publishDate && (
+        <Flex alignItems="center" gap="1.5">
+          <Icon name="mdi:calendar" size={16} />
+          <span>{dayjs(publishDate).format("YYYY.MM.DD")}</span>
+        </Flex>
+      )}
 
       <!-- 更新日 -->
-      {
-        updateDate && (
-          <Flex alignItems="center" gap="1.5">
-            <Icon name="mdi:update" size={16} />
-            <span>{dayjs(updateDate).format("YYYY.MM.DD")}</span>
-          </Flex>
-        )
-      }
+      {updateDate && (
+        <Flex alignItems="center" gap="1.5">
+          <Icon name="mdi:update" size={16} />
+          <span>{dayjs(updateDate).format("YYYY.MM.DD")}</span>
+        </Flex>
+      )}
+
+      <!-- 読了時間 -->
+      {readingTime && (
+        <Flex alignItems="center" gap="1.5">
+          <Icon name="mdi:clock-outline" size={16} />
+          <time>{readingTime}</time>
+        </Flex>
+      )}
     </Flex>
   </s.div>
 
-  {
-    description && (
-      <s.p
-        textAlign="center"
-        lineHeight="relaxed"
-        maxW="2xl"
-        color="sz.text.main"
-        px="4"
-      >
-        {description}
-      </s.p>
-    )
-  }
-</s.div>
+  {description && (
+    <s.p
+      textAlign="center"
+      lineHeight="relaxed"
+      maxW="2xl"
+      color="sz.text.main"
+      px="4"
+    >
+      {description}
+    </s.p>
+  )}
+</VStack>

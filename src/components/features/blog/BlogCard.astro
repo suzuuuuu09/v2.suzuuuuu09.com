@@ -1,10 +1,12 @@
 ---
 import dayjs from "dayjs";
-import { Flex, VStack, Center, styled as s } from "styled-system/jsx";
+import { Flex, HStack, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import { flex, center } from "styled-system/patterns";
 import { categories } from "@/consts/category";
-import Tag from "./Tag.astro";
+import Tag from "@/components/ui/Tag.astro";
+import Icon from "astro-iconify";
+import { getReadingTime } from "@/utils/reading-time";
 
 const maxVisibleTags = 2;
 
@@ -19,6 +21,7 @@ export interface Props {
       category?: string;
       publishDate: Date;
       updateDate?: Date;
+      content?: string;
     };
   };
 }
@@ -26,6 +29,7 @@ export interface Props {
 const { blog } = Astro.props;
 
 const currentCategory = categories.find((cat) => cat.category === blog.data.category);
+const readingTime = blog.data.content ? getReadingTime(blog.data.content) : undefined;
 ---
 
 <article
@@ -69,18 +73,8 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
     >
       <!-- カードヘッダー：絵文字背景 -->
       
-      <s.div
-        position="absolute"
-        top="6"
-        right="6"
-        opacity="0.1"
-      >
-        <Center
-          w="20"
-          h="20"
-          bg="sz.primary/10"
-          borderRadius="full"
-        >
+      <s.div position="absolute" top="6" right="6" opacity="0.1" >
+        <Center w="20" h="20" bg="sz.primary/10" borderRadius="full" >
           <div class={css({ fontSize: "3xl" })}>
             {currentCategory?.emoji || "📝"}
           </div>
@@ -133,43 +127,47 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
       </h4>
 
       <!-- タグ -->
-      <Flex
-        direction="column"
-        flex="1"
-        justify="space-between"
-      >
+      <Flex direction="column" flex="1" justify="space-between" >
         {blog.data.tags && blog.data.tags.length > 0 && (
-          <Flex
-            wrap="wrap"
-            gap="2"
-            mb="6"
-          >
+          <HStack gap="2" mb="7" >
             {blog.data.tags.slice(0, maxVisibleTags).map((tag) => (
               <Tag useHashTag name={tag} />
             ))}
             {blog.data.tags.length > maxVisibleTags && (
               <Tag name={`+${blog.data.tags.length - maxVisibleTags}`} />
             )}
-          </Flex>
+          </HStack>
         )}
-        <!-- フッター：日付情報 -->
-        <s.div
+
+        <HStack
+          justify="flex-end"
           borderTopWidth="1px"
           borderColor="sz.border/30"
           pt="3"
+          gap="2"
         >
-          <Flex justify="flex-end">
-            <!-- 公開日 -->
+          <!-- 読了時間 -->
+          {readingTime && (
+            <HStack gap="1">
+              <Icon name="mdi:clock-outline" size={16} />
+              <s.time color="sz.text.main" fontSize="sm">
+                {readingTime}
+              </s.time>
+            </HStack>
+          )}
+
+          <!-- 公開日 -->
+          <HStack gap="1">
+            <Icon name="mdi:calendar" size={16} />
             <s.time
               dateTime={blog.data.publishDate.toISOString()}
-              display="block"
               color="sz.text.main"
-              fontSize="base"
+              fontSize="sm"
             >
               {dayjs(blog.data.publishDate).format("YYYY.MM.DD")}
             </s.time>
-          </Flex>
-        </s.div>
+          </HStack>
+        </HStack>
       </Flex>
     </Flex>
   </a>

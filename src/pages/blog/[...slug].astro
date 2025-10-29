@@ -21,7 +21,8 @@ const articleInfo = {
   updateDate: entry.data.updateDate,
   tags: entry.data.tags || [],
   emoji: entry.data.emoji || "📝",
-  description: entry.data.description
+  description: entry.data.description,
+  content: entry.body, // 読了時間計算用
 };
 ---
 

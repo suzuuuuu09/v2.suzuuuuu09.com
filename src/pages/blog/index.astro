@@ -26,7 +26,11 @@ const posts = allBlogPosts.sort(
 					<BlogCard
           	blog={{
             	id: blog.id,
-            	data: { ...blog.data, slug: blog.data.slug ?? blog.id },
+            	data: { 
+								...blog.data, 
+								slug: blog.data.slug ?? blog.id,
+								content: blog.body,
+							},
           	}}
         	/>
 				))}
