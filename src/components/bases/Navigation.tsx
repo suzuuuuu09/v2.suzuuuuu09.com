@@ -80,9 +80,9 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
             className={css({
               position: 'absolute',
               borderRadius: 'lg',
-              backgroundColor: 'blue.500/20',
+              backgroundColor: 'sz.primary/20',
               border: '1px solid',
-              borderColor: 'blue.400/30',
+              borderColor: 'sz.primary/30',
               pointerEvents: 'none',
               zIndex: -1,
             })}
@@ -123,14 +123,14 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
           ref={(el) => { linkRefs.current[index] = el; }}
           href={link.href}
           className={`nav-link ${css({
-            color: 'gray.300',
+            color: 'sz.text.main',
             position: 'relative',
             paddingX: '0.75rem',
             paddingY: '0.5rem',
             borderRadius: 'lg',
             transition: 'all 0.1s ease',
             _hover: {
-              color: 'blue.400',
+              color: 'sz.primary',
             },
           })}`}
           onMouseEnter={() => handleMouseEnter(index)}

@@ -1,6 +1,7 @@
 ---
+// import "@mantine/core/styles.css";
 import "@/styles/global.css";
-import { SITE_TITLE } from "@/consts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts/base";
 import Header from "@/components/bases/Header.astro";
 import Footer from "@/components/bases/Footer.astro";
 import { ContentContainer } from "@/components/shared/ContentContainer";
@@ -24,13 +25,21 @@ const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{siteTitle}</title>
+		<meta name="description" content={SITE_DESCRIPTION} />
+		<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
 	</head>
 	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
-		<FloatingBackground client:load />
+		<FloatingBackground />
 		<Header />
 		<ContentContainer maxW={maxW}>
     	<slot />
 		</ContentContainer>
     <Footer />
+		<script>
+		import { initTwemoji } from "@/utils/twemoji";
+
+		document.addEventListener('DOMContentLoaded', initTwemoji);
+		document.addEventListener('astro:page-load', initTwemoji);
+		</script>
 	</body>
 </html>

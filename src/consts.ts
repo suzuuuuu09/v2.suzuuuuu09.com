@@ -1,30 +1,6 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
-import type { ContactLink, IconCard } from "@/types";
-
-export const SITE_TITLE = "suzuuuuu09.com";
-export const SITE_DESCRIPTION = "Welcome to suzuuuuu09.com!";
-
-export const CONTACT_LINKS: ContactLink[] =[
-  {
-    url: "https://twitter.com/suzuuuuu_09",
-    icon: "logos:twitter"
-  },
-  {
-    url: "https://github.com/suzuuuuu09",
-    icon: "logos:github-icon"
-  },
-  {
-    url: "https://zenn.dev/suzuuuuu09",
-    icon: "simple-icons:zenn",
-    color: "#3EA8FF"
-  },
-  {
-    url: "https://qiita.com/suzuuuuu09",
-    icon: "simple-icons:qiita",
-    color: "#55C500"
-  }
-]
+import type { IconCard } from "@/types";
 
 export const NAVIGATION_LINKS = [
   { href: "/", label: "Home" },
@@ -35,7 +11,7 @@ export const NAVIGATION_LINKS = [
 ]
 
 export const ICON_CARDS: Record<string, IconCard> = {
-  javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
+  js: { icon: "material-icon-theme:javascript", name: "JavaScript" },
   astro: { icon: "material-icon-theme:astro", name: "Astro" },
   bun: { icon: "material-icon-theme:bun", name: "Bun" },
   c: { icon: "material-icon-theme:c", name: "C" },
@@ -67,21 +43,21 @@ export const ICON_CARDS: Record<string, IconCard> = {
   opencv: { icon: "devicon:opencv", name: "OpenCV" },
   obsidian: { icon: "simple-icons:obsidian", name: "Obsidian", color: "#7C3AED" },
   pandas: { icon: "devicon:pandas", name: "Pandas" },
+  pandacss: { icon: "logos:pandacss-icon", name: "PandaCSS" },
   python: { icon: "material-icon-theme:python", name: "Python" },
   selenium: { icon: "logos:selenium", name: "Selenium" },
   svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
-  tailwindcss: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
-  typescript: { icon: "material-icon-theme:typescript", name: "TypeScript" },
+  tailwind: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
+  ts: { icon: "material-icon-theme:typescript", name: "TypeScript" },
   unocss: { icon: "material-icon-theme:unocss", name: "UnoCSS" },
   unity: { icon: "material-icon-theme:unity", name: "Unity" },
   vercel: { icon: "material-icon-theme:vercel", name: "Vercel" },
-  vscode: { icon: "material-icon-theme:vscode", name: "VSCode" },
-  visualstudio: { icon: "material-icon-theme:visualstudio", name: "Visual Studio" },
+  vscode: { icon: "devicon:vscode", name: "VSCode" },
+  visualstudio: { icon: "devicon:visualstudio", name: "Visual Studio" },
   vite: { icon: "material-icon-theme:vite", name: "Vite" },
   vim: { icon: "material-icon-theme:vim", name: "Vim" },
-  vuejs: { icon: "material-icon-theme:vue", name: "Vue.js" },
+  vue: { icon: "material-icon-theme:vue", name: "Vue.js" },
   vuetify: { icon: "simple-icons:vuetify", name: "Vuetify", color: "#1867C0" },
   zenn: { icon: "material-icon-theme:zenn", name: "Zenn" },
   qiita: { icon: "material-icon-theme:qiita", name: "Qiita" }
-
 }

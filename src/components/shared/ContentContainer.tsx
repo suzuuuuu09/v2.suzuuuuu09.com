@@ -13,6 +13,7 @@ export const containerRecipes = cva({
     minH: '100vh',
     flexDir: 'column',
     alignItems: 'center',
+    w: 'full',
   },
   variants: {
     maxW: {

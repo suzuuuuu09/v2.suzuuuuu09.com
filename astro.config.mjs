@@ -1,15 +1,25 @@
 // @ts-check
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
+import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
-  integrations: [mdx(), sitemap(), react()],
+  site: "https://suzuuuuu09.com",
+  integrations: [
+    sitemap(),
+    react(),
+    expressiveCode({
+      themes: ["tokyo-night"],
+      styleOverrides: {
+        codeFontFamily: "var(--moralerspace-neon)",
+        uiFontFamily: "var(--ibm-plex-sans-jp)",
+      }
+    })
+  ],
 
   markdown: {
     rehypePlugins: [
@@ -43,5 +53,9 @@ export default defineConfig({
         },
       ],
     ],
+    remarkRehype: {
+      footnoteLabelTagName: "h4",
+            footnoteLabel: "脚注",
+    }
   },
 });

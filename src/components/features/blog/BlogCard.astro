@@ -1,0 +1,176 @@
+---
+import dayjs from "dayjs";
+import { Flex, VStack, Center, styled as s } from "styled-system/jsx";
+import { css, cx } from "styled-system/css";
+import { flex, center } from "styled-system/patterns";
+import { categories } from "@/consts/category";
+import Tag from "./Tag.astro";
+
+const maxVisibleTags = 2;
+
+export interface Props {
+  blog: {
+    id: string;
+    data: {
+      title: string;
+      slug?: string;
+      emoji?: string;
+      tags?: string[];
+      category?: string;
+      publishDate: Date;
+      updateDate?: Date;
+    };
+  };
+}
+
+const { blog } = Astro.props;
+
+const currentCategory = categories.find((cat) => cat.category === blog.data.category);
+---
+
+<article
+  class={cx(
+    "group",
+    css({
+      position: "relative",
+      bgGradient: "to-br",
+      gradientFrom: "sz.bg",
+      gradientTo: "sz.bg-on",
+      borderRadius: "2xl",
+      shadow: "sm",
+      overflow: "hidden",
+      borderWidth: "1px",
+      borderColor: "sz.border/20",
+      backdropFilter: "blur(8px)",
+      transition: "all 0.4s",
+      _hover: {
+        shadow: "xl",
+      },
+    })
+  )}
+>
+  <a
+    href={`/blog/${blog.data.slug ?? blog.id}/`}
+    class={cx(
+      flex({ direction: "column", height: "full" }),
+      css({ color: "sz.text.main", textDecoration: "none" })
+    )}
+  >
+    <Flex
+      position="relative"
+      bgGradient="to-r"
+      gradientFrom="sz.primary/5"
+      gradientVia="sz.primary/10"
+      gradientTo="sz.primary/5"
+      p="8"
+      pb="6"
+      flex="1"
+      flexDir="column"
+    >
+      <!-- カードヘッダー：絵文字背景 -->
+      
+      <s.div
+        position="absolute"
+        top="6"
+        right="6"
+        opacity="0.1"
+      >
+        <Center
+          w="20"
+          h="20"
+          bg="sz.primary/10"
+          borderRadius="full"
+        >
+          <div class={css({ fontSize: "3xl" })}>
+            {currentCategory?.emoji || "📝"}
+          </div>
+        </Center>
+      </s.div>
+     
+
+      <!-- メイン絵文字 -->
+      <div class={css({ position: "relative", zIndex: "10" })}>
+        <div
+          class={cx(
+            center(),
+            css({
+              width: "16",
+              height: "16",
+              bg: "sz.bg",
+              borderRadius: "xl",
+              shadow: "md",
+              transition: "all 0.3s",
+              _groupHover: {
+                transform: "scale(1.1) rotate(3deg)",
+              },
+            })
+          )}
+        >
+          <span class={css({ fontSize: "3xl" })}>{blog.data.emoji || "📝"}</span>
+        </div>
+      </div>
+
+      <!-- タイトル -->
+      <h4
+        class={css({
+          lineHeight: "snug",
+          transition: "colors 0.3s",
+          mb: "3",
+          mt: "4",
+          fontWeight: "bold",
+          fontSize: "xl",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          display: "-webkit-box",
+          lineClamp: "2",
+          _groupHover: {
+            color: "sz.primary",
+          },
+        })}
+        style="-webkit-line-clamp: 2; -webkit-box-orient: vertical;"
+      >
+        {blog.data.title}
+      </h4>
+
+      <!-- タグ -->
+      <Flex
+        direction="column"
+        flex="1"
+        justify="space-between"
+      >
+        {blog.data.tags && blog.data.tags.length > 0 && (
+          <Flex
+            wrap="wrap"
+            gap="2"
+            mb="6"
+          >
+            {blog.data.tags.slice(0, maxVisibleTags).map((tag) => (
+              <Tag useHashTag name={tag} />
+            ))}
+            {blog.data.tags.length > maxVisibleTags && (
+              <Tag name={`+${blog.data.tags.length - maxVisibleTags}`} />
+            )}
+          </Flex>
+        )}
+        <!-- フッター：日付情報 -->
+        <s.div
+          borderTopWidth="1px"
+          borderColor="sz.border/30"
+          pt="3"
+        >
+          <Flex justify="flex-end">
+            <!-- 公開日 -->
+            <s.time
+              dateTime={blog.data.publishDate.toISOString()}
+              display="block"
+              color="sz.text.main"
+              fontSize="base"
+            >
+              {dayjs(blog.data.publishDate).format("YYYY.MM.DD")}
+            </s.time>
+          </Flex>
+        </s.div>
+      </Flex>
+    </Flex>
+  </a>
+</article>

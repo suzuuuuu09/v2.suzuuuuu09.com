@@ -1,0 +1,67 @@
+---
+import "@/styles/global.css";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts/base";
+import Header from "@/components/bases/Header.astro";
+import Footer from "@/components/bases/Footer.astro";
+import FloatingBackground from "@/components/bases/FloatingBackground";
+import { css } from "styled-system/css";
+import { Container } from "styled-system/jsx";
+
+interface Props {
+  title: string;
+  headings?: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+  frontmatter?: {
+    title: string;
+    publishDate?: string | Date;
+    updateDate?: string | Date;
+    tags?: string[];
+    emoji?: string;
+    description?: string;
+  };
+}
+
+const { title, headings = [], frontmatter } = Astro.props;
+const siteTitle = `${frontmatter?.title || title} - ${SITE_TITLE}`;
+const description = frontmatter?.description || SITE_DESCRIPTION;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
+    <FloatingBackground />
+    <Header />
+    
+    <Container
+      maxW="4xl"
+      px="6"
+      pt="28"
+      pb="16"
+      mx="auto"
+      minH="100vh"
+    >
+      <slot />
+    </Container>
+    
+    <Footer />
+    
+    <script>
+      import { initTwemoji } from "@/utils/twemoji";
+      
+      document.addEventListener('DOMContentLoaded', initTwemoji);
+      document.addEventListener('astro:page-load', initTwemoji);
+    </script>
+  </body>
+</html>

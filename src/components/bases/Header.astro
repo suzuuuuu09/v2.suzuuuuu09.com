@@ -1,7 +1,7 @@
 ---
 import { NAVIGATION_LINKS } from '@/consts';
 import { css } from 'styled-system/css';
-import { styled as s } from 'styled-system/jsx';
+import { Flex, VStack, styled as s } from 'styled-system/jsx';
 import Avatar from '@/components/ui/Avatar.astro';
 import Navigation from './Navigation';
 // import HamburgerMenu from '../HamburgerMenu';
@@ -13,15 +13,15 @@ import Navigation from './Navigation';
   left="50%"
   transform="translateX(-50%)"
   width="calc(100% - 2rem)"
-  maxWidth="7xl"
+  maxW="6xl"
   overflow="visible"
   zIndex="1000"
-  background="slate.800/90"
+  background="sz.bg-on/30"
   border="1px solid"
-  borderColor="white/20"
+  borderColor="sz.border/20"
   borderRadius="xl"
-  color="white"
-  boxShadow="2xl"
+  color="sz.text.main"
+  boxShadow="xl"
   backdropFilter="blur(12px)"
   transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
 >
@@ -39,7 +39,7 @@ import Navigation from './Navigation';
       alignItems="center"
       gap="3"
     >
-      <div id="avatar-wrapper">
+      <div id="avatar-container">
         <Avatar size={24} />
       </div>
       <s.h3
@@ -47,17 +47,17 @@ import Navigation from './Navigation';
         m="0"
         opacity="0.9"
         fontWeight="bold"
-      >suzuuuuu09</s.h3>
+        color="sz.text.main"
+      >suzuuuuu09.com</s.h3>
     </s.a>
-    <s.div
-      display="flex"
+    <Flex
       alignItems="center"
       position="relative"
     >
       <!-- <HamburgerMenu client:load /> 仮置き -->
       <button class={css({ display: 'block', md: { display: 'none' } })}>Menu</button>
       <Navigation links={NAVIGATION_LINKS} client:load />
-    </s.div>
+    </Flex>
   </s.nav>
   <div 
     class={`mobile-content ${css({
@@ -76,11 +76,7 @@ import Navigation from './Navigation';
       },
     })}`}
   >
-    <s.div
-      display="flex"
-      flexDir="column"
-      gap="3"
-    >
+    <VStack gap="3">
       {NAVIGATION_LINKS.map((link) => (
         <a
           href={link.href}
@@ -90,7 +86,7 @@ import Navigation from './Navigation';
             width: 'full',
             padding: '0.75rem 1.5rem',
             textAlign: 'center',
-            color: 'gray.300',
+            color: 'sz.border',
             backgroundColor: 'transparent',
             borderRadius: 'lg',
             overflow: 'hidden',
@@ -114,7 +110,7 @@ import Navigation from './Navigation';
           {link.label}
         </a>
       ))}
-    </s.div>
+    </VStack>
   </div>
 </s.header>
 
@@ -125,6 +121,7 @@ import { gsap } from 'gsap';
 let konamiCode = [38,38,40,40,37,39,37,39,66,65];
 let konamiIndex = 0;
 
+// KONAMIコマンド取得用のキーコードマップ
 const keyMap: { [key: string]: number } = {
   'ArrowUp': 38,
   'ArrowDown': 40,
@@ -144,15 +141,15 @@ document.addEventListener('keydown', function(e) {
   if (keyValue === konamiCode[konamiIndex]) {
     konamiIndex++;
     if (konamiIndex === konamiCode.length) {
-      // アバターのwrapperを取得
-      const avatarWrapper = document.getElementById('avatar-wrapper');
-      if (!avatarWrapper) return; // アバターが存在しない場合は実行しない
+      // アバターのcontainerを取得
+      const avatarContainer = document.getElementById('avatar-container');
+      if (!avatarContainer) return; // アバターが存在しない場合は実行しない
 
       // タイムラインを作成
       const tl = gsap.timeline();
       
       // 回転とスケールアニメーション
-      tl.to(avatarWrapper, {
+      tl.to(avatarContainer, {
         // rotationが360だと2回目以降に回転しなくなる
         // 相対的に回転させられる'+=360'を使用
         rotation: '+=360',
@@ -162,7 +159,7 @@ document.addEventListener('keydown', function(e) {
       })
       
       // リセット
-      .to(avatarWrapper, {
+      .to(avatarContainer, {
         scale: 1,
         duration: 0.4,
         ease: 'power2.out',

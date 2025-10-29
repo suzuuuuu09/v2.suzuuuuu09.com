@@ -14,8 +14,29 @@ export default defineConfig({
     ":root": {
       fontFamily: "var(--ibm-plex-sans-jp)",
     },
+    "html": {
+      scrollBehavior: "smooth",
+    },
     "body": {
       bg: "sz.bg",
+    },
+    // スクロールバーのスタイル
+    "::-webkit-scrollbar": {
+      width: "10px",
+      height: "10px",
+    },
+    "::-webkit-scrollbar-track": {
+      bgOpacity: "0",
+    },
+    "::-webkit-scrollbar-thumb": {
+      bg: "sz.primary/30",
+      _hover: {
+        bg: "sz.primary/50",
+      },
+    },
+    "::-webkit-scrollbar-thumb:active": {
+      bg: "sz.primary/60",
+      transition: "background-color 0.3s ease-in-out",
     },
     ".markdown-content": {
       "h1, h2, h3, h4, h5, h6": {
@@ -104,8 +125,17 @@ export default defineConfig({
         _hover: {
           backgroundImage: "linear-gradient(to right in oklch, {colors.s-primary}, {colors.s-secondary})",
         },
-      }
-    }
+      },
+      ".expressive-code": {
+        my: "4",
+      },
+    },
+    "img.emoji": {
+      display: "inline",
+      height: "1em",
+      width: "1em",
+      verticalAlign: "-0.1em",
+    },
   },
 
   // フォントの設定
@@ -129,10 +159,16 @@ export default defineConfig({
       fontWeight: "400",
       fontStyle: "normal",
       fontDisplay: "swap",
+    },
+    twemoji: {
+      src: "src('/fonts/twemoji.woff2') format('woff2')",
+      fontWeight: "400",
+      fontStyle: "normal",
+      fontDisplay: "swap",
     }
   },
   globalVars: {
-    "--ibm-plex-sans-jp": '"IBM Plex Sans JP", -apple-system, system-ui, sans-serif',
+    "--ibm-plex-sans-jp": '"IBM Plex Sans JP", -apple-system, system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif',
     "--moralerspace-neon": '"Moralerspace Neon", -apple-system, system-ui, sans-serif',
   },
 
@@ -150,6 +186,7 @@ export default defineConfig({
       semanticTokens: {
         colors: {
           "sz.primary": { value: "{colors.s-primary}" },
+          "sz.secondary": { value: "{colors.s-secondary}" },
           "sz.bg": { value: "{colors.s-bg}" },
           "sz.bg-on": {
             DEFAULT: { value: "{colors.s-bg-on}" },

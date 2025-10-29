@@ -1,22 +1,21 @@
 ---
 import { styled as s } from "styled-system/jsx";
-import SectionLayout from "@/components/shared/SectionLayout.astro";
+import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
 import IconCard from "@/components/shared/IconCard.astro";
 import { SkillGrid } from "@/components/features/skill/SkillGrid";
-import { css } from "styled-system/css";
 
 const programmingLanguages = [
-  "python", "html", "css", "javascript", "typescript",
+  "python", "html", "css", "js", "ts",
   "c", "cpp", "cs", "lua",
 ];
 
 const frameworksAndLibraries = [
   "fastapi", "pandas", "opencv", "django", "flask",
   "ffmpeg", "mediapipe", "selenium", "flutter",
-  "leaflet", "astro", "svelte", "vuejs", "nuxt",
+  "leaflet", "astro", "svelte", "vue", "nuxt",
   "bun", "nodejs", "gsap", "hono", "expressjs",
-  "tailwindcss", "unocss", "vite", "vuetify", "mantine",
+  "tailwind", "unocss", "pandacss", "vite", "vuetify", "mantine",
 ];
 
 const toolAndOthers = [

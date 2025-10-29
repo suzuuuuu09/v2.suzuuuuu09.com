@@ -1,20 +1,37 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection, render } from "astro:content";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
-}
-type Props = CollectionEntry<'blog'>;
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { entry },
+  }));
+};
 
-const post = Astro.props;
-const { Content } = await render(post);
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+// ブログの情報
+const articleInfo = {
+  title: entry.data.title,
+  publishDate: entry.data.publishDate,
+  updateDate: entry.data.updateDate,
+  tags: entry.data.tags || [],
+  emoji: entry.data.emoji || "📝",
+  description: entry.data.description
+};
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<BlogLayout
+  title={entry.data.title}
+  headings={headings}
+  frontmatter={articleInfo}
+>
+  <ArticleInfo {...articleInfo} />
+  <div class="markdown-content">
+    <Content />
+  </div>
+</BlogLayout>

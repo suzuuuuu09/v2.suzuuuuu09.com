@@ -1,12 +1,8 @@
 ---
-import { styled as s } from "styled-system/jsx";
+import { VStack, styled as s } from "styled-system/jsx";
 ---
 
 <s.footer
-  display="flex"
-  flexDir="column"
-  justifyContent="center"
-  alignItems="center"
   mx="auto"
   my="10"
   pt="4"
@@ -14,13 +10,15 @@ import { styled as s } from "styled-system/jsx";
   width="80%"
   borderTopWidth="1"
   borderTopColor="sz.border"
-  textAlign="center"
   pt="4"
 >
-  <s.span
-    fontSize="sm"
-    color="sz.text"
+  <VStack
+    justifyContent="center"
+    alignItems="center"
+    textAlign="center"
   >
-    Copyright © 2025 suzuuuuu09 All Rights Reserved.
-  </s.span>
+    <s.span fontSize="sm" color="sz.text" >
+      Copyright © 2025 suzuuuuu09 All Rights Reserved.
+    </s.span>
+  </VStack>
 </s.footer>
