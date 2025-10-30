@@ -12,6 +12,7 @@ category: idea
 ## YouTube
 
 ### video
+
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA

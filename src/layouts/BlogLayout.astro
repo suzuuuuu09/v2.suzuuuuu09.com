@@ -1,11 +1,14 @@
 ---
 import "@/styles/global.css";
+import "@/styles/callout.css";  // Calloutのスタイル
+import "katex/dist/katex.min.css";  // KaTeXのスタイル
+import { css } from "styled-system/css";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts/base";
 import Header from "@/components/bases/Header.astro";
 import Footer from "@/components/bases/Footer.astro";
 import FloatingBackground from "@/components/bases/FloatingBackground";
-import { css } from "styled-system/css";
-import { Container } from "styled-system/jsx";
+import { ContentContainer } from "@/components/shared/ContentContainer";
+import { Expand } from "@/components/shared/Expand";
 
 interface Props {
   title: string;
@@ -44,16 +47,20 @@ const description = frontmatter?.description || SITE_DESCRIPTION;
     <FloatingBackground />
     <Header />
     
-    <Container
-      maxW="4xl"
+    <!-- <Container
+      maxW="7xl"
       px="6"
-      pt="28"
+      pt="40"
       pb="16"
       mx="auto"
       minH="100vh"
-    >
-      <slot />
-    </Container>
+    > -->
+    <ContentContainer maxW="6xl">
+      <Expand>
+        <slot />
+      </Expand>
+    </ContentContainer>
+    <!-- </Container> -->
     
     <Footer />
     

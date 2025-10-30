@@ -1,7 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Flex, styled as s } from "styled-system/jsx";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
+import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -32,7 +34,12 @@ const articleInfo = {
   frontmatter={articleInfo}
 >
   <ArticleInfo {...articleInfo} />
-  <div class="markdown-content">
-    <Content />
-  </div>
+  <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
+    <s.article className="markdown-content" flex="1" minW="0">
+      <Content />
+    </s.article>
+    
+    <s.aside order={{ base: -1, lg: 1 }}>
+      <TableOfContents headings={headings} />
+    </s.aside>
 </BlogLayout>

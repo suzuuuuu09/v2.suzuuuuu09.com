@@ -2,9 +2,18 @@
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import expressiveCode from "astro-expressive-code";
+
+import remarkMath from "remark-math";
+import remarkCallout from "@r4ai/remark-callout";
+import remarkBreaks from "remark-breaks";
+import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
+import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
+
+import rehypeKatex from "rehype-katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
-import expressiveCode from "astro-expressive-code";
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,9 +30,36 @@ export default defineConfig({
     })
   ],
 
+  image: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "content.suzuuuuu09.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+
   markdown: {
+    remarkPlugins: [
+      remarkMath,
+      remarkWikiLinks,
+      remarkCallout,
+      remarkBreaks,
+      remarkEmbedLinks,
+    ],
     rehypePlugins: [
+      rehypeKatex,
       rehypeSlug,
+      [
+        rehypeExternalLinks,
+        {
+          target: "_blank",
+          rel: ["nofollow", "noopener", "noreferrer"],
+          content: { type: "text", value: "↗" },
+        },
+      ],
       [
         rehypeAutolinkHeadings,
         {

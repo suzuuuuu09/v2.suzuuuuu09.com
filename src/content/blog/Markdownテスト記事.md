@@ -13,6 +13,16 @@ slug: md-test
 description: Markdownの基本的な記法をテストするための記事です。スタイルなどの状態を確認することを目的としています．
 category: tech
 ---
+
+```markdown
+# H1 見出し
+## H2 見出し
+### H3 見出し
+#### H4 見出し
+##### H5 見出し
+###### H6 見出し
+```
+
 # H1 見出し
 ## H2 見出し
 ### H3 見出し
@@ -20,36 +30,59 @@ category: tech
 ##### H5 見出し
 ###### H6 見出し
 
+基本的にはH1, H5, H6は使わないでください。
+
 ## テキストスタイル
 
-この文はテストです。**太字**や*斜体*や~~打ち消し線~~を含んでいます。
+```markdown
+**太字** や *斜体* や ~~打ち消し線~~ を使います。
 
-`インラインコード`もテストしましょう。
-<mark>ハイライト</mark>も可能です。
+`インラインコード` や <mark>ハイライト</mark> も $InlineMath$ 使えます。
+```
 
-> これは引用文です。  
-> 複数行にわたる引用もできます。
+**太字** や *斜体* や ~~打ち消し線~~ を使います。
+  
+`インラインコード` や <mark>ハイライト</mark> も $InlineMath$ 使えます。
 
 ## リスト
 
-### 順序なしリスト
+```markdown
 - アイテム1
 - アイテム2
-  - ネストされたアイテム
-  - もう一つのネスト
+  - アイテム2-1
+  - アイテム2-2
+- アイテム3
+```
+
+- アイテム1
+- アイテム2
+  - アイテム2-1
+  - アイテム2-2
 - アイテム3
 
-### 順序ありリスト
-1. 最初のアイテム
-2. 二番目のアイテム
-   1. ネストされた順序リスト
-   2. もう一つのネスト
-3. 三番目のアイテム
+```markdown
+1. アイテムA
+2. アイテムB
+   1. アイテムB-1
+   2. アイテムB-2
+3. アイテムC
+```
 
-### チェックリスト
-- [x] 完了したタスク
-- [ ] 未完了のタスク
-- [x] もう一つの完了したタスク
+1. アイテムA
+2. アイテムB
+   1. アイテムB-1
+   2. アイテムB-2
+3. アイテムC
+
+```markdown
+- [x] タスク1
+- [ ] タスク2(未完了)
+- [x] タスク3(完了)
+```
+
+- [x] タスク1
+- [ ] タスク2(未完了)
+- [x] タスク3(完了)
 
 ## コードブロック
 
@@ -77,45 +110,197 @@ https://expressive-code.com
 
 ## テーブル
 
-| 名前 | 年齢 | 職業 |
-|:------:|:------:|:------:|
-| 田中太郎 | 25 | エンジニア |
-| 佐藤花子 | 30 | デザイナー |
-| 鈴木一郎 | 28 | PM |
+```markdown
+|   a   | b     |   c   |     d |
+| ----- | :---- | :---: | ----: |
+| aaaaa | bbbbb | ccccc | ddddd |
+| aaaa  | bbbb  | cccc  |  dddd |
+| aaa   | bbb   |  ccc  |   ddd |
+```
+
+|   a   | b     |   c   |     d |
+| ----- | :---- | :---: | ----: |
+| aaaaa | bbbbb | ccccc | ddddd |
+| aaaa  | bbbb  | cccc  |  dddd |
+| aaa   | bbb   |  ccc  |   ddd |
 
 ## 脚注
+
+```markdown
 これは脚注の例です。[^1]
+[^1]: これは脚注の内容です。
+```
+
+これは脚注の例です。[^1]
+[^1]: これは脚注の内容です。
 
 ## リンク
 
-[GitHub](https://github.com)への外部リンクです。
-
+```markdown
+[`GitHub`](https://github.com/suzuuuuu09)への外部リンクです。
 内部リンクの例：[トップページ](/)
 
+[Zenn.dev](https://zenn.dev/)
+
+[`Zenn.dev`](https://zenn.dev/)
+```
+
+[`GitHub`](https://github.com/suzuuuuu09)への外部リンクです。
+内部リンクの例：[トップページ](/)
+
+[Zenn.dev](https://zenn.dev/)
+
+[`Zenn.dev`](https://zenn.dev/)
+
 ## 画像
+
+```markdown
+![代替テキスト|700x24](https://placehold.jp/24/cc9999/993333/150x100.png)
+```
 
 ![代替テキスト|700x24](https://placehold.jp/24/cc9999/993333/150x100.png)
 
 ## 区切り線
+```markdown
+---
+```
 
 ---
 
 ## 絵文字
 
-🚀 ロケット
-🎉 お祝い  
-💡 アイデア
-✅ チェック  
-❤️ ハート
-⭐️ 星
+🚀 ロケット 🎉 お祝い  
+💡 アイデア ✅ チェック  
+❤️ ハート ⭐️ 星  
+絵文字はTwemojiに置き換わります。
 
-## 注意書き
+## 数式
 
-> **Note**
-> これは重要な注意書きです。
+```markdown
+$\KaTeX$ を使用した数式が使えます。
+```
 
-> **Warning**  
-> これは警告メッセージです。
+$\KaTeX$ を使用した数式が使えます。
+
+https://katex.org
+
+https://github.com/remarkjs/remark-math
+
+### インライン数式
+
+```markdown
+$E = mc^2$ などのインライン数式も使えます。
+```
+
+$E = mc^2$ などのインライン数式も使えます。
+
+### ブロック数式
+
+```markdown
+$$
+\int_a^b f(x) \,dx = F(b) - F(a)
+$$
+
+のようなブロック数式を使うこともできます。
+```
+
+$$
+\int_a^b f(x) \,dx = F(b) - F(a)
+$$
+
+のようなブロック数式を使うこともできます。
+
+## コールアウト
+
+コールアウトの実装には以下のライブラリを使用しています。
+
+https://github.com/r4ai/remark-callout
+
+<details>
+<summary>利用可能なコールアウト一覧</summary>
+
+> [!note]
+> Lorem ipsum dolor sit amet
+
+> [!abstract]
+> Lorem ipsum dolor sit amet
+
+> [!summary]
+> Lorem ipsum dolor sit amet
+
+> [!tldr]
+> Lorem ipsum dolor sit amet
+
+> [!info]
+> Lorem ipsum dolor sit amet
+
+> [!todo]
+> Lorem ipsum dolor sit amet
+
+> [!tip]
+> Lorem ipsum dolor sit amet
+
+> [!hint]
+> Lorem ipsum dolor sit amet
+
+> [!important]
+> Lorem ipsum dolor sit amet
+
+> [!success]
+> Lorem ipsum dolor sit amet
+
+> [!check]
+> Lorem ipsum dolor sit amet
+
+> [!done]
+> Lorem ipsum dolor sit amet
+
+> [!question]
+> Lorem ipsum dolor sit amet
+
+> [!help]
+> Lorem ipsum dolor sit amet
+
+> [!faq]
+> Lorem ipsum dolor sit amet
+
+> [!warning]
+> Lorem ipsum dolor sit amet
+
+> [!caution]
+> Lorem ipsum dolor sit amet
+
+> [!attention]
+> Lorem ipsum dolor sit amet
+
+> [!failure]
+> Lorem ipsum dolor sit amet
+
+> [!fail]
+> Lorem ipsum dolor sit amet
+
+> [!missing]
+> Lorem ipsum dolor sit amet
+
+> [!danger]
+> Lorem ipsum dolor sit amet
+
+> [!error]
+> Lorem ipsum dolor sit amet
+
+> [!bug]
+> Lorem ipsum dolor sit amet
+
+> [!example]
+> Lorem ipsum dolor sit amet
+
+> [!quote]
+> Lorem ipsum dolor sit amet
+
+> [!cite]
+> Lorem ipsum dolor sit amet
+
+</details>
 
 ## 複雑なHTMLとの組み合わせ
 
@@ -136,4 +321,3 @@ https://expressive-code.com
 ## リンク
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-[^1]: これは脚注の内容です。

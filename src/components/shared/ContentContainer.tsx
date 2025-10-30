@@ -23,6 +23,7 @@ export const containerRecipes = cva({
       '4xl': { maxW: '4xl' },
       '5xl': { maxW: '5xl' },
       '6xl': { maxW: '6xl' },
+      '7xl': { maxW: '7xl' },
     }
   },
   defaultVariants: {

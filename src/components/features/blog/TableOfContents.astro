@@ -1,0 +1,237 @@
+---
+import { styled as s } from "styled-system/jsx";
+import { css } from "styled-system/css";
+
+interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { headings } = Astro.props;
+
+// 目次の見出し最大レベル
+const MAX_TOC_DEPTH = 4;
+
+// 目次の見出しレベルをフィルター
+const tocHeadings = headings.filter((heading) => heading.depth <= MAX_TOC_DEPTH);
+
+// 基準レベルを計算（最初の見出しのレベルを基準とする）
+const baseLevel = tocHeadings.length > 0 ? tocHeadings[0].depth : 1;
+
+// 相対的なレベルを計算した見出し配列を作成
+const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
+  ...heading,
+  relativeDepth: Math.max(0, heading.depth - baseLevel), // 基準レベルからの相対値(最小0)
+}));
+---
+
+<s.nav
+  w={{ base: "full", lg: "300px" }}
+  position={{ base: "relative", lg: "sticky" }}
+  top={{ lg: "24" }}
+  maxH={{ lg: "calc(100vh - 112px)" }}
+  bg="sz.bg-on.500"
+  borderRadius="xl"
+  p="6"
+  borderWidth="1px"
+  borderColor="sz.border/20"
+  class="table-of-contents"
+  aria-label="目次"
+>
+  <s.h5
+    fontSize="lg"
+    fontWeight="bold"
+    color="sz.text.main"
+    mb="4"
+    px="2"
+  >
+    目次
+  </s.h5>
+  
+  <s.div
+    maxH={{ base: "300px", lg: "calc(100vh - 200px)" }}
+    overflowX="hidden"
+    overflowY="auto"
+    class="toc-scroll-container"
+  >
+    <s.ul listStyle="none" p="0" m="0">
+      {
+        tocHeadingsWithRelativeLevel.map((heading) => {
+          const marginLeft = heading.relativeDepth === 0 ? "0" : 
+                            heading.relativeDepth === 1 ? "4" : 
+                            heading.relativeDepth === 2 ? "8" : "12";
+          
+          return (
+            <s.li listStyle="none" m="0" ml={marginLeft}>
+              <s.a
+                href={`#${heading.slug}`}
+                display="block"
+                px="2"
+                py="1.5"
+                rounded="md"
+                fontSize="sm"
+                color="sz.text.main/70"
+                lineHeight="relaxed"
+                transition="all 0.2s"
+                class="toc-link"
+                data-slug={heading.slug}
+                _hover={{
+                  color: "sz.primary",
+                  bg: "sz.primary/10",
+                }}
+              >
+                {heading.text.replace(/\#\ /g, "")}
+              </s.a>
+            </s.li>
+          );
+        })
+      }
+    </s.ul>
+  </s.div>
+</s.nav>
+
+<style>
+  .toc-scroll-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .toc-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+  
+  .toc-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--colors-sz-primary);
+    opacity: 0.3;
+    border-radius: 3px;
+  }
+  
+  .toc-scroll-container::-webkit-scrollbar-thumb:hover {
+    opacity: 0.5;
+  }
+  
+  /* Firefox用スクロールバー */
+  .toc-scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--colors-sz-primary) transparent;
+  }
+
+  .toc-link.active {
+    color: var(--colors-sz-primary);
+    background: var(--colors-sz-primary);
+    background-opacity: 0.15;
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  function initializeTableOfContents() {
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
+    const headings = Array.from(
+      document.querySelectorAll<HTMLHeadingElement>("h1, h2, h3, h4, h5, h6")
+    ).filter((heading) => heading.id);
+
+    if (tocLinks.length === 0 || headings.length === 0) return;
+
+    // 現在アクティブな見出しを特定する関数
+    function updateActiveHeading() {
+      const scrollTop = window.scrollY;
+
+      let activeHeading: HTMLHeadingElement | null = null;
+
+      // 各見出しの位置をチェック
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const heading = headings[i];
+        const rect = heading.getBoundingClientRect();
+        const headingTop = scrollTop + rect.top;
+
+        // 見出しが画面上部から120px以内にある場合、それをアクティブとする
+        if (headingTop <= scrollTop + 120) {
+          activeHeading = heading;
+          break;
+        }
+      }
+
+      // 一番上にいる場合は最初の見出しをアクティブにする
+      if (!activeHeading && scrollTop < 120) {
+        activeHeading = headings[0];
+      }
+
+      // すべてのリンクからactiveクラスを削除
+      tocLinks.forEach((link) => link.classList.remove("active"));
+
+      // アクティブな見出しに対応するリンクにactiveクラスを追加
+      if (activeHeading) {
+        const activeLink = document.querySelector<HTMLAnchorElement>(
+          `.toc-link[data-slug="${activeHeading.id}"]`
+        );
+        if (activeLink) {
+          activeLink.classList.add("active");
+          
+          // アクティブなリンクをビューポートに表示（スムーズスクロール）
+          activeLink.scrollIntoView({
+            block: "nearest",
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+
+    // スクロールイベントリスナーを追加（スロットル処理付き）
+    let ticking = false;
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateActiveHeading();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // 初期化時とスクロール時にアクティブな見出しを更新
+    updateActiveHeading();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // リンククリック時のスムーススクロール
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.substring(1);
+        const targetElement = targetId ? document.getElementById(targetId) : null;
+
+        if (targetElement) {
+          const headerOffset = 112; // ヘッダーの高さ分のオフセット（pt-28 = 112px）
+          const elementPosition = targetElement.offsetTop;
+          const offsetPosition = elementPosition - headerOffset;
+
+          // URLにハッシュを追加
+          window.history.pushState(null, "", `#${targetId}`);
+
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    // クリーンアップ関数を返す
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }
+
+  // DOMが読み込まれた後に初期化
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeTableOfContents);
+  } else {
+    initializeTableOfContents();
+  }
+
+  // ページ遷移時の再初期化（Astroのクライアントサイドルーティング対応）
+  document.addEventListener("astro:page-load", initializeTableOfContents);
+</script>
