@@ -26,6 +26,9 @@ export default defineConfig({
       styleOverrides: {
         codeFontFamily: "var(--moralerspace-neon)",
         uiFontFamily: "var(--ibm-plex-sans-jp)",
+      },
+      defaultProps: {
+        wrap: true,
       }
     })
   ],
