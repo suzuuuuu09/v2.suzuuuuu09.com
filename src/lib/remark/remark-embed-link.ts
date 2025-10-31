@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit';
 import type { Root, Link } from 'mdast';
-import ogs from 'open-graph-scraper';
+import { fetchOGP } from '../../utils/ogp';
 
 export default function remarkEmbedLinks() {
   const cache = new Map();
@@ -101,8 +101,10 @@ export default function remarkEmbedLinks() {
           break;
         }
         case 'google-slides': {
-          if (url) {
-            const htmlValue = createGoogleSlidesEmbedHtml(url);
+          // Google Slidesの埋め込み
+          const embedUrl = convertToGoogleSlidesEmbedUrl(url);
+          if (embedUrl) {
+            const htmlValue = createGoogleSlidesEmbedHtml(embedUrl, linkTitle);
             parent.children[index] = {
               type: 'html',
               value: htmlValue,
@@ -110,10 +112,6 @@ export default function remarkEmbedLinks() {
           }
           break;
         }
-        case 'github':
-        case 'zenn':
-        case 'qiita':
-        case 'note':
         case 'other': {
           // その他のリンク（OGP取得）
           const promise = (async () => {
@@ -128,14 +126,9 @@ export default function remarkEmbedLinks() {
             // サイトクラス名
             const siteClass = urlType === 'other' ? 'external' : urlType;
 
-            // Zenn, Qiita、または画像のあるカードの場合はグリッドレイアウトを使用
             let htmlValue: string;
-            if (urlType === 'zenn' || urlType === 'qiita' || ogpData.image) {
-              htmlValue = createGridCardHtml(url, title, site, siteClass, ogpData);
-            } else {
               // 他のサイトは通常のレイアウト
-              htmlValue = createStandardCardHtml(url, title, site, siteClass, imageHtml);
-            }
+            htmlValue = createStandardCardHtml(url, title, site, siteClass, imageHtml);
 
             parent.children[index] = {
               type: 'html',
@@ -152,46 +145,13 @@ export default function remarkEmbedLinks() {
   };
 }
 
-// OGP情報を取得するヘルパー関数
-async function fetchOGP(url: string) {
-  try {
-    const options = {
-      url,
-      timeout: 5000,
-    };
-
-    const { result } = await ogs(options);
-    
-    // open-graph-scraperの結果から必要な情報を抽出
-    const ogTitle = result.ogTitle || result.twitterTitle || '';
-    const ogDescription = result.ogDescription || result.twitterDescription || '';
-    const ogImage = result.ogImage?.[0]?.url || result.twitterImage?.[0]?.url || '';
-    const ogSiteName = result.ogSiteName || new URL(url).hostname;
-    
-    return {
-      title: ogTitle,
-      description: ogDescription,
-      image: ogImage,
-      site_name: ogSiteName,
-    };
-  } catch (error) {
-    console.warn(`Failed to fetch OGP for ${url}:`, error);
-    return {
-      title: '',
-      description: '',
-      image: '',
-      site_name: new URL(url).hostname,
-    };
-  }
-}
-
 /**
  * URLのタイプを判定する関数
  * @param {string} url - 判定するURL
  * @returns {string} - URLタイプ
  */
 function getUrlType(url: string): string {
-  // YouTubeの動画URLかどうか判定
+  // // YouTubeの動画URLかどうか判定
   const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/;
   const youtubeMatch = youtubeRegex.exec(url);
 
@@ -204,10 +164,6 @@ function getUrlType(url: string): string {
   }
 
   // 各種サイトの判定
-  if (url.includes('github.com')) return 'github';
-  if (url.includes('zenn.dev')) return 'zenn';
-  if (url.includes('qiita.com')) return 'qiita';
-  if (url.includes('note.com')) return 'note';
   if (url.includes('x.com') || url.includes('twitter.com')) return 'twitter';
   if (url.includes('open.spotify.com')) return 'spotify';
   if (url.includes('docs.google.com/presentation')) return 'google-slides';
@@ -290,6 +246,45 @@ function extractSpotifyId(url: string): { type: string; id: string } | null {
   }
 }
 
+// Google SlidesのURLを埋め込み用URLに変換する
+function convertToGoogleSlidesEmbedUrl(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    const host = urlObj.hostname.replace(/^www\./, '');
+
+    if (host === 'docs.google.com' && urlObj.pathname.includes('/presentation/')) {
+      // 既に埋め込みURLの場合はそのまま返す
+      if (urlObj.pathname.includes('/embed') || urlObj.pathname.includes('/pubembed')) {
+        return url;
+      }
+
+      // /presentation/d/e/{long-id}/pub 形式の場合（公開用URL）
+      // long-id は通常、2PACX- で始まる長い文字列
+      const pubLongIdRegex = /\/presentation\/d\/e\/(2PACX-[a-zA-Z0-9_-]+)/;
+      const pubLongIdMatch = pubLongIdRegex.exec(urlObj.pathname);
+      if (pubLongIdMatch) {
+        const presentationId = pubLongIdMatch[1];
+        return `https://docs.google.com/presentation/d/e/${presentationId}/pubembed?start=false&loop=false&delayms=3000`;
+      }
+
+      // /presentation/d/{id}/edit 形式または /d/{id} 形式から埋め込みURLを生成
+      const idRegex = /\/presentation\/d\/([a-zA-Z0-9_-]+)/;
+      const idMatch = idRegex.exec(urlObj.pathname);
+      if (idMatch) {
+        const presentationId = idMatch[1];
+        // /e/ が含まれていない場合のみ（通常の編集URL）
+        if (!urlObj.pathname.includes('/e/')) {
+          return `https://docs.google.com/presentation/d/${presentationId}/embed?start=false&loop=false&delayms=3000`;
+        }
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function createTwitterEmbedHtml(url: string, tweetId: string, linkTitle: string): string {
   // Twitter公式の埋め込みScript
   return `
@@ -334,17 +329,20 @@ function createSpotifyEmbedHtml(embedUrl: string): string {
   `;
 }
 
-function createGoogleSlidesEmbedHtml(embedUrl: string): string {
+function createGoogleSlidesEmbedHtml(embedUrl: string, linkTitle: string): string {
+  // レスポンシブ対応のGoogle Slides埋め込み
   return `
-<div class="google-slides-embed-container">
-  <iframe
-    src="${embedUrl}"
-    frameborder="0"
-    allowfullscreen="true"
-    mozallowfullscreen="true"
-    webkitallowfullscreen="true"
-    style="width:100%;aspect-ratio:12/7;border:0;border-radius:8px;"
-  ></iframe>
+<div class="google-slides-wrapper">
+  <div class="google-slides-container">
+    <iframe
+      src="${embedUrl}"
+      title="${linkTitle || 'Google Slides'}"
+      frameborder="0"
+      allowfullscreen="true"
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    ></iframe>
+  </div>
 </div>`;
 }
 
