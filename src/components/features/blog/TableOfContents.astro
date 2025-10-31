@@ -1,6 +1,5 @@
 ---
 import { styled as s } from "styled-system/jsx";
-import { css } from "styled-system/css";
 
 interface Props {
   headings: {
@@ -24,6 +23,7 @@ const baseLevel = tocHeadings.length > 0 ? tocHeadings[0].depth : 1;
 // 相対的なレベルを計算した見出し配列を作成
 const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
   ...heading,
+  text: heading.text.replace(/^#+\s*/, ""),  // headingの先頭にある#を削除
   relativeDepth: Math.max(0, heading.depth - baseLevel), // 基準レベルからの相対値(最小0)
 }));
 ---
@@ -38,7 +38,6 @@ const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
   p="6"
   borderWidth="1px"
   borderColor="sz.border/20"
-  class="table-of-contents"
   aria-label="目次"
 >
   <s.h5
@@ -55,7 +54,6 @@ const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
     maxH={{ base: "300px", lg: "calc(100vh - 200px)" }}
     overflowX="hidden"
     overflowY="auto"
-    class="toc-scroll-container"
   >
     <s.ul listStyle="none" p="0" m="0">
       {
@@ -76,7 +74,6 @@ const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
                 color="sz.text.main/70"
                 lineHeight="relaxed"
                 transition="all 0.2s"
-                class="toc-link"
                 data-slug={heading.slug}
                 _hover={{
                   color: "sz.primary",
@@ -127,7 +124,7 @@ const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
   }
 </style>
 
-<script>
+<!-- <script>
   function initializeTableOfContents() {
     const tocLinks = document.querySelectorAll<HTMLAnchorElement>(".toc-link");
     const headings = Array.from(
@@ -234,4 +231,4 @@ const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
 
   // ページ遷移時の再初期化（Astroのクライアントサイドルーティング対応）
   document.addEventListener("astro:page-load", initializeTableOfContents);
-</script>
+</script> -->
