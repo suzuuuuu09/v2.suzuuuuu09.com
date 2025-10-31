@@ -87,6 +87,19 @@ export default function remarkEmbedLinks() {
           }
           break;
         }
+        case 'spotify': {
+          // Spotifyの埋め込み
+          const spotifyData = extractSpotifyId(url);
+          if (!spotifyData) return;
+
+          const embedUrl = `https://open.spotify.com/embed/${spotifyData.type}/${spotifyData.id}`;
+          const embedHtml = createSpotifyEmbedHtml(embedUrl);
+          parent.children[index] = {
+            type: 'html',
+            value: embedHtml,
+          };
+          break;
+        }
         case 'google-slides': {
           if (url) {
             const htmlValue = createGoogleSlidesEmbedHtml(url);
@@ -146,7 +159,7 @@ async function fetchOGP(url: string) {
       url,
       timeout: 5000,
     };
-    
+
     const { result } = await ogs(options);
     
     // open-graph-scraperの結果から必要な情報を抽出
@@ -196,6 +209,7 @@ function getUrlType(url: string): string {
   if (url.includes('qiita.com')) return 'qiita';
   if (url.includes('note.com')) return 'note';
   if (url.includes('x.com') || url.includes('twitter.com')) return 'twitter';
+  if (url.includes('open.spotify.com')) return 'spotify';
   if (url.includes('docs.google.com/presentation')) return 'google-slides';
 
   // それ以外は外部リンク
@@ -254,6 +268,28 @@ function extractTwitterId(url: string): string | null {
   }
 }
 
+function extractSpotifyId(url: string): { type: string; id: string } | null {
+  try {
+    const urlObj = new URL(url);
+    const host = urlObj.hostname.replace(/^www\./, '');
+
+    if (host === 'open.spotify.com') {
+      const pathRegex = /^\/(?:intl-[a-z]{2}\/)?(track|album|playlist|artist|show|episode)\/([a-zA-Z0-9]+)(?:\?.*)?$/;
+      const pathMatch = pathRegex.exec(urlObj.pathname);
+      if (pathMatch) {
+        return {
+          type: pathMatch[1],
+          id: pathMatch[2],
+        };
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function createTwitterEmbedHtml(url: string, tweetId: string, linkTitle: string): string {
   // Twitter公式の埋め込みScript
   return `
@@ -277,6 +313,25 @@ function createYouTubeEmbedHtml(embedSrc: string, linkTitle: string): string {
     allowfullscreen
   ></iframe>
 </figure>\n`;
+}
+
+function createSpotifyEmbedHtml(embedUrl: string): string {
+  return `
+  <div class="spotify-embed-container">
+    <iframe
+      data-testid="embed-iframe"
+      style="border-radius:12px"
+      src="${embedUrl}"
+      width="100%"
+      height="352"
+      frameBorder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+    >
+    </iframe>
+  </div>
+  `;
 }
 
 function createGoogleSlidesEmbedHtml(embedUrl: string): string {

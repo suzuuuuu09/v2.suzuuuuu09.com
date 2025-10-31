@@ -13,24 +13,51 @@ category: idea
 
 ### video
 
+```md
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
 
-### channel
+https://www.youtube.com/@HikakinTV
+
+https://music.youtube.com/channel/UC_fYA9QRK-aJnFTgvR_4zug
+```
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
+
 https://www.youtube.com/@HikakinTV
 
 https://music.youtube.com/channel/UC_fYA9QRK-aJnFTgvR_4zug
 
 ## GitHub
 
-### users
+```md
+<!-- ユーザー -->
 https://github.com/suzuuuuu09
 
-### repositories
+<!-- リポジトリ -->
 https://github.com/suzuuuuu09/suzuuuuu09
 
+<!-- Github Gistを埋め込む際はembedのscriptタグを使わずに -->
+<!-- shareでURLをコピーして使用してください -->
+https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
+```
+
+https://github.com/suzuuuuu09
+
+https://github.com/suzuuuuu09/suzuuuuu09
+
+<script src="https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4.js"></script>
+
+https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
+
 ## Zenn
+
+```markdown
+https://zenn.dev/aki_think/articles/c4f5b2a75ff4d4
+```
 
 https://zenn.dev/aki_think/articles/c4f5b2a75ff4d4
 
@@ -51,10 +78,10 @@ https://twitter.com/suzuuuuu_09/status/1963666266008461750
 
 ## スライド
 
-https://docs.google.com/presentation/d/e/2PACX-1vSYquqXU2KmtI21E7z_tKhLpED7MCFIEaAKY9WKWiYUaAiR7rysPHC7zpRVeIWNTp3al-y3dwXraEAj/pub?start=false&loop=false&delayms=3000
-
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZDlGAhUL-aQxTf3If9QMYl8jes_QEoe6hoinu5t4B6Rg7aDq/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="1440" height="839" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+https://docs.google.com/presentation/d/e/2PACX-1vSYquqXU2KmtI21E7z_tKhLpED7MCFIEaAKY9WKWiYUaAiR7rysPHC7zpRVeIWNTp3al-y3dwXraEAj/pubembed?start=false&loop=false&delayms=3000
 
 ## Spotify
 
-<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/5NxmDq0yXBYGfCbMqvIXuv?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4ded
+
+https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw

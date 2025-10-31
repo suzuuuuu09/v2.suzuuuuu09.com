@@ -302,7 +302,20 @@ https://github.com/r4ai/remark-callout
 
 </details>
 
-## 複雑なHTMLとの組み合わせ
+## 折りたたみ
+
+```markdown
+<details>
+<summary>詳細を表示</summary>
+
+この部分は折りたたまれています。
+**Markdown記法**も使えます。
+
+- リストアイテム1
+- リストアイテム2
+
+</details>
+```
 
 <details>
 <summary>詳細を表示</summary>
@@ -316,8 +329,20 @@ https://github.com/r4ai/remark-callout
 </details>
 
 ## キーボードマークアップ
-<kbd>Ctrl</kbd>+<kbd>C</kbd>を押すとコピーすることができます。
+
+```markdown
+Windowsでは <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+```
+
+Windowsでは <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 
 ## リンク
+
+```markdown
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
