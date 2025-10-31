@@ -275,9 +275,31 @@ export default defineConfig({
             color: "sz.text.main",
           }
         },
+        ".link-card-site-wrapper": {
+          display: "flex",
+          alignItems: "center",
+          gap: "2",
+          "img": {
+            m: "0",
+            rounded: "0",
+          }
+        },
+        ".link-card-favicon": {
+          w: "4",
+          h: "4",
+          objectFit: "contain",
+          flexShrink: "0",
+        },
+        ".link-card-favicon-fallback": {
+          w: "4",
+          h: "4",
+          flexShrink: "0",
+          color: "#666",
+        },
         ".link-card-site": {
           display: "flex",
-          fontSize: "0.8rem",
+          fontSize: "xs",
+          color: "#666",
         }
       },
       ".link-card-grid": {
