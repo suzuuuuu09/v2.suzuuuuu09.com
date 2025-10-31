@@ -4,6 +4,7 @@ import { Flex, styled as s } from "styled-system/jsx";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
+import SideArticle from "@/components/features/blog/SideArticle.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -37,9 +38,11 @@ const articleInfo = {
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
     <s.article className="markdown-content" flex="1" minW="0">
       <Content />
+      <SideArticle slug={entry.data.slug ?? entry.id} />
     </s.article>
     
     <s.aside order={{ base: -1, lg: 1 }}>
       <TableOfContents headings={headings} />
     </s.aside>
+  </Flex>
 </BlogLayout>

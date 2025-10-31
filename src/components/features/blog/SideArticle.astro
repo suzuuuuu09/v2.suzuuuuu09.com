@@ -1,0 +1,137 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { Grid, HStack, styled as s } from "styled-system/jsx";
+import { css } from "styled-system/css";
+import Icon from "astro-iconify";
+
+export interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+// 公開済みの記事を取得し、新しい順に並べる
+const blogCollection: CollectionEntry<"blog">[] = (await getCollection("blog"))
+  .filter((entry) => entry.data.isPublish)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+// 現在の記事のインデックスを取得
+const currentIndex = blogCollection.findIndex(
+  (entry) => (entry.data.slug ?? entry.id) === slug
+);
+
+// 前後の記事を取得
+const prevArticle = currentIndex > 0 ? blogCollection[currentIndex - 1] : null;
+const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[currentIndex + 1] : null;
+---
+
+<Grid
+  as="nav"
+  gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+  gap="4"
+  mt="12"
+  pt="8"
+  borderTopWidth="1px"
+  borderColor="sz.border/30"
+>
+  <!-- 次の記事（古い記事） -->
+  {nextArticle && (
+    <a
+      href={`/blog/${nextArticle.data.slug ?? nextArticle.id}/`}
+      class={css({
+        display: "flex",
+        flexDirection: "column",
+        gap: "2",
+        p: "4",
+        borderRadius: "xl",
+        borderWidth: "1px",
+        borderColor: "sz.border/20",
+        bg: "sz.bg",
+        transition: "all 0.3s",
+        textDecoration: "none",
+        textAlign: { base: "left", md: "right" },
+        _hover: {
+          borderColor: "sz.primary/50",
+          bg: "sz.bg-on",
+          shadow: "md",
+          transform: "translateY(-2px)",
+        },
+      })}
+    >
+      <HStack
+        gap="2"
+        color="sz.text.sub"
+        fontSize="sm"
+        justify={{ base: "flex-start", md: "flex-end" }}
+      >
+        <s.span display={{ base: "inline", md: "none" }}>
+          <Icon name="mdi:chevron-left" size={20} />
+        </s.span>
+        <span>前の記事</span>
+        <s.span display={{ base: "none", md: "inline" }}>
+          <Icon name="mdi:chevron-left" size={20} />
+        </s.span>
+      </HStack>
+      <s.div
+        color="sz.text.main"
+        fontWeight="medium"
+        lineHeight="snug"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        display="-webkit-box"
+        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+      >
+        {nextArticle.data.emoji && (
+          <s.span mr="2">{nextArticle.data.emoji}</s.span>
+        )}
+        {nextArticle.data.title}
+      </s.div>
+    </a>
+  )}
+
+  <!-- 前の記事（新しい記事） -->
+  {prevArticle && (
+    <a
+      href={`/blog/${prevArticle.data.slug ?? prevArticle.id}/`}
+      class={css({
+        display: "flex",
+        flexDirection: "column",
+        gap: "2",
+        p: "4",
+        borderRadius: "xl",
+        borderWidth: "1px",
+        borderColor: "sz.border/20",
+        bg: "sz.bg",
+        transition: "all 0.3s",
+        textDecoration: "none",
+        gridColumn: { base: "1", md: "2" },
+        _hover: {
+          borderColor: "sz.primary/50",
+          bg: "sz.bg-on",
+          shadow: "md",
+          transform: "translateY(-2px)",
+        },
+      })}
+    >
+      <HStack gap="2" color="sz.text.sub" fontSize="sm">
+        <Icon name="mdi:chevron-right" size={20} />
+        <span>次の記事</span>
+      </HStack>
+      <s.div
+        color="sz.text.main"
+        fontWeight="medium"
+        lineHeight="snug"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        display="-webkit-box"
+        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+      >
+        {prevArticle.data.emoji && (
+          <s.span mr="2">{prevArticle.data.emoji}</s.span>
+        )}
+        {prevArticle.data.title}
+      </s.div>
+    </a>
+  )}
+</Grid>
