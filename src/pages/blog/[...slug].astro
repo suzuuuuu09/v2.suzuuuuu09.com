@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   return blogEntries.map(entry => ({
     params: { slug: entry.data.slug ?? entry.id },
     props: { entry },
-  }));
+  })).filter(({ props }) => props.entry.data.isPublish); // 公開されている記事のみ
 };
 
 const { entry } = Astro.props;
