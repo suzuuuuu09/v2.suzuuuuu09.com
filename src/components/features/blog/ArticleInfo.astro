@@ -1,8 +1,8 @@
 ---
-import Tag from "@/components/ui/Tag.astro";
-import dayjs from "dayjs";
 import { Flex, VStack, styled as s } from "styled-system/jsx";
+import dayjs from "dayjs";
 import Icon from "astro-iconify";
+import TagList from "./TagList.astro";
 import { getReadingTime } from "@/lib/reading-time";
 
 interface Props {
@@ -70,9 +70,7 @@ const readingTime = content ? getReadingTime(content) : undefined;
       gap="2"
       mb="4"
     >
-      {tags.map((tag) => (
-        <Tag useHashTag name={tag} />
-      ))}
+      <TagList tags={tags} />
     </Flex>
   )}
 

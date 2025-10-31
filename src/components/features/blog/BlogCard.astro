@@ -5,6 +5,7 @@ import { css, cx } from "styled-system/css";
 import { flex, center } from "styled-system/patterns";
 import { categories } from "@/consts/category";
 import Tag from "@/components/ui/Tag.astro";
+import TagList from "./TagList.astro";
 import Icon from "astro-iconify";
 import { getReadingTime } from "@/lib/reading-time";
 
@@ -104,13 +105,13 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
         </div>
       </div>
 
-      <!-- タイトル -->
-      <h4
-        class={css({
-          lineHeight: "snug",
-          transition: "colors 0.3s",
-          mb: "3",
-          mt: "4",
+    <!-- タイトル -->
+    <h4
+      class={css({
+        lineHeight: "snug",
+        transition: "colors 0.3s",
+        mb: "3",
+        mt: "4",
           fontWeight: "bold",
           fontSize: "xl",
           overflow: "hidden",
@@ -128,16 +129,9 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
 
       <!-- タグ -->
       <Flex direction="column" flex="1" justify="space-between" >
-        {blog.data.tags && blog.data.tags.length > 0 && (
-          <HStack gap="2" mb="7" >
-            {blog.data.tags.slice(0, maxVisibleTags).map((tag) => (
-              <Tag useHashTag name={tag} />
-            ))}
-            {blog.data.tags.length > maxVisibleTags && (
-              <Tag name={`+${blog.data.tags.length - maxVisibleTags}`} />
-            )}
-          </HStack>
-        )}
+        <HStack gap="2" mb="7">
+          <TagList omit tags={blog.data.tags} />
+        </HStack>
 
         <HStack
           justify="flex-end"
