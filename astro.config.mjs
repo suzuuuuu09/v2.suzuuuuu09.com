@@ -9,7 +9,6 @@ import remarkCallout from "@r4ai/remark-callout";
 import remarkBreaks from "remark-breaks";
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
-import remarkGistEmbed from "./src/lib/remark/remark-gist-embed";
 
 import rehypeKatex from "rehype-katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -49,8 +48,6 @@ export default defineConfig({
       remarkCallout,
       remarkBreaks,
       remarkEmbedLinks,
-      remarkGistEmbed,
-      // remarkYoutubeEmbed
     ],
     rehypePlugins: [
       rehypeKatex,

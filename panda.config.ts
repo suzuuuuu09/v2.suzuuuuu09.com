@@ -85,7 +85,7 @@ export default defineConfig({
         px: "1",
         py: "0.25",
         bg: "sz.bg-on",
-        borderRadius: "md",
+        rounded: "md",
         borderWidth: "1",
         borderColor: "sz.border",
       },
@@ -141,7 +141,7 @@ export default defineConfig({
           },
         },
       },
-      "table": {
+      "table:not(.github-gist-embed-container table)": {
         width: "full",
         "thead": {
           "tr": {
@@ -203,6 +203,201 @@ export default defineConfig({
         h: "auto",
         maxH: "600px"
       },
+      ".link-card": {
+        my: "6",
+        borderWidth: "1",
+        borderColor: "sz.border",
+        borderRadius: "lg",
+        overflow: "hidden",
+        maxH: "200px",
+        transition: "background-color 0.1s ease",
+        bg: "sz.bg",
+        _hover: {
+          bg: "sz.bg-on.500",
+        },
+        _sm: {
+          flexDirection: "column",
+          maxH: "none",
+          w: "full",
+          maxW: "full",
+        },
+        "a": {
+          display: "flex",
+          textDecoration: "row",
+          w: "full",
+          h: "full",
+          color: "sz.text.main",
+          transition: "color 0.2s ease",
+          _sm: {
+            flexDirection: "column",
+          },
+          _hover: {
+            textDecoration: "none",
+          },
+          ".link-card-image": {
+            display: "flex",
+            flexShrink: "0",
+            w: "auto",
+            h: "200px",
+            overflow: "hidden",
+            alignItems: "center",
+            justifyContent: "center",
+            _sm: {
+              w: "full",
+              h: "250px",
+            },
+            "img": {
+              w: "full",
+              h: "full",
+              objectFit: "cover",
+              objectPosition: "center",
+              m: "0",
+              rounded: "0",
+              maxH: "250px"
+            }
+          }
+        },
+        ".link-card-content": {
+          display: "flex",
+          p: "4",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          flex: "1",
+          _sm: {
+            w: "full",
+          },
+          "h4": {
+            m: "0",
+            mb: "2",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            lineHeight: "1.4",
+            color: "sz.text.main",
+          }
+        },
+        ".link-card-site": {
+          display: "flex",
+          fontSize: "0.8rem",
+        }
+      },
+      ".link-card-grid": {
+        ".link-card-grid-container": {
+          display: "flex",
+          flexDirection: "row",
+          gap: "2",
+          overflow: "hidden",
+          height: "full",
+          _sm: {
+            flexDirection: "column",
+          }
+        },
+        ".link-card-image-container": {
+          display: "flex",
+          flexShrink: "0",
+          w: 'auto',
+          h: "200px",
+          overflow: "hidden",
+          alignItems: "center",
+          justifyContent: "center",
+          _sm: {
+            w: "full",
+            h: "250px",
+          },
+          "img": {
+            w: "full",
+            h: "full",
+            objectFit: "cover",
+            objectPosition: "center",
+            m: "0",
+            rounded: "0",
+          }
+        },
+        ".no-image": {
+          w: "full",
+          h: "full",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bg: "sz.bg-on",
+          color: "sz.border",
+          fontSize: "0.8rem",
+        }
+      },
+      
+      ".youtube-embed iframe": {
+        w: "full",
+        h: "full",
+        aspectRatio: "16 / 9",
+        minW: "300px",
+        maxW: "800px",
+      },
+
+      ".spotify-embed iframe": {
+        w: "full",
+        h: "full",
+        aspectRatio: "2 / 1",
+        minW: "300px",
+        maxW: "800px",
+      },
+
+      ".twitter-embed-container": {
+        m: "1rem 0",
+        display: "flex",
+        justifyContent: "center",
+        ".twitter-tweet": {
+          m: "0",
+          maxW: "550px",
+          w: "full",
+        }
+      },
+
+      ".google-slides-wrapper": {
+        display: "flex",
+        justifyContent: "center",
+        m: "1.5rem 0",
+        w: "full",
+      },
+
+      ".google-slides-container": {
+        w: "full",
+        position: "relative",
+        paddingBottom: "58.23%", // 12:7 aspect ratio (7 / 12 * 100)
+        maxW: "960px",
+        h: "0",
+        overflow: "hidden",
+        bgColor: "sz.bg-on",
+        "iframe": {
+          position: "absolute",
+          top: "0",
+          left: "0",
+          w: "full",
+          h: "full",
+          border: "0",
+          rounded: "8px",
+        }
+      },
+      
+      ".github-gist-embed-container": {
+        m: "1.5rem 0",
+        w: "full",
+        overflowX: "auto",
+        ".gist": {
+          m: "0",
+        },
+        ".github-meta": {
+          fontFamily: "inherit",
+        },
+      },
+      "iframe[src*='open.spotify.com']": {
+        w: "full",
+        h: "full",
+        aspectRatio: "2 / 1",
+        minW: "300px",
+        maxW: "800px",
+        border: "0",
+        rounded: "8px",
+        p: "0.5rem 0",
+      },
 
       // rehype-autolink-headingsのアンカーリンク
       ".heading-anchor": {
@@ -220,101 +415,6 @@ export default defineConfig({
       // Expressiveのコードブロック
       ".expressive-code": {
         my: "4",
-      },
-
-      // リンクの埋め込み
-      ".link-card": {
-        my: "6",
-        border: "1px solid",
-        borderColor: "sz.border",
-        rounded: "md",
-        maxH: "200px",
-        transition: "background-color 0.1s ease",
-        bgColor: "sz.bg",
-        overflow: "hidden",
-        "&:hover": {
-          bgColor: "sz.bg-on.500",
-        },
-        _sm: {
-          flexDirection: "column",
-          maxH: "none",
-          width: "100%",
-          maxW: "100%",
-        },
-        "a": {
-          display: "block",
-          height: "100%",
-          width: "100%",
-          color: "sz.text.main",
-          transition: "color 0.2s ease",
-          "&:hover": {
-            textDecoration: "none",
-          },
-        }
-      },
-      ".link-card-content": {
-        display: "flex",
-        p: "4",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        flex: "1",
-        _sm: {
-          w: "full",
-        },
-        "h4": {
-          m: "0 0 0.5rem 0",
-          fontSize: "1.1rem",
-          fontWeight: "bold",
-          lineHeight: "1.4",
-          color: "sz.text.main",
-        },
-      },
-      ".link-card-site": {
-        display: "flex",
-        fontSize: "0.8rem",
-      },
-      ".link-card-grid": {
-        ".link-card-grid-container": {
-          display: "flex",
-          flexDirection: "row",
-          gap: "0.5rem",
-          overflow: "hidden",
-          height: "100%",
-          _sm: {
-            flexDirection: "column",
-          },
-        },
-        ".link-card-image-container": {
-          display: "flex",
-          flexShrink: "0",
-          width: "auto",
-          height: "200px",
-          overflow: "hidden",
-          alignItems: "center",
-          justifyContent: "center",
-          _sm: {
-            width: "100%",
-            height: "250px",
-          },
-          "img": {
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            margin: "0",
-            borderRadius: "0",
-          },
-        },
-        ".no-image": {
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          bg: "sz.bg-on",
-          color: "sz.border",
-          fontSize: "0.8rem",
-        },
       },
     },
     "img.emoji": {

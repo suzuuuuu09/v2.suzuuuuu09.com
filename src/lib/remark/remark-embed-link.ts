@@ -112,6 +112,15 @@ export default function remarkEmbedLinks() {
           }
           break;
         }
+        case 'github-gist': {
+          // GitHub Gistの埋め込み
+          const htmlValue = createGithubGistEmbedHtml(url);
+          parent.children[index] = {
+            type: 'html',
+            value: htmlValue,
+          };
+          break;
+        }
         case 'other': {
           // その他のリンク（OGP取得）
           const promise = (async () => {
@@ -167,6 +176,7 @@ function getUrlType(url: string): string {
   if (url.includes('x.com') || url.includes('twitter.com')) return 'twitter';
   if (url.includes('open.spotify.com')) return 'spotify';
   if (url.includes('docs.google.com/presentation')) return 'google-slides';
+  if (url.includes('gist.github.com')) return 'github-gist';
 
   // それ以外は外部リンク
   return 'other';
@@ -343,6 +353,17 @@ function createGoogleSlidesEmbedHtml(embedUrl: string, linkTitle: string): strin
       webkitallowfullscreen="true"
     ></iframe>
   </div>
+</div>`;
+}
+
+function createGithubGistEmbedHtml(embedUrl: string): string {
+  // URLからクエリパラメータを除去してから.jsを追加
+  const cleanUrl = embedUrl.split('?')[0];
+  const scriptUrl = cleanUrl.endsWith('.js') ? cleanUrl : `${cleanUrl}.js`;
+  
+  return `
+<div class="github-gist-embed-container">
+  <script src="${scriptUrl}"></script>
 </div>`;
 }
 
