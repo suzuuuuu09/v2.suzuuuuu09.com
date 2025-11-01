@@ -11,9 +11,8 @@ tags:
   - TypeScript
 publishDate: 2025-10-05
 updateDate: 2025-11-01
-isPublish: true
+isPublish: false
 ---
-
 ## 🔍 問題の概要
 
 SveltekitプロジェクトでPandaCSSを導入した際に、`styled-system/css`モジュールが見つからないというTypeScriptエラーが発生する問題について解説します。

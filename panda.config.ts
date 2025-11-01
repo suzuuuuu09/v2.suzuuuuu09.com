@@ -1,4 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
+import { createPreset } from '@park-ui/panda-preset'
+import amber from '@park-ui/panda-preset/colors/amber'
+import sand from '@park-ui/panda-preset/colors/sand'
 
 export default defineConfig({
   // Whether to use css reset
@@ -6,6 +9,8 @@ export default defineConfig({
 
   // Where to look for your css declarations
   include: ["./src/**/*.{js,jsx,ts,tsx,astro}", "./pages/**/*.{js,jsx,ts,tsx,astro}"],
+
+  presets: [createPreset({ accentColor: amber, grayColor: sand, radius: 'sm' })],
 
   // Files to exclude
   exclude: [],
@@ -77,6 +82,7 @@ export default defineConfig({
 
       "p": {
         my: "2",
+        color: "sz.text.main",
         "code": {
           fontSize: "base",
         }
@@ -204,7 +210,7 @@ export default defineConfig({
         maxH: "600px"
       },
       ".link-card": {
-        my: "6",
+        my: "5",
         borderWidth: "1",
         borderColor: "sz.border",
         borderRadius: "lg",
@@ -496,6 +502,7 @@ export default defineConfig({
           "s-secondary": { value: "#6bbaa3" },
           "s-bg": { value: "#faf8ff" },
           "s-bg-on": { value: "#F0F0F0" },
+          "s-border": { value: "#D1D5DC" },
           // Callout colors
           "callout-blue": { value: "#3951e2" },
           "callout-cyan": { value: "#0096d4" },
@@ -518,7 +525,7 @@ export default defineConfig({
             800: { value: "#f5f3f7" },
           },
           "sz.text.main": { value: "#474554" },
-          "sz.border": { value: "{colors.gray.300}" },
+          "sz.border": { value: "{colors.s-border}" },
         },
       }
     },

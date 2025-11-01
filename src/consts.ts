@@ -11,13 +11,13 @@ export const NAVIGATION_LINKS = [
 ]
 
 export const ICON_CARDS: Record<string, IconCard> = {
-  js: { icon: "material-icon-theme:javascript", name: "JavaScript" },
+  javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
   astro: { icon: "material-icon-theme:astro", name: "Astro" },
   bun: { icon: "material-icon-theme:bun", name: "Bun" },
   c: { icon: "material-icon-theme:c", name: "C" },
   cpp: { icon: "material-icon-theme:cpp", name: "C++" },
   css: { icon: "material-icon-theme:css", name: "CSS" },
-  cs: { icon: "devicon:csharp", name: "C#" },
+  csharp: { icon: "devicon:csharp", name: "C#" },
   cloudflarepages: { icon: "simple-icons:cloudflarepages", name: "Cloudflare Pages", color: "#F38020" },
   django: { icon: "material-icon-theme:django", name: "Django", },
   expressjs: { icon: "simple-icons:express", name: "Express.js" },
@@ -48,7 +48,7 @@ export const ICON_CARDS: Record<string, IconCard> = {
   selenium: { icon: "logos:selenium", name: "Selenium" },
   svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
   tailwind: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
-  ts: { icon: "material-icon-theme:typescript", name: "TypeScript" },
+  typescript: { icon: "material-icon-theme:typescript", name: "TypeScript" },
   unocss: { icon: "material-icon-theme:unocss", name: "UnoCSS" },
   unity: { icon: "material-icon-theme:unity", name: "Unity" },
   vercel: { icon: "material-icon-theme:vercel", name: "Vercel" },

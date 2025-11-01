@@ -17,14 +17,14 @@ const calcMaxVisibleTags = (tags: string[]): number => {
   const avgLength = totalLength / tags.length;
   
   // 文字数の平均から表示数
-  if (avgLength <= 4) {
-    // 4文字以下: 3個表示
+  if (avgLength <= 5) {
+    // 5文字以下: 3個表示
     return 3;
-  } else if (avgLength <= 8) {
-    // 5-8文字: 2個表示
+  } else if (avgLength <= 10) {
+    // 5-10文字: 2個表示
     return 2;
   } else {
-    // 9文字以上: 1個表示
+    // 11文字以上: 1個表示
     return 1;
   }
 };

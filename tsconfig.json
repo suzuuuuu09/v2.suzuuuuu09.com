@@ -3,6 +3,8 @@
   "include": [
     ".astro/types.d.ts",
     "**/*",
+    "src",
+    "styled-system"
   ],
   "exclude": [
     "dist"

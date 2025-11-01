@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from "astro:content";
+import { Flex, styled as s } from "styled-system/jsx";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import ProductInfo from "@/components/features/product/ProductInfo.astro";
+import TableOfContents from "@/components/features/blog/TableOfContents.astro";
+import SideArticle from "@/components/features/blog/SideArticle.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('product');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { entry },
+  })).filter(({ props }) => props.entry.data.isPublish); // 公開されている記事のみ
+};
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+// プロダクトの情報
+const articleInfo = {
+  title: entry.data.title,
+  publishDate: entry.data.publishDate,
+  updateDate: entry.data.updateDate,
+  tags: entry.data.tags || [],
+  thumbnail: entry.data.thumbnail || "",
+  description: entry.data.description,
+  content: entry.body, // 読了時間計算用
+};
+---
+
+<BlogLayout
+  title={entry.data.title}
+  headings={headings}
+  frontmatter={articleInfo}
+>
+  <ProductInfo {...articleInfo} />
+  <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
+    <s.article className="markdown-content" flex="1" minW="0">
+      <Content />
+      <SideArticle slug={entry.data.slug ?? entry.id} collection="product" />
+    </s.article>
+
+    <s.aside order={{ base: -1, lg: 1 }}>
+      <TableOfContents headings={headings} />
+    </s.aside>
+  </Flex>
+</BlogLayout>

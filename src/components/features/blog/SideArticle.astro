@@ -1,29 +1,35 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import { Grid, HStack, styled as s } from "styled-system/jsx";
+import { Flex, Grid, HStack, styled as s } from "styled-system/jsx";
 import { css } from "styled-system/css";
 import Icon from "astro-iconify";
 
 export interface Props {
   slug: string;
+  collection?: 'blog' | 'product' | 'award';
 }
 
-const { slug } = Astro.props;
+const { slug, collection = 'blog' } = Astro.props as Props;
 
-// 公開済みの記事を取得し、新しい順に並べる
-const blogCollection: CollectionEntry<"blog">[] = (await getCollection("blog"))
-  .filter((entry) => entry.data.isPublish)
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+// 指定された collection の公開済みエントリを取得して日付でソート
+const entries = (await (getCollection as any)(collection)) as any[];
+const collectionEntries = entries
+  .filter((entry) => entry.data?.isPublish)
+  .sort((a, b) => {
+    const aDate = a.data?.publishDate ?? a.data?.updateDate ?? new Date(0);
+    const bDate = b.data?.publishDate ?? b.data?.updateDate ?? new Date(0);
+    return bDate.getTime() - aDate.getTime();
+  });
 
 // 現在の記事のインデックスを取得
-const currentIndex = blogCollection.findIndex(
-  (entry) => (entry.data.slug ?? entry.id) === slug
+const currentIndex = collectionEntries.findIndex(
+  (entry) => (entry.data?.slug ?? entry.id) === slug
 );
 
 // 前後の記事を取得
-const prevArticle = currentIndex > 0 ? blogCollection[currentIndex - 1] : null;
-const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[currentIndex + 1] : null;
+const prevArticle = currentIndex > 0 ? collectionEntries[currentIndex - 1] : null;
+const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntries[currentIndex + 1] : null;
 ---
 
 <Grid
@@ -33,20 +39,20 @@ const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[cu
   mt="12"
   pt="8"
   borderTopWidth="1px"
-  borderColor="sz.border/30"
+  borderColor="sz.border/50"
 >
-  <!-- 次の記事（古い記事） -->
+  <!-- 前の記事 -->
   {nextArticle && (
     <a
-      href={`/blog/${nextArticle.data.slug ?? nextArticle.id}/`}
+      href={`/${collection}/${nextArticle?.data?.slug ?? nextArticle?.id}/`}
       class={css({
         display: "flex",
         flexDirection: "column",
         gap: "2",
         p: "4",
         borderRadius: "xl",
-        borderWidth: "1px",
-        borderColor: "sz.border/20",
+        borderWidth: "1",
+        borderColor: "sz.border/50",
         bg: "sz.bg",
         transition: "all 0.3s",
         textDecoration: "none",
@@ -63,37 +69,34 @@ const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[cu
         gap="2"
         color="sz.text.sub"
         fontSize="sm"
-        justify={{ base: "flex-start", md: "flex-end" }}
+        flexWrap="wrap"
+        justify="flex-start"
       >
-        <s.span display={{ base: "inline", md: "none" }}>
-          <Icon name="mdi:chevron-left" size={20} />
-        </s.span>
+        <Icon name="mdi:chevron-left" size={20} />
         <span>前の記事</span>
-        <s.span display={{ base: "none", md: "inline" }}>
-          <Icon name="mdi:chevron-left" size={20} />
-        </s.span>
+        
       </HStack>
       <s.div
         color="sz.text.main"
-        fontWeight="medium"
+        fontWeight="bold"
         lineHeight="snug"
         overflow="hidden"
         textOverflow="ellipsis"
         display="-webkit-box"
         style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
       >
-        {nextArticle.data.emoji && (
+        {nextArticle?.data?.emoji && (
           <s.span mr="2">{nextArticle.data.emoji}</s.span>
         )}
-        {nextArticle.data.title}
+        {nextArticle?.data?.title}
       </s.div>
     </a>
   )}
 
-  <!-- 前の記事（新しい記事） -->
+  <!-- 次の記事 -->
   {prevArticle && (
     <a
-      href={`/blog/${prevArticle.data.slug ?? prevArticle.id}/`}
+      href={`/${collection}/${prevArticle?.data?.slug ?? prevArticle?.id}/`}
       class={css({
         display: "flex",
         flexDirection: "column",
@@ -101,7 +104,7 @@ const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[cu
         p: "4",
         borderRadius: "xl",
         borderWidth: "1px",
-        borderColor: "sz.border/20",
+        borderColor: "sz.border/50",
         bg: "sz.bg",
         transition: "all 0.3s",
         textDecoration: "none",
@@ -114,24 +117,24 @@ const nextArticle = currentIndex < blogCollection.length - 1 ? blogCollection[cu
         },
       })}
     >
-      <HStack gap="2" color="sz.text.sub" fontSize="sm">
-        <Icon name="mdi:chevron-right" size={20} />
+      <HStack flexWrap="wrap" justify="flex-end" gap="2" color="sz.text.sub" fontSize="sm">
         <span>次の記事</span>
+        <Icon name="mdi:chevron-right" size={20} />
       </HStack>
-      <s.div
+      <Flex
         color="sz.text.main"
-        fontWeight="medium"
+        fontWeight="bold"
         lineHeight="snug"
         overflow="hidden"
         textOverflow="ellipsis"
         display="-webkit-box"
         style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
       >
-        {prevArticle.data.emoji && (
+        {prevArticle?.data?.emoji && (
           <s.span mr="2">{prevArticle.data.emoji}</s.span>
         )}
-        {prevArticle.data.title}
-      </s.div>
+        {prevArticle?.data?.title}
+      </Flex>
     </a>
   )}
 </Grid>

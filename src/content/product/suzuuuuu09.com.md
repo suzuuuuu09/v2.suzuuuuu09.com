@@ -4,8 +4,9 @@ author: suzu
 slug: suzuuuuu09-com
 tags:
   - Astro
-  - UnoCSS
-  - Mantine
+  - PandaCSS
+  - ArkUI
+  - ParkUI
 thumbnail: "![[suzuuuuu09.com-1758351963075.webp]]"
 description: 初めてのポートフォリオサイト作成。
 publishDate: 2025-09-20T15:12
@@ -15,9 +16,9 @@ isPublish: true
 ## 概要
 
 ## 技術スタック
-- **フレームワーク**: Astro
-- **スタイリング**: UnoCSS
-- **UIフレームワーク**: Mantine
+- **フレームワーク**: Astro & React
+- **スタイリング**: PandaCSS
+- **UIフレームワーク**: Ark UI & Park UI
 
 ## 画像・動画
 ![[suzuuuuu09.com-1758351963075.webp]]
@@ -27,16 +28,19 @@ isPublish: true
 https://suzuuuuu09.com
 
 ## 参考記事
-https://unocss.dev
+[Panda CSS - Build modern websites using build time and type-safe CSS-in-JS](https://panda-css.com)
 
-https://astro.build
+[Astro](https://astro.build)
 
-https://docs.astro.build/ja/getting-started/
+[はじめに \| Docs](https://docs.astro.build/ja/getting-started/)
 
-https://mantine.dev
+Contentの管理方法を参考にしました。
+[ObsidianをCMSにしたら、思ったより本格的だった話 #cloudflare - Qiita](https://qiita.com/nasubi_dev/items/2237101b170f7327e4a0)
 
-https://raahii.me/posts/add-toc-to-astro-blog/
+記事の読了時間の計算方法についての書き方を参考にしました。
+[Adding reading time to Astro without the hassle \| Blog – Jahir Fiquitiva](https://jahir.dev/blog/astro-reading-time)
 
-https://qiita.com/nasubi_dev/items/2237101b170f7327e4a0
+リンクカードのfaviconの表示について表示しました。
+[URL をリンクカードに変換する Remark プラグインを作る \| SIWL.dev](https://siwl.dev/blog/articles/remark-bare-link/)
 
-https://jahir.dev/blog/astro-reading-time
+[\[Next.js\] URL末尾に .md つけたらMarkdownをそのまま返す！](https://zenn.dev/chot/articles/nextjs-md-suffix)

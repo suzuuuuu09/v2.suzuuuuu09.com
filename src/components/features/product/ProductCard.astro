@@ -1,0 +1,160 @@
+---
+import dayjs from "dayjs";
+import Icon from "astro-iconify";
+import { Flex, HStack, styled as s } from "styled-system/jsx";
+import { css, cx } from "styled-system/css";
+import { R2_URL } from "@/consts/base";
+import { cleanAssetPath } from "@/utils/cleanAssetPath";
+import { getReadingTime } from "@/lib/reading-time";
+import TagList from "@/components/features/blog/TagList.astro";
+
+export interface Props {
+  product: {
+    id: string;
+    data: {
+      title: string;
+      description?: string;
+      slug?: string;
+      author?: string;
+      publishDate: Date;
+      updateDate?: Date;
+      tags?: string[];
+      thumbnail: string;
+      content?: string;
+    };
+  };
+}
+
+const { product } = Astro.props;
+
+const buildThumbnailUrl = (thumbnailPath: string, title: string) => {
+  if (!thumbnailPath) return "";
+  let p = cleanAssetPath(thumbnailPath);
+  if (p.startsWith("http://") || p.startsWith("https://")) return p;
+  if (p.startsWith("assets/")) return `${R2_URL}/${p}`;
+  if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(p) && !p.includes("/")) {
+    const t = (title || "assets").replace(/ /g, "_");
+    return `${R2_URL}/assets/${t}/${p}`;
+  }
+  return p;
+};
+
+const thumbnailUrl = buildThumbnailUrl(product.data.thumbnail, product.data.title);
+const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
+---
+
+<article
+  class={cx(
+    "group",
+    css({
+      position: "relative",
+      bgGradient: "to-br",
+      gradientFrom: "sz.bg",
+      gradientTo: "sz.bg-on",
+      borderRadius: "2xl",
+      shadow: "sm",
+      overflow: "hidden",
+      borderWidth: "1px",
+      borderColor: "sz.border/20",
+      backdropFilter: "blur(8px)",
+      transition: "all 0.4s",
+      _hover: { shadow: "xl" },
+    })
+  )}
+>
+  <a
+    href={`/product/${product.id}/`}
+    class={cx(
+      css({ color: "sz.text.main", textDecoration: "none" }),
+      css({ display: "flex", flexDirection: "column", height: "100%" })
+    )}
+  >
+    <!-- サムネイル画像 -->
+    <s.div
+      position="relative"
+      w="full"
+      maxH="60"
+      h="240px"
+      overflow="hidden"
+      style={{ height: "240px" }}
+    >
+      <s.img
+        src={thumbnailUrl}
+        alt={product.data.title}
+        w="full"
+        h="full"
+        objectFit="cover"
+        objectPosition="center"
+        transition="transform 0.5s"
+        _groupHover={{ transform: "scale(1.05)" }}
+        loading="lazy"
+      />
+    </s.div>
+
+    <Flex
+      position="relative"
+      bgGradient="to-r"
+      gradientFrom="sz.primary/5"
+      gradientVia="sz.primary/10"
+      gradientTo="sz.primary/5"
+      p="6"
+      flex="1"
+      flexDir="column"
+    >
+      <s.h4
+        lineHeight="snug"
+        transition="colors 0.3s"
+        mx="1"
+        mb="3"
+        fontWeight="bold"
+        fontSize="xl"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        display="-webkit-box"
+        lineClamp="2"
+        _groupHover={{ color: "sz.primary" }}
+        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+      >
+        {product.data.title}
+      </s.h4>
+
+      <Flex flexDir="column" flex="1" justifyContent="space-between">
+        {product.data.tags && product.data.tags.length > 0 && (
+          <HStack gap="2" mb="7">
+            <TagList omit tags={product.data.tags} />
+          </HStack>
+        )}
+
+        <HStack
+          justify="flex-end"
+          borderTopWidth="1px"
+          borderColor="sz.border/30"
+          pt="3"
+          gap="2"
+        >
+          <!-- 読了時間 -->
+          {readingTime && (
+            <HStack gap="1">
+              <Icon name="mdi:clock-outline" size={16} />
+              <s.time color="sz.text.main" fontSize="base">
+                {readingTime}
+              </s.time>
+            </HStack>
+          )}
+
+          <!-- 公開日 -->
+          <HStack gap="1">
+            <Icon name="mdi:calendar" size={16} />
+            <s.time
+              dateTime={product.data.publishDate.toISOString()}
+              color="sz.text.main"
+              fontSize="sm"
+            >
+              {dayjs(product.data.publishDate).format("YYYY.MM.DD")}
+            </s.time>
+          </HStack>
+        </HStack>
+      </Flex>
+    </Flex>
+  </a>
+</article>

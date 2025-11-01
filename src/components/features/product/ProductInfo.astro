@@ -1,0 +1,128 @@
+---
+import dayjs from 'dayjs';
+import { Flex, HStack, VStack, styled as s } from 'styled-system/jsx';
+import { R2_URL } from '@/consts/base';
+import { cleanAssetPath } from '@/utils/cleanAssetPath';
+import Icon from 'astro-iconify';
+import TagList from '../blog/TagList.astro';
+import { getReadingTime } from '@/lib/reading-time';
+
+export interface Props {
+  title: string;
+  publishDate?: string | Date;
+  updateDate?: string | Date;
+  tags?: string[];
+  thumbnail?: string;
+  description?: string;
+  author?: string;
+  content?: string;
+}
+
+const {
+  title,
+  publishDate,
+  updateDate,
+  tags = [],
+  thumbnail,
+  description,
+  author,
+  content,
+} = Astro.props as Props;
+
+// サムネイルのパスを正規化して URL を返すユーティリティ
+const buildThumbnailUrl = (thumbnailPath: string | undefined, title: string) => {
+  if (!thumbnailPath) return '';
+
+  let path = cleanAssetPath(thumbnailPath);
+
+  // すでに絶対 URL の場合はそのまま
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+
+  // assets/ で始まる場合は R2 ベースに繋げる
+  if (path.startsWith('assets/')) return `${R2_URL}/${path}`;
+
+  // ファイル名だけ（拡張子あり）であれば title ベースのフォルダに入れて返す
+  if (path.match(/\.(jpe?g|png|gif|webp|avif|svg)$/i) && !path.includes('/')) {
+    const folder = title.replace(/\s+/g, '_');
+    return `${R2_URL}/assets/${folder}/${path}`;
+  }
+
+  // 相対パスなどはそのまま返す
+  return path;
+};
+
+const thumbnailUrl = buildThumbnailUrl(thumbnail, title || '');
+const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : undefined;
+---
+
+<VStack mb="8" gap="4">
+  {thumbnailUrl && (
+    <s.img
+      src={thumbnailUrl}
+      alt={title}
+      loading="eager"
+      decoding="async"
+      maxH="500px"
+      rounded="xl"
+      objectPosition="center"
+    />
+  )}
+
+  <s.h2
+    fontWeight="bold"
+    px={{ base: 3, sm: 4 }}
+    maxW="4xl"
+    wordBreak="break-word"
+  >
+    {title}
+  </s.h2>
+
+  {tags.length > 0 && (
+    <Flex
+      flexDirection="center"
+      flexWrap="wrap"
+      mb="4"
+      gap="2"
+    >
+      <TagList tags={tags} />
+    </Flex>
+  )}
+
+  <Flex justify="center" rounded="lg" w="full" maxW="2xl">
+    <Flex
+      flexDirection="center"
+      flexWrap="wrap"
+      fontSize="sm"
+      gap={{ base: 4, sm: 2 }}
+      alignItems={{ sm: "start" }}
+      color="sz.text.main"
+    >
+      {publishDate && (
+        <HStack gap="1.5">
+          <Icon name="mdi:calendar" size={16} />
+          <s.span>{dayjs(publishDate).format('YYYY.MM.DD')}</s.span>
+        </HStack>
+      )}
+
+      {updateDate && (
+        <HStack gap="1.5">
+          <Icon name="mdi:update" size={16} />
+          <s.span>{dayjs(updateDate).format('YYYY.MM.DD')}</s.span>
+        </HStack>
+      )}
+      
+      {readingTime && (
+        <HStack gap="1.5">
+          <Icon name="mdi:clock-outline" size={16} />
+          <s.span>{readingTime}</s.span>
+        </HStack>
+      )}
+    </s.div>
+  </Flex>
+
+  {description && (
+    <s.p maxW="2xl" style={{ textAlign: 'center', lineHeight: 1.6 }}>
+      {description}
+    </s.p>
+  )}
+</HStack>

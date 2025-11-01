@@ -21,7 +21,7 @@ suzuのアイコンを埋め込んだQRコードを作成できます。これ�
 - **フロントエンドフレームワーク**: Svelte 5
 - **ビルドツール**: Sveltekit with Vite
 - **言語**: TypeScript
-- **スタイリング**: PandCSS
+- **スタイリング**: PandaCSS
 - **UIコンポーネント**: Ark UI
 - **QRコード生成**: @svelte-put/qr
 
