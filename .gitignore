@@ -28,5 +28,6 @@ styled-system
 styled-system-studio
 
 # Obsidian content
-.obsidian/
-assets/
+src/content/.obsidian/
+src/content/assets/
+src/content/templates/
