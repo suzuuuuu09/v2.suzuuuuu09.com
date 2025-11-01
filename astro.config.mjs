@@ -60,7 +60,7 @@ export default defineConfig({
         {
           target: "_blank",
           rel: ["nofollow", "noopener", "noreferrer"],
-          content: { type: "text", value: "↗" },
+          content: { type: "text", value: "↗️" },
         },
       ],
       [

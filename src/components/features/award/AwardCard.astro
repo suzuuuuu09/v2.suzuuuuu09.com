@@ -1,11 +1,10 @@
 ---
 import dayjs from "dayjs";
-import { Flex, HStack, Center, styled as s } from "styled-system/jsx";
+import { Flex, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
-import { flex, center } from "styled-system/patterns";
 import Icon from "astro-iconify";
 
-export interface Props{
+export interface Props {
   award: {
     id?: string;
     data: {
@@ -14,119 +13,107 @@ export interface Props{
       type: string;
       description?: string;
       date: Date;
-    }
-  }
+    };
+  };
 }
 
-const { award } = Astro.props;
+const { award } = Astro.props as Props;
 ---
 
-<article
+<a
+  href={`/award/${award.data.slug ?? award.id}/`}
   class={cx(
-    "group",
-    css({
-      position: "relative",
-      bgGradient: "to-br",
-      gradientFrom: "sz.bg",
-      gradientTo: "sz.bg-on",
-      borderRadius: "2xl",
-      shadow: "sm",
-      overflow: "hidden",
-      borderWidth: "1px",
-      borderColor: "sz.border/20",
-      backdropFilter: "blur(8px)",
-      transition: "all 0.4s",
-      _hover: {
-        shadow: "xl",
-      },
-    })
+    css({ width: "100%", display: "block", color: "sz.text.main", textDecoration: "none" })
   )}
 >
-  <a
-    href={`/blog/${award.data.slug ?? award.id}/`}
+  <article
     class={cx(
-      flex({ direction: "column", height: "full" }),
-      css({ color: "sz.text.main", textDecoration: "none" })
+      "group",
+      css({
+        position: "relative",
+        bgGradient: "to-br",
+        gradientFrom: "sz.bg",
+        gradientTo: "sz.bg-on",
+        borderRadius: "2xl",
+        shadow: "sm",
+        overflow: "hidden",
+        borderWidth: "1px",
+        borderColor: "sz.border/20",
+        backdropFilter: "blur(8px)",
+        transition: "all 0.4s",
+        _hover: {
+          shadow: "xl",
+        },
+      })
     )}
   >
-    <Flex
-      position="relative"
+    <s.div
+      p={{ base: "5", md: "6" }}
       bgGradient="to-r"
       gradientFrom="sz.primary/5"
       gradientVia="sz.primary/10"
       gradientTo="sz.primary/5"
-      p="8"
-      pb="6"
-      flex="1"
-      flexDir="column"
+      position="relative"
     >
-      <!-- メイン絵文字 -->
-      <div class={css({ position: "relative", zIndex: "10" })}>
-        <div
-          class={cx(
-            center(),
-            css({
-              width: "16",
-              height: "16",
-              bg: "sz.bg",
-              borderRadius: "xl",
-              shadow: "md",
-              transition: "all 0.3s",
-              _groupHover: {
-                transform: "scale(1.1) rotate(3deg)",
-              },
-            })
-          )}
-        >
-          <span class={css({ fontSize: "3xl" })}>🏆</span>
-        </div>
-      </div>
+      <!-- カード背景用絵文字 -->
+      <s.div position="absolute" top="6" right="6" opacity="0.1" >
+        <Center w="20" h="20" bg="sz.primary/10" borderRadius="full" >
+          <div class={css({ fontSize: "3xl" })}>
+            🏆
+          </div>
+        </Center>
+      </s.div>
 
-    <!-- タイトル -->
-    <h4
-      class={css({
-        lineHeight: "snug",
-        transition: "colors 0.3s",
-        mb: "3",
-        mt: "4",
-          fontWeight: "bold",
-          fontSize: "xl",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          display: "-webkit-box",
-          lineClamp: "2",
-          _groupHover: {
-            color: "sz.primary",
-          },
-        })}
-        style="-webkit-line-clamp: 2; -webkit-box-orient: vertical;"
-      >
-        {`[${award.data.type}] ${award.data.title}`}
-      </h4>
+      <Flex direction="column" gap="4">
+        <Flex align="start" gap="4">
+          <!-- 絵文字 -->
+          <div
+            class={cx(
+              css({
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "3.5rem",
+                height: "3.5rem",
+                borderRadius: "xl",
+                bg: "sz.brand/10",
+                flexShrink: 0,
+                transition: "transform 0.3s",
+                _groupHover: { transform: "scale(1.05)" },
+              })
+            )}
+          >
+            <span class={css({ fontSize: "2xl" })}>🏆</span>
+          </div>
 
-      <!-- タグ -->
-      <Flex direction="column" flex="1" justify="space-between" >
-        <HStack
-          justify="flex-end"
-          borderTopWidth="1px"
-          borderColor="sz.border/30"
-          pt="3"
-          gap="2"
-        >
+          <!-- タイトル -->
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <Flex align="center" wrap="wrap" gap="2">
+              <s.p fontWeight="bold" fontSize="xl" display="flex" gap="2">
+                <s.span color="sz.text.sub">[{award.data.type}]</s.span>
+                <s.span className={css({ lineHeight: "snug", transition: "color 0.3s" })}>
+                  {award.data.title}
+                </s.span>
+              </s.p>
+            </Flex>
 
-          <!-- 公開日 -->
-          <HStack gap="1">
-            <Icon name="mdi:award" size={16} />
-            <s.time
-              dateTime={award.data.date.toISOString()}
-              color="sz.text.main"
-              fontSize="sm"
-            >
-              {dayjs(award.data.date).format("YYYY.MM.DD")}
-            </s.time>
-          </HStack>
-        </HStack>
+            <!-- 説明 -->
+            {award.data.description && (
+              <s.span color="sz.text.sub" fontSize="sm" mt="2" display="block" style={{ overflow: 'hidden' }}>
+                {award.data.description}
+              </s.span>
+            )}
+
+            <!-- 受賞日・出場日 -->
+            <Flex align="center" gap="2" mt="3">
+              <Icon name="mdi:award" size={16}/>
+              <s.time dateTime={award.data.date.toISOString()} color="sz.text.sub" fontSize="sm">
+                {dayjs(award.data.date).format("YYYY.MM.DD")}
+              </s.time>
+            </Flex>
+          </div>
+        </Flex>
       </Flex>
-    </Flex>
-  </a>
-</article>
+    </s.div>
+  </article>
+</a>

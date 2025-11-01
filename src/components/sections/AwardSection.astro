@@ -1,9 +1,39 @@
 ---
-import { css } from "styled-system/css";
+import { getCollection } from 'astro:content';
 import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
+import AwardCard from '@/components/features/award/AwardCard.astro';
+import { Expand } from '@/components/shared/Expand';
+import { AwardGrid } from '@/components/features/award/AwardGrid.tsx';
+
+// awardをMarkdownファイルをすべて取得
+const allAwards = await getCollection('award');
+
+// dateを新しい順でソート
+const awards = allAwards
+  .filter((award) => award.data.isPublish)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <SectionLayout>
   <SectionTitle>Award</SectionTitle>
+  <Expand>
+    {awards.length === 0 ? (
+      <p>No awards found.</p>
+    ) : (
+      <AwardGrid>
+        {awards.map((award) => (
+          <AwardCard
+            award={{
+              id: award.id,
+              data: {
+                ...award.data,
+                slug: award.data.slug ?? award.id,
+              },
+            }}
+          />
+        ))}
+      </AwardGrid>
+    )}
+  </Expand>
 </SectionLayout>

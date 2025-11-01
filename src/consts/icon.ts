@@ -1,14 +1,4 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
 import type { IconCard } from "@/types";
-
-export const NAVIGATION_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/product", label: "Products" },
-  { href: "/award", label: "Awards" },
-  { href: "/blog", label: "Blogs" },
-]
 
 export const ICON_CARDS: Record<string, IconCard> = {
   javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },

@@ -55,10 +55,14 @@ export async function GET({ props }: any) {
     .join("\n");
 
   const markdown = `---\n${frontmatterYaml}\n---\n\n${entry.body}`;
+  const encoder = new TextEncoder();
+  const utf8Bytes = encoder.encode(markdown);
 
-  return new Response(markdown, {
+  return new Response(utf8Bytes, {
+    status: 200,
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
+      "Cache-Control": "public, max-age=3600",
     },
-  });
+  })
 }

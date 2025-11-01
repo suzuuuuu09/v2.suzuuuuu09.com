@@ -38,7 +38,7 @@ const awardCollection = defineCollection({
   loader: glob({ base: './src/content/award', pattern: '**/*.md' }),
   schema: commonSchema.extend({
     type: z.string(),
-    date: z.coerce.date(),
+    date: z.coerce.date(), // 受賞日または開催日
   }),
 })
 

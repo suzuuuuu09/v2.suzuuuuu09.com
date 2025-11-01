@@ -101,7 +101,7 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
       flex="1"
       flexDir="column"
     >
-      <s.h4
+      <s.h2
         lineHeight="snug"
         transition="colors 0.3s"
         mx="1"
@@ -116,7 +116,7 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
         style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
       >
         {product.data.title}
-      </s.h4>
+      </s.h2>
 
       <Flex flexDir="column" flex="1" justifyContent="space-between">
         {product.data.tags && product.data.tags.length > 0 && (

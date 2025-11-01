@@ -13,7 +13,20 @@ export interface Props {
 const { slug, collection = 'blog' } = Astro.props as Props;
 
 // 指定された collection の公開済みエントリを取得して日付でソート
-const entries = (await (getCollection as any)(collection)) as any[];
+let entries: any[];
+switch (collection) {
+  case 'blog':
+    entries = await getCollection('blog');
+    break;
+  case 'product':
+    entries = await getCollection('product');
+    break;
+  case 'award':
+    entries = await getCollection('award');
+    break;
+  default:
+    entries = await getCollection('blog');
+}
 const collectionEntries = entries
   .filter((entry) => entry.data?.isPublish)
   .sort((a, b) => {

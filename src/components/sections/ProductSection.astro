@@ -1,8 +1,41 @@
 ---
+import { getCollection } from "astro:content";
 import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
+import { ArticleGrid } from "@/components/features/blog/ArticleGrid";
+import ProductCard from "@/components/features/product/ProductCard.astro";
+import { Expand } from "@/components/shared/Expand";
+
+// productをMarkdownファイルをすべて取得
+const allProducts = await getCollection("product");
+
+// isPublishがfalseのものは除外
+// publishDateを新しい順でソート
+const products = allProducts
+  .filter((product) => product.data.isPublish)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <SectionLayout>
   <SectionTitle>Product</SectionTitle>
+  <Expand>
+    {products.length === 0 ? (
+      <p>No products found.</p>
+    ) : (
+      <ArticleGrid>
+        {products.map((product) => (
+          <ProductCard
+            product={{
+              id: product.id,
+              data: {
+                ...product.data,
+                slug: product.data.slug ?? product.id,
+                content: product.body,
+              },
+            }}
+          />
+        ))}
+      </ArticleGrid>
+    )}
+  </Expand>
 </SectionLayout>

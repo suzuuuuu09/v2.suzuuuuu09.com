@@ -21,8 +21,7 @@ function normalizeFaviconUrl(url: string, favicon: string): string {
     } else {
       return `${baseUrl.origin}/${favicon}`;
     }
-  } catch (err) {
-    console.warn(`Failed to normalize favicon URL for ${url}:`, err);
+  } catch {
     return "";
   }
 }
@@ -53,8 +52,7 @@ export async function fetchOGP(url: string) {
       site_name: ogSiteName,
       favicon: favicon,
     };
-  } catch (error) {
-    console.warn(`Failed to fetch OGP for ${url}:`, error);
+  } catch {
     return {
       title: '',
       description: '',

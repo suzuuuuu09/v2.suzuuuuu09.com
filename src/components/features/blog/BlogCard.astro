@@ -103,7 +103,7 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
       </div>
 
     <!-- タイトル -->
-    <h4
+    <h2
       class={css({
         lineHeight: "snug",
         transition: "colors 0.3s",
@@ -122,7 +122,7 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
         style="-webkit-line-clamp: 2; -webkit-box-orient: vertical;"
       >
         {blog.data.title}
-      </h4>
+      </h2>
 
       <!-- タグ -->
       <Flex direction="column" flex="1" justify="space-between" >
