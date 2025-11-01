@@ -70,14 +70,14 @@ export function createGithubGistEmbedHtml(embedUrl: string): string {
 </div>`;
 };
 
-export function createCodepenEmbedHtml(embedUrl: string): string {
+export function createCodepenEmbedHtml(slugHash: string): string {
   return `
   <div class="codepen-embed-container">
     <p
       class="codepen"
       data-height="300"
       data-default-tab="html,result"
-      data-slug-hash="ZYQqJaJ"
+      data-slug-hash="${slugHash}"
       style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
     >
     </p>

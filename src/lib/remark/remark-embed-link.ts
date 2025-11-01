@@ -131,6 +131,18 @@ export default function remarkEmbedLinks() {
           };
           break;
         }
+        case 'codepen': {
+          // Codepenの埋め込み
+          const slugHash = extractCodepenSlugHash(url);
+          if (!slugHash) return;  // スラッグハッシュが取得できない場合はスキップ
+
+          const htmlValue = createCodepenEmbedHtml(slugHash);
+          parent.children[index] = {
+            type: 'html',
+            value: htmlValue,
+          };
+          break;
+        }
         case 'other': {
           // その他のリンク（OGP取得）
           const promise = (async () => {
@@ -305,3 +317,21 @@ function convertToGoogleSlidesEmbedUrl(url: string): string | null {
   }
 }
 
+function extractCodepenSlugHash(url: string): string | null {
+  try {
+    const urlObj = new URL(url);
+    const host = urlObj.hostname.replace(/^www\./, '');
+
+    if (host === 'codepen.io') {
+      // URL形式: /username/pen/slugHash
+      const pathRegex = /^\/[^/]+\/pen\/([a-zA-Z0-9_-]+)/;
+      const pathMatch = pathRegex.exec(urlObj.pathname);
+      if (pathMatch) {
+        return pathMatch[1];
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
