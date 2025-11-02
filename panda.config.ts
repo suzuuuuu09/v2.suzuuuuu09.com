@@ -1,7 +1,4 @@
 import { defineConfig } from "@pandacss/dev";
-import { createPreset } from '@park-ui/panda-preset'
-import amber from '@park-ui/panda-preset/colors/amber'
-import sand from '@park-ui/panda-preset/colors/sand'
 
 export default defineConfig({
   // Whether to use css reset
@@ -10,20 +7,16 @@ export default defineConfig({
   // Where to look for your css declarations
   include: ["./src/**/*.{js,jsx,ts,tsx,astro}", "./pages/**/*.{js,jsx,ts,tsx,astro}"],
 
-  presets: [createPreset({ accentColor: amber, grayColor: sand, radius: 'sm' })],
-
   // Files to exclude
   exclude: [],
   
   globalCss: {
-    ":root": {
-      fontFamily: "var(--ibm-plex-sans-jp)",
-    },
-    "html": {
-      scrollBehavior: "smooth",
-    },
-    "body": {
+    "html, body": {
+      color: "sz.text.main",
       bg: "sz.bg",
+      scrollBehavior: "smooth",
+      fontFamily: "var(--ibm-plex-sans-jp)",
+      fontFeatureSettings: "'plat'",
     },
     // スクロールバーのスタイル
     "::-webkit-scrollbar": {
@@ -210,7 +203,7 @@ export default defineConfig({
         maxH: "600px"
       },
       ".link-card": {
-        my: "5",
+        my: "4",  // remark-breaksで使うなら上のMarginだけにしたほうがいいかも
         borderWidth: "1",
         borderColor: "sz.border",
         borderRadius: "lg",
@@ -250,7 +243,7 @@ export default defineConfig({
             justifyContent: "center",
             _sm: {
               w: "full",
-              h: "250px",
+              h: "200px",
             },
             "img": {
               w: "full",
@@ -267,28 +260,53 @@ export default defineConfig({
           display: "flex",
           p: "4",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           flex: "1",
+          minW: "0",
+          maxW: "100%",
+          overflow: "hidden",
+          wordBreak: "break-word",
           _sm: {
             w: "full",
           },
-          "h4": {
+          ".link-card-title": {
+            display: "-webkit-box",
+            "-webkit-box-orient": "vertical",
+            "-webkit-line-clamp": "3",
+            textOverflow: "hidden",
+            overflow: "hidden",
             m: "0",
             mb: "2",
-            fontSize: "1.1rem",
+            fontSize: "16px",
             fontWeight: "bold",
             lineHeight: "1.4",
             color: "sz.text.main",
-          }
-        },
-        ".link-card-site-wrapper": {
-          display: "flex",
-          alignItems: "center",
-          gap: "2",
-          "img": {
-            m: "0",
-            rounded: "0",
-          }
+            _sm: {
+              "-webkit-line-clamp": "2",
+            }
+          },
+          ".link-card-description": {
+            mb: "2",
+            display: "-webkit-box",
+            "-webkit-box-orient": "vertical",
+            textOverflow: "hidden",
+            overflow: "hidden",
+            fontSize: "12px",
+            "-webkit-line-clamp": "2",
+            _sm: {
+              "-webkit-line-clamp": "1",
+            },
+          },
+          ".link-card-site-wrapper": {
+            mt: "auto",
+            display: "flex",
+            alignItems: "center",
+            gap: "2",
+            "img": {
+              m: "0",
+              rounded: "0",
+            }
+          },
         },
         ".link-card-favicon": {
           w: "4",
@@ -317,7 +335,7 @@ export default defineConfig({
           height: "full",
           _sm: {
             flexDirection: "column",
-          }
+          },
         },
         ".link-card-image-container": {
           display: "flex",

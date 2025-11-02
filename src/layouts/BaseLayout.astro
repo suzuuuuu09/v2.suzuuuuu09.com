@@ -29,7 +29,7 @@ const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 		<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
 	</head>
 	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
-		<FloatingBackground />
+		<FloatingBackground client:load />
 		<Header />
 		<ContentContainer maxW={maxW}>
     	<slot />

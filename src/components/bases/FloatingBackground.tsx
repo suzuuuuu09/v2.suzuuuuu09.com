@@ -1,7 +1,5 @@
-"use client";
-
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { css } from 'styled-system/css';
 
 const shapesNumber = 20;
@@ -17,9 +15,11 @@ interface Shape {
 }
 
 const FloatingBackground: React.FC = () => {
-  // ランダムな図形を生成
-  const generateShapes = (): Shape[] => {
-    const shapes: Shape[] = [];
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // ランダムな図形を生成（useMemoで一度だけ生成）
+  const shapes = React.useMemo(() => {
+    const generatedShapes: Shape[] = [];
     const shapeTypes: ('circle' | 'square' | 'triangle')[] = ['circle', 'square', 'triangle'];
     const colors = [
       '#3951e21a',
@@ -32,94 +32,117 @@ const FloatingBackground: React.FC = () => {
     ];
 
     for (let i = 0; i < shapesNumber; i++) {
-      shapes.push({
+      generatedShapes.push({
         id: i,
         type: shapeTypes[Math.floor(Math.random() * shapeTypes.length)],
         size: Math.random() * 80 + 20, // 20-100px
         x: Math.random() * 100, // 0-100%
         y: Math.random() * 100, // 0-100%
         color: colors[Math.floor(Math.random() * colors.length)],
-        duration: Math.random() * 20 + 10, // 10-30秒
+        duration: Math.random() * 200 + 100, // 100-120秒
       });
     }
 
-    return shapes;
-  };
+    return generatedShapes;
+  }, []);
 
-  const shapes = React.useMemo(() => generateShapes(), []);
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-  // 図形コンポーネント
-  const renderShape = (shape: Shape) => {
-    const animationVariants = {
-      floating: {
-        y: [0, -30, 0],
-        x: [0, 15, -15, 0],
-        rotate: [0, 5, -5, 0],
-        scale: [1, 1.1, 0.9, 1],
-        transition: {
-          duration: shape.duration,
-          repeat: Infinity,
-          ease: "easeInOut" as const,
-        },
-      },
+    // 各図形にGSAPアニメーションを適用
+    const elements = containerRef.current.querySelectorAll('[data-shape]');
+    let index = 0;
+    for (const element of elements) {
+      const shape = shapes[index];
+      if (!shape) {
+        index++;
+        continue;
+      }
+
+      // フローティングアニメーション
+      gsap.to(element, {
+        y: -30,
+        x: 15,
+        rotate: 5,
+        scale: 1.1,
+        duration: shape.duration / 4,
+        ease: 'power1.inOut',
+        yoyo: true,
+        repeat: -1,
+        repeatDelay: 0,
+        keyframes: [
+          { y: -30, x: 15, rotate: 5, scale: 1.1 },
+          { y: 0, x: -15, rotate: -5, scale: 0.9 },
+          { y: 0, x: 0, rotate: 0, scale: 1 },
+        ],
+      });
+
+      index++;
+    }
+
+    // クリーンアップ
+    return () => {
+      gsap.killTweensOf(elements);
     };
+  }, [shapes]);
 
+  // 図形をレンダリング
+  const renderShape = (shape: Shape) => {
     const baseClassName = css({
       position: 'absolute',
     });
 
+    const baseStyle: React.CSSProperties = {
+      left: `${shape.x}%`,
+      top: `${shape.y}%`,
+    };
+
     switch (shape.type) {
       case 'circle':
         return (
-          <motion.div
+          <div
             key={shape.id}
+            data-shape
             className={baseClassName}
             style={{
+              ...baseStyle,
               width: shape.size,
               height: shape.size,
-              left: `${shape.x}%`,
-              top: `${shape.y}%`,
               backgroundColor: shape.color,
               borderRadius: '50%',
             }}
-            variants={animationVariants}
-            animate="floating"
           />
         );
       case 'square':
         return (
-          <motion.div
+          <div
             key={shape.id}
+            data-shape
             className={baseClassName}
             style={{
+              ...baseStyle,
               width: shape.size,
               height: shape.size,
-              left: `${shape.x}%`,
-              top: `${shape.y}%`,
               backgroundColor: shape.color,
               borderRadius: '8px',
             }}
-            variants={animationVariants}
-            animate="floating"
           />
         );
       case 'triangle':
         return (
-          <motion.div
+          <div
             key={shape.id}
+            data-shape
             className={baseClassName}
             style={{
+              ...baseStyle,
               width: 0,
               height: 0,
-              left: `${shape.x}%`,
-              top: `${shape.y}%`,
               backgroundColor: 'transparent',
               borderLeft: `${shape.size / 2}px solid transparent`,
               borderRight: `${shape.size / 2}px solid transparent`,
               borderBottom: `${shape.size}px solid ${shape.color}`,
             }}
-            variants={animationVariants}
-            animate="floating"
           />
         );
       default:
@@ -128,13 +151,16 @@ const FloatingBackground: React.FC = () => {
   };
 
   return (
-    <div className={css({
-      position: 'fixed',
-      inset: 0,
-      overflow: 'hidden',
-      pointerEvents: 'none',
-      zIndex: 0,
-    })}>
+    <div
+      ref={containerRef}
+      className={css({
+        position: 'fixed',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none',
+        zIndex: 0,
+      })}
+    >
       {shapes.map(renderShape)}
     </div>
   );

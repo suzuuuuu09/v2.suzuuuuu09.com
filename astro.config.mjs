@@ -49,7 +49,7 @@ export default defineConfig({
       remarkMath,
       remarkWikiLinks,
       remarkCallout,
-      remarkBreaks,
+      // remarkBreaks,
       remarkEmbedLinks,
     ],
     rehypePlugins: [

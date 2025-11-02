@@ -85,8 +85,9 @@ export default function remarkEmbedLinks() {
 
               const title = ogpData.title || linkTitle || url;
               const site = ogpData.site_name;
+              const description = ogpData.description || '';
 
-              const htmlValue = createGridCardHtml(url, title, site, 'twitter', ogpData);
+              const htmlValue = createGridCardHtml(url, title, site, 'twitter', ogpData, description);
 
               parent.children[index] = {
                 type: 'html',
@@ -149,6 +150,7 @@ export default function remarkEmbedLinks() {
             const ogpData = await getOgpWithCache(url);
 
             const title = ogpData.title || linkTitle || url;
+            const description = ogpData.description || '';
             const site = ogpData.site_name;
             const imageHtml = ogpData.image
               ? `<div class="link-card-image"><img src="${ogpData.image}" alt="${title}" loading="lazy" /></div>`
@@ -158,7 +160,7 @@ export default function remarkEmbedLinks() {
             const siteClass = urlType === 'other' ? 'external' : urlType;
 
             let htmlValue: string;
-            htmlValue = createStandardCardHtml(url, title, site, siteClass, imageHtml, ogpData.favicon);
+            htmlValue = createStandardCardHtml(url, title, site, siteClass, imageHtml, description, ogpData.favicon);
 
             parent.children[index] = {
               type: 'html',
