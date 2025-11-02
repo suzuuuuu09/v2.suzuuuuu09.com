@@ -30,6 +30,7 @@ import Avatar from "@/components/ui/Avatar.astro";
             href={link.url}
             rel="noopener noreferrer"
             target="_blank"
+            aria-label={link.label}
           >
             <Icon size={24} color={link.color} name={link.icon} />
           </a>
@@ -37,14 +38,14 @@ import Avatar from "@/components/ui/Avatar.astro";
       </HStack>
     </div>
     <div>
-      <s.h3
+      <s.h2
         my="1"
         pb="1"
         borderBottomWidth="1"
         borderBottomColor="sz.border"
         fontWeight="bold"
         fontSize="2xl"
-      >suzu / @suzuuuuu09</s.h3>
+      >suzu / @suzuuuuu09</s.h2>
       <ProfileContent class="markdown-content"/>
       <s.a
         href="/about"

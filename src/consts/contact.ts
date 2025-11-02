@@ -2,19 +2,23 @@ import type { ContactLink } from "@/types";
 
 export const CONTACT_LINKS: ContactLink[] =[
   {
+    label: "Twitter",
     url: "https://twitter.com/suzuuuuu_09",
-    icon: "logos:twitter"
+    icon: "logos:twitter",
   },
   {
+    label: "GitHub",
     url: "https://github.com/suzuuuuu09",
     icon: "logos:github-icon"
   },
   {
+    label: "Zenn",
     url: "https://zenn.dev/suzuuuuu09",
     icon: "simple-icons:zenn",
     color: "#3EA8FF"
   },
   {
+    label: "Qiita",
     url: "https://qiita.com/suzuuuuu09",
     icon: "simple-icons:qiita",
     color: "#55C500"
