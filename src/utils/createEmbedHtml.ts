@@ -88,8 +88,18 @@ export function createCodepenEmbedHtml(slugHash: string): string {
 
 export function createGridCardHtml(url: string, title: string, site: string, siteClass: string, ogpData: any, description: string): string {
   const imageRatioClass = ogpData.image ? 'link-card-with-image' : '';
-  const faviconHtml = ogpData.favicon 
-    ? `<img src="${ogpData.favicon}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
+  
+  // 相対リンクを絶対リンクに変換
+  const absoluteImageUrl = ogpData.image?.startsWith('/') 
+    ? new URL(ogpData.image, url).href 
+    : ogpData.image;
+  
+  const absoluteFaviconUrl = ogpData.favicon?.startsWith('/')
+    ? new URL(ogpData.favicon, url).href
+    : ogpData.favicon;
+  
+  const faviconHtml = absoluteFaviconUrl 
+    ? `<img src="${absoluteFaviconUrl}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
     : `<svg class="link-card-favicon-fallback" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48 256 464"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M464 256 48 256"></path></svg>`;
 
   return `<div class="link-card ${siteClass} link-card-grid ${imageRatioClass}">
@@ -97,8 +107,8 @@ export function createGridCardHtml(url: string, title: string, site: string, sit
       <div class="link-card-grid-container">
         <div class="link-card-image-container">
           ${
-            ogpData.image
-              ? `<img src="${ogpData.image}" alt="${title}" loading="lazy" onload="this.naturalWidth > this.naturalHeight * 1.2 ? this.parentNode.parentNode.classList.add('wide-image') : ''" />`
+            absoluteImageUrl
+              ? `<img src="${absoluteImageUrl}" alt="${title}" loading="lazy" onload="this.naturalWidth > this.naturalHeight * 1.2 ? this.parentNode.parentNode.classList.add('wide-image') : ''" />`
               : `<div class="no-image"></div>`
           }
         </div>
@@ -116,8 +126,13 @@ export function createGridCardHtml(url: string, title: string, site: string, sit
 };
 
 export function createStandardCardHtml(url: string, title: string, site: string, siteClass: string, imageHtml: string, description:string, favicon?: string): string {
-  const faviconHtml = favicon 
-    ? `<img src="${favicon}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
+  // 相対リンクを絶対リンクに変換
+  const absoluteFaviconUrl = favicon?.startsWith('/')
+    ? new URL(favicon, url).href
+    : favicon;
+  
+  const faviconHtml = absoluteFaviconUrl 
+    ? `<img src="${absoluteFaviconUrl}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
     : `<svg class="link-card-favicon-fallback" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48 256 464"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M464 256 48 256"></path></svg>`;
 
   return `

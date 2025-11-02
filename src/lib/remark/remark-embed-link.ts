@@ -152,8 +152,14 @@ export default function remarkEmbedLinks() {
             const title = ogpData.title || linkTitle || url;
             const description = ogpData.description || '';
             const site = ogpData.site_name;
-            const imageHtml = ogpData.image
-              ? `<div class="link-card-image"><img src="${ogpData.image}" alt="${title}" loading="lazy" /></div>`
+            
+            // 相対リンクを絶対リンクに変換
+            const absoluteImageUrl = ogpData.image?.startsWith('/')
+              ? new URL(ogpData.image, url).href
+              : ogpData.image;
+            
+            const imageHtml = absoluteImageUrl
+              ? `<div class="link-card-image"><img src="${absoluteImageUrl}" alt="${title}" loading="lazy" /></div>`
               : '';
 
             // サイトクラス名
