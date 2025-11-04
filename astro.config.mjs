@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
 // import node from "@astrojs/node";
-import cloudflare from "@astrojs/cloudflare";
+// import cloudflare from "@astrojs/cloudflare";
 
 import remarkMath from "remark-math";
 import remarkCallout from "@r4ai/remark-callout";
@@ -21,11 +21,11 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   site: "https://suzuuuuu09.com",
-  output: "server",
+  // output: "server",
   // adapter: node({
   //   mode: "standalone",
   // }),
-  adapter: cloudflare({ imageService: "compile" }),
+  // adapter: cloudflare({ imageService: "compile" }),
   integrations: [
     sitemap(),
     react(),
