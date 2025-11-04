@@ -6,7 +6,6 @@ type ImageType = 'blog' | 'product' | 'about' | 'default';
 export const GET: APIRoute = async ({ url }) => {
   try {
     const title = url.searchParams.get('title');
-    const type = (url.searchParams.get('type') as ImageType) || 'default';
 
     if (!title) {
       return new Response('Title is required', { status: 400 });
@@ -15,7 +14,6 @@ export const GET: APIRoute = async ({ url }) => {
     // OG画像を生成
     const imageBuffer = await generateOgImage({
       title: decodeURIComponent(title),
-      type,
       format: 'png',
     });
 

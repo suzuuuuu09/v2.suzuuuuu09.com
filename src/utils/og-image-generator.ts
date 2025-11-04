@@ -7,18 +7,62 @@ import React from 'react';
 import OgImage from '@/components/OgImage';
 
 type ImageFormat = 'png' | 'webp' | 'jpeg';
-type ImageType = 'blog' | 'product' | 'about' | 'default';
 
 interface GenerateOgImageOptions {
   readonly title: string;
-  readonly type?: ImageType;
   readonly siteName?: string;
   readonly format?: ImageFormat;
 }
 
-/**
- * フォントを読み込む
- */
+// 背景画像をBase64でエンコード
+async function getBackgroundImageBase64(): Promise<string> {
+  try {
+    const imagePath = path.join(
+      process.cwd(),
+      'public',
+      'imgs',
+      'ogp-background.png'
+    );
+
+    if (!fs.existsSync(imagePath)) {
+      console.warn('Background image not found:', imagePath);
+      return '';
+    }
+
+    const imageBuffer = fs.readFileSync(imagePath);
+    const base64 = imageBuffer.toString('base64');
+    return `data:image/png;base64,${base64}`;
+  } catch (error) {
+    console.error('Error loading background image:', error);
+    return '';
+  }
+}
+
+// アイコンをBase64でエンコード
+async function getIconBase64(): Promise<string> {
+  try {
+    const iconPath = path.join(
+      process.cwd(),
+      'src',
+      'assets',
+      'icon.svg'
+    );
+
+    if (!fs.existsSync(iconPath)) {
+      console.warn('Icon not found:', iconPath);
+      return '';
+    }
+
+    const iconBuffer = fs.readFileSync(iconPath);
+    const base64 = iconBuffer.toString('base64');
+    return `data:image/svg+xml;base64,${base64}`;
+  } catch (error) {
+    console.error('Error loading icon:', error);
+    return '';
+  }
+}
+
+// フォントを読み込む
 async function loadFonts() {
   try {
     const regularPath = path.join(
@@ -64,16 +108,18 @@ async function loadFonts() {
 // OG画像をSVGとして生成
 async function generateSvg(
   title: string,
-  type: ImageType = 'default'
 ): Promise<string> {
   try {
     const fonts = await loadFonts();
+    const backgroundImage = await getBackgroundImageBase64();
+    const icon = await getIconBase64();
 
     const svg = await satori(
       React.createElement(OgImage, {
         title,
-        type,
         siteName: 'suzuuuuu09.com',
+        backgroundImage,
+        icon,
       }),
       {
         width: 1200,
@@ -130,9 +176,9 @@ export async function generateOgImage(
   options: GenerateOgImageOptions
 ): Promise<Buffer> {
   try {
-    const { title, type = 'default', format = 'png' } = options;
+    const { title, format = 'png' } = options;
 
-    const svg = await generateSvg(title, type);
+    const svg = await generateSvg(title);
     const imageBuffer = await convertSvgToImage(svg, format);
 
     return imageBuffer;

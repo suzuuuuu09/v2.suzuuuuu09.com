@@ -1,17 +1,26 @@
+import { loadDefaultJapaneseParser } from 'budoux';
+
 interface OgImageProps {
   readonly title: string;
-  readonly type?: 'blog' | 'product' | 'about' | 'default';
   readonly siteName?: string;
+  readonly backgroundImage?: string;
+  readonly icon?: string;
 }
 
-// グラデーション背景を持つOG画像コンポーネント
-export default function OgImage({ title, type = 'default', siteName = 'suzuuuuu09.com' }: OgImageProps) {
+// OG画像
+export default function OgImage({ title, siteName = 'suzuuuuu09.com', backgroundImage, icon }: OgImageProps) {
+  const parser = loadDefaultJapaneseParser();
+  const words = parser.parse(title);
+
   return (
     <div
       style={{
         width: '1200px',
         height: '630px',
         background: '#faf8ff',
+        backgroundImage: backgroundImage ? `url('${backgroundImage}')` : undefined,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -24,36 +33,65 @@ export default function OgImage({ title, type = 'default', siteName = 'suzuuuuu0
         overflow: 'hidden',
       }}
     >
+
       {/* タイトル */}
-      <h1
+      <div
         style={{
-          fontSize: '72px',
+          fontSize: '64px',
           fontWeight: 'bold',
-          textAlign: 'center',
-          margin: '0 0 40px 0',
+          display: 'flex',
+          justifyContent: 'flex-start', // 左寄せ
+          width: "1020px",
+          height: "400px",
+          flexWrap: 'wrap',
+          textOverflow: 'ellipsis',
+          alignContent: 'center',
+          alignItems: 'center',
           lineHeight: 1.2,
           wordWrap: 'break-word',
           wordBreak: 'break-word',
           maxWidth: '100%',
+          position: 'relative',
+          zIndex: '1',
         }}
       >
-        {title}
-      </h1>
+        {words.map((word, index) => (
+          <span key={`${word}-${index}`} style={{ whiteSpace: 'pre-wrap' }}>
+            {word}
+          </span>
+        ))}
+      </div>
       
 
       {/* サイト名 */}
       <div
         style={{
           position: 'absolute',
-          bottom: '20px',
-          left: '200px',
+          bottom: '30px',
+          left: '700px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
           textAlign: 'center',
-          fontSize: '28px',
-          fontWeight: 'normal',
+          fontWeight: 'bold',
+          fontSize: '48px',
           opacity: 0.9,
+          zIndex: '1',
         }}
       >
-          {siteName}
+        {icon && (
+          <img
+            src={icon}
+            alt="icon"
+            style={{
+              maxWidth: '48px',
+              maxHeight: '48px',
+              display: 'block',
+              objectFit: 'contain',
+            }}
+          />
+        )}
+        {siteName}
       </div>
     </div>
   );
