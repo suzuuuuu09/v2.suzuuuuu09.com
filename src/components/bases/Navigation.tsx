@@ -1,44 +1,81 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 import { css } from 'styled-system/css';
-
-interface LinkDimensions {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
 
 interface NavigationProps {
   links: { href: string; label: string }[];
 }
 
 const Navigation: React.FC<NavigationProps> = ({ links }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [backgroundDimensions, setBackgroundDimensions] = useState<LinkDimensions | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const isFirstHoverRef = useRef(true);
+  const isHoveringRef = useRef(false);
+
+  useEffect(() => {
+    const background = backgroundRef.current;
+    if (!background) return;
+
+    // 初期状態: 非表示
+    gsap.set(background, { opacity: 0 });
+  }, []);
 
   const updateBackgroundPosition = (index: number) => {
     const link = linkRefs.current[index];
+    const background = backgroundRef.current;
     
-    if (link) {
+    if (link && background) {
+      isHoveringRef.current = true;
+      
+      // 進行中のアニメーションをすべてキル
+      gsap.killTweensOf(background);
+      
       // 2フレーム待ってより確実な位置を取得
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          setBackgroundDimensions({
+          // 高速移動でホバーが既に外れている場合は処理しない
+          if (!isHoveringRef.current) return;
+          
+          const dimensions = {
             x: link.offsetLeft,
             y: link.offsetTop,
             width: link.offsetWidth,
             height: link.offsetHeight,
-          });
+          };
+
+          // 初回ホバー時は位置を設定してフェードインのみ
+          if (isFirstHoverRef.current) {
+            gsap.set(background, {
+              x: dimensions.x,
+              y: dimensions.y,
+              width: dimensions.width,
+              height: dimensions.height,
+            });
+            gsap.to(background, {
+              opacity: 1,
+              duration: 0.2,
+              ease: "power2.out",
+            });
+            isFirstHoverRef.current = false;
+          } else {
+            // 2回目以降はスムーズにアニメーション
+            gsap.to(background, {
+              x: dimensions.x,
+              y: dimensions.y,
+              width: dimensions.width,
+              height: dimensions.height,
+              opacity: 1,
+              duration: 0.6,
+              ease: "power2.out",
+            });
+          }
         });
       });
     }
   };
 
   const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
     updateBackgroundPosition(index);
   };
 
@@ -47,14 +84,26 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     const isMovingToAnotherNavLink = relatedTarget?.closest('.nav-link');
     
     if (!isMovingToAnotherNavLink) {
-      setHoveredIndex(null);
-      setBackgroundDimensions(null);
+      // Do nothing - let container handle it
     }
   };
 
   const handleContainerLeave = () => {
-    setHoveredIndex(null);
-    setBackgroundDimensions(null);
+    isHoveringRef.current = false;
+    const background = backgroundRef.current;
+    if (background) {
+      // 進行中のアニメーションをすべてキル
+      gsap.killTweensOf(background);
+      
+      gsap.to(background, {
+        opacity: 0,
+        duration: 0.4,
+        onComplete: () => {
+          // フェードアウト完了後に初回フラグをリセット
+          isFirstHoverRef.current = true;
+        },
+      });
+    }
   };
 
   return (
@@ -74,53 +123,24 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
       aria-label="Main navigation"
     >
       {/* ホバーの背景 */}
-      <AnimatePresence>
-        {hoveredIndex !== null && backgroundDimensions && (
-          <motion.div
-            className={css({
-              position: 'absolute',
-              borderRadius: 'lg',
-              backgroundColor: 'sz.primary/20',
-              border: '1px solid',
-              borderColor: 'sz.primary/30',
-              pointerEvents: 'none',
-              zIndex: -1,
-            })}
-            initial={{ 
-              opacity: 0, 
-              x: backgroundDimensions.x,
-              y: backgroundDimensions.y,
-              width: backgroundDimensions.width,
-              height: backgroundDimensions.height,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              x: backgroundDimensions.x,
-              y: backgroundDimensions.y,
-              width: backgroundDimensions.width,
-              height: backgroundDimensions.height,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 100,
-              damping: 25,
-              duration: 0.1,
-              opacity: { duration: 0.4 },
-              scale: { duration: 0.4 },
-            }}
-            layout
-          />
-        )}
-      </AnimatePresence>
+      <div
+        ref={backgroundRef}
+        className={css({
+          position: 'absolute',
+          borderRadius: 'lg',
+          backgroundColor: 'sz.primary/20',
+          border: '1px solid',
+          borderColor: 'sz.primary/30',
+          pointerEvents: 'none',
+          zIndex: -1,
+        })}
+        style={{ willChange: 'transform, opacity' }}
+      />
       
       {links.map((link, index) => (
-        <motion.a
+        <a
           key={link.href}
-          ref={(el) => { linkRefs.current[index] = el; }}
+          ref={(el: HTMLAnchorElement | null) => { linkRefs.current[index] = el; }}
           href={link.href}
           className={`nav-link ${css({
             color: 'sz.text.main',
@@ -128,18 +148,17 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
             paddingX: '0.75rem',
             paddingY: '0.5rem',
             borderRadius: 'lg',
-            transition: 'all 0.1s ease',
+            transition: 'color 0.1s ease',
             _hover: {
               color: 'sz.primary',
             },
           })}`}
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
           data-astro-prefetch
         >
           {link.label}
-        </motion.a>
+        </a>
       ))}
     </nav>
   );
