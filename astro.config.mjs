@@ -3,7 +3,8 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
-import node from "@astrojs/node";
+// import node from "@astrojs/node";
+import cloudflare from "@astrojs/cloudflare";
 
 import remarkMath from "remark-math";
 import remarkCallout from "@r4ai/remark-callout";
@@ -21,9 +22,10 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   site: "https://suzuuuuu09.com",
   output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
+  // adapter: node({
+  //   mode: "standalone",
+  // }),
+  adapter: cloudflare({ imageService: "compile" }),
   integrations: [
     sitemap(),
     react(),
@@ -107,5 +109,13 @@ export default defineConfig({
       footnoteLabelTagName: "h4",
             footnoteLabel: "脚注",
     }
+  },
+  vite: {
+    ssr: {
+      external: ["@resvg/resvg-js"],
+    },
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"],
+    },
   },
 });

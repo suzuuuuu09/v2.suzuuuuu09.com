@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { generateOgImage, getContentType } from '@/utils/og-image-generator';
+import { generateOgImage, getContentType } from '@/utils/_og-image-generator';
 
 type ImageType = 'blog' | 'product' | 'about' | 'default';
 
