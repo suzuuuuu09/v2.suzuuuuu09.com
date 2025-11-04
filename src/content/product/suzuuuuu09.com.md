@@ -11,28 +11,37 @@ tags:
 thumbnail: "![[suzuuuuu09.com-1758351963075.webp]]"
 description: ポートフォリオサイト。
 publishDate: 2025-09-20T15:12
-updateDate: 2025-11-02
+updateDate: 2025-11-04
 isPublish: true
 ---
 ## 概要
+
+## 画像・動画
+![[suzuuuuu09.com-1758351963075.webp]]
+
 
 ## 技術スタック
 ### フレームワーク
 #### Astro
 [Astro](https://astro.build)
-静的サイト生成に適していて簡単に扱いやすい **Astro** を採用しました。  
+静的サイト生成に適していて、扱いやすい **Astro** を採用しました。  
 パフォーマンスに優れており、非常に高速なページの読み込みがデフォルトで行えるようになっています。また、後述する**Content Collections**もAstroを採用した理由のひとつです。
 
 #### React
 [React](https://ja.react.dev)
 UIフレームワークに**React**を使用しました。
 
+#### GSAP
+[Homepage \| GSAP](https://gsap.com)
+アニメーションを行うために、**GSAP**を採用しました。
+[`Motion(旧Framer Motion)`](https://motion.dev)の採用も考えましたが、Reactでしか動かせないのがネックだったので諦めました。
+
 ### スタイリング・デザイン
 #### Panda CSS
 [Panda CSS - Build modern websites using build time and type-safe CSS-in-JS](https://panda-css.com)
 スタイリングには**Panda CSS**を採用しました。  
 Chakra UI開発チームによって作られた`サーバーファースト時代における CSS-in-JS の課題を解決することを目的とした新しい CSS-in-JS エンジン`です。(公式ページより)  
-Tailwind CSSやUno CSSのようなユーティリティクラスを活用したCSSフレームワークと違い、高い保守性があります。(余談ですが、当初はこのサイトはUnoCSSで作っていましたが、保守性が低さからサイトを一度作り直しています)
+Tailwind CSSやUnoCSSのようなユーティリティクラスを活用したCSSフレームワークと違い、高い保守性があります。(余談ですが、当初はこのサイトはUnoCSSで作っていましたが、保守性が低さからサイトを一度作り直しています)
 
 #### フォント
 [IBM Plex Sans JP - Google Fonts](https://fonts.google.com/specimen/IBM+Plex+Sans+JP)
@@ -50,8 +59,8 @@ Moralerspaceは欧文フォントMonaspaceと日本語フォントIBM Plex Sans 
 #### astro-iconify
 [GitHub - manuelmeister/astro-iconify: Inline and sprite-based SVGs in Astro using up to date Iconify service](https://github.com/manuelmeister/astro-iconify)
 アイコンはすべて**astro-iconify**を使っています。  
-Astro-iconifyを使うことでmdiやdeviconなどのアイコンやロゴを簡単に扱うことができます。
-もともとは[`Astro Icon`](https://iconify.design/docs/usage/svg/astro/)を使っていましたが、アイコンを使うために別途でパッケージが必要なのが煩わしかったのでAstro Iconは採用しませんでした。
+astro-iconifyを使うことでmdiやdeviconなどのアイコンやロゴを簡単に扱うことができます。
+もともとは[`Astro Icon`](https://iconify.design/docs/usage/svg/astro/)を使っていましたが、アイコンを使うために別途でパッケージをインストールする必要があり煩わしかったため、Astro Iconは採用しませんでした。
 
 ### コンテンツ管理
 #### Content Collections
@@ -63,11 +72,10 @@ Content CollectionsはAstroのプロジェクトフォルダ内にsrc/contentデ
 #### Cloudflare Pages
 [フル スタックアプリケーション \| Cloudflare](https://www.cloudflare.com/ja-jp/developer-platform/products/pages/)
 ホスティングには**Cloudflare Pages**を使用しました。  
-知り合いから「Cloudflare Pagesが楽で使いやすい」と聞いたので使ってみました。
+知り合いから「Cloudflare Pagesが楽で使いやすい」と聞いたので試しに導入してみました。
+
 ## 技術スタック
 - **UIフレームワーク**: Ark UI
-## 画像・動画
-![[suzuuuuu09.com-1758351963075.webp]]
 
 ## リンク
 ### デプロイ先
@@ -87,3 +95,6 @@ Contentの管理方法を参考にしました。
 
 [ローカル環境でもOGPを確認したい【localhost OGP チェッカー】](https://zenn.dev/yamap_web/articles/a7c027bb307987)
 OGPの作成時の確認手段として使いました。
+
+[BudouXとSatoriを使ってタイトルが分かち書きされたOGP画像を出力する。 - return $lock;](https://retrorocket.biz/archives/use-budoux-with-satori)
+OGP画像のタイトルを分かち書きする方法を参考にしました。

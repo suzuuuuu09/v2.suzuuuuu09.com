@@ -1,6 +1,7 @@
 import type { Dayjs } from "dayjs";
 
 export interface ContactLink {
+  label: string;
   url: string;
   icon: string;
   color?: string;

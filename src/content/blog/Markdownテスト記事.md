@@ -1,7 +1,7 @@
 ---
 title: Markdownテスト記事
 publishDate: 2025-08-09
-updateDate: 2025-11-01
+updateDate: 2025-11-02
 tags:
   - test
   - markdown
@@ -156,10 +156,10 @@ https://expressive-code.com
 ## 画像
 
 ```markdown
-![代替テキスト|700x24](https://placehold.jp/24/cc9999/993333/150x100.png)
+![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
 ```
 
-![代替テキスト|700x24](https://placehold.jp/24/cc9999/993333/150x100.png)
+![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
 
 ## 区切り線
 ```markdown
