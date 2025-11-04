@@ -204,6 +204,7 @@ export default defineConfig({
       },
       ".link-card": {
         my: "4",  // remark-breaksで使うなら上のMarginだけにしたほうがいいかも
+        // mb: "-4",  // rehype-breaksによる余分なスペースを相殺
         borderWidth: "1",
         borderColor: "sz.border",
         borderRadius: "lg",
