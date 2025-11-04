@@ -9,6 +9,7 @@ import Footer from "@/components/bases/Footer.astro";
 import FloatingBackground from "@/components/bases/FloatingBackground";
 import { ContentContainer } from "@/components/shared/ContentContainer";
 import { Expand } from "@/components/shared/Expand";
+import { SEO } from "astro-seo";
 
 interface Props {
   title: string;
@@ -30,6 +31,11 @@ interface Props {
 const { title, headings = [], frontmatter } = Astro.props;
 const siteTitle = `${frontmatter?.title || title} - ${SITE_TITLE}`;
 const description = frontmatter?.description || SITE_DESCRIPTION;
+
+// OG画像URL生成
+const ogImageUrl = new URL('/api/og', Astro.site);
+ogImageUrl.searchParams.set('title', frontmatter?.title || title);
+ogImageUrl.searchParams.set('type', 'blog');
 ---
 
 <!doctype html>
@@ -42,6 +48,22 @@ const description = frontmatter?.description || SITE_DESCRIPTION;
     <meta name="generator" content={Astro.generator} />
     <title>{siteTitle}</title>
     <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={frontmatter?.title || title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl.toString()} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={frontmatter?.title || title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl.toString()} />
+    
     <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
   </head>
   <body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>

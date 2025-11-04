@@ -8,13 +8,29 @@ import SideArticle from "@/components/features/blog/SideArticle.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.data.slug ?? entry.id },
-    props: { entry },
-  })).filter(({ props }) => props.entry.data.isPublish); // 公開されている記事のみ
-};
+  return blogEntries
+    .filter(({ data }) => data.isPublish) // 公開されている記事のみ
+    .map(entry => ({
+      params: { slug: entry.data.slug ?? entry.id },
+      props: { entry },
+    }));
+}
 
-const { entry } = Astro.props;
+const { slug } = Astro.params;
+let entry = Astro.props.entry;
+
+// SSRモードでentryが渡されない場合、コレクションから検索
+if (!entry) {
+  const blogEntries = await getCollection('blog');
+  const foundEntry = blogEntries.find(e => (e.data.slug ?? e.id) === slug);
+  
+  if (!foundEntry || !foundEntry.data.isPublish) {
+    return Astro.redirect('/404');
+  }
+  
+  entry = foundEntry;
+}
+
 const { Content, headings } = await render(entry);
 
 // ブログの情報

@@ -22,6 +22,7 @@
     "astro": "^5.15.1",
     "astro-expressive-code": "^0.41.3",
     "astro-iconify": "^1.2.0",
+    "astro-seo": "^0.8.4",
     "budoux": "^0.7.0",
     "dayjs": "^1.11.18",
     "mdast-util-from-markdown": "^2.0.2",
@@ -42,6 +43,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@astrojs/node": "^9.5.0",
     "@pandacss/dev": "^1.4.3",
     "gsap": "^3.13.0"
   }

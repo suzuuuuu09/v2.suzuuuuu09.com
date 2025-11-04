@@ -3,10 +3,10 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
+import node from "@astrojs/node";
 
 import remarkMath from "remark-math";
 import remarkCallout from "@r4ai/remark-callout";
-import remarkBreaks from "remark-breaks";
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
 
@@ -15,20 +15,31 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 
+import partytown from "@astrojs/partytown";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://suzuuuuu09.com",
+  output: "server",
+  adapter: node({
+    mode: "standalone",
+  }),
   integrations: [
     sitemap(),
     react(),
     expressiveCode({
-      themes: ["tokyo-night"],
-      styleOverrides: {
-        codeFontFamily: "var(--moralerspace-neon)",
-        uiFontFamily: "var(--ibm-plex-sans-jp)",
-      },
-      defaultProps: {
-        wrap: true,
+    themes: ["tokyo-night"],
+    styleOverrides: {
+      codeFontFamily: "var(--moralerspace-neon)",
+      uiFontFamily: "var(--ibm-plex-sans-jp)",
+    },
+    defaultProps: {
+      wrap: true,
+    }
+  }),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
       }
     })
   ],
