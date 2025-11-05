@@ -33,7 +33,7 @@ const { title, headings = [], frontmatter, collection = 'blog' } = Astro.props;
 const siteTitle = `${frontmatter?.title || title} - ${SITE_TITLE}`;
 const description = frontmatter?.description || SITE_DESCRIPTION;
 // OG画像URL生成
-const ogImageUrl = new URL(`/api/og/${collection}/${frontmatter?.slug || headings[0]?.slug || title}.png`, "https://v2-suzuuuuu09-com.pages.dev");
+const ogImageUrl = new URL(`/api/og/${collection}/${frontmatter?.slug || headings[0]?.slug || title}.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -61,8 +61,6 @@ const ogImageUrl = new URL(`/api/og/${collection}/${frontmatter?.slug || heading
     <meta property="twitter:title" content={frontmatter?.title || title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImageUrl.toString()} />
-    
-    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
   </head>
   <body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
     <FloatingBackground client:load />
