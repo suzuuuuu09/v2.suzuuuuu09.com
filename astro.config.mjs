@@ -21,11 +21,11 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   site: "https://suzuuuuu09.com",
-  // output: "server",
+  // output: "static",
   // adapter: node({
   //   mode: "standalone",
   // }),
-  // adapter: cloudflare({ imageService: "compile" }),
+  // adapter: cloudflare(),
   integrations: [
     sitemap(),
     react(),
