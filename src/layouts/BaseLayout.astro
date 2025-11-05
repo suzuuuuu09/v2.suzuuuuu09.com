@@ -16,10 +16,8 @@ interface Props {
 const { title, maxW } = Astro.props;
 const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 
-// OG画像URL生成
-const ogImageUrl = new URL('/api/og', Astro.site);
-ogImageUrl.searchParams.set('title', title || SITE_TITLE);
-ogImageUrl.searchParams.set('type', 'default');
+// OG画像URL生成 - defaultコレクション用
+const ogImageUrl = new URL(`/api/og/default/${title || "suzuuuuu09.com"}.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -55,6 +53,7 @@ ogImageUrl.searchParams.set('type', 'default');
     	<slot />
 		</ContentContainer>
     <Footer />
+
 		<script>
 		import { initTwemoji } from "@/utils/twemoji";
 

@@ -3,7 +3,7 @@ import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { loadDefaultJapaneseParser } from "budoux";
 
-export const generateOgImage = async (title: string): Promise<Buffer> => {
+export const generateOgImage = async (title: string, isShowSiteName: boolean = true): Promise<Buffer> => {
   const ibmPlexSansRegularFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Regular.ttf");
   const ibmPlexSnasBoldFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Bold.ttf");
   const backgroundImage = fs.readFileSync("./public/imgs/ogp-background.png");
@@ -45,55 +45,70 @@ export const generateOgImage = async (title: string): Promise<Buffer> => {
           width: "1020px",
           height: "400px",
           flexWrap: "wrap",
-          textOverflow: "ellipsis",
           alignContent: "center",
           alignItems: "center",
-          lineHeight: 1.2,
+          lineHeight: 1.1,
           wordWrap: "break-word",
           wordBreak: "break-word",
           maxWidth: "100%",
           position: "relative",
-          zIndex: "1",
+          zIndex: 1,
+          fontFamily: '"IBM Plex Sans JP", sans-serif',
+          background: "linear-gradient(135deg, #3951E2 0%, #474554 50%, #6bbaa3 100%)",
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          letterSpacing: "-0.02em",
+          textShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
         {words.map((word, index) => (
-          <span key={`${word}-${index}`} style={{ whiteSpace: 'pre-wrap' }}>
+          <span key={`${word}-${index}`} style={{ whiteSpace: "pre-wrap" }}>
             {word}
           </span>
         ))}
       </div>
       
       {/* サイト名 */}
-      <div
-        style={{
-          position: "absolute",
-          gap: "8px",
-          zIndex: "1",
-          bottom: "30px",
-          left: "670px",
-          display: "flex",
-          alignItems: "center",
-          textAlign: "center",
-          opacity: 0.9,
-          fontSize: "48px",
-          fontFamily: '"Moralerspace Neon", sans-serif',
-          textTransform: "uppercase", // すべての文字を大文字にする
-        }}
-      >
-        {iconSvg && (
-          <img
-            src={`data:image/svg+xml;base64,${Buffer.from(iconSvg).toString("base64")}`}
-            style={{
-              width: "48px",
-              height: "48px",
-              display: "block",
-              objectFit: "contain",
-            }}
-            alt="icon"
-          />
-        )}
-        suzuuuu09.com
-      </div>
+      {isShowSiteName && (
+        <div
+          style={{
+            position: "absolute",
+            gap: "10px",
+            zIndex: 1,
+            bottom: "40px",
+            right: "60px",
+            display: "flex",
+            alignItems: "center",
+            textAlign: "center",
+            opacity: 1,
+            fontSize: "48px",
+            fontFamily: '"Moralerspace Neon", sans-serif',
+            textTransform: "uppercase",
+            background: "linear-gradient(135deg, #3951E2 0%, #6bbaa3 100%)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            letterSpacing: "0.03em",
+            filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
+          }}
+        >
+          {iconSvg && (
+            <img
+              src={`data:image/svg+xml;base64,${Buffer.from(iconSvg).toString("base64")}`}
+              style={{
+                width: "48px",
+                height: "48px",
+                display: "block",
+                objectFit: "contain",
+                filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
+              }}
+              alt="icon"
+            />
+          )}
+          suzuuuu09.com
+        </div>
+      )}
     </main>,
     {
       width,
@@ -130,12 +145,4 @@ export const generateOgImage = async (title: string): Promise<Buffer> => {
   const pngBuffer = pngData.asPng();
 
   return Buffer.from(pngBuffer.buffer, pngBuffer.byteOffset, pngBuffer.byteLength);
-  // Render SVG to PNG and return as Buffer
-  // return new Response(pngData.asPng(), {
-  //   headers: {
-  //     "Content-Type": "image/png",
-  //   }
-  
-  //   }
-  // })
 }
