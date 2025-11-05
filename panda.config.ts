@@ -259,7 +259,9 @@ export default defineConfig({
         },
         ".link-card-content": {
           display: "flex",
-          p: "4",
+          px: "4",
+          pt: "4",
+          pb: "3.5",
           flexDirection: "column",
           justifyContent: "flex-start",
           flex: "1",
@@ -301,7 +303,7 @@ export default defineConfig({
           ".link-card-site-wrapper": {
             mt: "auto",
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             gap: "2",
             "img": {
               m: "0",
