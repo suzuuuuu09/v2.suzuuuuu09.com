@@ -20,7 +20,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://suzuuuuu09.com",
+  site: "https://v2-suzuuuuu09-com.pages.dev",
   // output: "static",
   // adapter: node({
   //   mode: "standalone",
