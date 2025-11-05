@@ -36,6 +36,7 @@ const { Content, headings } = await render(entry);
 // プロダクトの情報
 const articleInfo = {
   title: entry.data.title,
+  slug: entry.data.slug,
   publishDate: entry.data.publishDate,
   updateDate: entry.data.updateDate,
   tags: entry.data.tags || [],
@@ -49,6 +50,7 @@ const articleInfo = {
   title={entry.data.title}
   headings={headings}
   frontmatter={articleInfo}
+  collection="product"
 >
   <ProductInfo {...articleInfo} />
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>

@@ -36,8 +36,8 @@ const { Content, headings } = await render(entry);
 // ブログの情報
 const articleInfo = {
   title: entry.data.title,
-  author: entry.data.author,
   slug: entry.data.slug,
+  author: entry.data.author,
   isPublish: entry.data.isPublish,
   description: entry.data.description,
   content: entry.body, // 読了時間計算用
@@ -48,6 +48,7 @@ const articleInfo = {
   title={entry.data.title}
   headings={headings}
   frontmatter={articleInfo}
+  collection="award"
 >
   <ArticleInfo {...articleInfo} />
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>

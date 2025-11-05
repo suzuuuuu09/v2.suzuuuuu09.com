@@ -7,6 +7,7 @@ import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '@/consts/base';
 
 interface Props {
+	slug: string;
 	title: string;
 	description: string;
 	image?: ImageMetadata;
@@ -20,17 +21,18 @@ const {
 	title, 
 	description, 
 	image = FallbackImage,
-	ogType = 'default',
+	ogType = 'blog',
+	slug,
 	useGeneratedOg = true,
 } = Astro.props;
 
 // 動的OG画像URLを生成
 const ogImageUrl = useGeneratedOg
 	? new URL(
-		`/api/og/${encodeURIComponent(title)}?type=${ogType}`,
+		`/api/og/${ogType}/${slug}.png`,
 		Astro.site
 	).toString()
-	: new URL(image.src, Astro.url).toString();
+	: new URL(image.src, "https://v2-suzuuuuu09-com.pages.dev").toString();
 ---
 
 <!-- Global Metadata -->
