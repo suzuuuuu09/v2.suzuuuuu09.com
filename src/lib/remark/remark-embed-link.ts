@@ -21,7 +21,10 @@ export default function remarkEmbedLinks() {
     visit(tree, 'link', (node: Link, index: number | undefined, parent: any) => {
       if (!parent || typeof index !== 'number') return;
 
-      const url = node.url;
+      let url = node.url;
+      
+      // Twitter の x.com を twitter.com に正規化（ウィジェットスクリプト互換性のため）
+      url = url.replace(/x\.com/i, 'twitter.com');
 
       // リンクのテキスト（タイトル）を取得
       const linkTitle =

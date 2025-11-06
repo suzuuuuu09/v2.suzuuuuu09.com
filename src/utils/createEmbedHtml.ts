@@ -1,9 +1,12 @@
 export function createTwitterEmbedHtml(url: string, tweetId: string, linkTitle: string): string {
+  // x.com を twitter.com に正規化（ウィジェットスクリプトが twitter.com を期待している）
+  const normalizedUrl = url.replace(/x\.com/i, 'twitter.com');
+  
   // Twitter公式の埋め込みScript
   return `
 <div class="twitter-embed-container">
   <blockquote class="twitter-tweet" data-theme="light">
-    <a href="${url}">${linkTitle || 'Tweet'}</a>
+    <a href="${normalizedUrl}">${linkTitle || 'Tweet'}</a>
   </blockquote>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>`;
