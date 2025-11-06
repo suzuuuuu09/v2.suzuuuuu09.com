@@ -32,7 +32,7 @@ const ogImageUrl = useGeneratedOg
 		`/api/og/${ogType}/${slug}.png`,
 		Astro.site
 	).toString()
-	: new URL(image.src, "https://v2-suzuuuuu09-com.pages.dev").toString();
+	: new URL(image.src, Astro.site).toString();
 ---
 
 <!-- Global Metadata -->

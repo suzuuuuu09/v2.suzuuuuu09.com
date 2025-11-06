@@ -82,6 +82,7 @@ export default defineConfig({
           behavior: "prepend",
           content: /** @param {any} node */ (node) => {
             // headingのlevelに応じて#の数を変える
+            // h1 から h6 まで対応
             const level = Number.parseInt(node.tagName.substring(1), 7);
             const hashes = "#".repeat(level);
             
@@ -93,14 +94,6 @@ export default defineConfig({
               },
               children: [{ type: "text", value: hashes }],
             };
-          },
-          group: {
-            type: "element",
-            tagName: "div",
-            properties: {
-              className: ["heading-wrapper"],
-            },
-            children: [],
           },
         },
       ],

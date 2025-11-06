@@ -79,10 +79,12 @@ const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : 
 
   {tags.length > 0 && (
     <Flex
+      justifyContent="center"
       flexDirection="center"
       flexWrap="wrap"
       mb="4"
       gap="2"
+      maxW="4xl"
     >
       <TagList tags={tags} />
     </Flex>

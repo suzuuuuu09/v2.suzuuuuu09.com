@@ -1,7 +1,6 @@
 import type { IconCard } from "@/types";
 
 export const ICON_CARDS: Record<string, IconCard> = {
-  javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
   astro: { icon: "material-icon-theme:astro", name: "Astro" },
   bun: { icon: "material-icon-theme:bun", name: "Bun" },
   c: { icon: "material-icon-theme:c", name: "C" },
@@ -21,6 +20,7 @@ export const ICON_CARDS: Record<string, IconCard> = {
   gsap: { icon: "simple-icons:gsap", name: "GSAP", color: "#0AE448" },
   hono: { icon: "logos:hono", name: "Hono.js" },
   html: { icon: "material-icon-theme:html", name: "HTML" },
+  javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
   jupyter: { icon: "material-icon-theme:jupyter", name: "Jupyter" },
   lua: { icon: "material-icon-theme:lua", name: "Lua" },
   leaflet: { icon: "file-icons:leaflet", name: "Leaflet", color: "#199900" },
@@ -35,6 +35,7 @@ export const ICON_CARDS: Record<string, IconCard> = {
   pandas: { icon: "devicon:pandas", name: "Pandas" },
   pandacss: { icon: "logos:pandacss-icon", name: "PandaCSS" },
   python: { icon: "material-icon-theme:python", name: "Python" },
+  react: { icon: "simple-icons:react", name: "React", color: "#61DAFB" },
   selenium: { icon: "logos:selenium", name: "Selenium" },
   svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
   tailwind: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
