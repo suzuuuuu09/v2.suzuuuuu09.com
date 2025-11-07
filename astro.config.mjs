@@ -1,27 +1,34 @@
 // @ts-check
-import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
+import partytown from "@astrojs/partytown";
 import expressiveCode from "astro-expressive-code";
 
 import remarkMath from "remark-math";
 import remarkCallout from "@r4ai/remark-callout";
-import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
-import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
-
 import rehypeKatex from "rehype-katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 
-import partytown from "@astrojs/partytown";
+import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
+import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
+
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://v2-suzuuuuu09-com.pages.dev",
+  site: "https://suzuuuuu09.com",
 
   integrations: [
-    sitemap(),
+    sitemap({
+			i18n: {
+				defaultLocale: "ja",
+				locales: {
+					ja: "ja-JP",
+				},
+			},
+		}),
     react(),
     expressiveCode({
       themes: ["tokyo-night"],
