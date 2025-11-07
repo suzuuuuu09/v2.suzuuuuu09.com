@@ -1,9 +1,10 @@
 ---
 // import "@mantine/core/styles.css";
 import "@/styles/global.css";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts/base";
+import { SITE_TITLE, SITE_DESCRIPTION, GA_TRACKING_ID } from "@/consts/base";
 import Header from "@/components/bases/Header.astro";
 import Footer from "@/components/bases/Footer.astro";
+import GoogleAnalytics from "@/components/features/ga/GoogleAnalytics.astro";
 import { ContentContainer } from "@/components/shared/ContentContainer";
 import FloatingBackground from "@/components/bases/FloatingBackground";
 import { css } from "styled-system/css";
@@ -45,6 +46,8 @@ const ogImageUrl = new URL('/api/og/default.png', Astro.site);
 		<meta property="twitter:title" content={siteTitle} />
 		<meta property="twitter:description" content={SITE_DESCRIPTION} />
 		<meta property="twitter:image" content={ogImageUrl.toString()} />
+
+		<GoogleAnalytics id={GA_TRACKING_ID} />
 	</head>
 	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
 		<FloatingBackground client:load />
