@@ -3,8 +3,6 @@ import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
-// import node from "@astrojs/node";
-// import cloudflare from "@astrojs/cloudflare";
 
 import remarkMath from "remark-math";
 import remarkCallout from "@r4ai/remark-callout";
@@ -21,29 +19,25 @@ import partytown from "@astrojs/partytown";
 // https://astro.build/config
 export default defineConfig({
   site: "https://v2-suzuuuuu09-com.pages.dev",
-  // output: "static",
-  // adapter: node({
-  //   mode: "standalone",
-  // }),
-  // adapter: cloudflare(),
+
   integrations: [
     sitemap(),
     react(),
     expressiveCode({
-    themes: ["tokyo-night"],
-    styleOverrides: {
-      codeFontFamily: "var(--moralerspace-neon)",
-      uiFontFamily: "var(--ibm-plex-sans-jp)",
-    },
-    defaultProps: {
-      wrap: true,
-    }
+      themes: ["tokyo-night"],
+      styleOverrides: {
+        codeFontFamily: "var(--moralerspace-neon)",
+        uiFontFamily: "var(--ibm-plex-sans-jp)",
+      },
+      defaultProps: {
+        wrap: true,
+      }
   }),
     partytown({
       config: {
         forward: ["dataLayer.push"],
       }
-    })
+    }),
   ],
 
   image: {
