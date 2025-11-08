@@ -104,6 +104,10 @@ export function createGridCardHtml(url: string, title: string, site: string, sit
   const faviconHtml = absoluteFaviconUrl 
     ? `<img src="${absoluteFaviconUrl}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
     : `<svg class="link-card-favicon-fallback" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48 256 464"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M464 256 48 256"></path></svg>`;
+  
+  const descriptionHtml = description
+    ? `<span class="link-card-description">${description}</span>`
+    : '';
 
   return `<div class="link-card ${siteClass} link-card-grid ${imageRatioClass}">
     <a href="${url}" target="_blank">
@@ -117,7 +121,7 @@ export function createGridCardHtml(url: string, title: string, site: string, sit
         </div>
         <div class="link-card-content">
           <h4 class="link-card-title">${title}</h4>
-          <span class="link-card-description">${description}</span>
+          ${descriptionHtml}
           <div class="link-card-site-wrapper">
             ${faviconHtml}
             <span class="link-card-site">${site}</span>
@@ -138,13 +142,17 @@ export function createStandardCardHtml(url: string, title: string, site: string,
     ? `<img src="${absoluteFaviconUrl}" alt="${site} favicon" class="link-card-favicon" loading="lazy" />`
     : `<svg class="link-card-favicon-fallback" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48Z"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M256 48 256 464"></path><path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" d="M464 256 48 256"></path></svg>`;
 
+  const descriptionHtml = description
+    ? `<span class="link-card-description">${description}</span>`
+    : '';
+    
   return `
   <div class="link-card ${siteClass}">
     <a href="${url}" target="_blank">
       ${imageHtml}
       <div class="link-card-content">
         <h4 class="link-card-title">${title}</h4>
-        <span class="link-card-description">${description}</span>
+        ${descriptionHtml}
         <div class="link-card-site-wrapper">
           ${faviconHtml}
           <span class="link-card-site">${site}</span>
