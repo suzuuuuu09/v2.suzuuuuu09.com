@@ -3,7 +3,7 @@ import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { loadDefaultJapaneseParser } from "budoux";
 
-export const generateOgImage = async (title: string, isShowSiteName: boolean = true): Promise<Buffer> => {
+export const generateOgImage = async (title: string, isShowSiteName: boolean = true, collection?: string): Promise<Buffer> => {
   const ibmPlexSansRegularFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Regular.ttf");
   const ibmPlexSnasBoldFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Bold.ttf");
   const backgroundImage = fs.readFileSync("./public/imgs/ogp-background.png");
@@ -14,6 +14,9 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
 
   const parser = loadDefaultJapaneseParser();
   const words = parser.parse(title);
+
+  // コレクション名を大文字に変換
+  const collectionName = collection ? collection.charAt(0).toUpperCase() + collection.slice(1) : undefined;
 
   const svg = await satori(
     <main
@@ -29,86 +32,146 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
         justifyContent: "center",
         fontFamily: '"Moralerspace Neon", sans-serif',
         color: "#474554",
-        padding: "60px",
+        padding: "40px",
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* タイトル */}
       <div
         style={{
-          fontSize: "64px",
-          fontWeight: "bold",
           display: "flex",
-          justifyContent: "flex-start", // 左寄せ
-          width: "1020px",
-          height: "400px",
-          flexWrap: "wrap",
-          alignContent: "center",
+          justifyContent: "center",
           alignItems: "center",
-          lineHeight: 1.1,
-          wordWrap: "break-word",
-          wordBreak: "break-word",
-          maxWidth: "100%",
+          backgroundColor: "#faf8ff",
+          borderRadius: "50px",
+          width: "100%",
+          height: "100%",
+          boxSizing: "border-box",
           position: "relative",
-          zIndex: 1,
-          fontFamily: '"IBM Plex Sans JP", sans-serif',
-          background: "linear-gradient(135deg, #3951E2 0%, #474554 50%, #6bbaa3 100%)",
-          backgroundClip: "text",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          letterSpacing: "-0.02em",
-          textShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+          overflow: "hidden",
         }}
       >
-        {words.map((word, index) => (
-          <span key={`${word}-${index}`} style={{ whiteSpace: "pre-wrap" }}>
-            {word}
-          </span>
-        ))}
-      </div>
-      
-      {/* サイト名 */}
-      {isShowSiteName && (
+        {/* タイトル */}
         <div
           style={{
-            position: "absolute",
-            gap: "10px",
-            zIndex: 1,
-            bottom: "40px",
-            right: "60px",
+            fontSize: "64px",
+            fontWeight: "bold",
             display: "flex",
+            justifyContent: "flex-start", // 左寄せ
+            width: "1020px",
+            height: "350px",
+            flexWrap: "wrap",
+            alignContent: "center",
             alignItems: "center",
-            textAlign: "center",
-            opacity: 1,
-            fontSize: "48px",
-            fontFamily: '"Moralerspace Neon", sans-serif',
-            textTransform: "uppercase",
-            background: "linear-gradient(135deg, #3951E2 0%, #6bbaa3 100%)",
+            lineHeight: 1.1,
+            wordWrap: "break-word",
+            wordBreak: "break-word",
+            maxWidth: "100%",
+            position: "relative",
+            fontFamily: '"IBM Plex Sans JP", sans-serif',
+            background: "linear-gradient(135deg, #3951E2 0%, #474554 50%, #6bbaa3 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            letterSpacing: "0.03em",
-            filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
+            letterSpacing: "-0.02em",
+            textShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+            padding: "40px",
+            marginLeft: "-100px",
+            marginTop: "-60px",
           }}
         >
-          {iconSvg && (
-            <img
-              src={`data:image/svg+xml;base64,${Buffer.from(iconSvg).toString("base64")}`}
-              style={{
-                width: "48px",
-                height: "48px",
-                display: "block",
-                objectFit: "contain",
-                filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
-              }}
-              alt="icon"
-            />
-          )}
-          suzuuuu09.com
+          {words.map((word, index) => (
+            <span key={`${word}-${index}`} style={{ whiteSpace: "pre-wrap" }}>
+              {word}
+            </span>
+          ))}
         </div>
-      )}
+        
+        {/* コレクション名 */}
+        {collectionName && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "40px",
+              left: "60px",
+              display: "flex",
+              alignItems: "center",
+              fontSize: "32px",
+              fontFamily: '"IBM Plex Sans JP", sans-serif',
+              fontWeight: "bold",
+              textTransform: "uppercase",
+              background: "linear-gradient(135deg, #3951E2 0%, #6bbaa3 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "0.03em",
+              fontKerning: "normal",
+              filter: "drop-shadow(0 2px 4px rgba(57, 81, 226, 0.15))",
+              paddingRight: "8px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <div
+                style={{
+                  width: "4px",
+                  height: "36px",
+                  background: "linear-gradient(180deg, #3951E2 0%, #6bbaa3 100%)",
+                  borderRadius: "2px",
+                  boxShadow: "0 2px 8px rgba(57, 81, 226, 0.3)",
+                }}
+              />
+              {collectionName}
+            </div>
+          </div>
+        )}
+
+        {/* サイト名 */}
+        {isShowSiteName && (
+          <div
+            style={{
+              position: "absolute",
+              gap: "10px",
+              bottom: "40px",
+              right: "60px",
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+              opacity: 1,
+              fontSize: "48px",
+              fontFamily: '"Moralerspace Neon", sans-serif',
+              textTransform: "uppercase",
+              background: "linear-gradient(135deg, #3951E2 0%, #6bbaa3 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "0.03em",
+              filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
+            }}
+          >
+            {iconSvg && (
+              <img
+                src={`data:image/svg+xml;base64,${Buffer.from(iconSvg).toString("base64")}`}
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  display: "block",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))",
+                }}
+                alt="icon"
+              />
+            )}
+            suzuuuu09.com
+          </div>
+        )}
+      </div>
     </main>,
     {
       width,

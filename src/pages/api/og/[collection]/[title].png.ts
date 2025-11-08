@@ -29,7 +29,7 @@ export const GET: APIRoute = async ({ params }: APIContext) => {
     throw new Error("Post not found");
   }
 
-  const image = await generateOgImage(post.data.title);
+  const image = await generateOgImage(post.data.title, true, params.collection);
   return new Response(image instanceof Buffer ? new Uint8Array(image) : image, {
     headers: { "Content-Type": "image/png" },
   });
