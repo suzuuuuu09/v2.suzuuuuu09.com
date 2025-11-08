@@ -6,7 +6,7 @@ const commonSchema = z.object({
   title: z.string(),
   author: z.string().optional(),
   slug: z.string(),
-  description: z.string().optional(),
+  description: z.string().nullable().default(""),
   isPublish: z.boolean().default(false),
 })
 

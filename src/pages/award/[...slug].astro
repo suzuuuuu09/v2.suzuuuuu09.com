@@ -39,7 +39,7 @@ const articleInfo = {
   slug: entry.data.slug,
   author: entry.data.author,
   isPublish: entry.data.isPublish,
-  description: entry.data.description,
+  description: entry.data.description || "",
   content: entry.body, // 読了時間計算用
 };
 ---
