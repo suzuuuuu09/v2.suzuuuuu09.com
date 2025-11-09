@@ -9,13 +9,12 @@ tags:
 thumbnail: "![[QR_Code_Generator-1759659688106.webp]]"
 description: suzuのアイコンが入ったQRコードを生成できるサイト
 publishDate: 2025-10-05
-updateDate: 2025-11-01
+updateDate: 2025-11-08
 isPublish: true
 ---
 ## 概要
 suzuのアイコンを埋め込んだQRコードを作成できます。これまではアイコン入りQRコード作成サイトで毎回作り直していたため手間がかかっていましたが、その煩わしさを解消するために「QR Code Generator」を作成しました。  
 また、今回初めてPandaCSSを試してみました。今までにTailwindCSSとUnoCSSを使ってきた経験から比較すると、一番良かったなと感じたのはclass名が長くなりすぎないことです。TailwindCSSやUnoCSSを使用していると、どうしてもclass名が長くなって可読性が悪くなってしまうので、そこが一番いいなと思いました。  
-また、コンポーネント単位でスタイルを定義できるのでTypeScriptとの親和性が高いのも良いなと思いました。
 
 ## 技術スタック
 - **フロントエンドフレームワーク**: Svelte 5

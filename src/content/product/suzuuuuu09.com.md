@@ -12,15 +12,13 @@ tags:
 thumbnail: "![[suzuuuuu09.com-1758351963075.webp]]"
 description: AstroとReactを使ったポートフォリオサイト兼ブログサイトを構築した。UXを意識したデザインやアニメーション作成を意識した。遊び心を感じられるようなイースターエッグを仕込んだ。
 publishDate: 2025-09-20T15:12
-updateDate: 2025-11-07
+updateDate: 2025-11-08
 isPublish: true
 ---
 ## はじめに
-こんにちは。suzu (@suzuuuuu09) です。
-\
-Astro と React を用いてポートフォリオサイト兼ブログサイトを制作しました。  
-訪問者が楽しく快適に閲覧できるよう、デザインやアニメーションに配慮しています。  
-テーマは **「遊び心」** で、サイト内に小ネタやイースターエッグも仕込んでいるので、よろしければ探してみてください！
+こんにちは。はじめまして。**suzu (@suzuuuuu09)** です。私は情報系の大学 1 年で、個人的に Web フロントエンド技術を使った Web 開発をおこなっています。夏休みの機会を利用して、触ったことがなかった技術を使って新しいものを作ろうと思いました。  
+そこで今回、Astro と React を使ったポートフォリオサイト兼ブログサイトを制作しましたので、紹介します。  
+
 
 ## 画像・動画
 ![[suzuuuuu09.com-1758351963075.webp]]
@@ -52,9 +50,7 @@ Tailwind CSS や UnoCSS のようなユーティリティクラスを活用し�
 #### フォント
 [IBM Plex Sans JP - Google Fonts](https://fonts.google.com/specimen/IBM+Plex+Sans+JP)
 [GitHub - yuru7/moralerspace: Moralerspace は、欧文フォント Monaspace と日本語フォント IBM Plex Sans JP 等を合成したプログラミング向けフォントです。](https://github.com/yuru7/moralerspace)
-フォントは **IBM Plex Sans JP** と **Moralerspace** を使用しました。  
-IBM Plex Sans JP は視認性が高く、ブログや資料などの文字量が多い場所でも読みやすくなっています。また、このフォントは学園アイドルマスターでも採用されています。  ([`ソース`](https://twitter.com/gomafu_1729_80/status/1765019850613883101))  
-Moralerspace は欧文フォント Monaspace と日本語フォント IBM Plex Sans JP を合成したプログラミング向けフォントです。IBM Plex Sans JP をベースにしていることから、サイトに一体感を持たせるために採用しました。  
+フォントは本文に **IBM Plex Sans JP** 、コードブロックに **Moralerspace** を使用しました。  
 
 #### 絵文字
 [GitHub - twitter/twemoji: Emoji for everyone. https://twemoji.twitter.com/](https://github.com/twitter/twemoji)
@@ -92,6 +88,11 @@ Content Collections は Astro のプロジェクトフォルダ内に src/conten
 #### BudouX
 [GitHub - google/budoux](https://github.com/google/budoux)
 **BudouX** はタイトルの文を分かち書きするために使いました。
+
+### アナリティクス
+#### Google Analytics
+[Google Analytics  \|  Google for Developers](https://developers.google.com/analytics?hl=ja)
+アナリティクスは **Google Analytics** を使用しています。特にこだわりがなかったので無難なものを選びました。
 
 ## こだわりポイント
 ### ヘッダーナビゲーション
