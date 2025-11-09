@@ -55,15 +55,6 @@ const { award } = Astro.props as Props;
       gradientTo="sz.primary/5"
       position="relative"
     >
-      <!-- カード背景用絵文字 -->
-      <s.div position="absolute" top="6" right="6" opacity="0.1" >
-        <Center w="20" h="20" bg="sz.primary/10" borderRadius="full" >
-          <div class={css({ fontSize: "3xl" })}>
-            🏆
-          </div>
-        </Center>
-      </s.div>
-
       <Flex direction="column" gap="4">
         <Flex align="start" gap="4">
           <!-- 絵文字 -->
@@ -89,7 +80,7 @@ const { award } = Astro.props as Props;
           <!-- タイトル -->
           <div style={{ minWidth: 0, flex: 1 }}>
             <Flex align="center" wrap="wrap" gap="2">
-              <s.p fontWeight="bold" fontSize="xl" display="flex" gap="2">
+              <s.p fontWeight="bold" fontSize="xl">
                 <s.span color="sz.text.sub">[{award.data.type}]</s.span>
                 <s.span className={css({ lineHeight: "snug", transition: "color 0.3s" })}>
                   {award.data.title}
