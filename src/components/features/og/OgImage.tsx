@@ -97,7 +97,7 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
               left: "60px",
               display: "flex",
               alignItems: "center",
-              fontSize: "32px",
+              fontSize: "42px",
               fontFamily: '"IBM Plex Sans JP", sans-serif',
               fontWeight: "bold",
               textTransform: "uppercase",
@@ -115,13 +115,13 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
+                gap: "16px",
               }}
             >
               <div
                 style={{
-                  width: "4px",
-                  height: "36px",
+                  width: "8px",
+                  height: "42px",
                   background: "linear-gradient(180deg, #3951E2 0%, #6bbaa3 100%)",
                   borderRadius: "2px",
                   boxShadow: "0 2px 8px rgba(57, 81, 226, 0.3)",
