@@ -11,9 +11,9 @@ tags:
   - CloudflarePages
 thumbnail: "![[suzuuuuu09.com-1758351963075.webp]]"
 description: AstroとReactを使ったポートフォリオサイト兼ブログサイトを構築した。UXを意識したデザインやアニメーション作成を意識した。遊び心を感じられるようなイースターエッグを仕込んだ。
-publishDate: 2025-09-20T15:12
-updateDate: 2025-11-08
 isPublish: true
+publishDate: 2025-09-20T15:12
+updateDate: 2025-11-15T00:13
 ---
 ## はじめに
 こんにちは。はじめまして。**suzu (@suzuuuuu09)** です。私は情報系の大学 1 年で、個人的に Web フロントエンド技術を使った Web 開発をおこなっています。夏休みの機会を利用して、触ったことがなかった技術を使って新しいものを作ろうと思いました。  
@@ -58,9 +58,10 @@ Tailwind CSS や UnoCSS のようなユーティリティクラスを活用し�
 絵文字を入力すると自動で SVG 画像に変換してくれます。  
 😄⭐☔←こんな感じ
 
-#### astro-iconify
+#### アイコン
+[Iconify Design: All popular icon sets, one framework.](https://iconify.design)
 [GitHub - manuelmeister/astro-iconify: Inline and sprite-based SVGs in Astro using up to date Iconify service](https://github.com/manuelmeister/astro-iconify)
-アイコンはすべて**astro-iconify**を使っています。  
+アイコンは**astro-iconify**を使っています。  
 astro-iconify を使うことで mdi や devicon などのアイコンやロゴを簡単に扱うことができます。
 もともとは [`Astro Icon`](https://iconify.design/docs/usage/svg/astro/) を使っていましたが、アイコンを使うために別途でパッケージをインストールする必要があり煩わしかったため、Astro Icon は採用しませんでした。
 
@@ -82,8 +83,7 @@ Content Collections は Astro のプロジェクトフォルダ内に src/conten
 [GitHub - thx/resvg-js: A high-performance SVG renderer and toolkit, powered by Rust based resvg and napi-rs.](https://github.com/thx/resvg-js)
 **Satori** を使って HTML と CSS から SVG を生成します。生成した SVG を **Resvg** を用いて PNG 画像に変換しています。
 
-> [!NOTE] Sharp
-> Sharp は画像を最適化することができるツールです。Sharp は Node 以外のプロバイダーを使っているときは動かせません。しかし、このサイトは Cloudflare を使っているので、これに気づかずにいると原因不明のエラーに苦しめられて一日を無駄にすることになるので注意しましょう。
+
 
 #### BudouX
 [GitHub - google/budoux](https://github.com/google/budoux)
@@ -93,6 +93,11 @@ Content Collections は Astro のプロジェクトフォルダ内に src/conten
 #### Google Analytics
 [Google Analytics  \|  Google for Developers](https://developers.google.com/analytics?hl=ja)
 アナリティクスは **Google Analytics** を使用しています。特にこだわりがなかったので無難なものを選びました。
+
+### コードブロック
+#### Expressive Code
+[Expressive Code \| Expressive Code](https://expressive-code.com/)
+コードブロックに **Expressive Code** を使用しました。Astro との相性も良く、簡単にリッチなコードブロックを扱えるのが特徴です。
 
 ## こだわりポイント
 ### ヘッダーナビゲーション
