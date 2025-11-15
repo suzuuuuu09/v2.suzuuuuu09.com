@@ -74,9 +74,8 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
       position="relative"
       w="full"
       maxH="60"
-      h="240px"
+      h={{ base: "240", _sm: "200" }}
       overflow="hidden"
-      style={{ height: "240px" }}
     >
       <s.img
         src={thumbnailUrl}
@@ -97,7 +96,8 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
       gradientFrom="sz.primary/5"
       gradientVia="sz.primary/10"
       gradientTo="sz.primary/5"
-      p="6"
+      p={{ base: "6", _sm: "6" }}
+      pb={{ base: "4", _sm: "4" }}
       flex="1"
       flexDir="column"
     >

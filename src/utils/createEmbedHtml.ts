@@ -14,7 +14,7 @@ export function createTwitterEmbedHtml(url: string, tweetId: string, linkTitle: 
 
 export function createYouTubeEmbedHtml(embedSrc: string, linkTitle: string): string {
   // figure で中央寄せ。iframe はアスペクト比維持で横幅100%
-  return `\n<figure style="display:flex;justify-content:center;max-width:100%;">
+  return `\n<figure class="youtube-embed">
   <iframe
     src="${embedSrc}"
     title="${linkTitle || 'YouTube video'}"

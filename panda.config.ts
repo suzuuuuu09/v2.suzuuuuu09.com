@@ -25,13 +25,9 @@ export default defineConfig({
     },
     "::-webkit-scrollbar-thumb": {
       bg: "sz.primary/30",
-      _hover: {
+      "&:hover": {
         bg: "sz.primary/50",
       },
-    },
-    "::-webkit-scrollbar-thumb:active": {
-      bg: "sz.primary/60",
-      transition: "background-color 0.3s ease-in-out",
     },
     ".markdown-content": {
       "h1, h2, h3, h4, h5, h6": {
@@ -286,6 +282,7 @@ export default defineConfig({
             color: "sz.text.main",
             _sm: {
               "-webkit-line-clamp": "2",
+              mb: "1",
             }
           },
           ".link-card-description": {
@@ -373,12 +370,12 @@ export default defineConfig({
         }
       },
       
-      ".youtube-embed iframe": {
-        w: "full",
-        h: "full",
+      ".youtube-embed": {
+        my: "4",
+        display: "flex",
+        justifyContent: "center",
         aspectRatio: "16 / 9",
-        minW: "300px",
-        maxW: "800px",
+        maxW: "100%",
       },
 
       ".spotify-embed iframe": {
@@ -455,7 +452,7 @@ export default defineConfig({
         WebkitBackgroundClip: "text",
         backgroundClip: "text",
         color: "transparent",
-        transition: "opacity 0.2s ease-in-out",
+        transition: "background-image 0.2s ease-in-out",
         _hover: {
           backgroundImage: "linear-gradient(to right in oklch, {colors.s-primary/60}, {colors.s-secondary/60})",
         },
