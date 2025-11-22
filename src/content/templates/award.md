@@ -5,10 +5,12 @@ slug:
 description:
 date:
 isPublish: false
+publishDate:
+updateDate:
 ---
 ## 出場・受賞
 
-## 概要
+## 概要 
 
 ## 技術スタック
 

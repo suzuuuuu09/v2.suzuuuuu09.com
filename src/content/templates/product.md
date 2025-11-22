@@ -6,6 +6,8 @@ tags:
 thumbnail:
 description:
 isPublish: false
+publishDate:
+updateDate:
 ---
 ## 概要
 
