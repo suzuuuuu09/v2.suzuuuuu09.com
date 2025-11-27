@@ -9,6 +9,10 @@ export const articleGridRecipes = cva({
       md: "repeat(2, minmax(0, 1fr))",
     },
     gap: "6",
+    _md: {
+      justifyItems: "center",
+      alignItems: "center",
+    },
   },
 })
 

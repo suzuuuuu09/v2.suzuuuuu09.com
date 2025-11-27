@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { Flex, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import Icon from "astro-iconify";
+import { Card } from "@/components/ui/Card";
 
 export interface Props {
   award: {
@@ -20,31 +21,11 @@ export interface Props {
 const { award } = Astro.props as Props;
 ---
 
-<a
-  href={`/award/${award.data.slug ?? award.id}/`}
-  class={cx(
-    css({ width: "100%", display: "block", color: "sz.text.main", textDecoration: "none" })
-  )}
->
-  <article
+<Card>
+  <a
+    href={`/award/${award.data.slug ?? award.id}/`}
     class={cx(
-      "group",
-      css({
-        position: "relative",
-        bgGradient: "to-br",
-        gradientFrom: "sz.bg",
-        gradientTo: "sz.bg-on",
-        borderRadius: "2xl",
-        shadow: "sm",
-        overflow: "hidden",
-        borderWidth: "1px",
-        borderColor: "sz.border/20",
-        backdropFilter: "blur(8px)",
-        transition: "all 0.4s",
-        _hover: {
-          shadow: "xl",
-        },
-      })
+      css({ width: "100%", display: "block", color: "sz.text.main", textDecoration: "none" })
     )}
   >
     <s.div
@@ -106,5 +87,5 @@ const { award } = Astro.props as Props;
         </Flex>
       </Flex>
     </s.div>
-  </article>
-</a>
+  </a>
+</Card>

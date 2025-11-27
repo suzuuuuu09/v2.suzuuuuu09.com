@@ -5,6 +5,7 @@ import { css, cx } from "styled-system/css";
 import { flex, center } from "styled-system/patterns";
 import { categories } from "@/consts/category";
 import TagList from "./TagList.astro";
+import { Card } from "@/components/ui/Card";
 import Icon from "astro-iconify";
 import { getReadingTime } from "@/lib/reading-time";
 
@@ -30,27 +31,7 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
 const readingTime = blog.data.content ? getReadingTime(blog.data.content) : undefined;
 ---
 
-<article
-  class={cx(
-    "group",
-    css({
-      position: "relative",
-      bgGradient: "to-br",
-      gradientFrom: "sz.bg",
-      gradientTo: "sz.bg-on",
-      borderRadius: "2xl",
-      shadow: "sm",
-      overflow: "hidden",
-      borderWidth: "1px",
-      borderColor: "sz.border/20",
-      backdropFilter: "blur(8px)",
-      transition: "all 0.4s",
-      _hover: {
-        shadow: "xl",
-      },
-    })
-  )}
->
+<Card>
   <a
     href={`/blog/${blog.data.slug ?? blog.id}/`}
     class={cx(
@@ -81,26 +62,19 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
      
 
       <!-- メイン絵文字 -->
-      <div class={css({ position: "relative", zIndex: "10" })}>
-        <div
-          class={cx(
-            center(),
-            css({
-              width: "16",
-              height: "16",
-              bg: "sz.bg",
-              borderRadius: "xl",
-              shadow: "md",
-              transition: "all 0.3s",
-              _groupHover: {
-                transform: "scale(1.1) rotate(3deg)",
-              },
-            })
-          )}
+      <s.div position="relative" z="10">
+        <Center
+          w="16"
+          h="16"
+          bg="sz.bg"
+          rounded="xl"
+          shadow="md"
+          transition="all 0.3s"
+          _groupHover={{ transform: "scale(1.1) rotate(3deg)" }}
         >
-          <span class={css({ fontSize: "3xl" })}>{blog.data.emoji || "📝"}</span>
-        </div>
-      </div>
+          <s.span fontSize="3xl">{blog.data.emoji || "📝"}</s.span>
+        </Center>
+      </s.div>
 
     <!-- タイトル -->
     <h2
@@ -162,4 +136,4 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
       </Flex>
     </Flex>
   </a>
-</article>
+</Card>

@@ -7,6 +7,7 @@ import { R2_URL } from "@/consts/base";
 import { cleanAssetPath } from "@/utils/cleanAssetPath";
 import { getReadingTime } from "@/lib/reading-time";
 import TagList from "@/components/features/blog/TagList.astro";
+import { Card } from "@/components/ui/Card";
 
 export interface Props {
   product: {
@@ -43,25 +44,7 @@ const thumbnailUrl = buildThumbnailUrl(product.data.thumbnail, product.data.titl
 const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
 ---
 
-<article
-  class={cx(
-    "group",
-    css({
-      position: "relative",
-      bgGradient: "to-br",
-      gradientFrom: "sz.bg",
-      gradientTo: "sz.bg-on",
-      borderRadius: "2xl",
-      shadow: "sm",
-      overflow: "hidden",
-      borderWidth: "1px",
-      borderColor: "sz.border/20",
-      backdropFilter: "blur(8px)",
-      transition: "all 0.4s",
-      _hover: { shadow: "xl" },
-    })
-  )}
->
+<Card>
   <a
     href={`/product/${product.id}/`}
     class={cx(
@@ -157,4 +140,4 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
       </Flex>
     </Flex>
   </a>
-</article>
+</Card>
