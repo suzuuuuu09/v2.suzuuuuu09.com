@@ -1,7 +1,7 @@
 ---
 title: Markdownテスト記事
 publishDate: 2025-08-09
-updateDate: 2025-12-04T01:21
+updateDate: 2025-12-08T23:52
 tags:
   - test
   - markdown
@@ -29,7 +29,7 @@ isPublish: true
 ###### H6 見出し
 ```
 
-基本的にはH1, H5, H6は使わないでください。
+基本的には H1, H5, H6 は使わないでください。
 
 ## テキストスタイル
 
@@ -53,11 +53,11 @@ isPublish: true
 - アイテム3
 ```
 
-- アイテム1
-- アイテム2
-  - アイテム2-1
-  - アイテム2-2
-- アイテム3
+- アイテム 1
+- アイテム 2
+  - アイテム 2-1
+  - アイテム 2-2
+- アイテム 3
 
 ```markdown
 1. アイテムA
@@ -67,11 +67,11 @@ isPublish: true
 3. アイテムC
 ```
 
-1. アイテムA
-2. アイテムB
-   1. アイテムB-1
-   2. アイテムB-2
-3. アイテムC
+1. アイテム A
+2. アイテム B
+   1. アイテム B-1
+   2. アイテム B-2
+3. アイテム C
 
 ```markdown
 - [x] タスク1
@@ -79,9 +79,9 @@ isPublish: true
 - [x] タスク3(完了)
 ```
 
-- [x] タスク1
-- [ ] タスク2(未完了)
-- [x] タスク3(完了)
+- [x] タスク 1
+- [ ] タスク 2(未完了)
+- [x] タスク 3(完了)
 
 ## コードブロック
 
@@ -110,12 +110,15 @@ https://expressive-code.com
 ## テーブル
 
 ```markdown
+*[!table]テーブルの例*
 |   a   | b     |   c   |     d |
 | ----- | :---- | :---: | ----: |
 | aaaaa | bbbbb | ccccc | ddddd |
 | aaaa  | bbbb  | cccc  |  dddd |
 | aaa   | bbb   |  ccc  |   ddd |
 ```
+
+*[!table] テーブルの例*
 
 |   a   | b     |   c   |     d |
 | ----- | :---- | :---: | ----: |
@@ -144,7 +147,7 @@ https://expressive-code.com
 [`Zenn.dev`](https://zenn.dev/)
 ```
 
-[`GitHub`](https://github.com/suzuuuuu09)への外部リンクです。
+[`GitHub`](https://github.com/suzuuuuu09) への外部リンクです。
 内部リンクの例：[トップページ](/)
 
 [Zenn.dev](https://zenn.dev/)
@@ -155,10 +158,11 @@ https://expressive-code.com
 
 ```markdown
 ![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
+*[!image] 画像の例*
 ```
 
 ![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
-
+*[!image] 画像の例*
 ## 区切り線
 ```markdown
 ---
@@ -171,7 +175,7 @@ https://expressive-code.com
 🚀 ロケット 🎉 お祝い  
 💡 アイデア ✅ チェック  
 ❤️ ハート ⭐️ 星  
-絵文字はTwemojiに置き換わります。
+絵文字は Twemoji に置き換わります。
 
 ## 数式
 
@@ -320,10 +324,10 @@ https://github.com/r4ai/remark-callout
 <summary>詳細を表示</summary>
 
 この部分は折りたたまれています。
-**Markdown記法**も使えます。
+**Markdown 記法**も使えます。
 
-- リストアイテム1
-- リストアイテム2
+- リストアイテム 1
+- リストアイテム 2
 
 </details>
 
@@ -334,8 +338,8 @@ Windowsでは <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすること�
 macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 ```
 
-Windowsでは <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
-macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+Windows では <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+macOS では <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 
 ## リンク
 

@@ -14,6 +14,7 @@ import rehypeExternalLinks from "rehype-external-links";
 
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
+import rehypeCaption from "./src/lib/rehype/rehype-caption";
 
 
 // https://astro.build/config
@@ -67,6 +68,7 @@ export default defineConfig({
       remarkEmbedLinks,
     ],
     rehypePlugins: [
+      rehypeCaption, // <em>[!xxx]</em> をキャプションに変換
       rehypeKatex,
       rehypeSlug,
       [

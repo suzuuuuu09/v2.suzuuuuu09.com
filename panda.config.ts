@@ -45,7 +45,11 @@ export default defineConfig({
         fontSize: "3xl",
         borderBottomWidth: "1",
         borderBottomColor: "sz.border",
+        mt: "10",
         pb: "1",
+        _sm: {
+          mt: "8",
+        }
       },
       "h3": {
         fontSize: "2xl",
@@ -192,11 +196,33 @@ export default defineConfig({
         borderRadius: "sm",
       },
       "img": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         rounded: "lg",
         my: "4",
+        mx: "auto",
         w: "auto",
         h: "auto",
-        maxH: "600px"
+        maxH: "600px",
+      },
+      "video": {
+        my: "4",
+      },
+      ".caption": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1",
+        my: "1",
+        fontSize: "base",
+        fontWeight: "bold",
+        color: "sz.text.sub",
+        "svg": {
+          flexShrink: "0",
+          w: "4",
+          h: "4",
+        },
       },
       ".link-card": {
         my: "4",  // remark-breaksで使うなら上のMarginだけにしたほうがいいかも
@@ -509,6 +535,7 @@ export default defineConfig({
   
   conditions: {
     sm: "@media (max-width: 640px)",
+    md: "@media (max-width: 768px)",
   },
 
   // Useful for theme customization
