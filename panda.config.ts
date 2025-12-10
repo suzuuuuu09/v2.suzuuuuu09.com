@@ -214,7 +214,6 @@ export default defineConfig({
         alignItems: "center",
         justifyContent: "center",
         gap: "1",
-        my: "1",
         fontSize: "base",
         fontWeight: "bold",
         color: "sz.text.sub",
@@ -222,6 +221,18 @@ export default defineConfig({
           flexShrink: "0",
           w: "4",
           h: "4",
+        },
+      },
+      ".caption-table": {
+        mt: "8",
+        _sm: {
+          mt: "4",
+        },
+      },
+      ".caption-image": {
+        mb: "8",
+        _sm: {
+          mb: "4",
         },
       },
       ".link-card": {

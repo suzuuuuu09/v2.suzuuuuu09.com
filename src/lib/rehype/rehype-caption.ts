@@ -31,7 +31,7 @@ export default function rehypeCaption() {
       const captionNode = {
         type: 'element',
         tagName: 'div',
-        properties: { className: ['caption'], },
+        properties: { className: [`caption caption-${type}`], },
         children: [
           {
             type: 'raw',
