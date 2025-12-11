@@ -31,7 +31,7 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
 const readingTime = blog.data.content ? getReadingTime(blog.data.content) : undefined;
 ---
 
-<Card>
+<Card maxW="450px">
   <a
     href={`/blog/${blog.data.slug ?? blog.id}/`}
     class={cx(

@@ -5,6 +5,7 @@ const cardRecipes = cva({
   base: {
     gradientTo: "sz.bg-on",
     borderRadius: "2xl",
+    w: "full",
     shadow: "sm",
     overflow: "hidden",
     borderWidth: "1px",
@@ -13,11 +14,20 @@ const cardRecipes = cva({
     transition: "all 0.4s",
     _md: {
       maxW: "450px",
-      w: "full",
     },
     _hover: {
       shadow: "xl",
     },
+  },
+  variants: {
+    maxW: {
+      full: {
+        _md: { maxW: "full" }
+      },
+      "450px": {
+        _md: { maxW: "450px" }
+      }
+    }
   },
 })
 

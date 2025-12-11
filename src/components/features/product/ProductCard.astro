@@ -44,7 +44,7 @@ const thumbnailUrl = buildThumbnailUrl(product.data.thumbnail, product.data.titl
 const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
 ---
 
-<Card>
+<Card maxW="450px">
   <a
     href={`/product/${product.id}/`}
     class={cx(

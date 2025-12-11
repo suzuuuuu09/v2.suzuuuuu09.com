@@ -21,7 +21,7 @@ export interface Props {
 const { award } = Astro.props as Props;
 ---
 
-<Card>
+<Card maxW="full">
   <a
     href={`/award/${award.data.slug ?? award.id}/`}
     class={cx(
