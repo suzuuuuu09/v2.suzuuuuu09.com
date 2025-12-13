@@ -1,10 +1,9 @@
 ---
-import dayjs from 'dayjs';
 import { Flex, HStack, VStack, styled as s } from 'styled-system/jsx';
-import Icon from 'astro-iconify';
 import TagList from '../blog/TagList.astro';
-import { getReadingTime } from '@/lib/reading-time';
 import Thumbnail from '@/components/shared/Thumbnail';
+import ReadingTime from '@/components/shared/ReadingTime';
+import Date from '@/components/shared/Date';
 
 export interface Props {
   title: string;
@@ -27,8 +26,6 @@ const {
   author,
   content,
 } = Astro.props as Props;
-
-const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : undefined;
 ---
 
 <VStack mb="8" gap="4">
@@ -78,26 +75,23 @@ const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : 
       alignItems={{ sm: "start" }}
       color="sz.text.main"
     >
-      {publishDate && (
-        <HStack gap="1.5">
-          <Icon name="mdi:calendar" size={16} />
-          <s.span>{dayjs(publishDate).format('YYYY.MM.DD')}</s.span>
-        </HStack>
-      )}
+      <!-- 公開日 -->
+      <Date
+        date={publishDate || ""}
+        gap="1.5"
+        type="publish"
+        client:load
+      />
 
-      {updateDate && (
-        <HStack gap="1.5">
-          <Icon name="mdi:update" size={16} />
-          <s.span>{dayjs(updateDate).format('YYYY.MM.DD')}</s.span>
-        </HStack>
-      )}
+      <!-- 更新日 -->
+      <Date
+        date={updateDate || ""}
+        gap="1.5"
+        type="update"
+        client:load
+      />
       
-      {readingTime && (
-        <HStack gap="1.5">
-          <Icon name="mdi:clock-outline" size={16} />
-          <s.span>{readingTime}</s.span>
-        </HStack>
-      )}
+      <ReadingTime content={content || ''} gap="1.5" client:load/>
     </Flex>
   </Flex>
 

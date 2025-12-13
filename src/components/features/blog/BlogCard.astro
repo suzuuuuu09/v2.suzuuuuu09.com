@@ -1,13 +1,12 @@
 ---
-import dayjs from "dayjs";
 import { Flex, HStack, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import { flex, center } from "styled-system/patterns";
 import { categories } from "@/consts/category";
 import TagList from "./TagList.astro";
 import { Card } from "@/components/ui/Card";
-import Icon from "astro-iconify";
-import { getReadingTime } from "@/lib/reading-time";
+import ReadingTime from "@/components/shared/ReadingTime";
+import Date from "@/components/shared/Date";
 
 export interface Props {
   blog: {
@@ -28,7 +27,6 @@ export interface Props {
 const { blog } = Astro.props;
 
 const currentCategory = categories.find((cat) => cat.category === blog.data.category);
-const readingTime = blog.data.content ? getReadingTime(blog.data.content) : undefined;
 ---
 
 <Card maxW="450px">
@@ -76,19 +74,20 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
         </Center>
       </s.div>
 
-    <!-- タイトル -->
-    <h2
-      class={css({
-        lineHeight: "snug",
-        transition: "colors 0.3s",
-        mb: "3",
-        mt: "4",
+      <!-- タイトル -->
+      <h2
+        class={css({
+          lineHeight: "snug",
+          transition: "colors 0.3s",
+          mb: "3",
+          mt: "4",
           fontWeight: "bold",
           fontSize: "xl",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          display: "-webkit-box",
           lineClamp: "2",
+          wordBreak: "keep-all",
+          overflowWrap: "anywhere",
           _groupHover: {
             color: "sz.primary",
           },
@@ -112,26 +111,15 @@ const readingTime = blog.data.content ? getReadingTime(blog.data.content) : unde
           gap="2"
         >
           <!-- 読了時間 -->
-          {readingTime && (
-            <HStack gap="1">
-              <Icon name="mdi:clock-outline" size={16} />
-              <s.time color="sz.text.main" fontSize="sm">
-                {readingTime}
-              </s.time>
-            </HStack>
-          )}
+          <ReadingTime content={blog.data.content || ""} gap="1" client:load />
 
           <!-- 公開日 -->
-          <HStack gap="1">
-            <Icon name="mdi:calendar" size={16} />
-            <s.time
-              dateTime={blog.data.publishDate.toISOString()}
-              color="sz.text.main"
-              fontSize="sm"
-            >
-              {dayjs(blog.data.publishDate).format("YYYY.MM.DD")}
-            </s.time>
-          </HStack>
+          <Date
+            date={blog.data.publishDate || ""}
+            gap="1"
+            type="publish"
+            client:load
+          />
         </HStack>
       </Flex>
     </Flex>

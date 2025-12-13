@@ -1,9 +1,8 @@
 ---
-import dayjs from "dayjs";
 import { Flex, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
-import Icon from "astro-iconify";
 import { Card } from "@/components/ui/Card";
+import Date from "@/components/shared/Date";
 
 export interface Props {
   award: {
@@ -71,18 +70,18 @@ const { award } = Astro.props as Props;
 
             <!-- 説明 -->
             {award.data.description && (
-              <s.span color="sz.text.sub" fontSize="sm" mt="2" display="block" style={{ overflow: 'hidden' }}>
+              <s.span color="sz.text.sub" fontSize="sm" mt="2" mb="3" display="block" style={{ overflow: 'hidden' }}>
                 {award.data.description}
               </s.span>
             )}
 
             <!-- 受賞日・出場日 -->
-            <Flex align="center" gap="2" mt="3">
-              <Icon name="mdi:award" size={16}/>
-              <s.time dateTime={award.data.date.toISOString()} color="sz.text.sub" fontSize="sm">
-                {dayjs(award.data.date).format("YYYY.MM.DD")}
-              </s.time>
-            </Flex>
+            <Date
+              date={award.data.date}
+              gap="2"
+              type="award"
+              client:load
+            />
           </div>
         </Flex>
       </Flex>

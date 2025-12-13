@@ -1,12 +1,11 @@
 ---
-import dayjs from "dayjs";
-import Icon from "astro-iconify";
 import { Flex, HStack, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
-import { getReadingTime } from "@/lib/reading-time";
 import TagList from "@/components/features/blog/TagList.astro";
 import { Card } from "@/components/ui/Card";
 import Thumbnail from "@/components/shared/Thumbnail";
+import ReadingTime from "@/components/shared/ReadingTime";
+import Date from "@/components/shared/Date";
 
 export interface Props {
   product: {
@@ -26,7 +25,6 @@ export interface Props {
 }
 
 const { product } = Astro.props;
-const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
 ---
 
 <Card maxW="450px">
@@ -87,26 +85,15 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
           gap="2"
         >
           <!-- 読了時間 -->
-          {readingTime && (
-            <HStack gap="1">
-              <Icon name="mdi:clock-outline" size={16} />
-              <s.time color="sz.text.main" fontSize="base">
-                {readingTime}
-              </s.time>
-            </HStack>
-          )}
+          <ReadingTime content={product.data.content || ""} gap="1" client:load />
 
           <!-- 公開日 -->
-          <HStack gap="1">
-            <Icon name="mdi:calendar" size={16} />
-            <s.time
-              dateTime={product.data.publishDate.toISOString()}
-              color="sz.text.main"
-              fontSize="sm"
-            >
-              {dayjs(product.data.publishDate).format("YYYY.MM.DD")}
-            </s.time>
-          </HStack>
+          <Date
+            date={product.data.publishDate || ""}
+            gap="1"
+            type="publish"
+            client:load
+          />
         </HStack>
       </Flex>
     </Flex>
