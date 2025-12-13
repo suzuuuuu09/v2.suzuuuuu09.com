@@ -3,11 +3,10 @@ import dayjs from "dayjs";
 import Icon from "astro-iconify";
 import { Flex, HStack, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
-import { R2_URL } from "@/consts/base";
-import { cleanAssetPath } from "@/utils/cleanAssetPath";
 import { getReadingTime } from "@/lib/reading-time";
 import TagList from "@/components/features/blog/TagList.astro";
 import { Card } from "@/components/ui/Card";
+import Thumbnail from "@/components/shared/Thumbnail";
 
 export interface Props {
   product: {
@@ -27,20 +26,6 @@ export interface Props {
 }
 
 const { product } = Astro.props;
-
-const buildThumbnailUrl = (thumbnailPath: string, title: string) => {
-  if (!thumbnailPath) return "";
-  let p = cleanAssetPath(thumbnailPath);
-  if (p.startsWith("http://") || p.startsWith("https://")) return p;
-  if (p.startsWith("assets/")) return `${R2_URL}/${p}`;
-  if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(p) && !p.includes("/")) {
-    const t = (title || "assets").replace(/ /g, "_");
-    return `${R2_URL}/assets/${t}/${p}`;
-  }
-  return p;
-};
-
-const thumbnailUrl = buildThumbnailUrl(product.data.thumbnail, product.data.title);
 const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
 ---
 
@@ -52,26 +37,12 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
       css({ display: "flex", flexDirection: "column", height: "100%" })
     )}
   >
-    <!-- サムネイル画像 -->
-    <s.div
-      position="relative"
-      w="full"
-      maxH="60"
-      h={{ base: "240", _sm: "200" }}
-      overflow="hidden"
-    >
-      <s.img
-        src={thumbnailUrl}
-        alt={product.data.title}
-        w="full"
-        h="full"
-        objectFit="cover"
-        objectPosition="center"
-        transition="transform 0.5s"
-        _groupHover={{ transform: "scale(1.05)" }}
-        loading="lazy"
-      />
-    </s.div>
+    <Thumbnail
+      thumbnailPath={product.data.thumbnail || ""}
+      title={product.data.title}
+      type="card"
+      loading="lazy"
+    />
 
     <Flex
       position="relative"

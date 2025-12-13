@@ -1,11 +1,10 @@
 ---
 import dayjs from 'dayjs';
 import { Flex, HStack, VStack, styled as s } from 'styled-system/jsx';
-import { R2_URL } from '@/consts/base';
-import { cleanAssetPath } from '@/utils/cleanAssetPath';
 import Icon from 'astro-iconify';
 import TagList from '../blog/TagList.astro';
 import { getReadingTime } from '@/lib/reading-time';
+import Thumbnail from '@/components/shared/Thumbnail';
 
 export interface Props {
   title: string;
@@ -29,44 +28,16 @@ const {
   content,
 } = Astro.props as Props;
 
-// サムネイルのパスを正規化して URL を返すユーティリティ
-const buildThumbnailUrl = (thumbnailPath: string | undefined, title: string) => {
-  if (!thumbnailPath) return '';
-
-  let path = cleanAssetPath(thumbnailPath);
-
-  // すでに絶対 URL の場合はそのまま
-  if (path.startsWith('http://') || path.startsWith('https://')) return path;
-
-  // assets/ で始まる場合は R2 ベースに繋げる
-  if (path.startsWith('assets/')) return `${R2_URL}/${path}`;
-
-  // ファイル名だけ（拡張子あり）であれば title ベースのフォルダに入れて返す
-  if (path.match(/\.(jpe?g|png|gif|webp|avif|svg)$/i) && !path.includes('/')) {
-    const folder = title.replace(/\s+/g, '_');
-    return `${R2_URL}/assets/${folder}/${path}`;
-  }
-
-  // 相対パスなどはそのまま返す
-  return path;
-};
-
-const thumbnailUrl = buildThumbnailUrl(thumbnail, title || '');
 const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : undefined;
 ---
 
 <VStack mb="8" gap="4">
-  {thumbnailUrl && (
-    <s.img
-      src={thumbnailUrl}
-      alt={title}
-      loading="eager"
-      decoding="async"
-      maxH="500px"
-      rounded="xl"
-      objectPosition="center"
-    />
-  )}
+  <Thumbnail
+    thumbnailPath={thumbnail || ''}
+    title={title}
+    type="info"
+    loading="eager"
+  />
 
   <s.h1
     fontSize={{ base: "xl", sm: "2xl", md: "3xl", lg: "4xl" }}
@@ -127,7 +98,7 @@ const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : 
           <s.span>{readingTime}</s.span>
         </HStack>
       )}
-    </s.div>
+    </Flex>
   </Flex>
 
   {description && (
@@ -135,4 +106,4 @@ const readingTime = Astro.props.content ? getReadingTime(Astro.props.content) : 
       {description}
     </s.p>
   )}
-</HStack>
+</VStack>
