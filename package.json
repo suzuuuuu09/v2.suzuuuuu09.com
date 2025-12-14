@@ -48,7 +48,6 @@
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.51.1",
-    "@pandacss/dev": "^1.4.3",
-    "@shadow-panda/preset": "^0.7.1"
+    "@pandacss/dev": "^1.4.3"
   }
 }
