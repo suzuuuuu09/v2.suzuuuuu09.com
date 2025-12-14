@@ -15,6 +15,10 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.13",
     "@astrojs/sitemap": "^3.6.0",
+    "@iconify/react": "^6.0.2",
+    "@mantine/carousel": "^8.3.9",
+    "@mantine/core": "^8.3.8",
+    "@mantine/hooks": "^8.3.8",
     "@r4ai/remark-callout": "^0.6.2",
     "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.2.7",
@@ -24,6 +28,8 @@
     "astro-iconify": "^1.2.0",
     "budoux": "^0.7.0",
     "dayjs": "^1.11.18",
+    "embla-carousel-react": "^8.6.0",
+    "gsap": "^3.13.0",
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-to-string": "^4.0.0",
     "open-graph-scraper": "^6.10.0",
@@ -43,6 +49,6 @@
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.51.1",
     "@pandacss/dev": "^1.4.3",
-    "gsap": "^3.13.0"
+    "@shadow-panda/preset": "^0.7.1"
   }
 }
