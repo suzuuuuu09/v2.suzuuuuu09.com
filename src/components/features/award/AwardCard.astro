@@ -2,7 +2,7 @@
 import { Flex, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import { Card } from "@/components/ui/Card";
-import Date from "@/components/shared/Date";
+import Date from "@/components/shared/Date.astro";
 
 export interface Props {
   award: {
@@ -80,7 +80,6 @@ const { award } = Astro.props as Props;
               date={award.data.date}
               gap="2"
               type="award"
-              client:load
             />
           </div>
         </Flex>

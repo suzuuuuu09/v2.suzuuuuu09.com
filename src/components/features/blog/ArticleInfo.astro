@@ -1,9 +1,8 @@
 ---
 import { Flex, VStack, styled as s } from "styled-system/jsx";
 import TagList from "./TagList.astro";
-import ReadingTime from "@/components/shared/ReadingTime";
-import Date from "@/components/shared/Date";
-import { getReadingTime } from "@/lib/reading-time";
+import ReadingTime from "@/components/shared/ReadingTime.astro";
+import Date from "@/components/shared/Date.astro";
 
 interface Props {
   title: string;
@@ -24,8 +23,6 @@ const {
   description,
   content,
 } = Astro.props;
-
-const readingTime = content ? getReadingTime(content) : undefined;
 ---
 
 <VStack
@@ -95,7 +92,6 @@ const readingTime = content ? getReadingTime(content) : undefined;
         date={publishDate || ""}
         gap="1.5"
         type="publish"
-        client:load
       />
 
       <!-- 更新日 -->
@@ -103,11 +99,10 @@ const readingTime = content ? getReadingTime(content) : undefined;
         date={updateDate || ""}
         gap="1.5"
         type="update"
-        client:load
       />
 
       <!-- 読了時間 -->
-      <ReadingTime readingTime={readingTime} gap="1.5" client:load />
+      <ReadingTime content={content || ""} gap="1.5" />
     </Flex>
   </s.div>
 

@@ -4,9 +4,8 @@ import { css, cx } from "styled-system/css";
 import TagList from "@/components/features/blog/TagList.astro";
 import { Card } from "@/components/ui/Card";
 import Thumbnail from "@/components/shared/Thumbnail";
-import ReadingTime from "@/components/shared/ReadingTime";
-import Date from "@/components/shared/Date";
-import { getReadingTime } from "@/lib/reading-time";
+import ReadingTime from "@/components/shared/ReadingTime.astro";
+import Date from "@/components/shared/Date.astro";
 
 export interface Props {
   product: {
@@ -26,7 +25,6 @@ export interface Props {
 }
 
 const { product } = Astro.props;
-const readingTime = product.data.content ? getReadingTime(product.data.content) : undefined;
 ---
 
 <Card maxW="450px">
@@ -87,14 +85,13 @@ const readingTime = product.data.content ? getReadingTime(product.data.content) 
           gap="2"
         >
           <!-- 読了時間 -->
-          <ReadingTime readingTime={readingTime} gap="1" client:load />
+          <ReadingTime content={product.data.content || ""} gap="1" />
 
           <!-- 公開日 -->
           <Date
             date={product.data.publishDate || ""}
             gap="1"
             type="publish"
-            client:load
           />
         </HStack>
       </Flex>
