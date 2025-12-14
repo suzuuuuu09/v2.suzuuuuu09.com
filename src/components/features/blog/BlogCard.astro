@@ -7,6 +7,7 @@ import TagList from "./TagList.astro";
 import { Card } from "@/components/ui/Card";
 import ReadingTime from "@/components/shared/ReadingTime";
 import Date from "@/components/shared/Date";
+import { getReadingTime } from "@/lib/reading-time";
 
 export interface Props {
   blog: {
@@ -27,6 +28,7 @@ export interface Props {
 const { blog } = Astro.props;
 
 const currentCategory = categories.find((cat) => cat.category === blog.data.category);
+const readingTime = blog.data.content ? getReadingTime(blog.data.content) : undefined;
 ---
 
 <Card maxW="450px">
@@ -111,7 +113,7 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
           gap="2"
         >
           <!-- 読了時間 -->
-          <ReadingTime content={blog.data.content || ""} gap="1" client:load />
+          <ReadingTime readingTime={readingTime} gap="1" client:load />
 
           <!-- 公開日 -->
           <Date

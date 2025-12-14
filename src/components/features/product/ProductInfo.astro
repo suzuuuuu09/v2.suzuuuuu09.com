@@ -4,6 +4,7 @@ import TagList from '../blog/TagList.astro';
 import Thumbnail from '@/components/shared/Thumbnail';
 import ReadingTime from '@/components/shared/ReadingTime';
 import Date from '@/components/shared/Date';
+import { getReadingTime } from '@/lib/reading-time';
 
 export interface Props {
   title: string;
@@ -26,6 +27,9 @@ const {
   author,
   content,
 } = Astro.props as Props;
+
+// TSX側でやるとエラーになるのでここで処理
+const readingTime = content ? getReadingTime(content) : undefined;
 ---
 
 <VStack mb="8" gap="4">
@@ -91,7 +95,7 @@ const {
         client:load
       />
       
-      <ReadingTime content={content || ''} gap="1.5" client:load/>
+      <ReadingTime readingTime={readingTime} gap="1.5" client:load/>
     </Flex>
   </Flex>
 

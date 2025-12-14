@@ -1,12 +1,12 @@
-import { Icon } from "@iconify-icon/react";
+import { Icon } from "@iconify/react";
 import { HStack, styled as s } from "styled-system/jsx";
 import dayjs from "dayjs";
 
 interface Props {
-  date: string | Date;
-  gap: string;
-  type: "publish" | "update" | "award";
-  iconSize?: number;
+  readonly date: string | Date;
+  readonly gap: string;
+  readonly type: "publish" | "update" | "award";
+  readonly iconSize?: number;
 }
 
 export default function Date(props: Props) {
@@ -24,11 +24,11 @@ export default function Date(props: Props) {
       case "award":
         return "mdi:award";
     }
-  })()
+  })();
 
   return (
     <HStack gap={gap}>
-      <Icon icon={icon} size={iconSize} />
+      <Icon icon={icon} width={iconSize} height={iconSize} />
       <s.time
         dateTime={dayjs(date).toISOString()}
         color="sz.text.main"
