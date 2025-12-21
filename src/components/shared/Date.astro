@@ -11,7 +11,14 @@ interface Props {
 }
 
 const { date, gap, type, iconSize = 16 } = Astro.props;
-const formattedDate = dayjs(date).format("YYYY.MM.DD");
+
+// 日付の検証
+const dayjsDate = dayjs(date);
+if (!date || !dayjsDate.isValid()) {
+  return null;
+}
+
+const formattedDate = dayjsDate.format("YYYY.MM.DD");
 
 const icon = (() => {
   switch (type) {

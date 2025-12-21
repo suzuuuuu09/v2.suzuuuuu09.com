@@ -98,9 +98,6 @@ const {
         />
       )}
 
-      <!-- 読了時間 -->
-      <ReadingTime content={content || ""} gap="1.5" />
-
       {type && (
         <HStack gap="1.5">
           <Icon name="mdi:award" size={16} />
@@ -109,6 +106,9 @@ const {
           </s.span>
         </HStack>
       )}
+
+      <!-- 読了時間 -->
+      <ReadingTime content={content || ""} gap="1.5" />
     </Flex>
   </s.div>
 

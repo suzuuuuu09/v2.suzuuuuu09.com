@@ -88,18 +88,22 @@ const {
       color="sz.text.main"
     >
       <!-- 公開日 -->
-      <Date
-        date={publishDate || ""}
-        gap="1.5"
-        type="publish"
-      />
+      {publishDate && (
+        <Date
+          date={publishDate}
+          gap="1.5"
+          type="publish"
+        />
+      )}
 
       <!-- 更新日 -->
-      <Date
-        date={updateDate || ""}
-        gap="1.5"
-        type="update"
-      />
+      {updateDate && (
+        <Date
+          date={updateDate}
+          gap="1.5"
+          type="update"
+        />
+      )}
 
       <!-- 読了時間 -->
       <ReadingTime content={content || ""} gap="1.5" />
