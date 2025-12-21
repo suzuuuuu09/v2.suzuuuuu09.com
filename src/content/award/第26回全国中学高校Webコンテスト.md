@@ -3,8 +3,9 @@ title: 第26回全国中学高校Webコンテスト
 type: 銀賞
 slug: web-contest-26
 description: 中高生に向けたAIについて学習することができるWebサイト
-date: 2023-02-17
+date: 2023-02-17T00:00
 isPublish: true
+updateDate: 2025-12-16T18:04
 ---
 ## 出場・受賞
 - 銀賞

@@ -17,7 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     const background = backgroundRef.current;
     if (!background) return;
 
-    // 初期状態: 非表示
+    // 最初は非表示にする
     gsap.set(background, { opacity: 0 });
   }, []);
 
@@ -28,13 +28,13 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     if (link && background) {
       isHoveringRef.current = true;
       
-      // 進行中のアニメーションをすべてキル
+      // 実行してるアニメーションをすべて停止
       gsap.killTweensOf(background);
       
       // 2フレーム待ってより確実な位置を取得
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          // 高速移動でホバーが既に外れている場合は処理しない
+          // ホバー中でなければ何もしない
           if (!isHoveringRef.current) return;
           
           const dimensions = {
@@ -44,7 +44,7 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
             height: link.offsetHeight,
           };
 
-          // 初回ホバー時は位置を設定してフェードインのみ
+          // 初回ホバー時は位置を設定してフェードインのみ行う
           if (isFirstHoverRef.current) {
             gsap.set(background, {
               x: dimensions.x,
@@ -92,7 +92,7 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     isHoveringRef.current = false;
     const background = backgroundRef.current;
     if (background) {
-      // 進行中のアニメーションをすべてキル
+      // 実行してるアニメーションをすべて停止
       gsap.killTweensOf(background);
       
       gsap.to(background, {
