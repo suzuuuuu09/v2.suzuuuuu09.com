@@ -5,11 +5,11 @@ slug: cinii-mcp-server
 tags:
   - Python
   - FastMCP
-thumbnail: "![[cinii-mcp-server-1765992216809.webp]]"
+thumbnail: "![[cinii-mcp-server-1766844074393.webp]]"
 description: CiNiiで論文を検索するMCPサーバー
 isPublish: true
 publishDate: 2025-12-21T19:26
-updateDate: 2025-12-21T19:26
+updateDate: 2025-12-27T23:02
 ---
 ## 概要
 国立情報学研究所 (NII) が運営する学術論文や研究データプラットフォーム「CiNii」の検索を、AI が直接実行を可能にする MCP サーバーを構築した。
@@ -26,6 +26,7 @@ AI がデータベースを直接参照することで、ハルシネーショ�
 - **MCP 構築**: FastMCP
 
 ## 画像・動画
+![[cinii-mcp-server-1766844074393.webp]]
 ![[cinii-mcp-server-1765992216809.webp]]
 
 
