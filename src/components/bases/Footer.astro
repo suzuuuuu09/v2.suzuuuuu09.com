@@ -1,5 +1,5 @@
 ---
-import { HStack, styled as s } from "styled-system/jsx";
+import { VStack, HStack, styled as s } from "styled-system/jsx";
 ---
 
 <s.footer
@@ -12,7 +12,9 @@ import { HStack, styled as s } from "styled-system/jsx";
   borderTopColor="sz.border"
   pt="4"
 >
+  <!-- Desktop: 3カラムレイアウト -->
   <HStack
+    display={{ base: "none", md: "flex" }}
     justifyContent="space-between"
     alignItems="center"
     fontSize="sm"
@@ -27,4 +29,20 @@ import { HStack, styled as s } from "styled-system/jsx";
       Privacy Policy
     </s.a>
   </HStack>
+
+  <!-- Mobile: 縦並びレイアウト -->
+  <VStack
+    display={{ base: "flex", md: "none" }}
+    justifyContent="center"
+    alignItems="center"
+    gap="2"
+    fontSize="sm"
+  >
+    <s.span color="sz.text.sub" textAlign="center">
+      Copyright © 2025 suzuuuuu09 All Rights Reserved.
+    </s.span>
+		<s.a href="/privacy-policy" color="sz.text.sub" _hover={{ color: "sz.text.main", textDecoration: "underline" }}>
+			Privacy Policy
+		</s.a>
+  </VStack>
 </s.footer>
