@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-iconify';
+import { css } from 'styled-system/css';
+---
+
+<button 
+  id="darkModeToggle"
+  class={css({
+    p: '2',
+    borderRadius: 'md',
+    bg: 'sz.bg-on',
+    border: '1px solid',
+    borderColor: 'sz.border',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2',
+    _hover: {
+      bg: 'sz.bg-on.500',
+    }
+  })}
+>
+  <Icon name="mdi:white-balance-sunny" class="sun-icon" width="20" height="20" />
+  <Icon name="mdi:moon-waning-crescent" class="moon-icon" width="20" height="20" />
+</button>
+
+<script>
+  const toggle = document.getElementById('darkModeToggle');
+  const sunIcon = toggle?.querySelector('.sun-icon') as HTMLElement | null;
+  const moonIcon = toggle?.querySelector('.moon-icon') as HTMLElement | null;
+
+  function updateIcons() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const isDark = theme === 'dark';
+    
+    if (sunIcon && moonIcon) {
+      sunIcon.style.display = isDark ? 'block' : 'none';
+      moonIcon.style.display = isDark ? 'none' : 'block';
+    }
+  }
+
+	// アイコンの初期表示を設定
+  updateIcons();
+
+	// テーマ切り替え処理
+  toggle?.addEventListener('click', async (e) => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+		// トグルボタンの中心座標を取得
+    const rect = toggle.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+		// 画面の隅までの距離を計算
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+    
+		// View Transition APIが利用できない場合のフォールバック
+    if (!document.startViewTransition) {
+      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      updateIcons();
+      return;
+    }
+    
+		// テーマ切り替えとアニメーションの実行
+    const transition = document.startViewTransition(() => {
+      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      updateIcons();
+    });
+    
+		// アニメーション
+    await transition.ready;
+    document.documentElement.animate(
+      {
+        clipPath: [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ]
+      },
+      {
+        duration: 500,
+        easing: 'ease-in-out',
+        pseudoElement: '::view-transition-new(root)'
+      }
+    );
+  });
+
+	// View Transition APIでページ遷移した際にもアイコンを更新
+  document.addEventListener('astro:page-load', updateIcons);
+</script>
+
+ <style is:global>
+  ::view-transition-old(root) {
+    animation: none;
+		opacity: 1;
+	}
+  
+  ::view-transition-new(root) {
+    animation: none;
+  }
+</style> 

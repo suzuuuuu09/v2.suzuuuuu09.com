@@ -1,6 +1,5 @@
 ---
 import "@/styles/global.css";
-import "@/styles/callout.css";  // Calloutのスタイル
 import "katex/dist/katex.min.css";  // KaTeXのスタイル
 import { css } from "styled-system/css";
 import { SITE_TITLE, SITE_DESCRIPTION, GA_TRACKING_ID } from "@/consts/base";
@@ -48,6 +47,13 @@ const ogImageUrl = new URL(`/api/og/${collection}/${frontmatter?.slug || heading
     <title>{siteTitle}</title>
     <meta name="description" content={description} />
     
+    <!-- Dark mode initialization script -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article" />
     <meta property="og:url" content={Astro.url} />
@@ -69,20 +75,11 @@ const ogImageUrl = new URL(`/api/og/${collection}/${frontmatter?.slug || heading
     <FloatingBackground client:load />
     <Header />
     
-    <!-- <Container
-      maxW="7xl"
-      px="6"
-      pt="40"
-      pb="16"
-      mx="auto"
-      minH="100vh"
-    > -->
     <ContentContainer maxW="6xl">
       <Expand>
         <slot />
       </Expand>
     </ContentContainer>
-    <!-- </Container> -->
     
     <Footer />
     

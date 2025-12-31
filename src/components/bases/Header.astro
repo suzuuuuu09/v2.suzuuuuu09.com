@@ -4,7 +4,7 @@ import { Flex, HStack, VStack, styled as s } from 'styled-system/jsx';
 import Avatar from '@/components/ui/Avatar.astro';
 import Navigation from './Navigation';
 // import HamburgerMenu from './HamburgerMenu';
-import DarkModeToggle from "./DarkModeToggle.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import Icon from "astro-iconify";
 
 export const NAVIGATION_LINKS = [
@@ -71,7 +71,7 @@ export const NAVIGATION_LINKS = [
 		</HStack>
 
 		<HStack gap="4">
-			<DarkModeToggle />
+			<ThemeToggle />
 			<a href="/rss.xml">
 				<Icon
 				  name="mdi:rss"
