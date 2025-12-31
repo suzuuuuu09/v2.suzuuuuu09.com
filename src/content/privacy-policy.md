@@ -1,8 +1,9 @@
 ---
 title: Privacy Policy
 publishDate: 2025-12-31T19:17
-updateDate: 2025-12-31T19:20
+updateDate: 2026-01-01T04:06
 ---
+当サイトの閲覧に際しては、以下の事項をご確認ください。
 
 ## プライバシー
 ### アクセス解析ツール
