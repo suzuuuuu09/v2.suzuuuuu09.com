@@ -59,9 +59,11 @@ const ogImageUrl = new URL('/api/og/default.png', Astro.site);
 	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
 		<FloatingBackground client:load />
 		<Header />
+
 		<ContentContainer maxW={maxW}>
     	<slot />
 		</ContentContainer>
+
     <Footer />
 	</body>
 

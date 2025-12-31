@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { css } from 'styled-system/css';
 
-const shapesNumber = 20;
+const mobileShapesNumber = 10;
+const tabletShapesNumber = 15;
+const pcShapesNumber = 20;
 
 interface Shape {
   id: number;
@@ -16,6 +18,28 @@ interface Shape {
 
 const FloatingBackground: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [shapesNumber, setShapesNumber] = useState(20);
+
+  // 画面サイズに応じた図形の数を取得
+  useEffect(() => {
+    const updateShapesNumber = () => {
+      const width = window.innerWidth;
+      if (width <= 640) {
+        setShapesNumber(mobileShapesNumber); // スマホ
+      } else if (width <= 768) {
+        setShapesNumber(tabletShapesNumber); // タブレット
+      } else {
+        setShapesNumber(pcShapesNumber); // PC
+      }
+    };
+
+    updateShapesNumber();
+    window.addEventListener('resize', updateShapesNumber);
+
+    return () => {
+      window.removeEventListener('resize', updateShapesNumber);
+    };
+  }, []);
 
   // ランダムな図形を生成（useMemoで一度だけ生成）
   const shapes = React.useMemo(() => {
@@ -44,7 +68,7 @@ const FloatingBackground: React.FC = () => {
     }
 
     return generatedShapes;
-  }, []);
+  }, [shapesNumber]);
 
   useEffect(() => {
     if (!containerRef.current) return;

@@ -37,32 +37,50 @@ export default defineConfig({
         scrollMarginTop: "28",
       },
       "h1": {
-        fontSize: "4xl",
+        fontSize: "3xl",
         borderBottomWidth: "2",
         borderBottomColor: "sz.border",
         pb: "1",
+				_lg: {
+					fontSize: "4xl"
+				}
       },
       "h2": {
-        fontSize: "3xl",
+        fontSize: "2xl",
         borderBottomWidth: "1",
         borderBottomColor: "sz.border",
         mt: "10",
         pb: "1",
+				_lg: {
+					fontSize: "3xl"
+				},
         _sm: {
           mt: "8",
         }
       },
       "h3": {
-        fontSize: "2xl",
+        fontSize: "xl",
+				_lg: {
+					fontSize: "2xl",
+				}
       },
       "h4": {
-        fontSize: "xl",
+        fontSize: "lg",
+				_lg: {
+					fontSize: "xl",
+				}
       },
       "h5": {
-        fontSize: "lg",
+        fontSize: "base",
+				_lg: {
+					fontSize: "lg",
+				}
       },
       "h6": {
-        fontSize: "md",
+				fontSize: "sm",
+				_lg: {
+					fontSize: "base",
+				}
       },
       "a": {
         color: "sz.primary",
@@ -76,6 +94,10 @@ export default defineConfig({
 
       "p": {
         my: "2",
+				fontSize: "base",
+				_lg: {
+					fontSize: "lg",
+				},
         color: "sz.text.main",
         "code": {
           fontSize: "base",
@@ -549,7 +571,8 @@ export default defineConfig({
   
   conditions: {
     sm: "@media (max-width: 640px)",
-    md: "@media (max-width: 768px)",
+    md: "@media (max-width: 768px) and (min-width: 641px)",
+		lg: "@media (min-width: 769px)",
 		dark: "[data-theme='dark'] &",
 		light: "[data-theme='light'] &",
   },

@@ -6,17 +6,17 @@ const cardRecipes = cva({
     gradientTo: "sz.bg-on",
     borderRadius: "2xl",
     w: "full",
-    shadow: "sm",
+    shadow: "md",
     overflow: "hidden",
     borderWidth: "1px",
-    borderColor: "sz.border/20",
+    borderColor: "sz.border/40",
     backdropFilter: "blur(10px)",
     transition: "all 0.4s",
     _md: {
       maxW: "450px",
     },
     _hover: {
-      shadow: "xl",
+      shadow: "2xl",
     },
   },
   variants: {
