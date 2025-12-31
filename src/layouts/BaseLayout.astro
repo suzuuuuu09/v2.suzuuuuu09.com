@@ -1,5 +1,5 @@
 ---
-// import "@mantine/core/styles.css";
+import "@mantine/core/styles.css";
 import "@/styles/global.css";
 import { SITE_TITLE, SITE_DESCRIPTION, GA_TRACKING_ID } from "@/consts/base";
 import Header from "@/components/bases/Header.astro";
@@ -32,6 +32,13 @@ const ogImageUrl = new URL('/api/og/default.png', Astro.site);
 		<title>{siteTitle}</title>
 		<meta name="description" content={SITE_DESCRIPTION} />
 		
+		<!-- Dark mode initialization script -->
+		<script is:inline>
+			const theme = localStorage.getItem('theme') || 
+				(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			document.documentElement.setAttribute('data-theme', theme);
+		</script>
+		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.url} />
@@ -56,12 +63,13 @@ const ogImageUrl = new URL('/api/og/default.png', Astro.site);
     	<slot />
 		</ContentContainer>
     <Footer />
-
-		<script>
-		import { initTwemoji } from "@/utils/twemoji";
-
-		document.addEventListener('DOMContentLoaded', initTwemoji);
-		document.addEventListener('astro:page-load', initTwemoji);
-		</script>
 	</body>
+
+	<script>
+    import { initTwemoji } from "@/utils/twemoji";
+    
+    document.addEventListener('DOMContentLoaded', initTwemoji);
+    document.addEventListener('astro:page-load', initTwemoji);
+  </script>
+
 </html>

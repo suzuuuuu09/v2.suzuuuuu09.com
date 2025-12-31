@@ -61,7 +61,7 @@ const { award } = Astro.props as Props;
           <div style={{ minWidth: 0, flex: 1 }}>
             <Flex align="center" wrap="wrap" gap="2">
               <s.p fontWeight="bold" fontSize="xl">
-                <s.span color="sz.text.sub">[{award.data.type}]</s.span>
+                <s.span color="sz.text.main">[{award.data.type}]</s.span>
                 <s.span className={css({ lineHeight: "snug", transition: "color 0.3s" })}>
                   {award.data.title}
                 </s.span>

@@ -6,34 +6,30 @@ const commonSchema = z.object({
   title: z.string(),
   author: z.string().optional(),
   slug: z.string(),
+  tags: z.preprocess((val) => val ?? [], z.array(z.string())),
   description: z.string().nullable().default(""),
   isPublish: z.boolean().default(false),
 })
 
-// blog コレクション
 const blogCollection = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
   schema: commonSchema.extend({
     publishDate: z.coerce.date(),
     updateDate: z.coerce.date().optional(),
-    tags: z.array(z.string()).optional(),
     emoji: z.string().optional(),
     category: z.string().optional(),
   }),
 });
 
-// product コレクション
 const productCollection = defineCollection({
   loader: glob({ base: './src/content/product', pattern: '**/*.md' }),
   schema: commonSchema.extend({
     publishDate: z.coerce.date(),
     updateDate: z.coerce.date().optional(),
-    tags: z.array(z.string()).optional(),
     thumbnail: z.string(),
   }),
 })
 
-// Award コレクション
 const awardCollection = defineCollection({
   loader: glob({ base: './src/content/award', pattern: '**/*.md' }),
   schema: commonSchema.extend({
@@ -42,7 +38,7 @@ const awardCollection = defineCollection({
   }),
 })
 
-// コレクションをエクスポート
+// コレクションを保存
 export const collections = {
   blog: blogCollection,
   award: awardCollection,

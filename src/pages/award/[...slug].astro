@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { Flex, styled as s } from "styled-system/jsx";
 import BlogLayout from "@/layouts/BlogLayout.astro";
-import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
+import AwardInfo from "@/components/features/award/AwardInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
 
@@ -41,6 +41,8 @@ const articleInfo = {
   isPublish: entry.data.isPublish,
   description: entry.data.description || "",
   content: entry.body, // 読了時間計算用
+  date: entry.data.date, // awardコレクションではdateを使用
+  type: entry.data.type,
 };
 ---
 
@@ -50,7 +52,7 @@ const articleInfo = {
   frontmatter={articleInfo}
   collection="award"
 >
-  <ArticleInfo {...articleInfo} />
+  <AwardInfo {...articleInfo} />
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
     <s.article className="markdown-content" flex="1" minW="0">
       <Content />

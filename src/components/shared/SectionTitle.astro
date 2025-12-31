@@ -1,47 +1,54 @@
 ---
-import { css } from "styled-system/css";
+import { sva } from "styled-system/css";
 
 const underlineColor = "rgba(57, 81, 226, 1)";
 const underlineOffset = "6px";
 
-const wrapper = css({
-	textAlign: "center",
-  mb: "4",
-});
+const sectionTitle = sva({
+	slots: ["wrapper", "title"],
+	base: {
+		wrapper: {
+			textAlign: "center",
+			mb: "4",
+		},
+		title: {
+		  color: "sz.text.main",
+			fontSize: "3xl",
+			fontWeight: "bold",
+			borderBottomWidth: "4px",
+			borderBottomStyle: "solid",
+			borderBottomColor: "transparent",
+			position: "relative",
+			display: "inline-block",
+			textDecoration: "none",
+			_after: {
+				content: "''",
+				position: "absolute",
+				bottom: underlineOffset,
+				left: "-10%",
+				width: "120%",
+				height: "4px",
+				backgroundRepeat: "repeat-x",
+				backgroundSize:
+					"100% 100%, 0.6em 0.2em, 1.6em 0.2em, 3.4em 0.2em, 3.6em 0.2em",
+				backgroundPosition: "center bottom",
+				backgroundImage: [
+					`linear-gradient(180deg, rgba(57, 81, 226, 0) 0%, rgba(57, 81, 226, 0.02) 10%, ${underlineColor} 50%, rgba(57, 81, 226, 0) 98%, rgba(57, 81, 226, 0) 100%)`,
+					`radial-gradient(0.2em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
+					`radial-gradient(0.4em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
+					`radial-gradient(0.7em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
+					`radial-gradient(7.1em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
+				].join(", "),
+			},
+		}
+	}
+})
 
-const title = css({
-	fontSize: "3xl",
-	fontWeight: "bold",
-	borderBottomWidth: "4px",
-	borderBottomStyle: "solid",
-	borderBottomColor: "transparent",
-	position: "relative",
-	display: "inline-block",
-	textDecoration: "none",
-	_after: {
-		content: "''",
-		position: "absolute",
-		bottom: underlineOffset,
-		left: "-10%",
-		width: "120%",
-		height: "4px",
-		backgroundRepeat: "repeat-x",
-		backgroundSize:
-			"100% 100%, 0.6em 0.2em, 1.6em 0.2em, 3.4em 0.2em, 3.6em 0.2em",
-		backgroundPosition: "center bottom",
-		backgroundImage: [
-			`linear-gradient(180deg, rgba(57, 81, 226, 0) 0%, rgba(57, 81, 226, 0.02) 10%, ${underlineColor} 50%, rgba(57, 81, 226, 0) 98%, rgba(57, 81, 226, 0) 100%)`,
-			`radial-gradient(0.2em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
-			`radial-gradient(0.4em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
-			`radial-gradient(0.7em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
-			`radial-gradient(7.1em 0.1em at center center, ${underlineColor}, rgba(57, 81, 226, 0))`,
-		].join(", "),
-	},
-});
+const sections = sectionTitle();
 ---
 
-<div class={wrapper}>
-	<h1 class={`no-decoration ${title}`}>
+<div class={sections.wrapper}>
+	<h1 class={sections.title}>
 		<slot />
 	</h1>
 </div>

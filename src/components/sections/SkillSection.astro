@@ -27,21 +27,21 @@ const toolAndOthers = [
 
 <SectionLayout>
   <SectionTitle>Skills</SectionTitle>
-  <s.h2 mb="4" fontWeight="bold" fontSize="2xl">プログラミング言語</s.h2>
+  <s.h2 mb="4" fontWeight="bold" fontSize="2xl" color="sz.text.main">プログラミング言語</s.h2>
   <SkillGrid>
     {programmingLanguages.map((lang) => (
       <IconCard iconKey={lang} />
     ))}
   </SkillGrid>
 
-  <s.h2 mb="4" fontWeight="bold" fontSize="2xl">フレームワーク・ライブラリ</s.h2>
+  <s.h2 mb="4" fontWeight="bold" fontSize="2xl" color="sz.text.main">フレームワーク・ライブラリ</s.h2>
   <SkillGrid>
     {frameworksAndLibraries.map((fw) => (
       <IconCard iconKey={fw} />
     ))}
   </SkillGrid>
 
-  <s.h2 mb="4" fontWeight="bold" fontSize="2xl">ツール・その他</s.h2>
+  <s.h2 mb="4" fontWeight="bold" fontSize="2xl" color="sz.text.main">ツール・その他</s.h2>
   <SkillGrid>
     {toolAndOthers.map((tool) => (
       <IconCard iconKey={tool} />

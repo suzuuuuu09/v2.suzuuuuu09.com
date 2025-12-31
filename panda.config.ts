@@ -30,6 +30,7 @@ export default defineConfig({
       },
     },
     ".markdown-content": {
+			color: "sz.text.main",
       "h1, h2, h3, h4, h5, h6": {
         fontWeight: "bold",
         my: "5",
@@ -191,6 +192,7 @@ export default defineConfig({
       },
       "mark": {
         bg: "sz.primary/20",
+				color: "sz.text.main",
         px: "1",
         py: "0.25",
         borderRadius: "sm",
@@ -355,12 +357,12 @@ export default defineConfig({
           w: "4",
           h: "4",
           flexShrink: "0",
-          color: "#666",
+          color: "sz.text.sub",
         },
         ".link-card-site": {
           display: "flex",
           fontSize: "xs",
-          color: "#666",
+          color: "sz.text.sub",
         }
       },
       ".link-card-grid": {
@@ -485,13 +487,13 @@ export default defineConfig({
       // rehype-autolink-headingsのアンカーリンク
       ".heading-anchor": {
         marginRight: ".5rem",
-        backgroundImage: "linear-gradient(to right in oklch, {colors.s-primary}, {colors.s-secondary})",
+        backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary}, {colors.sz.secondary})",
         WebkitBackgroundClip: "text",
         backgroundClip: "text",
         color: "transparent",
         transition: "background-image 0.2s ease-in-out",
         _hover: {
-          backgroundImage: "linear-gradient(to right in oklch, {colors.s-primary/60}, {colors.s-secondary/60})",
+          backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary/60}, {colors.sz.secondary/60})",
         },
       },
 
@@ -547,6 +549,8 @@ export default defineConfig({
   conditions: {
     sm: "@media (max-width: 640px)",
     md: "@media (max-width: 768px)",
+		dark: "[data-theme='dark'] &",
+		light: "[data-theme='light'] &",
   },
 
   // Useful for theme customization
@@ -555,10 +559,19 @@ export default defineConfig({
       tokens: {
         colors: {
           "s-primary": { value: "#3951E2" },
+					"s-primary-dark": { value: "#5a73f5" },
           "s-secondary": { value: "#6bbaa3" },
+					"s-secondary-dark": { value: "#7ecbb3" },
           "s-bg": { value: "#faf8ff" },
+					"s-bg-dark": { value: "#1a1625" },
           "s-bg-on": { value: "#F0F0F0" },
+					"s-bg-on-dark": { value: "#2a2433" },
           "s-border": { value: "#D1D5DC" },
+					"s-border-dark": { value: "#3d3a4a" },
+					"s-text-main": { value: "#474554" },
+					"s-text-main-dark": { value: "#e8e6f0" },
+					"s-text-sub": { value: "#6b6878" },
+					"s-text-sub-dark": { value: "#a19daf" },
           // Callout colors
           "callout-blue": { value: "#3951e2" },
           "callout-cyan": { value: "#0096d4" },
@@ -571,17 +584,74 @@ export default defineConfig({
       },
       semanticTokens: {
         colors: {
-          "sz.primary": { value: "{colors.s-primary}" },
-          "sz.secondary": { value: "{colors.s-secondary}" },
-          "sz.bg": { value: "{colors.s-bg}" },
+          "sz.primary": {
+						value: {
+							base: "{colors.s-primary}",
+							_dark: "{colors.s-primary-dark}",
+						}
+					},
+          "sz.secondary": {
+						value: {
+							base: "{colors.s-secondary}",
+							_dark: "{colors.s-secondary-dark}",
+						}
+					},
+          "sz.bg": {
+						value: {
+							base: "{colors.s-bg}",
+							_dark: "{colors.s-bg-dark}",
+						},
+					},
           "sz.bg-on": {
-            DEFAULT: { value: "{colors.s-bg-on}" },
-            100: { value: "#f1f1f1" },
-            500: { value: "#f4f2f5" },
-            800: { value: "#f5f3f7" },
+            DEFAULT: {
+							value: {
+								base: "{colors.s-bg-on}",
+								_dark: "{colors.s-bg-on-dark}",
+							}
+						},
+            100: {
+							value: {
+								base: "#f1f1f1",
+								_dark: "#2e2838",
+							}
+						},
+            500: {
+							value: {
+								base: "#f4f2f5",
+								_dark: "#34304a",
+							}
+						},
+            800: {
+							value: {
+								base: "#f5f3f7",
+								_dark: "#3a3650",
+							}
+						},
           },
-          "sz.text.main": { value: "#474554" },
-          "sz.border": { value: "{colors.s-border}" },
+          "sz.text.main": {
+						value: {
+							base: "{colors.s-text-main}",
+							_dark: "{colors.s-text-main-dark}",
+						},
+					},
+					"sz.text.sub": {
+						value: {
+							base: "{colors.s-text-sub}",
+							_dark: "{colors.s-text-sub-dark}",
+						}
+					},
+					"sz.icon": {
+						value: {
+							base: "#000000",
+							_dark: "#ffffff",
+						}
+					},
+          "sz.border": {
+						value: {
+							base: "{colors.s-border}",
+							_dark: "{colors.s-border-dark}",
+						}
+					},
         },
       }
     },

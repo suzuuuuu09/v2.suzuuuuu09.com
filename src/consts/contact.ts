@@ -4,12 +4,13 @@ export const CONTACT_LINKS: ContactLink[] =[
   {
     label: "Twitter",
     url: "https://twitter.com/suzuuuuu_09",
-    icon: "logos:twitter",
+    icon: "simple-icons:twitter",
+		color: "#1DA1F2"
   },
   {
     label: "GitHub",
     url: "https://github.com/suzuuuuu09",
-    icon: "logos:github-icon"
+    icon: "simple-icons:github"
   },
   {
     label: "Zenn",

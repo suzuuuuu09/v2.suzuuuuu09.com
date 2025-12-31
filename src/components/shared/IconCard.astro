@@ -1,6 +1,7 @@
 ---
 import { getIconData } from '@/utils/icon';
 import { VStack, styled as s } from 'styled-system/jsx';
+import { css } from 'styled-system/css';
 import Icon from 'astro-iconify';
 
 interface Props {
@@ -49,9 +50,10 @@ const layout = calculateCardLayout(size, showName);
     <Icon
       name={iconName}
       size={size}
+      class={iconColor ? undefined : css({ color: 'sz.icon' })}
       style={iconColor ? `color: ${iconColor}` : undefined}
     />
-  </>
+  </VStack>
   {showName && (
     <s.span
       fontSize="base"

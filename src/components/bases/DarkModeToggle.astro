@@ -1,0 +1,58 @@
+---
+import { Icon } from 'astro-iconify';
+import { css } from 'styled-system/css';
+---
+
+<button 
+  id="darkModeToggle"
+  class={css({
+    p: '2',
+    borderRadius: 'md',
+    bg: 'sz.bg-on',
+    border: '1px solid',
+    borderColor: 'sz.border',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2',
+    _hover: {
+      bg: 'sz.bg-on.500',
+    }
+  })}
+>
+  <Icon name="mdi:white-balance-sunny" class="sun-icon" width="20" height="20" />
+  <Icon name="mdi:moon-waning-crescent" class="moon-icon" width="20" height="20" />
+</button>
+
+<script>
+  const toggle = document.getElementById('darkModeToggle');
+  const sunIcon = toggle?.querySelector('.sun-icon') as HTMLElement | null;
+  const moonIcon = toggle?.querySelector('.moon-icon') as HTMLElement | null;
+
+  function updateIcons() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const isDark = theme === 'dark';
+    
+    if (sunIcon && moonIcon) {
+      sunIcon.style.display = isDark ? 'block' : 'none';
+      moonIcon.style.display = isDark ? 'none' : 'block';
+    }
+  }
+
+  // Initialize on load
+  updateIcons();
+
+  // Handle click
+  toggle?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    updateIcons();
+  });
+
+  // Handle navigation (Astro View Transitions)
+  document.addEventListener('astro:page-load', updateIcons);
+</script>

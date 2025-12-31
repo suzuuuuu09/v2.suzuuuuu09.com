@@ -12,7 +12,7 @@ export const ICON_CARDS: Record<string, IconCard> = {
   expressjs: { icon: "simple-icons:express", name: "Express.js" },
   ffmpeg: { icon: "file-icons:ffmpeg", name: "FFmpeg", color: "#13802d" },
   flutter: { icon: "devicon:flutter", name: "Flutter" },
-  flask: { icon: "devicon:flask", name: "Flask" },
+  flask: { icon: "simple-icons:flask", name: "Flask" },
   fastapi: { icon: "devicon:fastapi", name: "FastAPI" },
   git: { icon: "material-icon-theme:git", name: "Git" },
   github: { icon: "simple-icons:github", name: "GitHub" },

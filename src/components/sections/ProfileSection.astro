@@ -1,5 +1,6 @@
 ---
 import { Flex, HStack, Center, styled as s } from "styled-system/jsx";
+import { css } from "styled-system/css";
 import { Icon } from "astro-iconify";
 import { CONTACT_LINKS } from "@/consts/contact";
 import { Content as ProfileContent } from "@/content/profile.md";
@@ -31,13 +32,15 @@ import Avatar from "@/components/ui/Avatar.astro";
             rel="noopener noreferrer"
             target="_blank"
             aria-label={link.label}
+            class={link.color ? undefined : css({ color: 'sz.icon' })}
+            style={link.color ? `color: ${link.color}` : undefined}
           >
-            <Icon size={24} color={link.color} name={link.icon} />
+            <Icon size={24} name={link.icon} />
           </a>
         ))}
       </HStack>
     </div>
-    <div>
+    <s.div color="sz.text.main">
       <s.h2
         my="1"
         pb="1"
@@ -46,12 +49,12 @@ import Avatar from "@/components/ui/Avatar.astro";
         fontWeight="bold"
         fontSize="2xl"
       >suzu / @suzuuuuu09</s.h2>
-      <ProfileContent class="markdown-content"/>
+			<ProfileContent class="markdown-content"/>
       <s.a
         href="/about"
         color="sz.primary"
         _hover={{ textDecoration: 'underline' }}
       > もっと見る </s.a>
-    </div>
+    </s.div>
   </Flex>
 </SectionLayout>

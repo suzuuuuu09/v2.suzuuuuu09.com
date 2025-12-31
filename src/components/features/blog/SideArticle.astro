@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import { Flex, Grid, HStack, styled as s } from "styled-system/jsx";
 import { css } from "styled-system/css";
@@ -12,7 +11,7 @@ export interface Props {
 
 const { slug, collection = 'blog' } = Astro.props as Props;
 
-// 指定された collection の公開済みエントリを取得して日付でソート
+// 指定されたコレクションから記事一覧を取得
 let entries: any[];
 switch (collection) {
   case 'blog':
@@ -27,6 +26,8 @@ switch (collection) {
   default:
     entries = await getCollection('blog');
 }
+
+// 公開済みの記事と公開日降順でソート
 const collectionEntries = entries
   .filter((entry) => entry.data?.isPublish)
   .sort((a, b) => {
@@ -53,6 +54,7 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
   pt="8"
   borderTopWidth="1px"
   borderColor="sz.border/50"
+  md={{ justifyItems: "center" }}
 >
   <!-- 前の記事 -->
   {nextArticle && (
@@ -61,6 +63,7 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
       class={css({
         display: "flex",
         flexDirection: "column",
+        w: "full",
         gap: "2",
         p: "4",
         borderRadius: "xl",
@@ -76,6 +79,9 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
           shadow: "md",
           transform: "translateY(-2px)",
         },
+        _md: {
+          maxW: "600px",
+        }
       })}
     >
       <HStack
@@ -89,20 +95,20 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
         <span>前の記事</span>
         
       </HStack>
-      <s.div
+      <Flex
         color="sz.text.main"
         fontWeight="bold"
         lineHeight="snug"
         overflow="hidden"
         textOverflow="ellipsis"
-        display="-webkit-box"
-        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+        flexDir="column"
+        lineClamp="2"
       >
         {nextArticle?.data?.emoji && (
           <s.span mr="2">{nextArticle.data.emoji}</s.span>
         )}
         {nextArticle?.data?.title}
-      </s.div>
+      </Flex>
     </a>
   )}
 
@@ -112,7 +118,8 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
       href={`/${collection}/${prevArticle?.data?.slug ?? prevArticle?.id}/`}
       class={css({
         display: "flex",
-        flexDirection: "column",
+        flexDir: "column",
+        w: "full",
         gap: "2",
         p: "4",
         borderRadius: "xl",
@@ -121,6 +128,7 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
         bg: "sz.bg",
         transition: "all 0.3s",
         textDecoration: "none",
+        textAlign: { base: "right", md: "left" },
         gridColumn: { base: "1", md: "2" },
         _hover: {
           borderColor: "sz.primary/50",
@@ -128,6 +136,9 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
           shadow: "md",
           transform: "translateY(-2px)",
         },
+        _md: {
+          maxW: "600px",
+        }
       })}
     >
       <HStack flexWrap="wrap" justify="flex-end" gap="2" color="sz.text.sub" fontSize="sm">
@@ -140,8 +151,8 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
         lineHeight="snug"
         overflow="hidden"
         textOverflow="ellipsis"
-        display="-webkit-box"
-        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+        flexDir="column"
+        lineClamp="2"
       >
         {prevArticle?.data?.emoji && (
           <s.span mr="2">{prevArticle.data.emoji}</s.span>
