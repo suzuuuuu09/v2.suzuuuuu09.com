@@ -1,5 +1,5 @@
 ---
-import { VStack, styled as s } from "styled-system/jsx";
+import { HStack, styled as s } from "styled-system/jsx";
 ---
 
 <s.footer
@@ -12,13 +12,19 @@ import { VStack, styled as s } from "styled-system/jsx";
   borderTopColor="sz.border"
   pt="4"
 >
-  <VStack
-    justifyContent="center"
+  <HStack
+    justifyContent="space-between"
     alignItems="center"
-    textAlign="center"
+    fontSize="sm"
   >
-    <s.span fontSize="sm" color="sz.text.sub" >
+    <s.span color="sz.text.sub" visibility="hidden" aria-hidden="true">
+      Privacy Policy
+    </s.span>
+    <s.span color="sz.text.sub">
       Copyright © 2025 suzuuuuu09 All Rights Reserved.
     </s.span>
-  </VStack>
+    <s.a href="/privacy-policy" color="sz.text.sub" _hover={{ color: "sz.text.main", textDecoration: "underline" }}>
+      Privacy Policy
+    </s.a>
+  </HStack>
 </s.footer>

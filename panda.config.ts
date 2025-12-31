@@ -94,7 +94,7 @@ export default defineConfig({
         px: "2",
         py: "1",
         fontSize: "sm",
-        fontFamily: "monospace",
+        fontFamily: "var(--moralerspace-neon)",
         fontWeight: "semibold",
         lineHeight: "1",
         color: "sz.text.main",
@@ -363,6 +363,7 @@ export default defineConfig({
           display: "flex",
           fontSize: "xs",
           color: "sz.text.sub",
+					fontFamily: "var(--moralerspace-neon)",
         }
       },
       ".link-card-grid": {
