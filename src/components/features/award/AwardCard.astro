@@ -59,13 +59,16 @@ const { award } = Astro.props as Props;
 
           <!-- タイトル -->
           <div style={{ minWidth: 0, flex: 1 }}>
-            <Flex align="center" wrap="wrap" gap="2">
-              <s.p fontWeight="bold" fontSize="xl">
-                <s.span color="sz.text.main">[{award.data.type}]</s.span>
-                <s.span className={css({ lineHeight: "snug", transition: "color 0.3s" })}>
-                  {award.data.title}
-                </s.span>
-              </s.p>
+            <Flex align="center" wrap="wrap" gap="2" >
+							<s.span
+								fontWeight="bold"
+								fontSize="xl"
+								lineHeight="snug"
+								transition="color 0.3s"
+								_groupHover={{ color: "sz.primary" }}
+							>
+								[{award.data.type}] {award.data.title}
+							</s.span>
             </Flex>
 
             <!-- 説明 -->
