@@ -35,6 +35,7 @@ export default defineConfig({
         fontWeight: "bold",
         my: "5",
         scrollMarginTop: "28",
+				display: "flex",
       },
       "h1": {
         fontSize: "3xl",
@@ -508,17 +509,57 @@ export default defineConfig({
       },
 
       // rehype-autolink-headingsのアンカーリンク
-      ".heading-anchor": {
-        marginRight: ".5rem",
-        backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary}, {colors.sz.secondary})",
-        WebkitBackgroundClip: "text",
-        backgroundClip: "text",
-        color: "transparent",
-        transition: "background-image 0.2s ease-in-out",
-        _hover: {
-          backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary/60}, {colors.sz.secondary/60})",
-        },
-      },
+			".heading-anchor-container": {
+				display: "flex",
+				alignItems: "center",
+				".heading-anchor": {
+					marginRight: ".5rem",
+					backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary}, {colors.sz.secondary})",
+					WebkitBackgroundClip: "text",
+					backgroundClip: "text",
+					color: "transparent",
+					transition: "background-image 0.2s ease-in-out",
+					_hover: {
+						backgroundImage: "linear-gradient(to right in oklch, {colors.sz.primary/60}, {colors.sz.secondary/60})",
+					},
+				},
+			},
+	    ".heading-1": {
+				fontSize: "2xl",
+				_lg: {
+					fontSize: "3xl"
+				}
+			},
+			".heading-2": {
+				fontSize: "xl",
+				_lg: {
+					fontSize: "2xl"
+				}
+			},
+			".heading-3": {
+				fontSize: "lg",
+				_lg: {
+					fontSize: "xl"
+				}
+			},
+			".heading-4": {
+				fontSize: "base",
+				_lg: {
+					fontSize: "lg"
+				}
+			},
+			".heading-5": {
+				fontSize: "sm",
+				_lg: {
+					fontSize: "base"
+				}
+			},
+			".heading-6": {
+				fontSize: "xs",
+				_lg: {
+					fontSize: "sm"
+				}
+			},
 
       // Expressiveのコードブロック
       ".expressive-code": {
@@ -685,3 +726,4 @@ export default defineConfig({
   outdir: "styled-system",
   jsxFramework: "react",
 });
+

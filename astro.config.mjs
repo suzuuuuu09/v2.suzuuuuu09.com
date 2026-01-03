@@ -68,7 +68,7 @@ export default defineConfig({
       remarkEmbedLinks,
     ],
     rehypePlugins: [
-      rehypeCaption, // <em>[!xxx]</em> をキャプションに変換
+      rehypeCaption,
       rehypeKatex,
       rehypeSlug,
       [
@@ -93,11 +93,14 @@ export default defineConfig({
               type: "element",
               tagName: "span",
               properties: {
-                className: ["heading-anchor"],
+                className: [`heading-anchor heading-${level}`],
               },
               children: [{ type: "text", value: hashes }],
             };
           },
+					properties: {
+						className: ["heading-anchor-container"]
+					}
         },
       ],
     ],
