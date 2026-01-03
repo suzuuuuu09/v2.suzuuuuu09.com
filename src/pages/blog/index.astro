@@ -1,19 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getBlogPosts } from '@/utils/post';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Expand } from '@/components/shared/Expand';
 import SectionTitle from '@/components/shared/SectionTitle.astro';
 import BlogCard from '@/components/features/blog/BlogCard.astro';
 import { ArticleGrid } from '@/components/features/blog/ArticleGrid';
 
-// blogをMarkdownファイルをすべて取得
-const allBlogPosts = await getCollection('blog');
-
-// isPublishがfalseのものは除外
-// publishDateを新しい順でソート
-const posts = allBlogPosts
-	.filter((post) => post.data.isPublish)
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const posts = await getBlogPosts();
 ---
 
 <BaseLayout title="Blogs">

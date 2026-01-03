@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAwardPosts } from "@/utils/post";
 import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
 import AwardCard from '@/components/features/award/AwardCard.astro';
@@ -7,12 +7,7 @@ import { Expand } from '@/components/shared/Expand';
 import { AwardGrid } from '@/components/features/award/AwardGrid.tsx';
 
 // awardをMarkdownファイルをすべて取得
-const allAwards = await getCollection('award');
-
-// dateを新しい順でソート
-const awards = allAwards
-  .filter((award) => award.data.isPublish)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const awards = await getAwardPosts();
 ---
 
 <SectionLayout>
@@ -29,6 +24,7 @@ const awards = allAwards
               data: {
                 ...award.data,
                 slug: award.data.slug ?? award.id,
+                description: award.data.description ?? undefined,
               },
             }}
           />

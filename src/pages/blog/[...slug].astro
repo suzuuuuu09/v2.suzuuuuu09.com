@@ -1,19 +1,18 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { Flex, styled as s } from "styled-system/jsx";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
+import { getBlogPosts } from "@/utils/post";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries
-    .filter(({ data }) => data.isPublish) // 公開されている記事のみ
-    .map(entry => ({
-      params: { slug: entry.data.slug ?? entry.id },
-      props: { entry },
-    }));
+  const blogEntries = await getBlogPosts();
+  return blogEntries.map(entry => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { entry },
+  }));
 }
 
 const { slug } = Astro.params;
@@ -21,10 +20,10 @@ let entry = Astro.props.entry;
 
 // SSRモードでentryが渡されない場合、コレクションから検索
 if (!entry) {
-  const blogEntries = await getCollection('blog');
+  const blogEntries = await getBlogPosts();
   const foundEntry = blogEntries.find(e => (e.data.slug ?? e.id) === slug);
   
-  if (!foundEntry || !foundEntry.data.isPublish) {
+  if (!foundEntry) {
     return Astro.redirect('/404');
   }
   

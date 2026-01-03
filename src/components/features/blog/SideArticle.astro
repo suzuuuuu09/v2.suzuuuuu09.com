@@ -1,8 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import { Flex, Grid, HStack, styled as s } from "styled-system/jsx";
 import { css } from "styled-system/css";
 import Icon from "astro-iconify";
+import { getBlogPosts, getAwardPosts, getProductPosts } from "@/utils/post";
 
 export interface Props {
   slug: string;
@@ -11,30 +11,11 @@ export interface Props {
 
 const { slug, collection = 'blog' } = Astro.props as Props;
 
-// 指定されたコレクションから記事一覧を取得
-let entries: any[];
-switch (collection) {
-  case 'blog':
-    entries = await getCollection('blog');
-    break;
-  case 'product':
-    entries = await getCollection('product');
-    break;
-  case 'award':
-    entries = await getCollection('award');
-    break;
-  default:
-    entries = await getCollection('blog');
-}
-
-// 公開済みの記事と公開日降順でソート
-const collectionEntries = entries
-  .filter((entry) => entry.data?.isPublish)
-  .sort((a, b) => {
-    const aDate = a.data?.publishDate ?? a.data?.updateDate ?? new Date(0);
-    const bDate = b.data?.publishDate ?? b.data?.updateDate ?? new Date(0);
-    return bDate.getTime() - aDate.getTime();
-  });
+const collectionEntries = {
+  blog: await getBlogPosts(),
+  product: await getProductPosts(),
+  award: await getAwardPosts(),
+}[collection];
 
 // 現在の記事のインデックスを取得
 const currentIndex = collectionEntries.findIndex(
@@ -104,7 +85,7 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
         flexDir="column"
         lineClamp="2"
       >
-        {nextArticle?.data?.emoji && (
+        {'emoji' in nextArticle.data && nextArticle?.data?.emoji && (
           <s.span mr="2">{nextArticle.data.emoji}</s.span>
         )}
         {nextArticle?.data?.title}
@@ -154,7 +135,7 @@ const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntr
         flexDir="column"
         lineClamp="2"
       >
-        {prevArticle?.data?.emoji && (
+        {'emoji' in prevArticle.data && prevArticle?.data?.emoji && (
           <s.span mr="2">{prevArticle.data.emoji}</s.span>
         )}
         {prevArticle?.data?.title}

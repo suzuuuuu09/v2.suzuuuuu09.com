@@ -1,15 +1,15 @@
 import type { APIRoute, APIContext } from "astro";
-import { getCollection } from "astro:content";
 import { generateOgImage } from "../../../../components/features/og/OgImage";
+import { getAllPosts } from "../../../../utils/post";
 
 const COLLECTIONS = ["blog", "award", "product"] as const;
 
 export const getStaticPaths = async () => {
-  // COLLECTIONを動的に取得
+  const allPosts = await getAllPosts();
   const paths = [];
+  
   for (const collection of COLLECTIONS) {
-    let posts = await getCollection(collection);
-    posts = posts.filter((post) => post.data.isPublish);
+    const posts = allPosts.filter((post) => post.collection === collection);
 
     paths.push(
       ...posts.map((post) => ({
@@ -21,10 +21,10 @@ export const getStaticPaths = async () => {
 }
 
 export const GET: APIRoute = async ({ params }: APIContext) => {
-  // COLLECTIONを動的に取得
-  const posts = await getCollection(params.collection as typeof COLLECTIONS[number]);
-  const filteredPosts = posts.filter((post) => post.data.isPublish);
-  const post = filteredPosts.find((post) => post.data.slug === params.title);
+  const allPosts = await getAllPosts();
+  const post = allPosts.find(
+    (post) => post.collection === params.collection && post.data.slug === params.title
+  );
   if (!post) {
     throw new Error("Post not found");
   }
