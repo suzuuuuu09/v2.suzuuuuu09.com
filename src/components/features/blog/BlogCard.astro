@@ -4,6 +4,7 @@ import { css, cx } from "styled-system/css";
 import { flex, center } from "styled-system/patterns";
 import { categories } from "@/consts/category";
 import TagList from "./TagList.astro";
+import CategoryBadge from "./CategoryBadge.astro";
 import { Card } from "@/components/ui/Card";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
@@ -104,21 +105,25 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
         </HStack>
 
         <HStack
-          justify="flex-end"
+          justify="space-between"
           borderTopWidth="1px"
           borderColor="sz.border/30"
           pt="3"
           gap="2"
         >
-          <!-- 読了時間 -->
-          <ReadingTime content={blog.data.content || ""} gap="1" />
+          <CategoryBadge category={blog.data.category} />
 
-          <!-- 公開日 -->
-          <Date
-            date={blog.data.publishDate || ""}
-            gap="1"
-            type="publish"
-          />
+          <HStack gap="2" justify="flex-end" flex="1">
+            <!-- 読了時間 -->
+            <ReadingTime content={blog.data.content || ""} gap="1" />
+
+            <!-- 公開日 -->
+            <Date
+              date={blog.data.publishDate || ""}
+              gap="1"
+              type="publish"
+            />
+          </HStack>
         </HStack>
       </Flex>
     </Flex>
