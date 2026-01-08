@@ -717,6 +717,18 @@ export default defineConfig({
 							_dark: "{colors.s-border-dark}",
 						}
 					},
+          "sz.purple": {
+            value: {
+              base: "#9b5de5",
+              _dark: "#b678f6",
+            }
+          },
+          "sz.yellow": {
+            value: {
+              base: "#f1d85b",
+              _dark: "#f4f472",
+            }
+          }
         },
       }
     },
