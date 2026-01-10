@@ -1,68 +1,23 @@
-import { getCollection } from "astro:content";
-
-const COLLECTIONS = ["blog", "award", "product"] as const;
+import { getAllPosts, type AllPost } from "@/utils/post";
 
 export async function getStaticPaths() {
-  const paths = await Promise.all(
-    COLLECTIONS.map(async (collection) => {
-      const entries = await getCollection(collection);
-      return entries
-        .filter((entry) => entry.data.isPublish)
-        .map((entry) => ({
-          params: { collection, slug: entry.data.slug ?? entry.id },
-          props: { entry },
-        }));
-    })
-  );
-  return paths.flat();
+  const entries = await getAllPosts();
+  return entries.map((entry) => ({
+    params: { collection: entry.collection, slug: entry.data.slug },
+    props: { entry },
+  }));
 }
 
-function formatValue(key: string, value: any): string | null {
-  if (value === undefined || value === null) return null;
-  if (Array.isArray(value)) {
-    const items = value.map((v) => `  - ${v}`).join("\n");
-    return `${key}:\n${items}`;
-  }
-  if (typeof value === "string" && (value.includes(":") || value.includes("#"))) {
-    return `${key}: "${value}"`;
-  }
-  return `${key}: ${value}`;
-}
-
-export async function GET({ props }: any) {
+export async function GET({ props }: { props: { entry: AllPost } }) {
   const { entry } = props;
-  const data = entry.data;
+  const markdown = entry.body;
 
-  // フロントマターを構築
-  const frontmatter = {
-    title: data.title,
-    slug: data.slug,
-    description: data.description,
-    isPublish: data.isPublish,
-    ...(data.publishDate && { publishDate: data.publishDate.toISOString() }),
-    ...(data.updateDate && { updateDate: data.updateDate.toISOString() }),
-    ...(data.date && { date: data.date.toISOString() }),
-    ...(data.tags && { tags: data.tags }),
-    ...(data.emoji && { emoji: data.emoji }),
-    ...(data.category && { category: data.category }),
-    ...(data.type && { type: data.type }),
-    ...(data.thumbnail && { thumbnail: data.thumbnail }),
-  };
-
-  const frontmatterYaml = Object.entries(frontmatter)
-    .map(([key, value]) => formatValue(key, value))
-    .filter(Boolean)
-    .join("\n");
-
-  const markdown = `---\n${frontmatterYaml}\n---\n\n${entry.body}`;
-  const encoder = new TextEncoder();
-  const utf8Bytes = encoder.encode(markdown);
-
-  return new Response(utf8Bytes, {
+  return new Response(markdown, {
     status: 200,
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       "Cache-Control": "public, max-age=3600",
     },
-  })
+  });
 }
+

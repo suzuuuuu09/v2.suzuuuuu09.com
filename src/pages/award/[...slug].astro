@@ -10,7 +10,7 @@ import { getAwardPosts } from "@/utils/post";
 export async function getStaticPaths() {
   const awardEntries = await getAwardPosts();
   return awardEntries.map(entry => ({
-    params: { slug: entry.data.slug ?? entry.id },
+    params: { slug: entry.data.slug },
     props: { entry },
   }));
 }
@@ -55,7 +55,7 @@ const articleInfo = {
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
     <s.article className="markdown-content" flex="1" minW="0">
       <Content />
-      <SideArticle collection="award" slug={entry.data.slug ?? entry.id} />
+      <SideArticle collection="award" slug={entry.data.slug} />
     </s.article>
     
     <s.aside order={{ base: -1, lg: 1 }}>
