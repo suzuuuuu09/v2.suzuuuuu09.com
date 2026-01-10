@@ -4,6 +4,7 @@ import TagList from '../blog/TagList.astro';
 import Thumbnail from '@/components/shared/Thumbnail';
 import ReadingTime from '@/components/shared/ReadingTime.astro';
 import Date from '@/components/shared/Date.astro';
+import BudouxText from '@/components/shared/BudouxText';
 
 export interface Props {
   title: string;
@@ -35,8 +36,7 @@ const {
     type="info"
     loading="eager"
   />
-
-  <s.h1
+	<s.h1
 		fontSize={{ base: "3xl", lg: "4xl" }}
     fontWeight="bold"
     textAlign="center"
@@ -45,13 +45,15 @@ const {
     w="full"
     maxW="4xl"
     lineHeight={{ base: "tight", lg: "normal", xl: "snug" }}
-    wordBreak="break-word"
-    overflowWrap="break-word"
-    hyphens="auto"
     color="sz.text.main"
+    display="flex"
+    flexWrap="wrap"
+    justifyContent="center"
+    gap="0.5"
   >
-    {title}
+    <BudouxText text={title} client:load />
   </s.h1>
+
 
   {tags.length > 0 && (
     <Flex
@@ -93,9 +95,20 @@ const {
     </Flex>
   </Flex>
 
-  {description && (
-    <s.p maxW="2xl" style={{ textAlign: 'center', lineHeight: 1.6 }}>
-      {description}
+	{description && (
+    <s.p
+      textAlign="center"
+      lineHeight="relaxed"
+      maxW="2xl"
+      color="sz.text.main"
+      px="4"
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      gap="0.5"
+    >
+      <BudouxText text={description} client:load />
     </s.p>
   )}
+
 </VStack>

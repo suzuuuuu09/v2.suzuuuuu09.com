@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import Thumbnail from "@/components/shared/Thumbnail";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
+import BudouxText from "@/components/shared/BudouxText";
 
 export interface Props {
   product: {
@@ -53,22 +54,24 @@ const { product } = Astro.props;
       flex="1"
       flexDir="column"
     >
-      <s.h2
-        lineHeight="snug"
-        transition="colors 0.3s"
-        mx="1"
-        mb="3"
-        fontWeight="bold"
-        fontSize="xl"
-        overflow="hidden"
-        textOverflow="ellipsis"
-        display="-webkit-box"
-        lineClamp="2"
-        _groupHover={{ color: "sz.primary" }}
-        style={{ WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
-      >
-        {product.data.title}
-      </s.h2>
+			<s.h2
+				lineHeight="snug"
+				transition="colors 0.3s"
+				mb="3"
+				mt="4"
+				fontWeight="bold"
+				fontSize="xl"
+				overflow="hidden"
+				textOverflow="ellipsis"
+				lineClamp="2"
+				display="flex"
+				flexWrap="wrap"
+				gap="0.5"
+				_groupHover={{ color: "sz.primary" }}
+			>
+			  <BudouxText text={product.data.title} client:load />
+			</s.h2>
+
 
       <Flex flexDir="column" flex="1" justifyContent="space-between">
         {product.data.tags && product.data.tags.length > 0 && (

@@ -3,6 +3,8 @@ import { Flex, VStack, styled as s } from "styled-system/jsx";
 import TagList from "./TagList.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
+// import BudouxText from "@/components/shared/BudouxText.astro";
+import BudouxText from "@/components/shared/BudouxText";
 
 interface Props {
   title: string;
@@ -51,12 +53,13 @@ const {
     w="full"
     maxW="4xl"
     lineHeight={{ base: "tight", lg: "normal", xl: "snug" }}
-    wordBreak="break-word"
-    overflowWrap="break-word"
-    hyphens="auto"
     color="sz.text.main"
+    display="flex"
+    flexWrap="wrap"
+    justifyContent="center"
+    gap="0.5"
   >
-    {title}
+    <BudouxText text={title} client:load />
   </s.h1>
 
   <!-- タグ -->
@@ -117,8 +120,12 @@ const {
       maxW="2xl"
       color="sz.text.main"
       px="4"
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      gap="0.5"
     >
-      {description}
+      <BudouxText text={description} client:load />
     </s.p>
   )}
 </VStack>
