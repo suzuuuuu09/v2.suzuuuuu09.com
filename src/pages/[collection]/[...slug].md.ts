@@ -3,7 +3,10 @@ import { getAllPosts, type AllPost } from "@/utils/post";
 export async function getStaticPaths() {
   const entries = await getAllPosts();
   return entries.map((entry) => ({
-    params: { collection: entry.collection, slug: entry.data.slug },
+    params: {
+			collection: entry.collection,
+			slug: entry.data.slug,
+		},
     props: { entry },
   }));
 }

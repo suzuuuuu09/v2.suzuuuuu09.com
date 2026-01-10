@@ -19,7 +19,7 @@ const collectionEntries = {
 
 // 現在の記事のインデックスを取得
 const currentIndex = collectionEntries.findIndex(
-  (entry) => (entry.data?.slug ?? entry.id) === slug
+  (entry) => (entry.data?.slug) === slug
 );
 
 // 前後の記事を取得
