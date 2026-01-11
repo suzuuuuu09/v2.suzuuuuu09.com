@@ -13,7 +13,14 @@ export default function rehypeBudoux() {
 			// <span>タグの中身を抽出
 			const match = html.match(/>([^<]*)<\/span>/);
 			if (match && match[1]) {
-				node.value = match[1];
+				// エスケープされた文字を元に戻す
+				const decoded = match[1]
+					.replace(/&lt;/g, "<")
+					.replace(/&gt;/g, ">")
+					.replace(/&amp;/g, "&")
+					.replace(/&quot;/g, '"')
+					.replace(/&#39;/g, "'");
+				node.value = decoded;
 			}
 		});
 	};
