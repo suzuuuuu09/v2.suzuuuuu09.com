@@ -24,6 +24,7 @@ const products = await getProductPosts();
                 ...product.data,
                 slug: product.data.slug ?? product.id,
                 description: product.data.description ?? undefined,
+								content: product.body
               },
             }}
           />
