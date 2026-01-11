@@ -9,7 +9,7 @@ thumbnail: "![[cinii-mcp-server-1766844074393.webp]]"
 description: CiNiiで論文を検索するMCPサーバー
 isPublish: true
 publishDate: 2025-12-21T19:26
-updateDate: 2025-12-30T21:34
+updateDate: 2026-01-11T02:24
 ---
 ## 概要
 国立情報学研究所 (NII) が運営する学術論文や研究データプラットフォーム「CiNii」の検索を、AI が直接実行を可能にする MCP サーバーを構築した。
