@@ -9,7 +9,7 @@ tags:
   - Astro
 isPublish: true
 publishDate: 2026-01-11T21:26
-updateDate: 2026-01-11T21:26
+updateDate: 2026-01-12T02:34
 ---
 ## 概要
 Qiita や esa.io などで搭載されている記事の末尾に `.md` つけると、生の Markdown データを取得できるようにする機能を Astro で実装します。  
@@ -42,6 +42,7 @@ src/pages/
 └─ [collection]/
     └─ [...slug].md.ts ← Markdownで返すエンドポイント
 ```
+
 ディレクトリの名前を `[collection]` にすることで動的パラメータを用いて複数のコレクションを一括で処理できるようになります。
 
 ```ts title=src/pages/[collection]/[...slug].md.ts
@@ -52,7 +53,7 @@ export async function getStaticPaths() {
   return entries.map((entry) => ({
     params: {
       collection: entry.collection, // award, blog, product
-	  slug: entry.data.slug,
+      slug: entry.data.slug,
 	},
     props: { entry },
   }));
