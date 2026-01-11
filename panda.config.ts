@@ -96,6 +96,8 @@ export default defineConfig({
       "p": {
         my: "2",
 				fontSize: "base",
+				wordBreak: "keep-all",
+				overflowWrap: "anywhere",
 				_lg: {
 					fontSize: "lg",
 				},

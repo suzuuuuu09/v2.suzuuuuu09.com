@@ -15,6 +15,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
 import rehypeCaption from "./src/lib/rehype/rehype-caption";
+import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
 
 
 // https://astro.build/config
@@ -33,12 +34,16 @@ export default defineConfig({
     react(),
     expressiveCode({
       themes: ["tokyo-night"],
+			// customizeTheme: (theme) => {
+			// 	// テーマのtypeに応じてnameを設定
+			// 	theme.name = theme.type;
+			// },
       styleOverrides: {
         codeFontFamily: "var(--moralerspace-neon)",
         uiFontFamily: "var(--ibm-plex-sans-jp)",
       },
       defaultProps: {
-        wrap: true,
+        wrap: false,
       }
   }),
     partytown({
@@ -64,11 +69,11 @@ export default defineConfig({
       remarkMath,
       remarkWikiLinks,
       remarkCallout,
-      // remarkBreaks,
       remarkEmbedLinks,
     ],
     rehypePlugins: [
       rehypeCaption,
+      rehypeBudoux,
       rehypeKatex,
       rehypeSlug,
       [
