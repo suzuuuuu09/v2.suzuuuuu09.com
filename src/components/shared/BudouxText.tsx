@@ -7,6 +7,7 @@ interface Props {
 }
 
 export default function BudouxText({ text, as: Component = "span", className }: Props) {
+	// 日本語用のパーサーを読み込む
 	const parser = loadDefaultJapaneseParser();
 	const rawWords = parser.parse(text);
 	const words = rawWords

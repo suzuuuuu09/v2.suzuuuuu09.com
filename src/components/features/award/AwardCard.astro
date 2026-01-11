@@ -19,7 +19,7 @@ export interface Props {
 }
 
 const { award } = Astro.props as Props;
-const titleText = `${award.data.type}：${award.data.title}`;
+const titleText = `[${award.data.type}] ${award.data.title}`;
 ---
 
 <Card maxW="full">
@@ -65,8 +65,6 @@ const titleText = `${award.data.type}：${award.data.title}`;
 							<s.h2
 								lineHeight="snug"
 								transition="colors 0.3s"
-								mb="3"
-								mt="4"
 								fontWeight="bold"
 								fontSize="xl"
 								overflow="hidden"
