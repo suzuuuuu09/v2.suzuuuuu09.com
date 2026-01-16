@@ -1,7 +1,5 @@
 ---
 title: Markdownテスト記事
-publishDate: 2025-08-09
-updateDate: 2026-01-09T23:39
 tags:
   - test
   - markdown
@@ -12,7 +10,9 @@ emoji: 📝
 slug: md-test
 description: Markdownの基本的な記法をテストするための記事です。スタイルなどの状態を確認することを目的としています．
 category: tech
-isPublish: true
+isPublish: false
+publishDate: 2025-08-09
+updateDate: 2026-01-13T02:19
 ---
 # H1 見出し
 ## H2 見出し

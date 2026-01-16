@@ -9,7 +9,7 @@ tags:
   - Astro
 isPublish: true
 publishDate: 2026-01-11T21:26
-updateDate: 2026-01-12T02:34
+updateDate: 2026-01-12T02:47
 ---
 ## 概要
 Qiita や esa.io などで搭載されている記事の末尾に `.md` つけると、生の Markdown データを取得できるようにする機能を Astro で実装します。  
@@ -54,7 +54,7 @@ export async function getStaticPaths() {
     params: {
       collection: entry.collection, // award, blog, product
       slug: entry.data.slug,
-	},
+    },
     props: { entry },
   }));
 }
