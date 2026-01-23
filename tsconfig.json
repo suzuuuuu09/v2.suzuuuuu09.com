@@ -12,13 +12,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
+		"verbatimModuleSyntax": false,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "~/*": [
-        "./public/*"
-      ],
+      "@/*": [ "./src/*" ],
+      "~/*": [ "./public/*" ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
