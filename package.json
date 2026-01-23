@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"engines": {
-		"note": "20.x"
+		"node": "20.x"
 	},
 	"scripts": {
 		"prepare": "panda codegen",
