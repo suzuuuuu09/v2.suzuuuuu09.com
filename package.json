@@ -4,7 +4,6 @@
 	"version": "0.0.1",
 	"scripts": {
 		"prepare": "panda codegen",
-		"postinstall": "sed -i.bak '/export { Props } from/d' node_modules/astro-iconify/lib/Icon.astro node_modules/astro-iconify/lib/Sprite.astro 2>/dev/null || true",
 		"dev": "dotenvx run -- astro dev",
 		"build": "dotenvx run -- astro build",
 		"preview": "dotenvx run -- astro preview",
@@ -28,7 +27,6 @@
 		"@types/react-dom": "^19.2.3",
 		"astro": "^5.16.15",
 		"astro-expressive-code": "^0.41.3",
-		"astro-iconify": "^1.2.0",
 		"astro-seo": "^0.8.4",
 		"budoux": "^0.7.0",
 		"dayjs": "^1.11.18",
