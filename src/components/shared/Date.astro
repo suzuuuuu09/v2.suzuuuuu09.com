@@ -1,13 +1,13 @@
 ---
-import Icon from "astro-iconify";
+import Icon from "@suzuuuuu09/astro-iconify";
 import { HStack, styled as s } from "styled-system/jsx";
 import dayjs from "dayjs";
 
 interface Props {
-  date: string | Date;
-  gap: string;
-  type: "publish" | "update" | "award";
-  iconSize?: number;
+	date: string | Date;
+	gap: string;
+	type: "publish" | "update" | "award";
+	iconSize?: number;
 }
 
 const { date, gap, type, iconSize = 16 } = Astro.props;
@@ -15,20 +15,20 @@ const { date, gap, type, iconSize = 16 } = Astro.props;
 // 日付の検証
 const dayjsDate = dayjs(date);
 if (!date || !dayjsDate.isValid()) {
-  return null;
+	return null;
 }
 
 const formattedDate = dayjsDate.format("YYYY.MM.DD");
 
 const icon = (() => {
-  switch (type) {
-    case "publish":
-      return "mdi:calendar";
-    case "update":
-      return "mdi:update";
-    case "award":
-      return "mdi:award";
-  }
+	switch (type) {
+		case "publish":
+			return "mdi:calendar";
+		case "update":
+			return "mdi:update";
+		case "award":
+			return "mdi:award";
+	}
 })();
 ---
 

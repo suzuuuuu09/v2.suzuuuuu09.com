@@ -1,13 +1,13 @@
 ---
-import { getIconData } from '@/utils/icon';
-import { VStack, styled as s } from 'styled-system/jsx';
-import { css } from 'styled-system/css';
-import Icon from 'astro-iconify';
+import { getIconData } from "@/utils/icon";
+import { VStack, styled as s } from "styled-system/jsx";
+import { css } from "styled-system/css";
+import Icon from "@suzuuuuu09/astro-iconify";
 
 interface Props {
-  iconKey: string;
-  showName?: boolean;
-  size?: number;
+	iconKey: string;
+	showName?: boolean;
+	size?: number;
 }
 
 const { iconKey, showName = true, size = 60 } = Astro.props;
@@ -15,17 +15,17 @@ const { iconKey, showName = true, size = 60 } = Astro.props;
 const iconData = getIconData(iconKey);
 
 function calculateCardLayout(iconSize: number, showName: boolean) {
-  const containerWidth = Math.max(iconSize + 16, 90);
-  const iconAreaHeight = iconSize + 8;
-  const textAreaHeight = showName ? 42 : 0;
-  const containerHeight = iconAreaHeight + textAreaHeight + 16;
-  
-  return {
-    containerWidth,
-    containerHeight,
-    iconAreaHeight,
-    textAreaHeight
-  };
+	const containerWidth = Math.max(iconSize + 16, 90);
+	const iconAreaHeight = iconSize + 8;
+	const textAreaHeight = showName ? 42 : 0;
+	const containerHeight = iconAreaHeight + textAreaHeight + 16;
+
+	return {
+		containerWidth,
+		containerHeight,
+		iconAreaHeight,
+		textAreaHeight,
+	};
 }
 
 const iconName = iconData?.icon || iconKey;

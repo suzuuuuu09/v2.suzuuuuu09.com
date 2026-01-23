@@ -2,9 +2,6 @@
 	"name": "v2.suzuuuuu09.com",
 	"type": "module",
 	"version": "0.0.1",
-	"engines": {
-		"node": "20.x"
-	},
 	"scripts": {
 		"prepare": "panda codegen",
 		"postinstall": "sed -i.bak '/export { Props } from/d' node_modules/astro-iconify/lib/Icon.astro node_modules/astro-iconify/lib/Sprite.astro 2>/dev/null || true",
@@ -26,6 +23,7 @@
 		"@pagefind/default-ui": "^1.4.0",
 		"@r4ai/remark-callout": "^0.6.2",
 		"@resvg/resvg-js": "^2.6.2",
+		"@suzuuuuu09/astro-iconify": "^1.0.0",
 		"@types/react": "^19.2.7",
 		"@types/react-dom": "^19.2.3",
 		"astro": "^5.16.15",

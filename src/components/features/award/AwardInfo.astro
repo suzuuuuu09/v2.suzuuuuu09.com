@@ -3,31 +3,31 @@ import { Flex, VStack, HStack, styled as s } from "styled-system/jsx";
 import TagList from "@/components/features/blog/TagList.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
-import Icon from "astro-iconify";
+import Icon from "@suzuuuuu09/astro-iconify";
 import BudouxText from "@/components/shared/BudouxText";
 
 interface Props {
-  title: string;
-  date?: string | Date;
-  updateDate?: string | Date;
-  tags?: string[];
-  emoji?: string;
-  description?: string;
-  content?: string;
-  type: string;
+	title: string;
+	date?: string | Date;
+	updateDate?: string | Date;
+	tags?: string[];
+	emoji?: string;
+	description?: string;
+	content?: string;
+	type: string;
 }
 
 const {
-  title,
-  date,
-  tags = [],
-  emoji,
-  description,
-  content,
-  type,
+	title,
+	date,
+	tags = [],
+	emoji,
+	description,
+	content,
+	type,
 } = Astro.props;
 
-const titleText = `[${type}] ${title}`
+const titleText = `[${type}] ${title}`;
 ---
 
 <VStack
