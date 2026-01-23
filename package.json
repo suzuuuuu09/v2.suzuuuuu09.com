@@ -2,6 +2,9 @@
 	"name": "v2.suzuuuuu09.com",
 	"type": "module",
 	"version": "0.0.1",
+	"engines": {
+		"note": "20.x"
+	},
 	"scripts": {
 		"prepare": "panda codegen",
 		"dev": "dotenvx run -- astro dev",
@@ -26,7 +29,6 @@
 		"@types/react-dom": "^19.2.3",
 		"astro": "^5.16.15",
 		"astro-expressive-code": "^0.41.3",
-		"astro-iconify": "^1.2.0",
 		"budoux": "^0.7.0",
 		"dayjs": "^1.11.18",
 		"embla-carousel-react": "^8.6.0",
@@ -50,6 +52,7 @@
 	},
 	"devDependencies": {
 		"@dotenvx/dotenvx": "^1.51.1",
-		"@pandacss/dev": "^1.4.3"
+		"@pandacss/dev": "^1.4.3",
+		"astro-iconify": "1.2.0"
 	}
 }
