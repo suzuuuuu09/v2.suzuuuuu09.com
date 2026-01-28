@@ -5,14 +5,14 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import ProductInfo from "@/components/features/product/ProductInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
-import { getProductPosts } from "@/utils/post";
+import { getProductPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
-  const productEntries = await getProductPosts();
-  return productEntries.map(entry => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+	const productEntries = await getProductPosts();
+	return productEntries.map((entry) => ({
+		params: { slug: entry.data.slug },
+		props: { entry },
+	}));
 }
 
 const { slug } = Astro.params;
@@ -20,28 +20,28 @@ let entry = Astro.props.entry;
 
 // SSRモードでentryが渡されない場合、コレクションから検索
 if (!entry) {
-  const productEntries = await getProductPosts();
-  const foundEntry = productEntries.find(e => (e.data.slug ?? e.id) === slug);
-  
-  if (!foundEntry) {
-    return Astro.redirect('/404');
-  }
-  
-  entry = foundEntry;
+	const productEntries = await getProductPosts();
+	const foundEntry = productEntries.find((e) => (e.data.slug ?? e.id) === slug);
+
+	if (!foundEntry) {
+		return Astro.redirect("/404");
+	}
+
+	entry = foundEntry;
 }
 
 const { Content, headings } = await render(entry);
 
 // プロダクトの情報
 const articleInfo = {
-  title: entry.data.title,
-  slug: entry.data.slug,
-  publishDate: entry.data.publishDate,
-  updateDate: entry.data.updateDate,
-  tags: entry.data.tags || [],
-  thumbnail: entry.data.thumbnail || "",
-  description: entry.data.description || "",
-  content: entry.body, // 読了時間計算用
+	title: entry.data.title,
+	slug: entry.data.slug,
+	publishDate: entry.data.publishDate,
+	updateDate: entry.data.updateDate,
+	tags: entry.data.tags || [],
+	thumbnail: entry.data.thumbnail || "",
+	description: entry.data.description || "",
+	content: entry.body, // 読了時間計算用
 };
 ---
 

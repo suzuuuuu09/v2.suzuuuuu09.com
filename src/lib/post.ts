@@ -10,7 +10,7 @@ export type AllPost = BlogEntry | AwardEntry | ProductEntry;
 export async function getBlogPosts(): Promise<BlogEntry[]> {
 	const posts = await getCollection("blog");
 	return posts
-	  .filter((post) => post.data.isPublish)
+		.filter((post) => post.data.isPublish)
 		.sort((a, b) => {
 			const dateA = a.data.publishDate;
 			const dateB = b.data.publishDate;
@@ -22,7 +22,7 @@ export async function getBlogPosts(): Promise<BlogEntry[]> {
 export async function getAwardPosts(): Promise<AwardEntry[]> {
 	const posts = await getCollection("award");
 	return posts
-	  .filter((post) => post.data.isPublish)
+		.filter((post) => post.data.isPublish)
 		.sort((a, b) => {
 			const dateA = a.data.date;
 			const dateB = b.data.date;
@@ -34,7 +34,7 @@ export async function getAwardPosts(): Promise<AwardEntry[]> {
 export async function getProductPosts(): Promise<ProductEntry[]> {
 	const posts = await getCollection("product");
 	return posts
-	  .filter((post) => post.data.isPublish)
+		.filter((post) => post.data.isPublish)
 		.sort((a, b) => {
 			const dateA = a.data.publishDate;
 			const dateB = b.data.publishDate;
@@ -57,4 +57,3 @@ export async function getAllPosts(): Promise<AllPost[]> {
 		return dateB.getTime() - dateA.getTime();
 	});
 }
-

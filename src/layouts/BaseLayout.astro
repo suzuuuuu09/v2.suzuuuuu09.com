@@ -18,7 +18,7 @@ const { title, maxW } = Astro.props;
 const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 
 // OG画像URL生成 - defaultコレクション用
-const ogImageUrl = new URL('/api/og/default.png', Astro.site);
+const ogImageUrl = new URL("/api/og/default.png", Astro.site);
 ---
 
 <!doctype html>
@@ -68,7 +68,7 @@ const ogImageUrl = new URL('/api/og/default.png', Astro.site);
 	</body>
 
 	<script>
-    import { initTwemoji } from "@/utils/twemoji";
+    import { initTwemoji } from "@/lib/twemoji";
     
     document.addEventListener('DOMContentLoaded', initTwemoji);
     document.addEventListener('astro:page-load', initTwemoji);

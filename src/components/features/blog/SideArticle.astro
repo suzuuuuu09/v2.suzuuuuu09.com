@@ -2,29 +2,33 @@
 import { Flex, Grid, HStack, styled as s } from "styled-system/jsx";
 import { css } from "styled-system/css";
 import Icon from "@suzuuuuu09/astro-iconify";
-import { getBlogPosts, getAwardPosts, getProductPosts } from "@/utils/post";
+import { getBlogPosts, getAwardPosts, getProductPosts } from "@/lib/post";
 
 export interface Props {
-  slug: string;
-  collection?: 'blog' | 'product' | 'award';
+	slug: string;
+	collection?: "blog" | "product" | "award";
 }
 
-const { slug, collection = 'blog' } = Astro.props as Props;
+const { slug, collection = "blog" } = Astro.props as Props;
 
 const collectionEntries = {
-  blog: await getBlogPosts(),
-  product: await getProductPosts(),
-  award: await getAwardPosts(),
+	blog: await getBlogPosts(),
+	product: await getProductPosts(),
+	award: await getAwardPosts(),
 }[collection];
 
 // 現在の記事のインデックスを取得
 const currentIndex = collectionEntries.findIndex(
-  (entry) => (entry.data?.slug) === slug
+	(entry) => entry.data?.slug === slug,
 );
 
 // 前後の記事を取得
-const prevArticle = currentIndex > 0 ? collectionEntries[currentIndex - 1] : null;
-const nextArticle = currentIndex < collectionEntries.length - 1 ? collectionEntries[currentIndex + 1] : null;
+const prevArticle =
+	currentIndex > 0 ? collectionEntries[currentIndex - 1] : null;
+const nextArticle =
+	currentIndex < collectionEntries.length - 1
+		? collectionEntries[currentIndex + 1]
+		: null;
 ---
 
 <Grid

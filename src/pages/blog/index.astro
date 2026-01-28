@@ -1,10 +1,10 @@
 ---
-import { getBlogPosts } from '@/utils/post';
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Expand } from '@/components/shared/Expand';
-import SectionTitle from '@/components/shared/SectionTitle.astro';
-import BlogCard from '@/components/features/blog/BlogCard.astro';
-import { ArticleGrid } from '@/components/features/blog/ArticleGrid';
+import { getBlogPosts } from "@/lib/post";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Expand } from "@/components/shared/Expand";
+import SectionTitle from "@/components/shared/SectionTitle.astro";
+import BlogCard from "@/components/features/blog/BlogCard.astro";
+import { ArticleGrid } from "@/components/features/blog/ArticleGrid";
 
 const posts = await getBlogPosts();
 ---

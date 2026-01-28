@@ -5,14 +5,14 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
-import { getBlogPosts } from "@/utils/post";
+import { getBlogPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
-  const blogEntries = await getBlogPosts();
-  return blogEntries.map(entry => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+	const blogEntries = await getBlogPosts();
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.data.slug },
+		props: { entry },
+	}));
 }
 
 const { slug } = Astro.params;
@@ -20,28 +20,28 @@ let entry = Astro.props.entry;
 
 // SSRモードでentryが渡されない場合、コレクションから検索
 if (!entry) {
-  const blogEntries = await getBlogPosts();
-  const foundEntry = blogEntries.find(e => (e.data.slug ?? e.id) === slug);
-  
-  if (!foundEntry) {
-    return Astro.redirect('/404');
-  }
-  
-  entry = foundEntry;
+	const blogEntries = await getBlogPosts();
+	const foundEntry = blogEntries.find((e) => (e.data.slug ?? e.id) === slug);
+
+	if (!foundEntry) {
+		return Astro.redirect("/404");
+	}
+
+	entry = foundEntry;
 }
 
 const { Content, headings } = await render(entry);
 
 // ブログの情報
 const articleInfo = {
-  title: entry.data.title,
-  slug: entry.data.slug,
-  publishDate: entry.data.publishDate,
-  updateDate: entry.data.updateDate,
-  tags: entry.data.tags || [],
-  emoji: entry.data.emoji || "📝",
-  description: entry.data.description || "",
-  content: entry.body, // 読了時間計算用
+	title: entry.data.title,
+	slug: entry.data.slug,
+	publishDate: entry.data.publishDate,
+	updateDate: entry.data.updateDate,
+	tags: entry.data.tags || [],
+	emoji: entry.data.emoji || "📝",
+	description: entry.data.description || "",
+	content: entry.body, // 読了時間計算用
 };
 ---
 
