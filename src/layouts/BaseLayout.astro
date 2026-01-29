@@ -55,6 +55,34 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site);
 		<meta property="twitter:image" content={ogImageUrl.toString()} />
 
 		<GoogleAnalytics id={GA_TRACKING_ID} />
+		
+		<!-- Preconnect -->
+		<link rel="preconnect" href="https://content.suzuuuuu09.com" />
+		<link rel="preconnect" href="https://twemoji.maxcdn.com" />
+
+		<!-- フォントのプレロード -->
+		<link
+			rel="preload"
+			href="/fonts/IBMPlexSansJP-Regular.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/IBMPlexSansJP-Bold.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/MoralerspaceNeon-Regular.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin="anonymous"
+		/>
+
 	</head>
 	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
 		<FloatingBackground client:load />
