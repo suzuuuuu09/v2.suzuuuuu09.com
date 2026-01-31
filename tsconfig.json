@@ -1,28 +1,21 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*",
-    "src",
-    "styled-system"
-  ],
-  "exclude": [
-    "dist"
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*", "src", "styled-system"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
 		"verbatimModuleSyntax": false,
-    "paths": {
-      "@/*": [ "./src/*" ],
-      "~/*": [ "./public/*" ],
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  },
-  "path-autocomplete.pathMappings": {
-    "@": "${folder}/src",
-    "~": "${folder}/public",
-    "styled-system/*": "styled-system/*"
-  }
+		"paths": {
+			"@/*": ["./src/*"],
+			"~/*": ["./public/*"]
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	},
+	"path-autocomplete.pathMappings": {
+		"@": "${folder}/src",
+		"~": "${folder}/public",
+		"styled-system/*": "styled-system/*"
+	}
 }
