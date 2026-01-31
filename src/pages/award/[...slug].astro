@@ -5,6 +5,7 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import AwardInfo from "@/components/features/award/AwardInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
+import ShareMenu from "@/components/features/blog/ShareMenu.astro";
 import { getAwardPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
@@ -43,6 +44,8 @@ const articleInfo = {
 	date: entry.data.date, // awardコレクションではdateを使用
 	type: entry.data.type,
 };
+
+const shareTitle = `[${entry.data.type}] ${entry.data.title}`;
 ---
 
 <BlogLayout
@@ -58,8 +61,32 @@ const articleInfo = {
       <SideArticle collection="award" slug={entry.data.slug} />
     </s.article>
     
-    <s.aside order={{ base: -1, lg: 1 }}>
+    <ShareMenu
+			title={shareTitle}
+			slug={entry.data.slug}
+			description={articleInfo.description}
+			visible="base"
+			collection="award"
+		/>
+    
+		<s.aside
+			w={{ base: "100%", lg: "72" }}
+      order={{ base: -1, lg: 1 }} 
+      display="flex" 
+      flexDir="column" 
+      gap="4"
+      position={{ base: "relative", lg: "sticky" }}
+      top={{ lg: "24" }}
+      alignSelf="flex-start"
+		>
       <TableOfContents headings={headings} />
+			<ShareMenu
+				title={shareTitle}
+				slug={entry.data.slug}
+				description={articleInfo.description}
+				visible="lg"
+				collection="award"
+			/>
     </s.aside>
   </Flex>
 </BlogLayout>
