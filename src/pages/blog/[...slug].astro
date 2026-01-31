@@ -5,6 +5,7 @@ import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
+import ShareMenu from "@/components/features/blog/ShareMenu.astro";
 import { getBlogPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
@@ -55,11 +56,36 @@ const articleInfo = {
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
     <s.article className="markdown-content" flex="1" minW="0">
       <Content />
-      <SideArticle slug={entry.data.slug} />
+			<SideArticle slug={entry.data.slug} />
     </s.article>
-    
-    <s.aside order={{ base: -1, lg: 1 }}>
+
+		<ShareMenu
+			title={articleInfo.title}
+			slug={articleInfo.slug}
+			description={articleInfo.description}
+			visible="base"
+			collection="blog"
+		/>
+		
+
+    <s.aside 
+			w={{ base: "100%", lg: "72" }}
+      order={{ base: -1, lg: 1 }} 
+      display="flex" 
+      flexDir="column" 
+      gap="4"
+      position={{ base: "relative", lg: "sticky" }}
+      top={{ lg: "24" }}
+      alignSelf="flex-start"
+    >
       <TableOfContents headings={headings} />
+			<ShareMenu
+				title={articleInfo.title}
+				slug={articleInfo.slug}
+				description={articleInfo.description}
+				visible="lg"
+				collection="blog"
+			/>
     </s.aside>
   </Flex>
 </BlogLayout>
