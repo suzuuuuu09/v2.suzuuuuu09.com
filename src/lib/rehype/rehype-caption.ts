@@ -37,7 +37,7 @@ export default function rehypeCaption() {
 				// <div class="caption"><svg>...</svg><span>text</span></div> に置き換え
 				const captionNode = {
 					type: "element",
-					tagName: "div",
+					tagName: "figcaption",
 					properties: { className: [`caption caption-${type}`] },
 					children: [
 						{
