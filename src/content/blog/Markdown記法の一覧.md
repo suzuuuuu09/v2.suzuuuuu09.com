@@ -1,18 +1,14 @@
 ---
-title: Markdownテスト記事
+title: Markdown記法の一覧
 tags:
-  - test
   - markdown
-  - list
-  - code
-  - style
 emoji: 📝
-slug: md-test
-description: Markdownの基本的な記法をテストするための記事です。スタイルなどの状態を確認することを目的としています．
+slug: markdown-guide
+description: このブログ内で使えるMarkdown記法をまとめる。
 category: tech
-isPublish: false
+isPublish: true
 publishDate: 2025-08-09
-updateDate: 2026-01-13T02:19
+updateDate: 2026-02-05T01:29
 ---
 # H1 見出し
 ## H2 見出し
@@ -103,7 +99,7 @@ if __name__ == "__main__":
 echo "Hello, World!"
 ```
 
-コードブロックの書き方はこれを参考にしてください
+コードブロックの書き方は Expressive Code のドキュメントを参考にしてください。
 
 https://expressive-code.com
 
@@ -338,14 +334,135 @@ Windowsでは <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすること�
 macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 ```
 
-Windows では <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
+Windows では <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。  
 macOS では <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 
-## リンク
+## 埋め込み
+### YouTube
 
 ```markdown
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
+<!-- Youtubeの動画 -->
+https://youtu.be/zczjerfFrSI
+
+<!-- YoutubeMusicの動画 -->
+https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
+
+<!-- Youtubeのチャンネル -->
+https://www.youtube.com/@HikakinTV
+
+<!-- YoutubeMusicのチャンネル -->
+https://music.youtube.com/channel/UC_fYA9QRK-aJnFTgvR_4zug
 ```
 
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
+https://youtu.be/zczjerfFrSI
 
+https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
+
+https://www.youtube.com/@HikakinTV
+
+https://music.youtube.com/channel/UCRjVmUQ3CW1kH6vP1VGskWA?si=tMEmi_2_ZvECUUKh
+
+### GitHub
+
+```markdown
+<!-- ユーザー -->
+https://github.com/suzuuuuu09
+
+<!-- リポジトリ -->
+https://github.com/suzuuuuu09/suzuuuuu09
+
+<!-- Github Gistを埋め込む際はscriptタグのembedを使わずにshareでURLをコピーして使用してね -->
+https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
+```
+
+https://github.com/suzuuuuu09
+
+https://github.com/suzuuuuu09/suzuuuuu09
+
+https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
+
+### Codepen
+```markdown
+<!-- 右下のshareからURLをコピーしてください -->
+https://codepen.io/suzuuuuu09/pen/ZYQqJaJ
+```
+https://codepen.io/suzuuuuu09/pen/ZYQqJaJ
+
+### Zenn
+
+```markdown
+https://zenn.dev/aki_think/articles/c4f5b2a75ff4d4
+```
+
+https://zenn.dev/aki_think/articles/c4f5b2a75ff4d4
+
+### Qiita
+
+```md
+https://qiita.com/Qiita/items/c686397e4a0f4f11683d
+```
+
+https://qiita.com/Qiita/items/c686397e4a0f4f11683d
+
+### Note
+
+```markdown
+https://note.com/notemag/n/n0e4bc242c5b6
+```
+
+https://note.com/notemag/n/n0e4bc242c5b6
+
+### はてなブログ
+```markdown
+https://staff.hatenablog.com/entry/2026/01/28/122303
+```
+https://staff.hatenablog.com/entry/2026/01/28/122303
+
+### X(Twitter)
+
+```markdown
+<!-- プロフィール -->
+https://x.com/suzuuuuu_09
+
+<!-- ツイート -->
+https://twitter.com/suzuuuuu_09/status/1900561016435487007
+```
+
+https://twitter.com/suzuuuuu_09
+
+https://twitter.com/suzuuuuu_09/status/1900561016435487007
+
+
+### Reddit
+```markdown
+https://www.reddit.com/r/neovim/comments/1ppa4ag/nvimtreesitter_breaking_changes/
+```
+https://www.reddit.com/r/neovim/comments/1ppa4ag/nvimtreesitter_breaking_changes/
+
+### Google スライド
+
+```md
+https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZDlGAhUL-aQxTf3If9QMYl8jes_QEoe6hoinu5t4B6Rg7aDq/pub
+```
+
+https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZDlGAhUL-aQxTf3If9QMYl8jes_QEoe6hoinu5t4B6Rg7aDq/pub
+
+### Spotify
+
+```markdown
+<!-- Spotifyのトラック -->
+https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4ded
+
+<!-- Spotifyのアーティスト -->
+https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw
+```
+
+https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4ded
+
+https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw
+
+### Soundcloud
+```markdown
+https://soundcloud.com/bei-dou-515365507/mega-tskr-ft-camellia-ft
+```
+https://soundcloud.com/bei-dou-515365507/mega-tskr-ft-camellia-ft
