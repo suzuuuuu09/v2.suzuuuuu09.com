@@ -445,7 +445,7 @@ export default defineConfig({
 				display: "flex",
 				justifyContent: "center",
 				aspectRatio: "16 / 9",
-				maxW: "100%",
+				maxW: "full",
 			},
 
 			".spotify-embed iframe": {
@@ -513,6 +513,13 @@ export default defineConfig({
 				border: "0",
 				rounded: "8px",
 				p: "0.5rem 0",
+			},
+			".hatena-blog-embed, .note-embed, .twitter-embed": {
+				display: "flex",
+				justifyContent: "center",
+			},
+			".speaker-deck-embed": {
+				my: "4",
 			},
 
 			// rehype-autolink-headingsのアンカーリンク
@@ -670,6 +677,35 @@ export default defineConfig({
 						value: {
 							base: "{colors.s-secondary}",
 							_dark: "{colors.s-secondary-dark}",
+						},
+					},
+					"sz.gradient": {
+						25: {
+							value: {
+								base: "color-mix(in oklch, {colors.s-primary} 25%, {colors.s-secondary} 75%)",
+								_dark:
+									"color-mix(in oklch, {colors.s-primary-dark} 25%, {colors.s-secondary-dark} 75%)",
+							},
+						},
+						50: {
+							value: {
+								base: "color-mix(in oklch, {colors.s-primary} 50%, {colors.s-secondary} 50%)",
+								_dark:
+									"color-mix(in oklch, {colors.s-primary-dark} 50%, {colors.s-secondary-dark} 50%)",
+							},
+						},
+						75: {
+							value: {
+								base: "color-mix(in oklch, {colors.s-primary} 75%, {colors.s-secondary} 25%)",
+								_dark:
+									"color-mix(in oklch, {colors.s-primary-dark} 75%, {colors.s-secondary-dark} 25%)",
+							},
+						},
+						100: {
+							value: {
+								base: "{colors.s-primary}",
+								_dark: "{colors.s-primary-dark}",
+							},
 						},
 					},
 					"sz.bg": {

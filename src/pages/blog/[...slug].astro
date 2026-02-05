@@ -7,6 +7,7 @@ import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import SideArticle from "@/components/features/blog/SideArticle.astro";
 import ShareMenu from "@/components/features/blog/ShareMenu.astro";
 import { getBlogPosts } from "@/lib/post";
+import Discussion from "@/components/features/blog/Discussion";
 
 export async function getStaticPaths() {
 	const blogEntries = await getBlogPosts();
@@ -56,6 +57,7 @@ const articleInfo = {
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
     <s.article className="markdown-content" flex="1" minW="0">
       <Content />
+			<Discussion client:load />
 			<SideArticle slug={entry.data.slug} />
     </s.article>
 
