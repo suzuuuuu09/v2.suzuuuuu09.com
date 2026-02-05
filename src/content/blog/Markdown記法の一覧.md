@@ -8,7 +8,7 @@ description: このブログ内で使えるMarkdown記法をまとめる。
 category: tech
 isPublish: true
 publishDate: 2025-08-09
-updateDate: 2026-02-05T01:29
+updateDate: 2026-02-05T01:48
 ---
 # H1 見出し
 ## H2 見出し
@@ -446,6 +446,13 @@ https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZ
 ```
 
 https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZDlGAhUL-aQxTf3If9QMYl8jes_QEoe6hoinu5t4B6Rg7aDq/pub
+
+  
+### Speaker Deck
+```markdown
+https://speakerdeck.com/suzuuuuu09/matsusupo
+```
+https://speakerdeck.com/suzuuuuu09/matsusupo
 
 ### Spotify
 
