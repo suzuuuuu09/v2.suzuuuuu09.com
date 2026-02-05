@@ -19,6 +19,7 @@ export function detectUrlType(url: string): ServiceType {
 	if (url.includes("note.com")) return "note";
 	if (url.includes("soundcloud.com")) return "soundcloud";
 	if (url.includes("reddit.com")) return "reddit";
+	if (url.includes("speakerdeck.com")) return "speaker-deck";
 
 	return "other";
 }

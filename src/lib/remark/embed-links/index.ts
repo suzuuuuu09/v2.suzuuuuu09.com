@@ -73,6 +73,9 @@ export default function remarkEmbedLinks() {
 					case "reddit":
 						promise = Processors.processReddit(ctx);
 						break;
+					case "speaker-deck":
+						promise = Processors.processSpeakerDeck(ctx);
+						break;
 					case "other":
 						promise = Processors.processOgpCard(ctx, "other");
 						break;

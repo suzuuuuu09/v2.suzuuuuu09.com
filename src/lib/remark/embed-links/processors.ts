@@ -1,4 +1,4 @@
-import { fetchOGP } from "../../../lib/ogs"; // 既存のインポート
+import { fetchOGP } from "./ogs";
 import * as Detect from "./detect";
 import * as Templates from "./templates";
 import type { ProcessorContext, OgpData, OembedResponse } from "./types";
@@ -167,6 +167,24 @@ export async function processReddit(ctx: ProcessorContext): Promise<void> {
 
 	const data = await response.json();
 	replaceWithHtml(ctx, data.html, "reddit-embed");
+}
+
+export async function processSpeakerDeck(ctx: ProcessorContext): Promise<void> {
+	const endpoint = "https://speakerdeck.com/oembed.json";
+	const query = encodeURIComponent(ctx.url);
+	const response = await fetch(`${endpoint}?url=${query}`);
+
+	if (!response.ok) return;
+
+	const data = await response.json();
+	let embedHtml = data.html as string;
+
+	// 幅と高さを100%に固定
+	embedHtml = embedHtml
+		.replace(/width=["']?\d+["']?/g, 'width="100%"')
+		.replace(/height=["']?\d+["']?/g, 'height="100%"');
+
+	replaceWithHtml(ctx, embedHtml, "speaker-deck-embed");
 }
 
 export async function processOgpCard(

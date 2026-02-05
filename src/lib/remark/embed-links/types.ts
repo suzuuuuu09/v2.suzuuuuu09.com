@@ -21,6 +21,7 @@ export type ServiceType =
 	| "hatena-blog"
 	| "note"
 	| "reddit"
+	| "speaker-deck"
 	| "other"
 	| "skip";
 
