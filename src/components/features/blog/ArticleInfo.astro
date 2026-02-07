@@ -6,23 +6,23 @@ import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText";
 
 interface Props {
-  title: string;
-  publishDate?: string | Date;
-  updateDate?: string | Date;
-  tags?: string[];
-  emoji?: string;
-  description?: string;
-  content?: string;
+	title: string;
+	publishDate?: string | Date;
+	updateDate?: string | Date;
+	tags?: string[];
+	emoji?: string;
+	description?: string;
+	content?: string;
 }
 
 const {
-  title,
-  publishDate,
-  updateDate,
-  tags = [],
-  emoji,
-  description,
-  content,
+	title,
+	publishDate,
+	updateDate,
+	tags = [],
+	emoji,
+	description,
+	content,
 } = Astro.props;
 ---
 

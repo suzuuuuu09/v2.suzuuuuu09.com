@@ -10,11 +10,11 @@ import { getAwardPosts } from "@/lib/post";
 import Discussion from "@/components/features/blog/Discussion";
 
 export async function getStaticPaths() {
-  const awardEntries = await getAwardPosts();
-  return awardEntries.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+	const awardEntries = await getAwardPosts();
+	return awardEntries.map((entry) => ({
+		params: { slug: entry.data.slug },
+		props: { entry },
+	}));
 }
 
 const { slug } = Astro.params;
@@ -22,27 +22,27 @@ let entry = Astro.props.entry;
 
 // SSRモードでentryが渡されない場合、コレクションから検索
 if (!entry) {
-  const awardEntries = await getAwardPosts();
-  const foundEntry = awardEntries.find((e) => (e.data.slug ?? e.id) === slug);
+	const awardEntries = await getAwardPosts();
+	const foundEntry = awardEntries.find((e) => (e.data.slug ?? e.id) === slug);
 
-  if (!foundEntry) {
-    return Astro.redirect("/404");
-  }
+	if (!foundEntry) {
+		return Astro.redirect("/404");
+	}
 
-  entry = foundEntry;
+	entry = foundEntry;
 }
 
 const { Content, headings } = await render(entry);
 
 const articleInfo = {
-  title: entry.data.title,
-  slug: entry.data.slug,
-  author: entry.data.author,
-  isPublish: entry.data.isPublish,
-  description: entry.data.description || "",
-  content: entry.body, // 読了時間計算用
-  date: entry.data.date, // awardコレクションではdateを使用
-  type: entry.data.type,
+	title: entry.data.title,
+	slug: entry.data.slug,
+	author: entry.data.author,
+	isPublish: entry.data.isPublish,
+	description: entry.data.description || "",
+	content: entry.body, // 読了時間計算用
+	date: entry.data.date, // awardコレクションではdateを使用
+	type: entry.data.type,
 };
 
 const shareTitle = `[${entry.data.type}] ${entry.data.title}`;

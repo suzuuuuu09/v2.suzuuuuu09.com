@@ -3,11 +3,11 @@ import { styled as s } from "styled-system/jsx";
 import Panel from "@/components/ui/Panel";
 
 interface Props {
-  headings: {
-    depth: number;
-    slug: string;
-    text: string;
-  }[];
+	headings: {
+		depth: number;
+		slug: string;
+		text: string;
+	}[];
 }
 
 const { headings } = Astro.props;
@@ -17,7 +17,7 @@ const MAX_TOC_DEPTH = 4;
 
 // 目次の見出しレベルをフィルター
 const tocHeadings = headings.filter(
-  (heading) => heading.depth <= MAX_TOC_DEPTH,
+	(heading) => heading.depth <= MAX_TOC_DEPTH,
 );
 
 // 基準レベルを計算（最初の見出しのレベルを基準とする）
@@ -25,9 +25,9 @@ const baseLevel = tocHeadings.length > 0 ? tocHeadings[0].depth : 1;
 
 // 相対的なレベルを計算した見出し配列を作成
 const tocHeadingsWithRelativeLevel = tocHeadings.map((heading) => ({
-  ...heading,
-  text: heading.text.replace(/^#+\s*/, ""), // headingの先頭にある#を削除
-  relativeDepth: Math.max(0, heading.depth - baseLevel), // 基準レベルからの相対値(最小0)
+	...heading,
+	text: heading.text.replace(/^#+\s*/, ""), // headingの先頭にある#を削除
+	relativeDepth: Math.max(0, heading.depth - baseLevel), // 基準レベルからの相対値(最小0)
 }));
 ---
 

@@ -4,7 +4,7 @@ import { styled as s } from "styled-system/jsx";
 import { categories } from "@/consts/category";
 
 export interface Props {
-  category?: string;
+	category?: string;
 }
 
 const { category } = Astro.props;
@@ -13,43 +13,43 @@ const currentCategory = categories.find((cat) => cat.category === category);
 
 // カテゴリーごとのCSSクラス定義
 const getCategoryClass = (category: string) => {
-  switch (category) {
-    case "tech":
-      return css({
-        bg: "sz.primary/20",
-        color: "sz.primary",
-        borderColor: "sz.primary/40",
-      });
-    case "idea":
-      return css({
-        bg: "sz.secondary/25",
-        color: "sz.text.main",
-        borderColor: "sz.secondary/50",
-      });
-    case "work":
-      return css({
-        bg: "sz.purple/20",
-        color: "sz.purple",
-        borderColor: "sz.purple/40",
-      });
-    case "private":
-      return css({
-        bg: "sz.yellow/25",
-        color: "sz.text.main",
-        borderColor: "sz.yellow/50",
-      });
-    default:
-      return css({
-        bg: "sz.bg-on",
-        color: "sz.text.sub",
-        borderColor: "sz.border",
-      });
-  }
+	switch (category) {
+		case "tech":
+			return css({
+				bg: "sz.primary/20",
+				color: "sz.primary",
+				borderColor: "sz.primary/40",
+			});
+		case "idea":
+			return css({
+				bg: "sz.secondary/25",
+				color: "sz.text.main",
+				borderColor: "sz.secondary/50",
+			});
+		case "work":
+			return css({
+				bg: "sz.purple/20",
+				color: "sz.purple",
+				borderColor: "sz.purple/40",
+			});
+		case "private":
+			return css({
+				bg: "sz.yellow/25",
+				color: "sz.text.main",
+				borderColor: "sz.yellow/50",
+			});
+		default:
+			return css({
+				bg: "sz.bg-on",
+				color: "sz.text.sub",
+				borderColor: "sz.border",
+			});
+	}
 };
 
 const categoryClass = currentCategory
-  ? getCategoryClass(currentCategory.category)
-  : "";
+	? getCategoryClass(currentCategory.category)
+	: "";
 ---
 
 {

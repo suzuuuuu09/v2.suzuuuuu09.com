@@ -11,25 +11,25 @@ import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText";
 
 export interface Props {
-  blog: {
-    id: string;
-    data: {
-      title: string;
-      slug?: string;
-      emoji?: string;
-      tags?: string[];
-      category?: string;
-      publishDate: Date;
-      updateDate?: Date;
-      content?: string;
-    };
-  };
+	blog: {
+		id: string;
+		data: {
+			title: string;
+			slug?: string;
+			emoji?: string;
+			tags?: string[];
+			category?: string;
+			publishDate: Date;
+			updateDate?: Date;
+			content?: string;
+		};
+	};
 }
 
 const { blog } = Astro.props;
 
 const currentCategory = categories.find(
-  (cat) => cat.category === blog.data.category,
+	(cat) => cat.category === blog.data.category,
 );
 ---
 

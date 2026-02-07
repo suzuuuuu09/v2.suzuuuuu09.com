@@ -9,10 +9,10 @@ import Icon from "@suzuuuuu09/astro-iconify";
 // import Search from '@/components/shared/Search.astro';
 
 export const NAVIGATION_LINKS = [
-  { href: "/about", label: "About" },
-  { href: "/product", label: "Products" },
-  { href: "/award", label: "Awards" },
-  { href: "/blog", label: "Blogs" },
+	{ href: "/about", label: "About" },
+	{ href: "/product", label: "Products" },
+	{ href: "/award", label: "Awards" },
+	{ href: "/blog", label: "Blogs" },
 ];
 
 // 現在のパスを取得
@@ -20,9 +20,9 @@ const currentPath = Astro.url.pathname;
 
 // 末尾に/があるときは削除
 const normalizedPath =
-  currentPath.endsWith("/") && currentPath.length > 1
-    ? currentPath.slice(0, -1)
-    : currentPath;
+	currentPath.endsWith("/") && currentPath.length > 1
+		? currentPath.slice(0, -1)
+		: currentPath;
 
 console.log("Current Path:", normalizedPath);
 ---

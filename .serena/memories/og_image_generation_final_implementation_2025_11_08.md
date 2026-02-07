@@ -5,6 +5,7 @@
 ### 1. 仕様
 
 #### エンドポイント
+
 - **URL形式**: `localhost:4321/api/og/{type}/{slug}.png`
 - **例**: `localhost:4321/api/og/blog/md-test.png`
 - **パラメータ**:
@@ -12,6 +13,7 @@
   - `slug`: ページのスラッグ
 
 #### OG画像レイアウト
+
 - **全体サイズ**: 1200x630px
 - **背景**: 背景画像（グラデーション）
 - **構成要素**:
@@ -21,6 +23,7 @@
   4. **サイト名**: 右下にアイコン付き（suzuuuu09.com）
 
 #### スタイル設定
+
 - **背景コンテナ**: `backgroundColor: #faf8ff`、`borderRadius: 16px`
 - **タイトル**: IBMPlexSansJP、64px、左寄せ、flexWrap自動折返し
 - **サイト名**: MoralerSpaceNeon、48px、`position: absolute`、右下配置
@@ -28,6 +31,7 @@
 ### 2. 実装ファイル
 
 #### src/components/features/og/OgImage.tsx
+
 ```jsx
 <main style={{ backgroundImage, ...styles }}>
   <div style={{ backgroundColor: "#faf8ff", borderRadius: "16px", padding: "40px" }}>
@@ -36,7 +40,7 @@
       {words.map(...)}
     </div>
   </div>
-  
+
   {/* サイト名 */}
   <div style={{ position: "absolute", bottom: "40px", right: "60px" }}>
     {iconSvg && <img ... />}
@@ -48,6 +52,7 @@
 ### 3. 動作確認 ✅
 
 **テスト結果**:
+
 - ✅ 背景画像が正しく表示
 - ✅ 白背景（カド丸）がタイトル周辺に配置
 - ✅ タイトルテキストが読みやすい
@@ -69,5 +74,5 @@
 ## 注意点
 
 - SSRモード: @astrojs/nodeまたはアダプター必須
-- 日本語フォント: public/fonts/IBMPlexSansJP-*.ttf が必要
+- 日本語フォント: public/fonts/IBMPlexSansJP-\*.ttf が必要
 - 画像生成時間: 初回2-3秒（キャッシュ活用推奨）

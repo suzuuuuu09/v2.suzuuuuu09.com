@@ -2,31 +2,31 @@
 import Tag from "@/components/ui/Tag.astro";
 
 interface Props {
-  tags?: string[];
-  omit?: boolean;
+	tags?: string[];
+	omit?: boolean;
 }
 
 const { tags, omit = false } = Astro.props;
 
 // タグの長さに応じて表示数を動的に決定
 const calcMaxVisibleTags = (tags: string[]): number => {
-  if (!tags || tags.length === 0) return 0;
+	if (!tags || tags.length === 0) return 0;
 
-  // タグの平均文字数を計算
-  const totalLength = tags.reduce((sum, tag) => sum + tag.length, 0);
-  const avgLength = totalLength / tags.length;
+	// タグの平均文字数を計算
+	const totalLength = tags.reduce((sum, tag) => sum + tag.length, 0);
+	const avgLength = totalLength / tags.length;
 
-  // 文字数の平均から表示数
-  if (avgLength <= 4) {
-    // 4文字以下: 3個表示
-    return 3;
-  } else if (avgLength <= 10) {
-    // 4-10文字: 2個表示
-    return 2;
-  } else {
-    // 11文字以上: 1個表示
-    return 1;
-  }
+	// 文字数の平均から表示数
+	if (avgLength <= 4) {
+		// 4文字以下: 3個表示
+		return 3;
+	} else if (avgLength <= 10) {
+		// 4-10文字: 2個表示
+		return 2;
+	} else {
+		// 11文字以上: 1個表示
+		return 1;
+	}
 };
 
 const maxVisibleTags = tags ? calcMaxVisibleTags(tags) : 0;

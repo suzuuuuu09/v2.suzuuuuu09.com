@@ -7,24 +7,24 @@ import Icon from "@suzuuuuu09/astro-iconify";
 import BudouxText from "@/components/shared/BudouxText";
 
 interface Props {
-  title: string;
-  date?: string | Date;
-  updateDate?: string | Date;
-  tags?: string[];
-  emoji?: string;
-  description?: string;
-  content?: string;
-  type: string;
+	title: string;
+	date?: string | Date;
+	updateDate?: string | Date;
+	tags?: string[];
+	emoji?: string;
+	description?: string;
+	content?: string;
+	type: string;
 }
 
 const {
-  title,
-  date,
-  tags = [],
-  emoji,
-  description,
-  content,
-  type,
+	title,
+	date,
+	tags = [],
+	emoji,
+	description,
+	content,
+	type,
 } = Astro.props;
 
 const titleText = `[${type}] ${title}`;

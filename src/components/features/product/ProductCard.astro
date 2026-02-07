@@ -9,20 +9,20 @@ import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText";
 
 export interface Props {
-  product: {
-    id: string;
-    data: {
-      title: string;
-      description?: string;
-      slug?: string;
-      author?: string;
-      publishDate: Date;
-      updateDate?: Date;
-      tags?: string[];
-      thumbnail: string;
-      content?: string;
-    };
-  };
+	product: {
+		id: string;
+		data: {
+			title: string;
+			description?: string;
+			slug?: string;
+			author?: string;
+			publishDate: Date;
+			updateDate?: Date;
+			tags?: string[];
+			thumbnail: string;
+			content?: string;
+		};
+	};
 }
 
 const { product } = Astro.props;

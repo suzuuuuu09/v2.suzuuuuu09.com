@@ -3,31 +3,31 @@ import "@mantine/core/styles.css";
 import "@/styles/global.css";
 import "katex/dist/katex.min.css"; // KaTeXのスタイル
 import { css } from "styled-system/css";
-import { SITE_TITLE, SITE_DESCRIPTION, GA_TRACKING_ID } from "@/consts/base";
-import Header from "@/components/bases/Header.astro";
-import Footer from "@/components/bases/Footer.astro";
 import FloatingBackground from "@/components/bases/FloatingBackground";
+import Footer from "@/components/bases/Footer.astro";
+import Header from "@/components/bases/Header.astro";
+import GoogleAnalytics from "@/components/features/ga/GoogleAnalytics.astro";
 import { ContentContainer } from "@/components/shared/ContentContainer";
 import { Expand } from "@/components/shared/Expand";
-import GoogleAnalytics from "@/components/features/ga/GoogleAnalytics.astro";
+import { GA_TRACKING_ID, SITE_DESCRIPTION, SITE_TITLE } from "@/consts/base";
 
 interface Props {
-  title: string;
-  headings: {
-    depth: number;
-    slug: string;
-    text: string;
-  }[];
-  frontmatter?: {
-    title: string;
-    slug: string;
-    publishDate?: string | Date;
-    updateDate?: string | Date;
-    tags?: string[];
-    emoji?: string;
-    description?: string;
-  };
-  collection?: string;
+	title: string;
+	headings: {
+		depth: number;
+		slug: string;
+		text: string;
+	}[];
+	frontmatter?: {
+		title: string;
+		slug: string;
+		publishDate?: string | Date;
+		updateDate?: string | Date;
+		tags?: string[];
+		emoji?: string;
+		description?: string;
+	};
+	collection?: string;
 }
 
 const { title, headings = [], frontmatter, collection = "blog" } = Astro.props;
@@ -35,8 +35,8 @@ const siteTitle = `${frontmatter?.title || title} - ${SITE_TITLE}`;
 const description = frontmatter?.description || SITE_DESCRIPTION;
 // OG画像URL生成
 const ogImageUrl = new URL(
-  `/api/og/${collection}/${frontmatter?.slug || headings[0]?.slug || title}.png`,
-  Astro.site,
+	`/api/og/${collection}/${frontmatter?.slug || headings[0]?.slug || title}.png`,
+	Astro.site,
 );
 ---
 

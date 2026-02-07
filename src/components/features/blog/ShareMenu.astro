@@ -5,30 +5,30 @@ import Icon from "@suzuuuuu09/astro-iconify";
 import Panel from "@/components/ui/Panel";
 
 interface Props {
-  title: string;
-  slug: string;
-  description?: string;
-  collection: string;
-  visible?: "lg" | "base" | "always";
+	title: string;
+	slug: string;
+	description?: string;
+	collection: string;
+	visible?: "lg" | "base" | "always";
 }
 
 const {
-  title,
-  slug,
-  description = "",
-  collection,
-  visible = "always",
+	title,
+	slug,
+	description = "",
+	collection,
+	visible = "always",
 } = Astro.props;
 const baseUrl = Astro.site;
 const url = `${baseUrl}${collection}/${slug}`;
 
 const twitterShareUrl = () => {
-  const twitterBaseUrl = "https://twitter.com/intent/tweet";
-  const params = new URLSearchParams({
-    text: title,
-    url: url,
-  });
-  return `${twitterBaseUrl}?${params.toString()}`;
+	const twitterBaseUrl = "https://twitter.com/intent/tweet";
+	const params = new URLSearchParams({
+		text: title,
+		url: url,
+	});
+	return `${twitterBaseUrl}?${params.toString()}`;
 };
 ---
 

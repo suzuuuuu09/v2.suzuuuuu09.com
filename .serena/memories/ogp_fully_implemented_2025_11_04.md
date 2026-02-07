@@ -5,6 +5,7 @@
 ### 1. 実装完了
 
 #### ファイル一覧
+
 - ✅ `src/components/OgImage.tsx` - Reactコンポーネント
 - ✅ `src/utils/og-image-generator.ts` - 画像生成ロジック
 - ✅ `src/pages/api/og.ts` - APIエンドポイント
@@ -18,6 +19,7 @@
 ### 2. 機能実装内容
 
 #### BlogLayout での自動生成
+
 ```astro
 const ogImageUrl = new URL('/api/og', Astro.site);
 ogImageUrl.searchParams.set('title', frontmatter?.title || title);
@@ -25,12 +27,14 @@ ogImageUrl.searchParams.set('type', 'blog');
 ```
 
 メタタグ:
+
 - `og:image`: 生成されたOG画像URL
 - `og:type`: article
 - `og:site_name`: suzuuuuu09.com
 - `twitter:image`: 同じOG画像URL
 
 #### BaseLayout での自動生成
+
 - タイプ: `default`
 - `og:type`: website
 - その他は同様
@@ -38,6 +42,7 @@ ogImageUrl.searchParams.set('type', 'blog');
 ### 3. テスト結果 ✅
 
 #### ブログページ: `/blog/embed-test`
+
 ```
 og:image: https://suzuuuuu09.com/api/og?title=埋め込みテスト&type=blog
 og:title: 埋め込みテスト
@@ -46,6 +51,7 @@ twitter:image: https://suzuuuuu09.com/api/og?title=埋め込みテスト&type=bl
 ```
 
 #### OG画像生成確認 ✅
+
 - タイトル: 「埋め込みテスト」（日本語対応）
 - グラデーション: 紫色（blog タイプ）
 - サイト名: suzuuuuu09.com
@@ -53,6 +59,7 @@ twitter:image: https://suzuuuuu09.com/api/og?title=埋め込みテスト&type=bl
 ### 4. SSR対応 ✅
 
 #### 修正内容
+
 - `output: "server"` で SSR モード有効化
 - `@astrojs/node` アダプターをインストール
 - 3つのページで SSRモード対応実装:
@@ -63,18 +70,21 @@ twitter:image: https://suzuuuuu09.com/api/og?title=埋め込みテスト&type=bl
 ### 5. ビルド状況
 
 ✅ 本番ビルド成功
+
 ```
 [build] ✓ Completed in 12.61s
 [build] Complete!
 ```
 
 dist 構成:
+
 - dist/client/ - クライアント資産
 - dist/server/ - サーバーロジック
 
 ### 6. デプロイメント対応
 
 本番環境での実行:
+
 ```bash
 # ビルド
 bun run build
@@ -85,13 +95,13 @@ node dist/server/entry.mjs
 
 ### 7. 機能一覧
 
-| 機能 | 状態 | URL例 |
-|------|------|------|
-| ブログOG画像 | ✅ 完成 | `/blog/embed-test` |
-| 受賞OG画像 | ✅ 完成 | `/award/[slug]` |
-| プロダクトOG画像 | ✅ 完成 | `/product/[slug]` |
+| 機能              | 状態    | URL例                         |
+| ----------------- | ------- | ----------------------------- |
+| ブログOG画像      | ✅ 完成 | `/blog/embed-test`            |
+| 受賞OG画像        | ✅ 完成 | `/award/[slug]`               |
+| プロダクトOG画像  | ✅ 完成 | `/product/[slug]`             |
 | APIエンドポイント | ✅ 完成 | `/api/og?title=...&type=blog` |
-| SSRレンダリング | ✅ 完成 | 動的ページ対応 |
+| SSRレンダリング   | ✅ 完成 | 動的ページ対応                |
 
 ## 次のステップ
 

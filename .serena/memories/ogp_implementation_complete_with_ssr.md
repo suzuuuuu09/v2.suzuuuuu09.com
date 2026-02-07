@@ -5,23 +5,27 @@
 ### 1. 実装ファイル
 
 #### src/components/OgImage.tsx
+
 - タイプ別グラデーション背景
 - blog/product/about/default の4タイプ対応
 - IBM Plex Sans JP フォント使用
 
 #### src/utils/og-image-generator.ts
+
 - フォント読み込み
 - SVG生成（Satori）
 - 画像変換（@resvg/resvg-js + Sharp）
 - MIME タイプ返却
 
 #### src/pages/api/og.ts
+
 - GET /api/og?title=...&type=...&format=...
 - 動的OG画像生成エンドポイント
 
 ### 2. 設定変更
 
 #### astro.config.mjs
+
 ```javascript
 import node from "@astrojs/node";
 
@@ -45,6 +49,7 @@ export default defineConfig({
 ### 4. ビルド結果
 
 ✅ 本番ビルド成功
+
 - dist/client/ - クライアント資産
 - dist/server/ - サーバーロジック
 - @astrojs/node で SSR 対応
@@ -69,6 +74,7 @@ GET /api/og?title=デフォルト&type=default   → ✅ 紫グラデーショ�
 本番環境でのデプロイ方法:
 
 **Node.js サーバー:**
+
 ```bash
 # ビルド
 bun run build
@@ -78,6 +84,7 @@ node dist/server/entry.mjs
 ```
 
 **Vercel:**
+
 ```bash
 # package.json に以下を追加
 {

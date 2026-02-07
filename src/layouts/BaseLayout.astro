@@ -1,17 +1,17 @@
 ---
 import "@mantine/core/styles.css";
 import "@/styles/global.css";
-import { SITE_TITLE, SITE_DESCRIPTION, GA_TRACKING_ID } from "@/consts/base";
-import Header from "@/components/bases/Header.astro";
+import { css } from "styled-system/css";
+import FloatingBackground from "@/components/bases/FloatingBackground";
 import Footer from "@/components/bases/Footer.astro";
+import Header from "@/components/bases/Header.astro";
 import GoogleAnalytics from "@/components/features/ga/GoogleAnalytics.astro";
 import { ContentContainer } from "@/components/shared/ContentContainer";
-import FloatingBackground from "@/components/bases/FloatingBackground";
-import { css } from "styled-system/css";
+import { GA_TRACKING_ID, SITE_DESCRIPTION, SITE_TITLE } from "@/consts/base";
 
 interface Props {
-  title?: string;
-  maxW?: any;
+	title?: string;
+	maxW?: any;
 }
 
 const { title, maxW } = Astro.props;

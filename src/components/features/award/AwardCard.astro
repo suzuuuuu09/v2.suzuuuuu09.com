@@ -6,16 +6,16 @@ import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText";
 
 export interface Props {
-  award: {
-    id?: string;
-    data: {
-      title: string;
-      slug: string;
-      type: string;
-      description?: string;
-      date: Date;
-    };
-  };
+	award: {
+		id?: string;
+		data: {
+			title: string;
+			slug: string;
+			type: string;
+			description?: string;
+			date: Date;
+		};
+	};
 }
 
 const { award } = Astro.props as Props;

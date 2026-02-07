@@ -4,5 +4,5 @@
  * Obsidian形式の画像パス（![[image.webp]]）を通常のパス（image.webp）に変換する
  */
 export const cleanAssetPath = (imagePath: string): string => {
-  return imagePath.replaceAll("![[", "").replaceAll("]]", "");
+	return imagePath.replaceAll("![[", "").replaceAll("]]", "");
 };

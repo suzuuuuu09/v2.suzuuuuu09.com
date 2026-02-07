@@ -5,6 +5,7 @@
 ### 1. コンポーネント実装
 
 #### src/components/OgImage.tsx
+
 - Reactコンポーネント、Satoriで使用
 - タイプ別カラースキーム:
   - blog: 紫 (#667eea → #764ba2)
@@ -15,6 +16,7 @@
 - IBMPlexSansJPフォント使用
 
 #### src/utils/og-image-generator.ts
+
 - `loadFonts()`: public/fonts/IBMPlexSansJP-{Regular,Bold}.ttfを読み込み
 - `generateSvg()`: SatoriでリアクトコンポーネントからSVG生成
 - `convertSvgToImage()`: @resvg/resvg-js → sharpで画像変換
@@ -24,6 +26,7 @@
 ### 2. APIエンドポイント
 
 #### src/pages/api/og.ts
+
 - GET /api/og?title=...&type=...
 - パラメータ:
   - title: 必須、URLエンコード対応
@@ -35,6 +38,7 @@
 ### 3. 設定変更
 
 #### astro.config.mjs
+
 - output: "static" → "server" に変更
 - SSRモード有効化により動的APIが機能
 
@@ -64,17 +68,20 @@ GET /api/og?title=デフォルト&type=default     → 200 OK (紫グラデー�
 ### ブログ記事でのOG画像URL例
 
 ```html
-<meta property="og:image" content="https://suzuuuuu09.com/api/og?title=ブログタイトル&type=blog">
+<meta
+  property="og:image"
+  content="https://suzuuuuu09.com/api/og?title=ブログタイトル&type=blog"
+/>
 ```
 
 ### プログラムでの利用
 
 ```typescript
-import { generateOgImage } from '@/utils/og-image-generator';
+import { generateOgImage } from "@/utils/og-image-generator";
 
 const buffer = await generateOgImage({
-  title: 'My Title',
-  type: 'blog',
-  format: 'png',
+  title: "My Title",
+  type: "blog",
+  format: "png",
 });
 ```
