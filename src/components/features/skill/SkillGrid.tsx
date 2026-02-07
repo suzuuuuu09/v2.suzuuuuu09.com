@@ -1,6 +1,6 @@
 import { styled as s } from "styled-system/jsx";
 
-export const SkillGrid = s('div', {
+export const SkillGrid = s("div", {
   base: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill,minmax(100px,1fr))",
@@ -10,5 +10,5 @@ export const SkillGrid = s('div', {
     alignContent: "stretch",
     justifyItems: "center",
     mb: "8",
-  }
-})
+  },
+});

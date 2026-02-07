@@ -10,25 +10,27 @@ const posts = await getBlogPosts();
 ---
 
 <BaseLayout title="Blogs">
-	<SectionTitle>Blogs</SectionTitle>
-	<Expand>
-		{posts.length === 0 ? (
-			<p>No blog posts found.</p>
-		) : (
-			<ArticleGrid>
-				{posts.map((blog) => (
-					<BlogCard
-          	blog={{
-            	id: blog.id,
-            	data: { 
-								...blog.data, 
-								slug: blog.data.slug ?? blog.id,
-								content: blog.body,
-							},
-          	}}
-        	/>
-				))}
-			</ArticleGrid>
-		)}
-	</Expand>
+  <SectionTitle>Blogs</SectionTitle>
+  <Expand>
+    {
+      posts.length === 0 ? (
+        <p>No blog posts found.</p>
+      ) : (
+        <ArticleGrid>
+          {posts.map((blog) => (
+            <BlogCard
+              blog={{
+                id: blog.id,
+                data: {
+                  ...blog.data,
+                  slug: blog.data.slug ?? blog.id,
+                  content: blog.body,
+                },
+              }}
+            />
+          ))}
+        </ArticleGrid>
+      )
+    }
+  </Expand>
 </BaseLayout>

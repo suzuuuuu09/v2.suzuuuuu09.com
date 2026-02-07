@@ -26,7 +26,12 @@ const titleText = `[${award.data.type}] ${award.data.title}`;
   <a
     href={`/award/${award.data.slug ?? award.id}/`}
     class={cx(
-      css({ width: "100%", display: "block", color: "sz.text.main", textDecoration: "none" })
+      css({
+        width: "100%",
+        display: "block",
+        color: "sz.text.main",
+        textDecoration: "none",
+      }),
     )}
   >
     <s.div
@@ -53,7 +58,7 @@ const titleText = `[${award.data.type}] ${award.data.title}`;
                 flexShrink: 0,
                 transition: "transform 0.3s",
                 _groupHover: { transform: "scale(1.05)" },
-              })
+              }),
             )}
           >
             <span class={css({ fontSize: "2xl" })}>🏆</span>
@@ -61,38 +66,42 @@ const titleText = `[${award.data.type}] ${award.data.title}`;
 
           <!-- タイトル -->
           <div style={{ minWidth: 0, flex: 1 }}>
-            <Flex align="center" wrap="wrap" gap="2" >
-							<s.h2
-								lineHeight="snug"
-								transition="colors 0.3s"
-								fontWeight="bold"
-								fontSize="xl"
-								overflow="hidden"
-								textOverflow="ellipsis"
-								lineClamp="2"
-								display="flex"
-								flexWrap="wrap"
-								gap="0.5"
-								_groupHover={{ color: "sz.primary" }}
-							>
-								<BudouxText text={titleText} client:load/>
-							</s.h2>
-
+            <Flex align="center" wrap="wrap" gap="2">
+              <s.h2
+                lineHeight="snug"
+                transition="colors 0.3s"
+                fontWeight="bold"
+                fontSize="xl"
+                overflow="hidden"
+                textOverflow="ellipsis"
+                lineClamp="2"
+                display="flex"
+                flexWrap="wrap"
+                gap="0.5"
+                _groupHover={{ color: "sz.primary" }}
+              >
+                <BudouxText text={titleText} client:load />
+              </s.h2>
             </Flex>
 
             <!-- 説明 -->
-            {award.data.description && (
-              <s.span color="sz.text.sub" fontSize="sm" mt="2" mb="3" display="block" style={{ overflow: 'hidden' }}>
-                {award.data.description}
-              </s.span>
-            )}
+            {
+              award.data.description && (
+                <s.span
+                  color="sz.text.sub"
+                  fontSize="sm"
+                  mt="2"
+                  mb="3"
+                  display="block"
+                  style={{ overflow: "hidden" }}
+                >
+                  {award.data.description}
+                </s.span>
+              )
+            }
 
             <!-- 受賞日・出場日 -->
-            <Date
-              date={award.data.date}
-              gap="2"
-              type="award"
-            />
+            <Date date={award.data.date} gap="2" type="award" />
           </div>
         </Flex>
       </Flex>

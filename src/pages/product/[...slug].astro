@@ -10,11 +10,11 @@ import { getProductPosts } from "@/lib/post";
 import Discussion from "@/components/features/blog/Discussion";
 
 export async function getStaticPaths() {
-	const productEntries = await getProductPosts();
-	return productEntries.map((entry) => ({
-		params: { slug: entry.data.slug },
-		props: { entry },
-	}));
+  const productEntries = await getProductPosts();
+  return productEntries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
 }
 
 const { slug } = Astro.params;
@@ -22,28 +22,27 @@ let entry = Astro.props.entry;
 
 // SSRモードでentryが渡されない場合、コレクションから検索
 if (!entry) {
-	const productEntries = await getProductPosts();
-	const foundEntry = productEntries.find((e) => (e.data.slug ?? e.id) === slug);
+  const productEntries = await getProductPosts();
+  const foundEntry = productEntries.find((e) => (e.data.slug ?? e.id) === slug);
 
-	if (!foundEntry) {
-		return Astro.redirect("/404");
-	}
+  if (!foundEntry) {
+    return Astro.redirect("/404");
+  }
 
-	entry = foundEntry;
+  entry = foundEntry;
 }
 
 const { Content, headings } = await render(entry);
 
-// プロダクトの情報
 const articleInfo = {
-	title: entry.data.title,
-	slug: entry.data.slug,
-	publishDate: entry.data.publishDate,
-	updateDate: entry.data.updateDate,
-	tags: entry.data.tags || [],
-	thumbnail: entry.data.thumbnail || "",
-	description: entry.data.description || "",
-	content: entry.body, // 読了時間計算用
+  title: entry.data.title,
+  slug: entry.data.slug,
+  publishDate: entry.data.publishDate,
+  updateDate: entry.data.updateDate,
+  tags: entry.data.tags || [],
+  thumbnail: entry.data.thumbnail || "",
+  description: entry.data.description || "",
+  content: entry.body, // 読了時間計算用
 };
 ---
 
@@ -54,39 +53,59 @@ const articleInfo = {
   collection="product"
 >
   <ProductInfo {...articleInfo} />
+
   <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
-    <s.article className="markdown-content" flex="1" minW="0">
-      <Content />
-			<Discussion client:load />
-      <SideArticle slug={entry.data.slug} collection="product" />
+    <s.article
+      flex="1"
+      minW="0"
+      display="flex"
+      flexDir="column"
+      order={{ base: 2, lg: 1 }}
+    >
+      <s.div className="markdown-content" order="1">
+        <Content />
+      </s.div>
+
+      <s.nav order="2">
+        <ShareMenu
+          title={articleInfo.title}
+          slug={articleInfo.slug}
+          description={articleInfo.description}
+          collection="product"
+          visible="base"
+        />
+      </s.nav>
+
+      <s.section order="3">
+        <Discussion client:load />
+      </s.section>
+
+      <s.section order="4">
+        <SideArticle slug={entry.data.slug} collection="product" />
+      </s.section>
     </s.article>
 
-    <ShareMenu
-			title={articleInfo.title}
-			slug={articleInfo.slug}
-			description={articleInfo.description}
-			collection="product"
-			visible="base"
-		/>
-
-		<s.aside 
-			w={{ base: "100%", lg: "72" }}
-      order={{ base: -1, lg: 1 }} 
-      display="flex" 
-      flexDir="column" 
+    <s.aside
+      w={{ base: "100%", lg: "72" }}
+      order={{ base: 1, lg: 2 }}
+      display="flex"
+      flexDir="column"
       gap="4"
       position={{ base: "relative", lg: "sticky" }}
       top={{ lg: "24" }}
       alignSelf="flex-start"
     >
       <TableOfContents headings={headings} />
-			<ShareMenu
-				title={articleInfo.title}
-				slug={articleInfo.slug}
-				description={articleInfo.description}
-				visible="lg"
-				collection="product"
-			/>
+
+      <s.nav>
+        <ShareMenu
+          title={articleInfo.title}
+          slug={articleInfo.slug}
+          description={articleInfo.description}
+          visible="lg"
+          collection="product"
+        />
+      </s.nav>
     </s.aside>
   </Flex>
 </BlogLayout>

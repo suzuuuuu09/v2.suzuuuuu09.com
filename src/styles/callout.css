@@ -7,7 +7,11 @@
   border-radius: 0.5rem;
   border-width: 1px;
   border-color: color-mix(in srgb, var(--colors-callout-blue) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-blue) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-blue) 50%,
+    transparent
+  );
 }
 
 [data-callout] > [data-callout-title] {
@@ -79,7 +83,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 /* Info Type */
 [data-callout][data-callout-type="info"] {
   border-color: color-mix(in srgb, var(--colors-callout-blue) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-blue) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-blue) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="info"] > [data-callout-title] {
@@ -98,7 +106,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 /* Todo Type */
 [data-callout][data-callout-type="todo"] {
   border-color: color-mix(in srgb, var(--colors-callout-blue) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-blue) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-blue) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="todo"] > [data-callout-title] {
@@ -119,7 +131,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="summary"],
 [data-callout][data-callout-type="tldr"] {
   border-color: color-mix(in srgb, var(--colors-callout-cyan) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-cyan) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-cyan) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="abstract"] > [data-callout-title],
@@ -135,11 +151,13 @@ details[data-callout][open] > summary[data-callout-title]::after {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiI+PHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iNCIgeD0iOCIgeT0iMiIgcng9IjEiIHJ5PSIxIi8+PHBhdGggZD0iTTE2IDRoMmEyIDIgMCAwIDEgMiAydjE0YTIgMiAwIDAgMS0yIDJINmEyIDIgMCAwIDEtMi0yVjZhMiAyIDAgMCAxIDItMmgybTQgN2g0bS00IDVoNG0tOC01aC4wMU04IDE2aC4wMSIvPjwvZz48L3N2Zz4=");
 }
 
-[data-callout][data-callout-type="abstract"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="abstract"]
+  > [data-callout-title]:empty::after {
   content: "Abstract";
 }
 
-[data-callout][data-callout-type="summary"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="summary"]
+  > [data-callout-title]:empty::after {
   content: "Summary";
 }
 
@@ -152,7 +170,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="hint"],
 [data-callout][data-callout-type="important"] {
   border-color: color-mix(in srgb, var(--colors-callout-cyan) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-cyan) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-cyan) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="tip"] > [data-callout-title],
@@ -176,7 +198,8 @@ details[data-callout][open] > summary[data-callout-title]::after {
   content: "Hint";
 }
 
-[data-callout][data-callout-type="important"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="important"]
+  > [data-callout-title]:empty::after {
   content: "Important";
 }
 
@@ -184,8 +207,16 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="success"],
 [data-callout][data-callout-type="check"],
 [data-callout][data-callout-type="done"] {
-  border-color: color-mix(in srgb, var(--colors-callout-green) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-green) 50%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--colors-callout-green) 20%,
+    transparent
+  );
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-green) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="success"] > [data-callout-title],
@@ -201,7 +232,8 @@ details[data-callout][open] > summary[data-callout-title]::after {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0iTTIwIDZMOSAxN2wtNS01Ii8+PC9zdmc+");
 }
 
-[data-callout][data-callout-type="success"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="success"]
+  > [data-callout-title]:empty::after {
   content: "Success";
 }
 
@@ -217,8 +249,16 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="question"],
 [data-callout][data-callout-type="help"],
 [data-callout][data-callout-type="faq"] {
-  border-color: color-mix(in srgb, var(--colors-callout-orange) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-orange) 50%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--colors-callout-orange) 20%,
+    transparent
+  );
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-orange) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="question"] > [data-callout-title],
@@ -234,7 +274,8 @@ details[data-callout][open] > summary[data-callout-title]::after {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cGF0aCBkPSJNOS4wOSA5YTMgMyAwIDAgMSA1LjgzIDFjMCAyLTMgMy0zIDNtLjA4IDRoLjAxIi8+PC9nPjwvc3ZnPg==");
 }
 
-[data-callout][data-callout-type="question"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="question"]
+  > [data-callout-title]:empty::after {
   content: "Question";
 }
 
@@ -250,8 +291,16 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="warning"],
 [data-callout][data-callout-type="caution"],
 [data-callout][data-callout-type="attention"] {
-  border-color: color-mix(in srgb, var(--colors-callout-orange) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-orange) 50%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--colors-callout-orange) 20%,
+    transparent
+  );
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-orange) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="warning"] > [data-callout-title],
@@ -267,15 +316,18 @@ details[data-callout][open] > summary[data-callout-title]::after {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0ibTIxLjczIDE4bC04LTE0YTIgMiAwIDAgMC0zLjQ4IDBsLTggMTRBMiAyIDAgMCAwIDQgMjFoMTZhMiAyIDAgMCAwIDEuNzMtM00xMiA5djRtMCA0aC4wMSIvPjwvc3ZnPg==");
 }
 
-[data-callout][data-callout-type="warning"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="warning"]
+  > [data-callout-title]:empty::after {
   content: "Warning";
 }
 
-[data-callout][data-callout-type="caution"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="caution"]
+  > [data-callout-title]:empty::after {
   content: "Caution";
 }
 
-[data-callout][data-callout-type="attention"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="attention"]
+  > [data-callout-title]:empty::after {
   content: "Attention";
 }
 
@@ -284,7 +336,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="fail"],
 [data-callout][data-callout-type="missing"] {
   border-color: color-mix(in srgb, var(--colors-callout-red) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-red) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-red) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="failure"] > [data-callout-title],
@@ -300,7 +356,8 @@ details[data-callout][open] > summary[data-callout-title]::after {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0iTTE4IDZMNiAxOE02IDZsMTIgMTIiLz48L3N2Zz4=");
 }
 
-[data-callout][data-callout-type="failure"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="failure"]
+  > [data-callout-title]:empty::after {
   content: "Failure";
 }
 
@@ -308,7 +365,8 @@ details[data-callout][open] > summary[data-callout-title]::after {
   content: "Fail";
 }
 
-[data-callout][data-callout-type="missing"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="missing"]
+  > [data-callout-title]:empty::after {
   content: "Missing";
 }
 
@@ -316,7 +374,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="danger"],
 [data-callout][data-callout-type="error"] {
   border-color: color-mix(in srgb, var(--colors-callout-red) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-red) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-red) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="danger"] > [data-callout-title],
@@ -341,7 +403,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 /* Bug Type */
 [data-callout][data-callout-type="bug"] {
   border-color: color-mix(in srgb, var(--colors-callout-red) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-red) 50%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-red) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="bug"] > [data-callout-title] {
@@ -359,15 +425,24 @@ details[data-callout][open] > summary[data-callout-title]::after {
 
 /* Example Type */
 [data-callout][data-callout-type="example"] {
-  border-color: color-mix(in srgb, var(--colors-callout-purple) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-purple) 50%, transparent);
+  border-color: color-mix(
+    in srgb,
+    var(--colors-callout-purple) 20%,
+    transparent
+  );
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-purple) 50%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="example"] > [data-callout-title] {
   color: var(--colors-callout-purple);
 }
 
-[data-callout][data-callout-type="example"] > [data-callout-title]:empty::after {
+[data-callout][data-callout-type="example"]
+  > [data-callout-title]:empty::after {
   content: "Example";
 }
 
@@ -380,7 +455,11 @@ details[data-callout][open] > summary[data-callout-title]::after {
 [data-callout][data-callout-type="quote"],
 [data-callout][data-callout-type="cite"] {
   border-color: color-mix(in srgb, var(--colors-callout-gray) 20%, transparent);
-  background-color: color-mix(in srgb, var(--colors-callout-gray) 15%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--colors-callout-gray) 15%,
+    transparent
+  );
 }
 
 [data-callout][data-callout-type="quote"] > [data-callout-title],

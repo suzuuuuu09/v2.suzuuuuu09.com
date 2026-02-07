@@ -1,5 +1,5 @@
 import type { CareerItem } from "@/types";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 export const CAREER_ITEMS: CareerItem[] = [
   {
@@ -29,7 +29,7 @@ export const CAREER_ITEMS: CareerItem[] = [
     writeEnd: true,
   },
   {
-    "id": "4",
+    id: "4",
     title: "愛知工業大学 入学",
     supplement: "AIT",
     start: dayjs("2025-04-04"),
@@ -43,5 +43,5 @@ export const CAREER_ITEMS: CareerItem[] = [
     start: dayjs("2025-04-04"),
     icon: "tabler:cpu",
     writeEnd: true,
-  }
+  },
 ];

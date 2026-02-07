@@ -28,17 +28,19 @@ export interface Props {
 
 const { blog } = Astro.props;
 
-const currentCategory = categories.find((cat) => cat.category === blog.data.category);
+const currentCategory = categories.find(
+  (cat) => cat.category === blog.data.category,
+);
 ---
 
 <Card maxW="450px">
   <s.a
     href={`/blog/${blog.data.slug ?? blog.id}/`}
-		display="flex"
-		direction="column"
-		h="full"
-		color="sz.text.main"
-		textDecoration="none"
+    display="flex"
+    direction="column"
+    h="full"
+    color="sz.text.main"
+    textDecoration="none"
   >
     <Flex
       position="relative"
@@ -52,15 +54,14 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
       flexDir="column"
     >
       <!-- カードヘッダー：絵文字背景 -->
-      
-      <s.div position="absolute" top="6" right="6" opacity="0.1" >
-        <Center w="20" h="20" bg="sz.primary/10" borderRadius="full" >
-					<s.div fontSize="3xl" >
+
+      <s.div position="absolute" top="6" right="6" opacity="0.1">
+        <Center w="20" h="20" bg="sz.primary/10" borderRadius="full">
+          <s.div fontSize="3xl">
             {currentCategory?.emoji || "📝"}
           </s.div>
         </Center>
       </s.div>
-     
 
       <!-- メイン絵文字 -->
       <s.div position="relative" z="10">
@@ -76,27 +77,27 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
           <s.span fontSize="3xl">{blog.data.emoji || "📝"}</s.span>
         </Center>
       </s.div>
-			
-			<s.h2
-				lineHeight="snug"
-				transition="colors 0.3s"
-				mb="3"
-				mt="4"
-				fontWeight="bold"
-				fontSize="xl"
-				overflow="hidden"
-				textOverflow="ellipsis"
-				lineClamp="2"
-				display="flex"
-				flexWrap="wrap"
-				gap="0.5"
-				_groupHover={{ color: "sz.primary" }}
-			>
-				<BudouxText text={blog.data.title} client:load/>
-			</s.h2>
+
+      <s.h2
+        lineHeight="snug"
+        transition="colors 0.3s"
+        mb="3"
+        mt="4"
+        fontWeight="bold"
+        fontSize="xl"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        lineClamp="2"
+        display="flex"
+        flexWrap="wrap"
+        gap="0.5"
+        _groupHover={{ color: "sz.primary" }}
+      >
+        <BudouxText text={blog.data.title} client:load />
+      </s.h2>
 
       <!-- タグ -->
-      <Flex direction="column" flex="1" justify="space-between" >
+      <Flex direction="column" flex="1" justify="space-between">
         <HStack gap="2" mb="7">
           <TagList omit tags={blog.data.tags} />
         </HStack>
@@ -115,11 +116,7 @@ const currentCategory = categories.find((cat) => cat.category === blog.data.cate
             <ReadingTime content={blog.data.content || ""} gap="1" />
 
             <!-- 公開日 -->
-            <Date
-              date={blog.data.publishDate || ""}
-              gap="1"
-              type="publish"
-            />
+            <Date date={blog.data.publishDate || ""} gap="1" type="publish" />
           </HStack>
         </HStack>
       </Flex>

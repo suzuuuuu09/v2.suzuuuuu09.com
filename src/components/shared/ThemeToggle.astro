@@ -2,40 +2,46 @@
 import { Icon } from "@suzuuuuu09/astro-iconify";
 import { css } from "styled-system/css";
 ---
-<button 
+
+<button
   id="darkModeToggle"
   class={css({
-    p: '2',
-    borderRadius: 'md',
-    bg: 'sz.bg-on',
-    border: '1px solid',
-    borderColor: 'sz.border',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '2',
+    p: "2",
+    borderRadius: "md",
+    bg: "sz.bg-on",
+    border: "1px solid",
+    borderColor: "sz.border",
+    cursor: "pointer",
+    transition: "all 0.2s",
+    display: "flex",
+    alignItems: "center",
+    gap: "2",
     _hover: {
-      bg: 'sz.bg-on.500',
-    }
+      bg: "sz.bg-on.500",
+    },
   })}
 >
-  <Icon name="mdi:white-balance-sunny" class="sun-icon" width="20" height="20" />
+  <Icon
+    name="mdi:white-balance-sunny"
+    class="sun-icon"
+    width="20"
+    height="20"
+  />
   <Icon name="mdi:moon-and-stars" class="moon-icon" width="20" height="20" />
 </button>
 
 <script>
-  const toggle = document.getElementById('darkModeToggle');
-  const sunIcon = toggle?.querySelector('.sun-icon') as HTMLElement | null;
-  const moonIcon = toggle?.querySelector('.moon-icon') as HTMLElement | null;
+  const toggle = document.getElementById("darkModeToggle");
+  const sunIcon = toggle?.querySelector(".sun-icon") as HTMLElement | null;
+  const moonIcon = toggle?.querySelector(".moon-icon") as HTMLElement | null;
 
   function updateIcons() {
-    const theme = document.documentElement.getAttribute('data-theme');
-    const isDark = theme === 'dark';
-    
+    const theme = document.documentElement.getAttribute("data-theme");
+    const isDark = theme === "dark";
+
     if (sunIcon && moonIcon) {
-      sunIcon.style.display = isDark ? 'block' : 'none';
-      moonIcon.style.display = isDark ? 'none' : 'block';
+      sunIcon.style.display = isDark ? "block" : "none";
+      moonIcon.style.display = isDark ? "none" : "block";
     }
   }
 
@@ -43,57 +49,61 @@ import { css } from "styled-system/css";
   updateIcons();
 
   // テーマ切り替え処理
-  toggle?.addEventListener('click', async () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
+  toggle?.addEventListener("click", async () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+
     // トグルボタンの中心座標を取得
     const rect = toggle.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
-    
+
     // 画面の隅までの距離を計算
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
+      Math.max(y, window.innerHeight - y),
     );
-    
+
     // View Transition APIが利用できない場合のフォールバック
     if (!document.startViewTransition) {
-      localStorage.setItem('theme', newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
       updateIcons();
-      window.dispatchEvent(new CustomEvent('themeChange', { detail: { theme: newTheme } }));
+      window.dispatchEvent(
+        new CustomEvent("themeChange", { detail: { theme: newTheme } }),
+      );
       return;
     }
-    
+
     // テーマ切り替えとアニメーションの実行
     const transition = document.startViewTransition(() => {
-      localStorage.setItem('theme', newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
       updateIcons();
-      window.dispatchEvent(new CustomEvent('themeChange', { detail: { theme: newTheme } }));
+      window.dispatchEvent(
+        new CustomEvent("themeChange", { detail: { theme: newTheme } }),
+      );
     });
-    
+
     // アニメーション
     await transition.ready;
     document.documentElement.animate(
       {
         clipPath: [
           `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`
-        ]
+          `circle(${endRadius}px at ${x}px ${y}px)`,
+        ],
       },
       {
         duration: 500,
-        easing: 'ease-in-out',
-        pseudoElement: '::view-transition-new(root)'
-      }
+        easing: "ease-in-out",
+        pseudoElement: "::view-transition-new(root)",
+      },
     );
   });
 
   // View Transition APIでページ遷移した際にもアイコンを更新
-  document.addEventListener('astro:page-load', updateIcons);
+  document.addEventListener("astro:page-load", updateIcons);
 </script>
 
 <style is:global>
@@ -101,7 +111,7 @@ import { css } from "styled-system/css";
     animation: none;
     opacity: 1;
   }
-  
+
   ::view-transition-new(root) {
     animation: none;
   }

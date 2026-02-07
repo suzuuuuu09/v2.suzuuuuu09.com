@@ -5,97 +5,97 @@ import Icon from "@suzuuuuu09/astro-iconify";
 import Panel from "@/components/ui/Panel";
 
 interface Props {
-	title: string;
-	slug: string;
-	description?: string;
-	collection: string;
-	visible?: "lg" | "base" | "always";
+  title: string;
+  slug: string;
+  description?: string;
+  collection: string;
+  visible?: "lg" | "base" | "always";
 }
 
 const {
-	title,
-	slug,
-	description = "",
-	collection,
-	visible = "always",
+  title,
+  slug,
+  description = "",
+  collection,
+  visible = "always",
 } = Astro.props;
 const baseUrl = Astro.site;
 const url = `${baseUrl}${collection}/${slug}`;
 
 const twitterShareUrl = () => {
-	const twitterBaseUrl = "https://twitter.com/intent/tweet";
-	const params = new URLSearchParams({
-		text: title,
-		url: url,
-	});
-	return `${twitterBaseUrl}?${params.toString()}`;
+  const twitterBaseUrl = "https://twitter.com/intent/tweet";
+  const params = new URLSearchParams({
+    text: title,
+    url: url,
+  });
+  return `${twitterBaseUrl}?${params.toString()}`;
 };
 ---
 
 <Panel title="Share" visible={visible}>
-	<HStack gap="4" px="4">
-		<s.a href={twitterShareUrl()} target="_blank" rel="noopener noreferrer">
-			<Icon
-				name="simple-icons:twitter"
-				style={{
-					color: "#1DA1F2",
-					width: "24px",
-					height: "24px",
-				}}
-			/>
-		</s.a>
-		<s.button
-			data-action="copy"
-			className={css({
-				borderColor: "sz.bg-on",
-				cursor: "pointer",
-			})}
-		>
-			<Icon
-				name="mdi:content-copy"
-				className={css({
-					color: "sz.text.main",
-					width: "24px",
-					height: "24px",
-				})}
-			/>
-		</s.button>
-		<s.button
-			data-action="share"
-			className={css({
-				borderColor: "sz.bg-on",
-				cursor: "pointer",
-			})}
-		>
-			<Icon
-				name="mdi:share-variant"
-				className={css({
-					color: "sz.text.main",
-					width: "24px",
-					height: "24px",
-				})}
-			/>
-		</s.button>
-	</HStack>
+  <HStack gap="4" px="4">
+    <s.a href={twitterShareUrl()} target="_blank" rel="noopener noreferrer">
+      <Icon
+        name="simple-icons:twitter"
+        style={{
+          color: "#1DA1F2",
+          width: "24px",
+          height: "24px",
+        }}
+      />
+    </s.a>
+    <s.button
+      data-action="copy"
+      className={css({
+        borderColor: "sz.bg-on",
+        cursor: "pointer",
+      })}
+    >
+      <Icon
+        name="mdi:content-copy"
+        className={css({
+          color: "sz.text.main",
+          width: "24px",
+          height: "24px",
+        })}
+      />
+    </s.button>
+    <s.button
+      data-action="share"
+      className={css({
+        borderColor: "sz.bg-on",
+        cursor: "pointer",
+      })}
+    >
+      <Icon
+        name="mdi:share-variant"
+        className={css({
+          color: "sz.text.main",
+          width: "24px",
+          height: "24px",
+        })}
+      />
+    </s.button>
+  </HStack>
 </Panel>
 
 <script define:vars={{ title, description, url }}>
-	document.querySelectorAll('[data-action]').forEach(button => {
-		button.addEventListener('click', function() {
-			const action = this.getAttribute('data-action');
-			
-			switch (action) {
-				case 'copy':
-				  navigator.clipboard.writeText(url);
-					break;
-				case 'share':
-					navigator.share({
-						title,
-						text: description,
-						url,
-					})
-					break;
-			};
-		});
-	});
+  document.querySelectorAll("[data-action]").forEach((button) => {
+    button.addEventListener("click", function () {
+      const action = this.getAttribute("data-action");
+
+      switch (action) {
+        case "copy":
+          navigator.clipboard.writeText(url);
+          break;
+        case "share":
+          navigator.share({
+            title,
+            text: description,
+            url,
+          });
+          break;
+      }
+    });
+  });
 </script>

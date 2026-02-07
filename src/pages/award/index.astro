@@ -12,23 +12,25 @@ const awards = await getAwardPosts();
 <BaseLayout title="Awards">
   <SectionTitle>Awards</SectionTitle>
   <Expand>
-    {awards.length === 0 ? (
-      <p>No awards found.</p>
-    ) : (
-      <AwardGrid>
-        {awards.map((award) => (
-          <AwardCard
-            award={{
-              id: award.id,
-              data: {
-                ...award.data,
-                slug: award.data.slug ?? award.id,
-                description: award.data.description ?? undefined,
-              },
-            }}
-          />
-        ))}
-      </AwardGrid>
-    )}
+    {
+      awards.length === 0 ? (
+        <p>No awards found.</p>
+      ) : (
+        <AwardGrid>
+          {awards.map((award) => (
+            <AwardCard
+              award={{
+                id: award.id,
+                data: {
+                  ...award.data,
+                  slug: award.data.slug ?? award.id,
+                  description: award.data.description ?? undefined,
+                },
+              }}
+            />
+          ))}
+        </AwardGrid>
+      )
+    }
   </Expand>
 </BaseLayout>

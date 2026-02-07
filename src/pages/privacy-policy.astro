@@ -4,7 +4,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
 import TableOfContents from "@/components/features/blog/TableOfContents.astro";
 import { Expand } from "@/components/shared/Expand";
-import { Content as PrivacyPolicyContent, getHeadings, frontmatter, rawContent } from "@/content/privacy-policy.md";
+import {
+  Content as PrivacyPolicyContent,
+  getHeadings,
+  frontmatter,
+  rawContent,
+} from "@/content/privacy-policy.md";
 
 // privacy-policy.mdからheadingsを取得
 const headings = getHeadings();
@@ -19,17 +24,16 @@ const articleInfo = {
 ---
 
 <BaseLayout title="Privacy Policy">
-	<Expand>
-		<ArticleInfo {...articleInfo} />
-		<Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
-			<s.article className="markdown-content" flex="1" minW="0">
-				<PrivacyPolicyContent />
-			</s.article>
-			
-			<s.aside order={{ base: -1, lg: 1 }}>
-				<TableOfContents headings={headings} />
-			</s.aside>
-		</Flex>
-	</Expand>
-</BaseLayout>
+  <Expand>
+    <ArticleInfo {...articleInfo} />
+    <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "8" }}>
+      <s.article className="markdown-content" flex="1" minW="0">
+        <PrivacyPolicyContent />
+      </s.article>
 
+      <s.aside order={{ base: -1, lg: 1 }}>
+        <TableOfContents headings={headings} />
+      </s.aside>
+    </Flex>
+  </Expand>
+</BaseLayout>

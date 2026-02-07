@@ -10,8 +10,8 @@ import FloatingBackground from "@/components/bases/FloatingBackground";
 import { css } from "styled-system/css";
 
 interface Props {
-	title?: string;
-	maxW?: any;
+  title?: string;
+  maxW?: any;
 }
 
 const { title, maxW } = Astro.props;
@@ -23,83 +23,82 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site);
 
 <!doctype html>
 <html lang="ja">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{siteTitle}</title>
-		<meta name="description" content={SITE_DESCRIPTION} />
-		
-		<!-- Dark mode initialization script -->
-		<script is:inline>
-			const theme = localStorage.getItem('theme') || 
-				(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-			document.documentElement.setAttribute('data-theme', theme);
-		</script>
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:title" content={siteTitle} />
-		<meta property="og:description" content={SITE_DESCRIPTION} />
-		<meta property="og:image" content={ogImageUrl.toString()} />
-		<meta property="og:site_name" content={SITE_TITLE} />
-		
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
-		<meta property="twitter:title" content={siteTitle} />
-		<meta property="twitter:description" content={SITE_DESCRIPTION} />
-		<meta property="twitter:image" content={ogImageUrl.toString()} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+    <meta name="description" content={SITE_DESCRIPTION} />
 
-		<GoogleAnalytics id={GA_TRACKING_ID} />
-		
-		<!-- Preconnect -->
-		<link rel="preconnect" href="https://content.suzuuuuu09.com" />
-		<link rel="preconnect" href="https://twemoji.maxcdn.com" />
+    <!-- Dark mode initialization script -->
+    <script is:inline>
+      const theme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
 
-		<!-- フォントのプレロード -->
-		<link
-			rel="preload"
-			href="/fonts/IBMPlexSansJP-Regular.ttf"
-			as="font"
-			type="font/ttf"
-			crossorigin="anonymous"
-		/>
-		<link
-			rel="preload"
-			href="/fonts/IBMPlexSansJP-Bold.ttf"
-			as="font"
-			type="font/ttf"
-			crossorigin="anonymous"
-		/>
-		<link
-			rel="preload"
-			href="/fonts/MoralerspaceNeon-Regular.ttf"
-			as="font"
-			type="font/ttf"
-			crossorigin="anonymous"
-		/>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={SITE_DESCRIPTION} />
+    <meta property="og:image" content={ogImageUrl.toString()} />
+    <meta property="og:site_name" content={SITE_TITLE} />
 
-	</head>
-	<body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
-		<FloatingBackground client:load />
-		<Header />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={SITE_DESCRIPTION} />
+    <meta property="twitter:image" content={ogImageUrl.toString()} />
 
-		<ContentContainer maxW={maxW}>
-    	<slot />
-		</ContentContainer>
+    <GoogleAnalytics id={GA_TRACKING_ID} />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://content.suzuuuuu09.com" />
+    <link rel="preconnect" href="https://twemoji.maxcdn.com" />
+
+    <!-- フォントのプレロード -->
+    <link
+      rel="preload"
+      href="/fonts/IBMPlexSansJP-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/IBMPlexSansJP-Bold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/MoralerspaceNeon-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class={css({ bg: "sz.bg", minH: "100vh", position: "relative" })}>
+    <FloatingBackground client:load />
+    <Header />
+
+    <ContentContainer maxW={maxW}>
+      <slot />
+    </ContentContainer>
 
     <Footer />
-	</body>
-
-	<script>
+  </body><script>
     import { initTwemoji } from "@/lib/twemoji";
-    
-    document.addEventListener('DOMContentLoaded', initTwemoji);
-    document.addEventListener('astro:page-load', initTwemoji);
-  </script>
 
+    document.addEventListener("DOMContentLoaded", initTwemoji);
+    document.addEventListener("astro:page-load", initTwemoji);
+  </script>
 </html>

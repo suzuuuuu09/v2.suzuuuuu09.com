@@ -39,7 +39,7 @@ const thumbnailStyles = sva({
           w: "full",
           maxH: "60",
           h: { base: "240", _sm: "200" },
-          overflow: "hidden"
+          overflow: "hidden",
         },
         image: {
           w: "full",
@@ -47,8 +47,8 @@ const thumbnailStyles = sva({
           objectFit: "cover",
           objectPosition: "center",
           transition: "transform 0.5s",
-          _groupHover: { transform: "scale(1.05)" }
-        }
+          _groupHover: { transform: "scale(1.05)" },
+        },
       },
       info: {
         wrapper: {},
@@ -56,12 +56,12 @@ const thumbnailStyles = sva({
           maxH: "500px",
           rounded: "xl",
           objectPosition: "center",
-          decoding: "async"
-        }
-      }
-    }
-  }
-})
+          decoding: "async",
+        },
+      },
+    },
+  },
+});
 
 export default function Thumbnail(props: Props) {
   const { thumbnailPath, title, type, loading } = props;
@@ -72,7 +72,7 @@ export default function Thumbnail(props: Props) {
   return (
     <>
       {type === "card" ? (
-        <div className={styles.wrapper} >
+        <div className={styles.wrapper}>
           <img
             src={thumbnailUrl}
             alt={title}
@@ -89,5 +89,5 @@ export default function Thumbnail(props: Props) {
         />
       )}
     </>
-  )
+  );
 }

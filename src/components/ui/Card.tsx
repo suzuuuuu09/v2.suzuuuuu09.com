@@ -22,17 +22,17 @@ const cardRecipes = cva({
   variants: {
     maxW: {
       full: {
-        _md: { maxW: "full" }
+        _md: { maxW: "full" },
       },
       "450px": {
-        _md: { maxW: "450px" }
-      }
-    }
+        _md: { maxW: "450px" },
+      },
+    },
   },
-})
+});
 
-export const Card = s('article', cardRecipes, {
+export const Card = s("article", cardRecipes, {
   defaultProps: {
-    className: 'group'
-  }
-})
+    className: "group",
+  },
+});

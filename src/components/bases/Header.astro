@@ -13,7 +13,18 @@ export const NAVIGATION_LINKS = [
   { href: "/product", label: "Products" },
   { href: "/award", label: "Awards" },
   { href: "/blog", label: "Blogs" },
-]
+];
+
+// 現在のパスを取得
+const currentPath = Astro.url.pathname;
+
+// 末尾に/があるときは削除
+const normalizedPath =
+  currentPath.endsWith("/") && currentPath.length > 1
+    ? currentPath.slice(0, -1)
+    : currentPath;
+
+console.log("Current Path:", normalizedPath);
 ---
 
 <s.header
@@ -42,158 +53,154 @@ export const NAVIGATION_LINKS = [
     py="3"
     position="relative"
   >
-		<HStack>
-			<s.a
-				href="/"
-				display="flex"
-				alignItems="center"
-				gap="3"
-			>
-				<div id="avatar-container">
-					<Avatar size={24} />
-				</div>
-				<s.h3
-					fontSize="xl"
-					m="0"
-					opacity="0.9"
-					fontWeight="bold"
-					color="sz.text.main"
-				>suzuuuuu09.com</s.h3>
-			</s.a>
-			<Flex
-				alignItems="center"
-				gap="3"
-				position="relative"
-			>
-				<!-- <HamburgerMenu client:load /> 仮置き -->
-				<button class={css({ display: 'block', md: { display: 'none' } })}>Menu</button>
-				<Navigation links={NAVIGATION_LINKS} client:load />
-			</Flex>
-		</HStack>
+    <HStack>
+      <s.a href="/" display="flex" alignItems="center" gap="3">
+        <div id="avatar-container">
+          <Avatar size={24} />
+        </div>
+        <s.h3
+          fontSize="xl"
+          m="0"
+          opacity="0.9"
+          fontWeight="bold"
+          color="sz.text.main">suzuuuuu09.com</s.h3
+        >
+      </s.a>
+      <Flex alignItems="center" gap="3" position="relative">
+        <!-- <HamburgerMenu client:load /> 仮置き -->
+        <button class={css({ display: "block", md: { display: "none" } })}
+          >Menu</button
+        >
+        <Navigation links={NAVIGATION_LINKS} client:load />
+      </Flex>
+    </HStack>
 
-		<HStack gap="4">
-			<ThemeToggle />
-			<a href="/rss.xml">
-				<Icon
-				  name="mdi:rss"
-					width="24"
-					height="24"
-					class={css({
-						color: 'sz.text.main',
-					})}
-				/>
-			</a>
-		</HStack>
+    <HStack gap="4">
+      <ThemeToggle />
+      <a href="/rss.xml">
+        <Icon
+          name="mdi:rss"
+          width="24"
+          height="24"
+          class={css({
+            color: "sz.text.main",
+          })}
+        />
+      </a>
+    </HStack>
   </s.nav>
-  <div 
+  <div
     class={`mobile-content ${css({
       opacity: 0,
-      transform: 'translateY(-10px)',
-      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      transform: "translateY(-10px)",
+      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       height: 0,
-      overflow: 'hidden',
+      overflow: "hidden",
       padding: 0,
-      '&.show': {
+      "&.show": {
         opacity: 1,
-        transform: 'translateY(0)',
-        height: 'auto',
-        overflow: 'visible',
-        padding: '0.5rem 1.5rem 1.5rem',
+        transform: "translateY(0)",
+        height: "auto",
+        overflow: "visible",
+        padding: "0.5rem 1.5rem 1.5rem",
       },
     })}`}
   >
     <VStack gap="3">
-      {NAVIGATION_LINKS.map((link) => (
-        <a
-          href={link.href}
-          class={`mobile-nav-item ${css({
-            display: 'flex',
-            position: 'relative',
-            width: 'full',
-            padding: '0.75rem 1.5rem',
-            textAlign: 'center',
-            color: 'sz.border',
-            backgroundColor: 'transparent',
-            borderRadius: 'lg',
-            overflow: 'hidden',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            _hover: {
-              color: 'blue.400',
-              backgroundColor: 'blue.500/20',
-            },
-            _before: {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
-              transition: 'all 0.1s ease',
-            },
-          })}`}
-        >
-          {link.label}
-        </a>
-      ))}
+      {
+        NAVIGATION_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class={`mobile-nav-item ${css({
+              display: "flex",
+              position: "relative",
+              width: "full",
+              padding: "0.75rem 1.5rem",
+              textAlign: "center",
+              color: "sz.border",
+              backgroundColor: "transparent",
+              borderRadius: "lg",
+              overflow: "hidden",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              _hover: {
+                color: "blue.400",
+                backgroundColor: "blue.500/20",
+              },
+              _before: {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background:
+                  "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)",
+                transition: "all 0.1s ease",
+              },
+            })}`}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </VStack>
   </div>
 </s.header>
 
 <script>
-import { gsap } from 'gsap';
+  import { gsap } from "gsap";
 
-// 「↑↑↓↓←→←→BA」を検出するためのKONAMIコマンド入力値
-let konamiCode = [38,38,40,40,37,39,37,39,66,65];
-let konamiIndex = 0;
+  // 「↑↑↓↓←→←→BA」を検出するためのKONAMIコマンド入力値
+  let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+  let konamiIndex = 0;
 
-// KONAMIコマンド取得用のキーコードマップ
-const keyMap: { [key: string]: number } = {
-  'ArrowUp': 38,
-  'ArrowDown': 40,
-  'ArrowLeft': 37,
-  'ArrowRight': 39,
-  'b': 66,
-  'B': 66,
-  'a': 65,
-  'A': 65
-};
+  // KONAMIコマンド取得用のキーコードマップ
+  const keyMap: { [key: string]: number } = {
+    ArrowUp: 38,
+    ArrowDown: 40,
+    ArrowLeft: 37,
+    ArrowRight: 39,
+    b: 66,
+    B: 66,
+    a: 65,
+    A: 65,
+  };
 
-// KONAMIコマンドを検出
-document.addEventListener('keydown', function(e) {
-  const keyValue = keyMap[e.key];
-  
-  if (keyValue === konamiCode[konamiIndex]) {
-    konamiIndex++;
-    if (konamiIndex === konamiCode.length) {
-      // アバターのcontainerを取得
-      const avatarContainer = document.getElementById('avatar-container');
-      if (!avatarContainer) return; // アバターが存在しない場合は実行しない
+  // KONAMIコマンドを検出
+  document.addEventListener("keydown", function (e) {
+    const keyValue = keyMap[e.key];
 
-      // タイムラインを作成
-      const tl = gsap.timeline();
-      
-      // 回転とスケールアニメーション
-      tl.to(avatarContainer, {
-        // rotationが360だと2回目以降に回転しなくなる
-        // 相対的に回転させられる'+=360'を使用
-        rotation: '+=360',
-        scale: 1.3,
-        duration: 0.6,
-        ease: 'power2.inOut',
-      })
-      
-      // リセット
-      .to(avatarContainer, {
-        scale: 1,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
-      
+    if (keyValue === konamiCode[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiCode.length) {
+        // アバターのcontainerを取得
+        const avatarContainer = document.getElementById("avatar-container");
+        if (!avatarContainer) return; // アバターが存在しない場合は実行しない
+
+        // タイムラインを作成
+        const tl = gsap.timeline();
+
+        // 回転とスケールアニメーション
+        tl.to(avatarContainer, {
+          // rotationが360だと2回目以降に回転しなくなる
+          // 相対的に回転させられる'+=360'を使用
+          rotation: "+=360",
+          scale: 1.3,
+          duration: 0.6,
+          ease: "power2.inOut",
+        })
+
+          // リセット
+          .to(avatarContainer, {
+            scale: 1,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+
+        konamiIndex = 0;
+      }
+    } else {
       konamiIndex = 0;
     }
-  } else {
-    konamiIndex = 0;
-  }
-});
+  });
 </script>

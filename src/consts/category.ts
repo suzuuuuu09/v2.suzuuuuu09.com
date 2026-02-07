@@ -5,4 +5,4 @@ export const categories: CategoryItem[] = [
   { category: "tech", emoji: "🖥️" },
   { category: "idea", emoji: "💡" },
   { category: "work", emoji: "💼" },
-]
+];

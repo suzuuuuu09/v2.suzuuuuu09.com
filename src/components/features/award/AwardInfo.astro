@@ -7,48 +7,46 @@ import Icon from "@suzuuuuu09/astro-iconify";
 import BudouxText from "@/components/shared/BudouxText";
 
 interface Props {
-	title: string;
-	date?: string | Date;
-	updateDate?: string | Date;
-	tags?: string[];
-	emoji?: string;
-	description?: string;
-	content?: string;
-	type: string;
+  title: string;
+  date?: string | Date;
+  updateDate?: string | Date;
+  tags?: string[];
+  emoji?: string;
+  description?: string;
+  content?: string;
+  type: string;
 }
 
 const {
-	title,
-	date,
-	tags = [],
-	emoji,
-	description,
-	content,
-	type,
+  title,
+  date,
+  tags = [],
+  emoji,
+  description,
+  content,
+  type,
 } = Astro.props;
 
 const titleText = `[${type}] ${title}`;
 ---
 
-<VStack
-  alignItems="center"
-  mb="8"
-  gap="4"
->
+<VStack alignItems="center" mb="8" gap="4">
   <!-- 絵文字 -->
-  {emoji && (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      fontSize={{ base: "7xl", lg: "8xl" }}
-    >
-      {emoji}
-    </Flex>
-  )}
+  {
+    emoji && (
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        fontSize={{ base: "7xl", lg: "8xl" }}
+      >
+        {emoji}
+      </Flex>
+    )
+  }
 
   <!-- タイトル -->
-	<s.h1
-		fontSize={{ base: "3xl", lg: "4xl" }}
+  <s.h1
+    fontSize={{ base: "3xl", lg: "4xl" }}
     fontWeight="bold"
     textAlign="center"
     m="0"
@@ -62,31 +60,27 @@ const titleText = `[${type}] ${title}`;
     justifyContent="center"
     gap="0.5"
   >
-	  
     <BudouxText text={titleText} client:load />
   </s.h1>
 
-
   <!-- タグ -->
-  {tags.length > 0 && (
-    <Flex
-      justifyContent="center"
-      alignItems="center"
-      flexWrap="wrap"
-      gap="2"
-      mb="4"
-      maxW="4xl"
-    >
-      <TagList tags={tags} />
-    </Flex>
-  )}
+  {
+    tags.length > 0 && (
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        flexWrap="wrap"
+        gap="2"
+        mb="4"
+        maxW="4xl"
+      >
+        <TagList tags={tags} />
+      </Flex>
+    )
+  }
 
   <!-- メタデータ -->
-  <s.div
-    rounded="lg"
-    w="full"
-    maxW="2xl"
-  >
+  <s.div rounded="lg" w="full" maxW="2xl">
     <Flex
       justifyContent="center"
       alignItems={{ base: "center", sm: "flex-start" }}
@@ -96,43 +90,39 @@ const titleText = `[${type}] ${title}`;
       color="sz.text.main"
     >
       <!-- 公開日 -->
-      {date && (
-        <Date
-          date={date}
-          gap="1.5"
-          type="publish"
-        />
-      )}
+      {date && <Date date={date} gap="1.5" type="publish" />}
 
-      {type && (
-        <HStack gap="1.5">
-          <Icon name="mdi:award" size={16} />
-          <s.span color="sz.text.main" fontSize="sm">
-            {type}
-          </s.span>
-        </HStack>
-      )}
+      {
+        type && (
+          <HStack gap="1.5">
+            <Icon name="mdi:award" size={16} />
+            <s.span color="sz.text.main" fontSize="sm">
+              {type}
+            </s.span>
+          </HStack>
+        )
+      }
 
       <!-- 読了時間 -->
       <ReadingTime content={content || ""} gap="1.5" />
     </Flex>
   </s.div>
 
-	  {description && (
-    <s.p
-      textAlign="center"
-      lineHeight="relaxed"
-      maxW="2xl"
-      color="sz.text.main"
-      px="4"
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="center"
-      gap="0.5"
-    >
-      <BudouxText text={description} client:load />
-    </s.p>
-  )}
-
+  {
+    description && (
+      <s.p
+        textAlign="center"
+        lineHeight="relaxed"
+        maxW="2xl"
+        color="sz.text.main"
+        px="4"
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        gap="0.5"
+      >
+        <BudouxText text={description} client:load />
+      </s.p>
+    )
+  }
 </VStack>
-

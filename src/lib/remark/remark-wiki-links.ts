@@ -13,7 +13,7 @@ export default function remarkWikiLinks() {
   return (tree: any, file: any) => {
     // frontmatterからtitleを取得し、半角スペースをアンダースコアに置き換え
     const rawTitle = file.data.astro?.frontmatter?.title || "assets";
-    const title = rawTitle.replaceAll(' ', '_');
+    const title = rawTitle.replaceAll(" ", "_");
     // メディア（画像・動画）を処理
     visit(tree, "text", (node, index, parent) => {
       if (!node.value.includes("![[")) return;

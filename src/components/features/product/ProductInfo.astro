@@ -1,10 +1,10 @@
 ---
-import { Flex, HStack, VStack, styled as s } from 'styled-system/jsx';
-import TagList from '../blog/TagList.astro';
-import Thumbnail from '@/components/shared/Thumbnail';
-import ReadingTime from '@/components/shared/ReadingTime.astro';
-import Date from '@/components/shared/Date.astro';
-import BudouxText from '@/components/shared/BudouxText';
+import { Flex, HStack, VStack, styled as s } from "styled-system/jsx";
+import TagList from "@/components/features/blog/TagList.astro";
+import Thumbnail from "@/components/shared/Thumbnail";
+import ReadingTime from "@/components/shared/ReadingTime.astro";
+import Date from "@/components/shared/Date.astro";
+import BudouxText from "@/components/shared/BudouxText";
 
 export interface Props {
   title: string;
@@ -31,13 +31,13 @@ const {
 
 <VStack mb="8" gap="4">
   <Thumbnail
-    thumbnailPath={thumbnail || ''}
+    thumbnailPath={thumbnail || ""}
     title={title}
     type="info"
     loading="eager"
   />
-	<s.h1
-		fontSize={{ base: "3xl", lg: "4xl" }}
+  <s.h1
+    fontSize={{ base: "3xl", lg: "4xl" }}
     fontWeight="bold"
     textAlign="center"
     m="0"
@@ -54,19 +54,20 @@ const {
     <BudouxText text={title} client:load />
   </s.h1>
 
-
-  {tags.length > 0 && (
-    <Flex
-      justifyContent="center"
-      flexDirection="center"
-      flexWrap="wrap"
-      mb="4"
-      gap="2"
-      maxW="4xl"
-    >
-      <TagList tags={tags} />
-    </Flex>
-  )}
+  {
+    tags.length > 0 && (
+      <Flex
+        justifyContent="center"
+        flexDirection="center"
+        flexWrap="wrap"
+        mb="4"
+        gap="2"
+        maxW="4xl"
+      >
+        <TagList tags={tags} />
+      </Flex>
+    )
+  }
 
   <Flex justify="center" rounded="lg" w="full" maxW="2xl">
     <Flex
@@ -78,37 +79,30 @@ const {
       color="sz.text.main"
     >
       <!-- 公開日 -->
-      <Date
-        date={publishDate || ""}
-        gap="1.5"
-        type="publish"
-      />
+      <Date date={publishDate || ""} gap="1.5" type="publish" />
 
       <!-- 更新日 -->
-      <Date
-        date={updateDate || ""}
-        gap="1.5"
-        type="update"
-      />
-      
+      <Date date={updateDate || ""} gap="1.5" type="update" />
+
       <ReadingTime content={content || ""} gap="1.5" />
     </Flex>
   </Flex>
 
-	{description && (
-    <s.p
-      textAlign="center"
-      lineHeight="relaxed"
-      maxW="2xl"
-      color="sz.text.main"
-      px="4"
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="center"
-      gap="0.5"
-    >
-      <BudouxText text={description} client:load />
-    </s.p>
-  )}
-
+  {
+    description && (
+      <s.p
+        textAlign="center"
+        lineHeight="relaxed"
+        maxW="2xl"
+        color="sz.text.main"
+        px="4"
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        gap="0.5"
+      >
+        <BudouxText text={description} client:load />
+      </s.p>
+    )
+  }
 </VStack>

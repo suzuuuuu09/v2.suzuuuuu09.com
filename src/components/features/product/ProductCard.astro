@@ -33,7 +33,7 @@ const { product } = Astro.props;
     href={`/product/${product.id}/`}
     class={cx(
       css({ color: "sz.text.main", textDecoration: "none" }),
-      css({ display: "flex", flexDirection: "column", height: "100%" })
+      css({ display: "flex", flexDirection: "column", height: "100%" }),
     )}
   >
     <Thumbnail
@@ -54,31 +54,32 @@ const { product } = Astro.props;
       flex="1"
       flexDir="column"
     >
-			<s.h2
-				lineHeight="snug"
-				transition="colors 0.3s"
-				mx="1"
-				mb="3"
-				fontWeight="bold"
-				fontSize="xl"
-				overflow="hidden"
-				textOverflow="ellipsis"
-				lineClamp="2"
-				display="flex"
-				flexWrap="wrap"
-				gap="0.5"
-				_groupHover={{ color: "sz.primary" }}
-			>
-			  <BudouxText text={product.data.title} client:load />
-			</s.h2>
-
+      <s.h2
+        lineHeight="snug"
+        transition="colors 0.3s"
+        mx="1"
+        mb="3"
+        fontWeight="bold"
+        fontSize="xl"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        lineClamp="2"
+        display="flex"
+        flexWrap="wrap"
+        gap="0.5"
+        _groupHover={{ color: "sz.primary" }}
+      >
+        <BudouxText text={product.data.title} client:load />
+      </s.h2>
 
       <Flex flexDir="column" flex="1" justifyContent="space-between">
-        {product.data.tags && product.data.tags.length > 0 && (
-          <HStack gap="2" mb="7">
-            <TagList omit tags={product.data.tags} />
-          </HStack>
-        )}
+        {
+          product.data.tags && product.data.tags.length > 0 && (
+            <HStack gap="2" mb="7">
+              <TagList omit tags={product.data.tags} />
+            </HStack>
+          )
+        }
 
         <HStack
           justify="flex-end"
@@ -91,11 +92,7 @@ const { product } = Astro.props;
           <ReadingTime content={product.data.content || ""} gap="1" />
 
           <!-- 公開日 -->
-          <Date
-            date={product.data.publishDate || ""}
-            gap="1"
-            type="publish"
-          />
+          <Date date={product.data.publishDate || ""} gap="1" type="publish" />
         </HStack>
       </Flex>
     </Flex>

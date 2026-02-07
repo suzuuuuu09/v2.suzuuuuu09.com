@@ -5,9 +5,9 @@ import { css } from "styled-system/css";
 import Icon from "@suzuuuuu09/astro-iconify";
 
 interface Props {
-	iconKey: string;
-	showName?: boolean;
-	size?: number;
+  iconKey: string;
+  showName?: boolean;
+  size?: number;
 }
 
 const { iconKey, showName = true, size = 60 } = Astro.props;
@@ -15,17 +15,17 @@ const { iconKey, showName = true, size = 60 } = Astro.props;
 const iconData = getIconData(iconKey);
 
 function calculateCardLayout(iconSize: number, showName: boolean) {
-	const containerWidth = Math.max(iconSize + 16, 90);
-	const iconAreaHeight = iconSize + 8;
-	const textAreaHeight = showName ? 42 : 0;
-	const containerHeight = iconAreaHeight + textAreaHeight + 16;
+  const containerWidth = Math.max(iconSize + 16, 90);
+  const iconAreaHeight = iconSize + 8;
+  const textAreaHeight = showName ? 42 : 0;
+  const containerHeight = iconAreaHeight + textAreaHeight + 16;
 
-	return {
-		containerWidth,
-		containerHeight,
-		iconAreaHeight,
-		textAreaHeight,
-	};
+  return {
+    containerWidth,
+    containerHeight,
+    iconAreaHeight,
+    textAreaHeight,
+  };
 }
 
 const iconName = iconData?.icon || iconKey;
@@ -50,17 +50,21 @@ const layout = calculateCardLayout(size, showName);
     <Icon
       name={iconName}
       size={size}
-      class={iconColor ? undefined : css({ color: 'sz.icon' })}
+      class={iconColor ? undefined : css({ color: "sz.icon" })}
       style={iconColor ? `color: ${iconColor}` : undefined}
     />
   </VStack>
-  {showName && (
-    <s.span
-      fontSize="base"
-      color="sz.text.main"
-      fontWeight="medium"
-      textAlign="center"
-      height={`${layout.textAreaHeight}px`}
-    >{displayName}</s.span>
-  )}
+  {
+    showName && (
+      <s.span
+        fontSize="base"
+        color="sz.text.main"
+        fontWeight="medium"
+        textAlign="center"
+        height={`${layout.textAreaHeight}px`}
+      >
+        {displayName}
+      </s.span>
+    )
+  }
 </VStack>

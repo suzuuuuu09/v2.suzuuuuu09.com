@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { css } from 'styled-system/css';
+import React, { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { css } from "styled-system/css";
 
 interface NavigationProps {
   links: { href: string; label: string }[];
@@ -24,19 +24,19 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
   const updateBackgroundPosition = (index: number) => {
     const link = linkRefs.current[index];
     const background = backgroundRef.current;
-    
+
     if (link && background) {
       isHoveringRef.current = true;
-      
+
       // 実行してるアニメーションをすべて停止
       gsap.killTweensOf(background);
-      
+
       // 2フレーム待ってより確実な位置を取得
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           // ホバー中でなければ何もしない
           if (!isHoveringRef.current) return;
-          
+
           const dimensions = {
             x: link.offsetLeft,
             y: link.offsetTop,
@@ -81,11 +81,7 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
 
   const handleMouseLeave = (e: React.MouseEvent) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    const isMovingToAnotherNavLink = relatedTarget?.closest('.nav-link');
-    
-    if (!isMovingToAnotherNavLink) {
-      // Do nothing - let container handle it
-    }
+    const isMovingToAnotherNavLink = relatedTarget?.closest(".nav-link");
   };
 
   const handleContainerLeave = () => {
@@ -94,7 +90,7 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     if (background) {
       // 実行してるアニメーションをすべて停止
       gsap.killTweensOf(background);
-      
+
       gsap.to(background, {
         opacity: 0,
         duration: 0.4,
@@ -110,13 +106,13 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
     <nav
       ref={containerRef}
       className={css({
-        display: 'none',
+        display: "none",
         md: {
-          display: 'flex',
+          display: "flex",
         },
-        position: 'relative',
-        alignItems: 'center',
-        marginX: '0.5rem',
+        position: "relative",
+        alignItems: "center",
+        marginX: "0.5rem",
       })}
       onMouseLeave={handleContainerLeave}
       role="navigation"
@@ -126,31 +122,33 @@ const Navigation: React.FC<NavigationProps> = ({ links }) => {
       <div
         ref={backgroundRef}
         className={css({
-          position: 'absolute',
-          borderRadius: 'lg',
-          backgroundColor: 'sz.primary/20',
-          border: '1px solid',
-          borderColor: 'sz.primary/30',
-          pointerEvents: 'none',
+          position: "absolute",
+          borderRadius: "lg",
+          backgroundColor: "sz.primary/20",
+          border: "1px solid",
+          borderColor: "sz.primary/30",
+          pointerEvents: "none",
           zIndex: -1,
         })}
-        style={{ willChange: 'transform, opacity' }}
+        style={{ willChange: "transform, opacity" }}
       />
-      
+
       {links.map((link, index) => (
         <a
           key={link.href}
-          ref={(el: HTMLAnchorElement | null) => { linkRefs.current[index] = el; }}
+          ref={(el: HTMLAnchorElement | null) => {
+            linkRefs.current[index] = el;
+          }}
           href={link.href}
           className={`nav-link ${css({
-            color: 'sz.text.main',
-            position: 'relative',
-            paddingX: '0.75rem',
-            paddingY: '0.5rem',
-            borderRadius: 'lg',
-            transition: 'color 0.1s ease',
+            color: "sz.text.main",
+            position: "relative",
+            paddingX: "0.75rem",
+            paddingY: "0.5rem",
+            borderRadius: "lg",
+            transition: "color 0.1s ease",
             _hover: {
-              color: 'sz.primary',
+              color: "sz.primary",
             },
           })}`}
           onMouseEnter={() => handleMouseEnter(index)}

@@ -3,9 +3,9 @@ import { styled as s } from "styled-system/jsx";
 
 export const sectionLayoutRecipes = cva({
   base: {
-    py: '5',
-    w: 'full',
-  }
-})
+    py: "5",
+    w: "full",
+  },
+});
 
-export const SectionLayout = s('section', sectionLayoutRecipes);
+export const SectionLayout = s("section", sectionLayoutRecipes);

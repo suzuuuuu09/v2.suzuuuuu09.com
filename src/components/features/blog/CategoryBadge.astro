@@ -15,39 +15,63 @@ const currentCategory = categories.find((cat) => cat.category === category);
 const getCategoryClass = (category: string) => {
   switch (category) {
     case "tech":
-      return css({ bg: "sz.primary/20", color: "sz.primary", borderColor: "sz.primary/40" });
+      return css({
+        bg: "sz.primary/20",
+        color: "sz.primary",
+        borderColor: "sz.primary/40",
+      });
     case "idea":
-      return css({ bg: "sz.secondary/25", color: "sz.text.main", borderColor: "sz.secondary/50" });
+      return css({
+        bg: "sz.secondary/25",
+        color: "sz.text.main",
+        borderColor: "sz.secondary/50",
+      });
     case "work":
-      return css({ bg: "sz.purple/20", color: "sz.purple", borderColor: "sz.purple/40" });
+      return css({
+        bg: "sz.purple/20",
+        color: "sz.purple",
+        borderColor: "sz.purple/40",
+      });
     case "private":
-      return css({ bg: "sz.yellow/25", color: "sz.text.main", borderColor: "sz.yellow/50" });
+      return css({
+        bg: "sz.yellow/25",
+        color: "sz.text.main",
+        borderColor: "sz.yellow/50",
+      });
     default:
-      return css({ bg: "sz.bg-on", color: "sz.text.sub", borderColor: "sz.border" });
+      return css({
+        bg: "sz.bg-on",
+        color: "sz.text.sub",
+        borderColor: "sz.border",
+      });
   }
 };
 
-const categoryClass = currentCategory ? getCategoryClass(currentCategory.category) : "";
+const categoryClass = currentCategory
+  ? getCategoryClass(currentCategory.category)
+  : "";
 ---
 
-{currentCategory && (
-  <div
-    class={cx(
-      css({
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "1",
-        px: "2.5",
-        py: "1",
-        borderRadius: "md",
-        fontSize: "xs",
-        fontWeight: "semibold",
-        borderWidth: "1",
-      }),
-      categoryClass
-    )}
-  >
-    <s.span>{currentCategory.emoji}</s.span>
-    <s.span textTransform="capitalize">{currentCategory.category}</s.span>
-  </div>
-)}
+{
+  currentCategory && (
+    <div
+      class={cx(
+        css({
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "1",
+          px: "2.5",
+          py: "1",
+          borderRadius: "md",
+          fontSize: "xs",
+          fontWeight: "semibold",
+          borderWidth: "1",
+        }),
+        categoryClass,
+      )}
+    >
+      <s.span>{currentCategory.emoji}</s.span>
+      <s.span textTransform="capitalize">{currentCategory.category}</s.span>
+    </div>
+  )
+}

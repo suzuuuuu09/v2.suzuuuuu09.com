@@ -1,5 +1,5 @@
-import { cva } from "styled-system/css"
-import { styled as s } from "styled-system/jsx"
+import { cva } from "styled-system/css";
+import { styled as s } from "styled-system/jsx";
 
 export const articleGridRecipes = cva({
   base: {
@@ -14,6 +14,6 @@ export const articleGridRecipes = cva({
       alignItems: "center",
     },
   },
-})
+});
 
 export const ArticleGrid = s("div", articleGridRecipes);

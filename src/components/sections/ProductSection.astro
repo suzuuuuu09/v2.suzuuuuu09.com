@@ -12,24 +12,26 @@ const products = await getProductPosts();
 <SectionLayout>
   <SectionTitle>Product</SectionTitle>
   <Expand>
-    {products.length === 0 ? (
-      <p>No products found.</p>
-    ) : (
-      <ArticleGrid>
-        {products.map((product) => (
-          <ProductCard
-            product={{
-              id: product.id,
-              data: {
-                ...product.data,
-                slug: product.data.slug ?? product.id,
-                description: product.data.description ?? undefined,
-								content: product.body
-              },
-            }}
-          />
-        ))}
-      </ArticleGrid>
-    )}
+    {
+      products.length === 0 ? (
+        <p>No products found.</p>
+      ) : (
+        <ArticleGrid>
+          {products.map((product) => (
+            <ProductCard
+              product={{
+                id: product.id,
+                data: {
+                  ...product.data,
+                  slug: product.data.slug ?? product.id,
+                  description: product.data.description ?? undefined,
+                  content: product.body,
+                },
+              }}
+            />
+          ))}
+        </ArticleGrid>
+      )
+    }
   </Expand>
 </SectionLayout>

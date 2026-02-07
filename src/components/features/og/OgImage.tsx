@@ -3,9 +3,17 @@ import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { loadDefaultJapaneseParser } from "budoux";
 
-export const generateOgImage = async (title: string, isShowSiteName: boolean = true, collection?: string): Promise<Buffer> => {
-  const ibmPlexSansRegularFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Regular.ttf");
-  const ibmPlexSnasBoldFont = fs.readFileSync("./public/fonts/IBMPlexSansJP-Bold.ttf");
+export const generateOgImage = async (
+  title: string,
+  isShowSiteName: boolean = true,
+  collection?: string,
+): Promise<Buffer> => {
+  const ibmPlexSansRegularFont = fs.readFileSync(
+    "./public/fonts/IBMPlexSansJP-Regular.ttf",
+  );
+  const ibmPlexSnasBoldFont = fs.readFileSync(
+    "./public/fonts/IBMPlexSansJP-Bold.ttf",
+  );
   const backgroundImage = fs.readFileSync("./public/imgs/ogp-background.png");
   const iconSvg = fs.readFileSync("./src/assets/icon.svg", "utf-8");
 
@@ -16,14 +24,18 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
   const words = parser.parse(title);
 
   // コレクション名を大文字に変換
-  const collectionName = collection ? collection.charAt(0).toUpperCase() + collection.slice(1) : undefined;
+  const collectionName = collection
+    ? collection.charAt(0).toUpperCase() + collection.slice(1)
+    : undefined;
 
   const svg = await satori(
     <main
       style={{
         width,
         height,
-        backgroundImage: backgroundImage ? `url('data:image/png;base64,${backgroundImage.toString("base64")}')` : undefined,
+        backgroundImage: backgroundImage
+          ? `url('data:image/png;base64,${backgroundImage.toString("base64")}')`
+          : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
@@ -70,7 +82,8 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
             maxWidth: "100%",
             position: "relative",
             fontFamily: '"IBM Plex Sans JP", sans-serif',
-            background: "linear-gradient(135deg, #3951E2 0%, #474554 50%, #6bbaa3 100%)",
+            background:
+              "linear-gradient(135deg, #3951E2 0%, #474554 50%, #6bbaa3 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -87,7 +100,7 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
             </span>
           ))}
         </div>
-        
+
         {/* コレクション名 */}
         {collectionName && (
           <div
@@ -122,7 +135,8 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
                 style={{
                   width: "8px",
                   height: "42px",
-                  background: "linear-gradient(180deg, #3951E2 0%, #6bbaa3 100%)",
+                  background:
+                    "linear-gradient(180deg, #3951E2 0%, #6bbaa3 100%)",
                   borderRadius: "2px",
                   boxShadow: "0 2px 8px rgba(57, 81, 226, 0.3)",
                 }}
@@ -189,23 +203,27 @@ export const generateOgImage = async (title: string, isShowSiteName: boolean = t
           weight: 700,
           style: "normal",
         },
-      ]
-    }
-  )
+      ],
+    },
+  );
 
   // Render SVG to PNG and return as Buffer
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: "width",
-      value: width
+      value: width,
     },
     background: "#faf8ff",
     font: {
       loadSystemFonts: false,
-    }
+    },
   });
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  return Buffer.from(pngBuffer.buffer, pngBuffer.byteOffset, pngBuffer.byteLength);
-}
+  return Buffer.from(
+    pngBuffer.buffer,
+    pngBuffer.byteOffset,
+    pngBuffer.byteLength,
+  );
+};
