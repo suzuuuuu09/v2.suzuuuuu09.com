@@ -10,15 +10,18 @@ tags:
   - TypeScript
 isPublish: false
 publishDate: 2026-01-04T03:10
-updateDate: 2026-01-04T03:47
+updateDate: 2026-02-07T23:56
 ---
+
 ## 概要
 
 ## 環境
+
 - `astro`: v5.15.1
 - `@astrojs/rss`: v4.0.13
 
 ## 参考
+
 [Add an RSS feed \| Docs](https://docs.astro.build/ja/recipes/rss/)
 
 [astro/packages/astro-rss/README.md at 8d569b545b3cba21eb87f77c75c2be0916139d3a · withastro/astro · GitHub](https://github.com/withastro/astro/blob/8d569b545b3cba21eb87f77c75c2be0916139d3a/packages/astro-rss/README.md#enclosure)

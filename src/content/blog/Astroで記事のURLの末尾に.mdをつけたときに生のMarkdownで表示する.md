@@ -9,12 +9,15 @@ tags:
   - Astro
 isPublish: true
 publishDate: 2026-01-11T21:26
-updateDate: 2026-01-12T02:47
+updateDate: 2026-02-07T23:56
 ---
+
 ## 概要
-Qiita や esa.io などで搭載されている記事の末尾に `.md` つけると、生の Markdown データを取得できるようにする機能を Astro で実装します。  
+
+Qiita や esa.io などで搭載されている記事の末尾に `.md` つけると、生の Markdown データを取得できるようにする機能を Astro で実装します。
 
 ## 環境
+
 - **Astro**: v5.15.1
 - Astro の Content Collections で記事を管理していること
 
@@ -24,7 +27,9 @@ Qiita や esa.io などで搭載されている記事の末尾に `.md` つけ�
 - `/blog/example.md` → `text/markdown` 形式で Markdown の生データを表示
 
 ## ディレクトリ構成
+
 当サイトでは次のようなディレクトリ構成で記事を管理しています。`award`、`blog`、`product` と複数のコレクションがあり、これらを一括で処理する行えるようにしました。
+
 ```text title=ディレクトリ構成
 src/pages/
 ├─ award/
@@ -36,7 +41,9 @@ src/pages/
 ```
 
 ## エンドポイントの実装
+
 ここで `src/pages/[collection]/[...slug].md.ts` として新しくエンドポイント用のファイルを作ります。
+
 ```text title=ディレクトリ構成
 src/pages/
 └─ [collection]/
@@ -72,9 +79,8 @@ export async function GET({ props }: { props: { entry: AllPost } }) {
     },
   });
 }
-
-
 ```
 
 ## おわりに
+
 Astro の動的ルーティングとエンドポイント機能を組み合わせることで、意外と簡単に実装できました。

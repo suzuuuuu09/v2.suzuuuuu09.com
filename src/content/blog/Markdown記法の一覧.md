@@ -8,20 +8,32 @@ description: このブログ内で使えるMarkdown記法をまとめる。
 category: tech
 isPublish: true
 publishDate: 2025-08-09
-updateDate: 2026-02-05T01:48
+updateDate: 2026-02-07T23:56
 ---
+
 # H1 見出し
+
 ## H2 見出し
+
 ### H3 見出し
+
 #### H4 見出し
+
 ##### H5 見出し
+
 ###### H6 見出し
+
 ```markdown
 # H1 見出し
+
 ## H2 見出し
+
 ### H3 見出し
+
 #### H4 見出し
+
 ##### H5 見出し
+
 ###### H6 見出し
 ```
 
@@ -30,13 +42,13 @@ updateDate: 2026-02-05T01:48
 ## テキストスタイル
 
 ```markdown
-**太字** や *斜体* や ~~打ち消し線~~ を使います。
+**太字** や _斜体_ や ~~打ち消し線~~ を使います。
 
 `インラインコード` や <mark>ハイライト</mark> も $InlineMath$ 使えます。
 ```
 
-**太字** や *斜体* や ~~打ち消し線~~ を使います。
-  
+**太字** や _斜体_ や ~~打ち消し線~~ を使います。
+
 `インラインコード` や <mark>ハイライト</mark> も $InlineMath$ 使えます。
 
 ## リスト
@@ -106,17 +118,17 @@ https://expressive-code.com
 ## テーブル
 
 ```markdown
-*[!table]テーブルの例*
-|   a   | b     |   c   |     d |
+_[!table]テーブルの例_
+| a | b | c | d |
 | ----- | :---- | :---: | ----: |
 | aaaaa | bbbbb | ccccc | ddddd |
-| aaaa  | bbbb  | cccc  |  dddd |
-| aaa   | bbb   |  ccc  |   ddd |
+| aaaa | bbbb | cccc | dddd |
+| aaa | bbb | ccc | ddd |
 ```
 
-*[!table] テーブルの例*
+_[!table] テーブルの例_
 
-|   a   | b     |   c   |     d |
+| a     | b     |   c   |     d |
 | ----- | :---- | :---: | ----: |
 | aaaaa | bbbbb | ccccc | ddddd |
 | aaaa  | bbbb  | cccc  |  dddd |
@@ -154,12 +166,14 @@ https://expressive-code.com
 
 ```markdown
 ![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
-*[!image] 画像の例*
+_[!image] 画像の例_
 ```
 
 ![代替テキスト](https://placehold.jp/24/cc9999/993333/150x100.png)
-*[!image] 画像の例*
+_[!image] 画像の例_
+
 ## 区切り線
+
 ```markdown
 ---
 ```
@@ -337,20 +351,56 @@ macOSでは <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることが�
 Windows では <kbd>Ctrl</kbd> + <kbd>C</kbd> を押すとコピーすることができます。  
 macOS では <kbd>⌘</kbd> + <kbd>C</kbd> を押すとコピーすることができます。
 
+## ファイルツリー
+
+```tree
+src/pages/
+├─ award/
+│   └─ [...slug].txt   # すばらしい名言が書かれたテキストファイルを置きます
+├─ blog/
+│   └─ [...slug].json
+└─ product/
+    ├─ [...slug].astro
+    ├─ [...slug].ts
+    ├─ index.js
+    ├─ example.py
+    └─ page.tsx
+    ├─ package.json
+    ├─ README.md
+    ├─ tsconfig.json
+```
+
+```tree
+src/
+	components/
+		Header.tsx
+		Footer.tsx
+test/
+	test.ts
+README.md
+package.json
+tsconfig.json
+```
+
 ## 埋め込み
+
 ### YouTube
 
 ```markdown
 <!-- Youtubeの動画 -->
+
 https://youtu.be/zczjerfFrSI
 
 <!-- YoutubeMusicの動画 -->
+
 https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
 
 <!-- Youtubeのチャンネル -->
+
 https://www.youtube.com/@HikakinTV
 
 <!-- YoutubeMusicのチャンネル -->
+
 https://music.youtube.com/channel/UC_fYA9QRK-aJnFTgvR_4zug
 ```
 
@@ -366,12 +416,15 @@ https://music.youtube.com/channel/UCRjVmUQ3CW1kH6vP1VGskWA?si=tMEmi_2_ZvECUUKh
 
 ```markdown
 <!-- ユーザー -->
+
 https://github.com/suzuuuuu09
 
 <!-- リポジトリ -->
+
 https://github.com/suzuuuuu09/suzuuuuu09
 
 <!-- Github Gistを埋め込む際はscriptタグのembedを使わずにshareでURLをコピーして使用してね -->
+
 https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
 ```
 
@@ -382,10 +435,13 @@ https://github.com/suzuuuuu09/suzuuuuu09
 https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
 
 ### Codepen
+
 ```markdown
 <!-- 右下のshareからURLをコピーしてください -->
+
 https://codepen.io/suzuuuuu09/pen/ZYQqJaJ
 ```
+
 https://codepen.io/suzuuuuu09/pen/ZYQqJaJ
 
 ### Zenn
@@ -413,18 +469,22 @@ https://note.com/notemag/n/n0e4bc242c5b6
 https://note.com/notemag/n/n0e4bc242c5b6
 
 ### はてなブログ
+
 ```markdown
 https://staff.hatenablog.com/entry/2026/01/28/122303
 ```
+
 https://staff.hatenablog.com/entry/2026/01/28/122303
 
 ### X(Twitter)
 
 ```markdown
 <!-- プロフィール -->
+
 https://x.com/suzuuuuu_09
 
 <!-- ツイート -->
+
 https://twitter.com/suzuuuuu_09/status/1900561016435487007
 ```
 
@@ -432,11 +492,12 @@ https://twitter.com/suzuuuuu_09
 
 https://twitter.com/suzuuuuu_09/status/1900561016435487007
 
-
 ### Reddit
+
 ```markdown
 https://www.reddit.com/r/neovim/comments/1ppa4ag/nvimtreesitter_breaking_changes/
 ```
+
 https://www.reddit.com/r/neovim/comments/1ppa4ag/nvimtreesitter_breaking_changes/
 
 ### Google スライド
@@ -447,20 +508,23 @@ https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZ
 
 https://docs.google.com/presentation/d/e/2PACX-1vQJzjtiJ0C-Ngylgck6lNzYZ2kW_FAKZDlGAhUL-aQxTf3If9QMYl8jes_QEoe6hoinu5t4B6Rg7aDq/pub
 
-  
 ### Speaker Deck
+
 ```markdown
 https://speakerdeck.com/suzuuuuu09/matsusupo
 ```
+
 https://speakerdeck.com/suzuuuuu09/matsusupo
 
 ### Spotify
 
 ```markdown
 <!-- Spotifyのトラック -->
+
 https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4ded
 
 <!-- Spotifyのアーティスト -->
+
 https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw
 ```
 
@@ -469,7 +533,9 @@ https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4de
 https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw
 
 ### Soundcloud
+
 ```markdown
 https://soundcloud.com/bei-dou-515365507/mega-tskr-ft-camellia-ft
 ```
+
 https://soundcloud.com/bei-dou-515365507/mega-tskr-ft-camellia-ft
