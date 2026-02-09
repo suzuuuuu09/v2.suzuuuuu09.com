@@ -596,26 +596,20 @@ export default defineConfig({
 	globalFontface: {
 		"IBM Plex Sans JP": [
 			{
-				src: "url('/fonts/IBMPlexSansJP-Regular.ttf') format('truetype')",
+				src: "url('/fonts/IBMPlexSansJP-Regular.woff2') format('woff2')",
 				fontWeight: "400",
 				fontStyle: "normal",
 				fontDisplay: "swap",
 			},
 			{
-				src: "url('/fonts/IBMPlexSansJP-Bold.ttf') format('truetype')",
+				src: "url('/fonts/IBMPlexSansJP-Bold.woff2') format('woff2')",
 				fontWeight: "700",
 				fontStyle: "normal",
 				fontDisplay: "swap",
 			},
 		],
 		"Moralerspace Neon": {
-			src: "url('/fonts/MoralerspaceNeon-Regular.ttf') format('truetype')",
-			fontWeight: "400",
-			fontStyle: "normal",
-			fontDisplay: "swap",
-		},
-		twemoji: {
-			src: "src('/fonts/twemoji.woff2') format('woff2')",
+			src: "url('/fonts/MoralerspaceNeon-Regular.woff2') format('woff2')",
 			fontWeight: "400",
 			fontStyle: "normal",
 			fontDisplay: "swap",
