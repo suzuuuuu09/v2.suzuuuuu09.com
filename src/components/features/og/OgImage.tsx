@@ -9,10 +9,10 @@ export const generateOgImage = async (
 	collection?: string,
 ): Promise<Buffer> => {
 	const ibmPlexSansRegularFont = fs.readFileSync(
-		"./public/fonts/IBMPlexSansJP-Regular.woff2",
+		"./public/fonts/IBMPlexSansJP-Regular.ttf",
 	);
 	const ibmPlexSnasBoldFont = fs.readFileSync(
-		"./public/fonts/IBMPlexSansJP-Bold.woff2",
+		"./public/fonts/IBMPlexSansJP-Bold.ttf",
 	);
 	const backgroundImage = fs.readFileSync("./public/imgs/ogp-background.png");
 	const iconSvg = fs.readFileSync("./src/assets/icon.svg", "utf-8");
