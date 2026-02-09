@@ -60,10 +60,10 @@ export default function remarkWikiLinks() {
 			} else {
 				// 画像 - 直接HTMLとして出力 ASTノードが悪さをする(原因不明)
 				// Note: Cloudflare Image Resizing is a paid feature
-				// For now, use loading="lazy" and decoding="async" for optimization
+				// Optimized with sizes attribute to help browser select appropriate size
 				parts.push({
 					type: "html",
-					value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" decoding="async" />`,
+					value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" decoding="async" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px" style="max-width: 100%; height: auto;" />`,
 				});
 			}
 
