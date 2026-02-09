@@ -91,6 +91,7 @@ export default function Discussion() {
 			>
 				<s.a
 					href={`#${title}`}
+					aria-label={title}
 					marginRight=".5rem"
 					display="inline-flex"
 					alignItems="center"
