@@ -3,7 +3,8 @@ import { Flex, HStack, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import TagList from "@/components/features/blog/TagList.astro";
 import { Card } from "@/components/ui/Card";
-import Thumbnail from "@/components/shared/Thumbnail";
+// import Thumbnail from "@/components/shared/Thumbnail";
+import Thumbnail from "@/components/shared/Thumbnail.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText";
@@ -23,9 +24,10 @@ export interface Props {
 			content?: string;
 		};
 	};
+	priority?: boolean;
 }
 
-const { product } = Astro.props;
+const { product, priority = false } = Astro.props;
 ---
 
 <Card maxW="450px">
@@ -40,7 +42,8 @@ const { product } = Astro.props;
       thumbnailPath={product.data.thumbnail || ""}
       title={product.data.title}
       type="card"
-      loading="lazy"
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : "auto"}
     />
 
     <Flex

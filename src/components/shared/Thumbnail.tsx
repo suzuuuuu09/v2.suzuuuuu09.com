@@ -27,6 +27,7 @@ interface Props {
 	title: string;
 	type: "card" | "info";
 	loading: "eager" | "lazy";
+	fetchpriority?: "high" | "low" | "auto";
 }
 
 const thumbnailStyles = sva({
@@ -64,7 +65,7 @@ const thumbnailStyles = sva({
 });
 
 export default function Thumbnail(props: Props) {
-	const { thumbnailPath, title, type, loading } = props;
+	const { thumbnailPath, title, type, loading, fetchpriority = "auto" } = props;
 	const thumbnailUrl = buildThumbnailUrl(thumbnailPath, title);
 	const styles = thumbnailStyles({ type });
 
@@ -78,6 +79,7 @@ export default function Thumbnail(props: Props) {
 						alt={title}
 						className={styles.image}
 						loading={loading}
+						fetchPriority={fetchpriority}
 					/>
 				</div>
 			) : (
@@ -86,6 +88,7 @@ export default function Thumbnail(props: Props) {
 					alt={title}
 					className={styles.image}
 					loading={loading}
+					fetchPriority={fetchpriority}
 				/>
 			)}
 		</>

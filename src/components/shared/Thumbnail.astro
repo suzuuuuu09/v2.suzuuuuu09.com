@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+import { R2_URL } from "@/consts/base";
+import { cleanAssetPath } from "@/utils/cleanAssetPath";
+import { sva } from "styled-system/css";
+
+interface Props {
+	thumbnailPath: string;
+	title: string;
+	type: "card" | "info";
+	loading: "eager" | "lazy";
+	fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+	thumbnailPath,
+	title,
+	type,
+	loading,
+	fetchpriority = "auto",
+} = Astro.props;
+
+const buildThumbnailUrl = (pathInput: string, titleStr: string) => {
+	if (!pathInput) return "";
+	let path = cleanAssetPath(pathInput);
+	if (path.startsWith("http://") || path.startsWith("https://")) return path;
+	if (path.startsWith("assets/")) return `${R2_URL}/${path}`;
+	if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(path) && !path.includes("/")) {
+		const t = (titleStr || "assets").replace(/ /g, "_");
+		return `${R2_URL}/assets/${t}/${path}`;
+	}
+	return path;
+};
+
+const thumbnailUrl = buildThumbnailUrl(thumbnailPath, title);
+
+const thumbnailStyles = sva({
+	slots: ["image", "wrapper"],
+	variants: {
+		type: {
+			card: {
+				wrapper: {
+					position: "relative",
+					w: "full",
+					maxH: "60",
+					h: { base: "240", _sm: "200" },
+					overflow: "hidden",
+				},
+				image: {
+					w: "full",
+					h: "full",
+					objectFit: "cover",
+					objectPosition: "center",
+					transition: "transform 0.5s",
+					_groupHover: { transform: "scale(1.05)" },
+				},
+			},
+			info: {
+				wrapper: {},
+				image: {
+					w: "full",
+					h: "auto",
+					maxH: "500px",
+					rounded: "xl",
+					objectPosition: "center",
+				},
+			},
+		},
+	},
+});
+
+const styles = thumbnailStyles({ type });
+
+const imageSize =
+	type === "card"
+		? { width: 800, height: 450 } // カード用のアスペクト比
+		: { width: 1200, height: 630 }; // 詳細表示用のサイズ
+---
+
+{thumbnailUrl && (
+  type === "card" ? (
+    <div class={styles.wrapper}>
+      <Image
+        src={thumbnailUrl}
+        alt={title}
+        width={imageSize.width}
+        height={imageSize.height}
+        class={styles.image}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        decoding="async"
+      />
+    </div>
+  ) : (
+    <Image
+      src={thumbnailUrl}
+      alt={title}
+      width={imageSize.width}
+      height={imageSize.height}
+      class={styles.image}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding="async"
+    />
+  )
+)}
