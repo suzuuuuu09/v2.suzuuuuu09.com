@@ -8,7 +8,7 @@ description: このブログ内で使えるMarkdown記法をまとめる。
 category: tech
 isPublish: true
 publishDate: 2025-08-09
-updateDate: 2026-02-07T23:56
+updateDate: 2026-02-09T03:18
 ---
 
 # H1 見出し
@@ -388,19 +388,15 @@ tsconfig.json
 
 ```markdown
 <!-- Youtubeの動画 -->
-
 https://youtu.be/zczjerfFrSI
 
 <!-- YoutubeMusicの動画 -->
-
 https://music.youtube.com/watch?v=GFHtlz-wqW4&si=bSsSOvCo8iPfB7jA
 
 <!-- Youtubeのチャンネル -->
-
 https://www.youtube.com/@HikakinTV
 
 <!-- YoutubeMusicのチャンネル -->
-
 https://music.youtube.com/channel/UC_fYA9QRK-aJnFTgvR_4zug
 ```
 
@@ -416,15 +412,12 @@ https://music.youtube.com/channel/UCRjVmUQ3CW1kH6vP1VGskWA?si=tMEmi_2_ZvECUUKh
 
 ```markdown
 <!-- ユーザー -->
-
 https://github.com/suzuuuuu09
 
 <!-- リポジトリ -->
-
 https://github.com/suzuuuuu09/suzuuuuu09
 
 <!-- Github Gistを埋め込む際はscriptタグのembedを使わずにshareでURLをコピーして使用してね -->
-
 https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
 ```
 
@@ -438,7 +431,6 @@ https://gist.github.com/suzuuuuu09/966dafbb70727684f28a73c0b80f00a4
 
 ```markdown
 <!-- 右下のshareからURLをコピーしてください -->
-
 https://codepen.io/suzuuuuu09/pen/ZYQqJaJ
 ```
 
@@ -480,11 +472,9 @@ https://staff.hatenablog.com/entry/2026/01/28/122303
 
 ```markdown
 <!-- プロフィール -->
-
 https://x.com/suzuuuuu_09
 
 <!-- ツイート -->
-
 https://twitter.com/suzuuuuu_09/status/1900561016435487007
 ```
 
@@ -520,11 +510,9 @@ https://speakerdeck.com/suzuuuuu09/matsusupo
 
 ```markdown
 <!-- Spotifyのトラック -->
-
 https://open.spotify.com/intl-ja/track/5NxmDq0yXBYGfCbMqvIXuv?si=ba8cb6a2448e4ded
 
 <!-- Spotifyのアーティスト -->
-
 https://open.spotify.com/intl-ja/artist/3wCJxpjgYDXbwLn4vmSBEx?si=8i7_ZyROQG-TakyKrWZGQw
 ```
 

@@ -118,7 +118,7 @@ export default function Discussion() {
 					reactionsEnabled="1"
 					emitMetadata="0"
 					inputPosition="bottom"
-					theme={theme === "light" ? "light" : "dark"}
+					theme={theme === "light" ? "catppuccin_latte" : "catppuccin_mocha"}
 					lang="ja"
 					loading="lazy"
 				/>

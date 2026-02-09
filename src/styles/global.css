@@ -1,4 +1,76 @@
 @layer reset, base, tokens, recipes, utilities;
 
-@import './embed.css';
-@import './callout.css';
+@import "./embed.css";
+@import "./callout.css";
+
+/* File Tree Container */
+.file-tree-container {
+	background-color: var(--ec-codeBg, #1a1b26);
+	/* border: 1px solid var(--ec-brdCol, #3b4261); */
+	/* border-radius: 0.75rem; */
+	margin: 1.5rem 0;
+	overflow: hidden;
+	font-family: var(--moralerspace-neon), monospace;
+	box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.file-tree-header {
+	background-color: var(--ec-frm-tbarBg, #16161e);
+	padding: 0.75rem 1.25rem;
+	font-size: 0.65rem;
+	color: #787c99;
+	/* border-bottom: 1px solid var(--ec-brdCol, #3b4261); */
+	font-weight: 800;
+	letter-spacing: 0.15em;
+}
+
+.file-tree-content {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+/* Tree Line */
+.tree-line {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 2px 8px;
+	/* border-radius: 4px; */
+	transition: background-color 0.15s ease;
+}
+
+.tree-line:hover {
+	background-color: rgba(255, 255, 255, 0.04);
+}
+
+.tree-guide {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	/* border-left: 1px solid #3b4261; */
+}
+
+.tree-icon-wrapper {
+	margin-right: 0.75rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tree-name {
+	color: #a9b1d6;
+	font-size: 13px;
+}
+
+.tree-line:hover .tree-name {
+	color: #c0caf5;
+}
+
+.tree-comment {
+	margin-left: 1rem;
+	color: #565f89;
+	font-style: italic;
+	font-size: 11px;
+}
