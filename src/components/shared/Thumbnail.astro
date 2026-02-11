@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
+import { sva } from "styled-system/css";
 import { R2_URL } from "@/consts/base";
 import { cleanAssetPath } from "@/utils/cleanAssetPath";
-import { sva } from "styled-system/css";
 
 interface Props {
 	thumbnailPath: string;
@@ -22,13 +22,16 @@ const {
 
 const buildThumbnailUrl = (pathInput: string, titleStr: string) => {
 	if (!pathInput) return "";
-	let path = cleanAssetPath(pathInput);
+
+	const path = cleanAssetPath(pathInput);
+
 	if (path.startsWith("http://") || path.startsWith("https://")) return path;
 	if (path.startsWith("assets/")) return `${R2_URL}/${path}`;
 	if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(path) && !path.includes("/")) {
 		const t = (titleStr || "assets").replace(/ /g, "_");
 		return `${R2_URL}/assets/${t}/${path}`;
 	}
+
 	return path;
 };
 
@@ -56,9 +59,14 @@ const thumbnailStyles = sva({
 				},
 			},
 			info: {
-				wrapper: {},
-				image: {
+				wrapper: {
 					w: "full",
+					display: "flex",
+					justifyContent: "center",
+				},
+				image: {
+					w: "auto",
+					maxW: "full",
 					h: "auto",
 					maxH: "500px",
 					rounded: "xl",
@@ -72,35 +80,35 @@ const thumbnailStyles = sva({
 const styles = thumbnailStyles({ type });
 
 const imageSize =
-	type === "card"
-		? { width: 800, height: 450 } // カード用のアスペクト比
-		: { width: 1200, height: 630 }; // 詳細表示用のサイズ
+	type === "card" ? { width: 800, height: 450 } : { width: 1200, height: 630 };
 ---
 
 {thumbnailUrl && (
-  type === "card" ? (
-    <div class={styles.wrapper}>
-      <Image
-        src={thumbnailUrl}
-        alt={title}
-        width={imageSize.width}
-        height={imageSize.height}
-        class={styles.image}
-        loading={loading}
-        fetchpriority={fetchpriority}
-        decoding="async"
-      />
-    </div>
-  ) : (
-    <Image
-      src={thumbnailUrl}
-      alt={title}
-      width={imageSize.width}
-      height={imageSize.height}
-      class={styles.image}
-      loading={loading}
-      fetchpriority={fetchpriority}
-      decoding="async"
-    />
-  )
+	type === "card" ? (
+		<div class={styles.wrapper}>
+			<Image
+				src={thumbnailUrl}
+				alt={title}
+				width={imageSize.width}
+				height={imageSize.height}
+				class={styles.image}
+				loading={loading}
+				fetchpriority={fetchpriority}
+				decoding="async"
+			/>
+		</div>
+	) : (
+		<div class={styles.wrapper}>
+			<Image
+				src={thumbnailUrl}
+				alt={title}
+				width={imageSize.width}
+				height={imageSize.height}
+				class={styles.image}
+				loading={loading}
+				fetchpriority={fetchpriority}
+				decoding="async"
+			/>
+		</div>
+	)
 )}
