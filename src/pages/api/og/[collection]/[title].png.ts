@@ -4,6 +4,8 @@ import { getAllPosts } from "../../../../lib/post";
 
 const COLLECTIONS = ["blog", "award", "product"] as const;
 
+export const prerender = false;
+
 export const getStaticPaths = async () => {
 	const allPosts = await getAllPosts();
 	const paths = [];
