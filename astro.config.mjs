@@ -23,10 +23,8 @@ import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://suzuuuuu09.com",
-	output: "static",
-	adapter: cloudflare({
-		imageService: "compile",
-	}),
+	output: "server",
+	adapter: cloudflare(),
 
 	integrations: [
 		sitemap({
