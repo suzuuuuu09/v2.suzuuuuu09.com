@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import partytown from "@astrojs/partytown";
@@ -22,6 +23,10 @@ import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://suzuuuuu09.com",
+	output: "static",
+	adapter: cloudflare({
+		imageService: "compile",
+	}),
 
 	integrations: [
 		sitemap({
@@ -65,6 +70,9 @@ export default defineConfig({
 				pathname: "/**",
 			},
 		],
+		service: {
+			entrypoint: "astro/assets/services/sharp",
+		},
 	},
 
 	markdown: {
