@@ -1,119 +1,129 @@
-import type { Parent, Root, Text } from "mdast";
+// https://github.com/nasubi-dev/portfoilo-v2/blob/main/astro.config.mjs
 import { visit } from "unist-util-visit";
-import type { VFile } from "vfile";
 import { R2_URL } from "../../consts/base";
 
+// WikiLinks形式の処理プラグイン
 export default function remarkWikiLinks() {
-	return (tree: Root, file: VFile) => {
-		const mediaWikiLinkRegex = /!\[\[(.*?)(?:\|(.*?))?\]\]/g;
-		const internalWikiLinkRegex = /(?<!!)\[\[(.*?)(?:\|(.*?))?\]\]/g;
+	// 画像/動画用: ![[xxx.webp]] - グループ1がパス
+	const mediaWikiLinkRegex = /!\[\[(.*?)(?:\|(.*?))?\]\]/g;
 
-		const rawTitle =
-			(file.data.astro as { frontmatter: { title?: string } })?.frontmatter
-				?.title || "assets";
+	// 内部リンク用: [[xxx]] - グループ1がパス
+	const internalWikiLinkRegex = /(?<!!)\[\[(.*?)(?:\|(.*?))?\]\]/g;
+
+	return (tree: any, file: any) => {
+		// frontmatterからtitleを取得し、半角スペースをアンダースコアに置き換え
+		const rawTitle = file.data.astro?.frontmatter?.title || "assets";
 		const title = rawTitle.replaceAll(" ", "_");
+		// メディア（画像・動画）を処理
+		visit(tree, "text", (node, index, parent) => {
+			if (!node.value.includes("![[")) return;
 
-		visit(
-			tree,
-			"text",
-			(node: Text, index: number | undefined, parent: Parent | undefined) => {
-				if (!parent || index === undefined) return;
-				if (!node.value.includes("[[")) return;
+			const parts = [];
+			let lastIndex = 0;
+			let match;
 
-				const isMedia = node.value.includes("![[");
-				const regex = isMedia ? mediaWikiLinkRegex : internalWikiLinkRegex;
-				const parts: (
-					| Text
-					| {
-							type: "html" | "link";
-							value?: string;
-							url?: string;
-							children?: any;
-					  }
-				)[] = [];
-				let lastIndex = 0;
-				let match: RegExpExecArray | null;
-
-				while ((match = regex.exec(node.value)) !== null) {
-					if (match.index > lastIndex) {
-						parts.push({
-							type: "text",
-							value: node.value.slice(lastIndex, match.index),
-						});
-					}
-
-					const [fullMatch, path, text] = match;
-					const displayText = text || path;
-
-					if (isMedia) {
-						const isVideo = /\.(mp4|webm|mov)$/i.exec(path);
-						let r2Url = path.startsWith("assets/")
-							? `${R2_URL}/${path}`
-							: `${R2_URL}/assets/${title}/${path}`;
-
-						if (isVideo) {
-							parts.push({
-								type: "html",
-								value: `<video src="${r2Url}" controls width="100%"></video>`,
-							});
-						} else {
-							// 生成したい画像幅のリスト
-							const widths = [640, 1024, 1200];
-
-							// 各サイズごとのURLを生成
-							const srcset = widths
-								.map((w) => {
-									const params = new URLSearchParams();
-
-									params.set("href", r2Url);
-									params.set("w", w.toString()); // 幅を設定
-									params.set("f", "webp"); // WebPに変換
-									params.set("q", "80"); // 画質
-
-									return `/_image?${params.toString()} ${w}w`;
-								})
-								.join(", ");
-
-							// フォールバック用のメインURL（一番大きいサイズなど）
-							const defaultParams = new URLSearchParams();
-							defaultParams.set("href", r2Url);
-							defaultParams.set("w", "1000");
-							defaultParams.set("f", "webp");
-							const src = `/_image?${defaultParams.toString()}`;
-
-							parts.push({
-								type: "html",
-								value: `
-									<img 
-										src="${src}" 
-										srcset="${srcset}" 
-										sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px" 
-										alt="${displayText}" 
-										loading="lazy" 
-										decoding="async" 
-										style="max-width: 100%; height: auto;" 
-									/>`,
-							});
-						}
-					} else {
-						// 内部リンク処理
-						parts.push({
-							type: "link",
-							url: path,
-							children: [{ type: "text", value: displayText }],
-						});
-					}
-					lastIndex = match.index + fullMatch.length;
+			while ((match = mediaWikiLinkRegex.exec(node.value)) !== null) {
+				// マッチ前のテキスト
+				if (match.index > lastIndex) {
+					parts.push({
+						type: "text",
+						value: node.value.slice(lastIndex, match.index),
+					});
 				}
 
-				if (lastIndex < node.value.length) {
-					parts.push({ type: "text", value: node.value.slice(lastIndex) });
+				// パスとテキストを抽出 - '!'は含まない
+				const [fullMatch, path, text] = match;
+				const displayText = text || path;
+
+				// パス処理の改善: assets/で始まる場合もそうでない場合も処理
+				let r2Url = path;
+
+				// assets/で始まる場合はそのまま
+				if (path.startsWith("assets/")) {
+					r2Url = `${R2_URL}/${path}`;
+				}
+				// 拡張子があり、assetsで始まらない場合はassets/を前に追加
+				else if (
+					/\.(jpe?g|png|gif|webp|avif|svg|mp4|webm|mov)$/i.exec(path) &&
+					!path.includes("/")
+				) {
+					r2Url = `${R2_URL}/assets/${title}/${path}`;
+				}
+				// それ以外の場合（既に完全なURLの場合など）はそのまま
+
+				if (/\.(mp4|webm|mov)$/i.exec(path)) {
+					// 動画
+					parts.push({
+						type: "html",
+						value: `<video src="${r2Url}" controls width="100%" alt="${displayText}"></video>`,
+					});
+				} else {
+					// 画像 - 直接HTMLとして出力 ASTノードが悪さをする(原因不明)
+					// Note: Cloudflare Image Resizing is a paid feature
+					// Optimized with sizes attribute to help browser select appropriate size
+					parts.push({
+						type: "html",
+						value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" decoding="async" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px" style="max-width: 100%; height: auto;" />`,
+					});
 				}
 
-				if (parts.length > 0) {
-					parent.children.splice(index, 1, ...(parts as any));
+				lastIndex = match.index + fullMatch.length;
+			}
+
+			// 残りのテキスト
+			if (lastIndex < node.value.length) {
+				parts.push({ type: "text", value: node.value.slice(lastIndex) });
+			}
+
+			// 元のノードを置き換え
+			if (parts.length > 0) {
+				parent.children.splice(index, 1, ...parts);
+				return (index ?? 0) + parts.length;
+			}
+		});
+
+		// 内部リンクを処理
+		visit(tree, "text", (node, index, parent) => {
+			if (!node.value.includes("[[") || node.value.includes("![[")) return;
+
+			const parts = [];
+			let lastIndex = 0;
+			let match;
+
+			while ((match = internalWikiLinkRegex.exec(node.value)) !== null) {
+				// マッチ前のテキスト
+				if (match.index > lastIndex) {
+					parts.push({
+						type: "text",
+						value: node.value.slice(lastIndex, match.index),
+					});
 				}
-			},
-		);
+
+				// パスとテキストを抽出
+				const [, path, text] = match;
+				const displayText = text || path;
+
+				// 内部リンク
+				parts.push({
+					type: "link",
+					url: path,
+					children: [{ type: "text", value: displayText }],
+				});
+
+				lastIndex = match.index + match[0].length;
+			}
+
+			// 残りのテキスト
+			if (lastIndex < node.value.length) {
+				parts.push({ type: "text", value: node.value.slice(lastIndex) });
+			}
+
+			// 元のノードを置き換え
+			if (parts.length > 0) {
+				parent.children.splice(index, 1, ...parts);
+				if (index !== null) return;
+				return index + parts.length;
+			}
+		});
 	};
 }

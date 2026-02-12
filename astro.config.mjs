@@ -24,9 +24,7 @@ import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
 export default defineConfig({
 	site: "https://suzuuuuu09.com",
 	output: "static",
-	adapter: cloudflare({
-		imageService: "compile",
-	}),
+	adapter: cloudflare(),
 
 	integrations: [
 		sitemap({
@@ -70,9 +68,7 @@ export default defineConfig({
 				pathname: "/**",
 			},
 		],
-		service: {
-			entrypoint: "astro/assets/services/sharp",
-		},
+		domains: ["content.suzuuuuu09.com"],
 	},
 
 	markdown: {

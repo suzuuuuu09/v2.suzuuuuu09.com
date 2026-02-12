@@ -32,3 +32,7 @@ styled-system-studio
 src/content/.obsidian/
 src/content/assets/
 src/content/templates/
+
+# Cloudflare workers cache
+.cloudflare/
+.wrangler/
