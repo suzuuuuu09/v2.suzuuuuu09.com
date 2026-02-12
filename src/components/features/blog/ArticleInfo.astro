@@ -56,7 +56,7 @@ const {
     justifyContent="center"
     gap="0.5"
   >
-    <BudouxText text={title} client:idle />
+    <BudouxText text={title} client:visible />
   </s.h1>
 
   <!-- タグ -->
@@ -109,7 +109,7 @@ const {
         justifyContent="center"
         gap="0.5"
       >
-        <BudouxText text={description} client:idle />
+        <BudouxText text={description} client:visible />
       </s.p>
     )
   }

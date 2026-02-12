@@ -72,7 +72,7 @@ const { product, priority = false } = Astro.props;
         gap="0.5"
         _groupHover={{ color: "sz.primary" }}
       >
-        <BudouxText text={product.data.title} client:idle />
+        <BudouxText text={product.data.title} client:visible />
       </s.h2>
 
       <Flex flexDir="column" flex="1" justifyContent="space-between">

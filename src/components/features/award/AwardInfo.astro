@@ -60,7 +60,7 @@ const titleText = `[${type}] ${title}`;
     justifyContent="center"
     gap="0.5"
   >
-    <BudouxText text={titleText} client:idle />
+    <BudouxText text={titleText} client:visible />
   </s.h1>
 
   <!-- タグ -->
@@ -121,7 +121,7 @@ const titleText = `[${type}] ${title}`;
         justifyContent="center"
         gap="0.5"
       >
-        <BudouxText text={description} client:idle />
+        <BudouxText text={description} client:visible />
       </s.p>
     )
   }
