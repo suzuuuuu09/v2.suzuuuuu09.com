@@ -3,7 +3,7 @@ import { Flex, Center, styled as s } from "styled-system/jsx";
 import { css, cx } from "styled-system/css";
 import { Card } from "@/components/ui/Card";
 import Date from "@/components/shared/Date.astro";
-import BudouxText from "@/components/shared/BudouxText";
+import BudouxText from "@/components/shared/BudouxText.astro";
 
 export interface Props {
 	award: {
@@ -80,7 +80,7 @@ const titleText = `[${award.data.type}] ${award.data.title}`;
                 gap="0.5"
                 _groupHover={{ color: "sz.primary" }}
               >
-                <BudouxText text={titleText} client:visible />
+                <BudouxText text={titleText} />
               </s.h2>
             </Flex>
 

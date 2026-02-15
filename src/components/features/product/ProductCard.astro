@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 import Thumbnail from "@/components/shared/Thumbnail.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
-import BudouxText from "@/components/shared/BudouxText";
+import BudouxText from "@/components/shared/BudouxText.astro";
 
 export interface Props {
 	product: {
@@ -72,7 +72,7 @@ const { product, priority = false } = Astro.props;
         gap="0.5"
         _groupHover={{ color: "sz.primary" }}
       >
-        <BudouxText text={product.data.title} client:visible />
+        <BudouxText text={product.data.title} />
       </s.h2>
 
       <Flex flexDir="column" flex="1" justifyContent="space-between">

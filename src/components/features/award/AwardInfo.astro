@@ -4,7 +4,7 @@ import TagList from "@/components/features/blog/TagList.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
 import Icon from "@suzuuuuu09/astro-iconify";
-import BudouxText from "@/components/shared/BudouxText";
+import BudouxText from "@/components/shared/BudouxText.astro";
 
 interface Props {
 	title: string;
@@ -60,7 +60,7 @@ const titleText = `[${type}] ${title}`;
     justifyContent="center"
     gap="0.5"
   >
-    <BudouxText text={titleText} client:visible />
+    <BudouxText text={titleText} />
   </s.h1>
 
   <!-- タグ -->
@@ -121,7 +121,7 @@ const titleText = `[${type}] ${title}`;
         justifyContent="center"
         gap="0.5"
       >
-        <BudouxText text={description} client:visible />
+        <BudouxText text={description} />
       </s.p>
     )
   }

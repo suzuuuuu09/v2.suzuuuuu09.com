@@ -3,7 +3,7 @@ import { Flex, VStack, styled as s } from "styled-system/jsx";
 import TagList from "./TagList.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
-import BudouxText from "@/components/shared/BudouxText";
+import BudouxText from "@/components/shared/BudouxText.astro";
 
 interface Props {
 	title: string;
@@ -56,7 +56,7 @@ const {
     justifyContent="center"
     gap="0.5"
   >
-    <BudouxText text={title} client:visible />
+    <BudouxText text={title} />
   </s.h1>
 
   <!-- タグ -->
@@ -109,7 +109,7 @@ const {
         justifyContent="center"
         gap="0.5"
       >
-        <BudouxText text={description} client:visible />
+        <BudouxText text={description} />
       </s.p>
     )
   }
