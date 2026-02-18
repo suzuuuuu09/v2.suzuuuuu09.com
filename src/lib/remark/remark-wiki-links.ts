@@ -47,7 +47,7 @@ export default function remarkWikiLinks() {
 					/\.(jpe?g|png|gif|webp|avif|svg|mp4|webm|mov)$/i.exec(path) &&
 					!path.includes("/")
 				) {
-					r2Url = `${R2_URL}/assets/${title}/${path}`;
+					r2Url = `${R2_URL}/assets/${path}`;
 				}
 				// それ以外の場合（既に完全なURLの場合など）はそのまま
 

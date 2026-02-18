@@ -29,7 +29,7 @@ const buildThumbnailUrl = (pathInput: string, titleStr: string) => {
 	if (path.startsWith("assets/")) return `${R2_URL}/${path}`;
 	if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(path) && !path.includes("/")) {
 		const t = (titleStr || "assets").replace(/ /g, "_");
-		return `${R2_URL}/assets/${t}/${path}`;
+		return `${R2_URL}/assets/${path}`;
 	}
 
 	return path;
