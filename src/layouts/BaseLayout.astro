@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { title, maxW } = Astro.props;
-const siteTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
+const siteTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 
 // OG画像URL生成 - defaultコレクション用
 const ogImageUrl = new URL("/api/og/default.png", Astro.site);
@@ -62,6 +62,9 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site);
     <!-- Preconnect -->
     <link rel="preconnect" href="https://content.suzuuuuu09.com" crossorigin />
     <link rel="preconnect" href="https://twemoji.maxcdn.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
 
 		<!-- フォントのプレロード -->
     <link

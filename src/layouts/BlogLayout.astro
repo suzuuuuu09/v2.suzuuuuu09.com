@@ -31,7 +31,7 @@ interface Props {
 }
 
 const { title, headings = [], frontmatter, collection = "blog" } = Astro.props;
-const siteTitle = `${frontmatter?.title || title} - ${SITE_TITLE}`;
+const siteTitle = `${frontmatter?.title || title} | ${SITE_TITLE}`;
 const description = frontmatter?.description || SITE_DESCRIPTION;
 // OG画像URL生成
 const ogImageUrl = new URL(
@@ -87,6 +87,9 @@ const ogImageUrl = new URL(
     <!-- Preconnect -->
     <link rel="preconnect" href="https://content.suzuuuuu09.com" />
     <link rel="preconnect" href="https://twemoji.maxcdn.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
 
     <!-- フォントのプレロード -->
     <link
