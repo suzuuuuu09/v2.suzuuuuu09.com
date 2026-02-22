@@ -1,5 +1,5 @@
 ---
-title: 使わなくなったノートPCにZorin OSをインストールする
+title: 14年前のノートPCにZorin OSをインストールする
 slug: install-zorion-os-laptop
 author: suzu
 emoji: 💻
@@ -10,7 +10,7 @@ tags:
   - ZorinOS
 isPublish: true
 publishDate: 2026-02-19T00:49
-updateDate: 2026-02-19T00:50
+updateDate: 2026-02-23T03:47
 ---
 ## 概要
 使わなくなったノート PC が家に眠っていたので、Windows からの移行先として有名で軽量な Zorin OS を入れてみました。
