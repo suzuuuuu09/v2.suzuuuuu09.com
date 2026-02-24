@@ -9,7 +9,7 @@ thumbnail: "![[cinii-mcp-server-1766844074393.webp]]"
 description: CiNiiで論文を検索するMCPサーバー
 isPublish: true
 publishDate: 2025-12-21T19:26
-updateDate: 2026-02-21T01:18
+updateDate: 2026-02-24T13:23
 ---
 
 ## 概要
@@ -30,8 +30,10 @@ AI がデータベースを直接参照することで、ハルシネーショ�
 
 ## 画像・動画
 
-![[cinii-mcp-server-1766844074393.webp]]
-![[cinii-mcp-server-1765992216809.webp]]
+![[cinii-mcp-server-1771906934897.webp]]
+![[cinii-mcp-server-1771906966964.webp]]
+
+
 
 ## リンク
 
