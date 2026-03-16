@@ -1,6 +1,6 @@
 # Cache static assets from content.suzuuuuu09.com for 30 days
-https://content.suzuuuuu09.com/*
-  Cache-Control: public, max-age=2592000, immutable
+# https://content.suzuuuuu09.com/*
+#   Cache-Control: public, max-age=2592000, immutable
 
 # Cache static assets for 1 year
 /_astro/*
