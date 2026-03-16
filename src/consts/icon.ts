@@ -3,6 +3,7 @@ import type { IconCard } from "@/types";
 export const ICON_CARDS: Record<string, IconCard> = {
 	astro: { icon: "material-icon-theme:astro", name: "Astro" },
 	bun: { icon: "material-icon-theme:bun", name: "Bun" },
+	biome: { icon: "simple-icons:biome", name: "Biome", color: "#007ACC" },
 	c: { icon: "material-icon-theme:c", name: "C" },
 	cpp: { icon: "material-icon-theme:cpp", name: "C++" },
 	css: { icon: "material-icon-theme:css", name: "CSS" },
@@ -12,7 +13,13 @@ export const ICON_CARDS: Record<string, IconCard> = {
 		name: "Cloudflare Pages",
 		color: "#F38020",
 	},
+	cloudflareworkers: {
+		icon: "simple-icons:cloudflare",
+		name: "Cloudflare Workers",
+		color: "#F38020",
+	},
 	django: { icon: "material-icon-theme:django", name: "Django" },
+	drizzle: { icon: "simple-icons:drizzle", name: "Drizzle", color: "#0EA5E9" },
 	expressjs: { icon: "simple-icons:express", name: "Express.js" },
 	ffmpeg: { icon: "file-icons:ffmpeg", name: "FFmpeg", color: "#13802d" },
 	flutter: { icon: "devicon:flutter", name: "Flutter" },
@@ -26,7 +33,7 @@ export const ICON_CARDS: Record<string, IconCard> = {
 		color: "#2088FF",
 	},
 	gsap: { icon: "simple-icons:gsap", name: "GSAP", color: "#0AE448" },
-	hono: { icon: "logos:hono", name: "Hono.js" },
+	hono: { icon: "logos:hono", name: "Hono" },
 	html: { icon: "material-icon-theme:html", name: "HTML" },
 	javascript: { icon: "material-icon-theme:javascript", name: "JavaScript" },
 	jupyter: { icon: "material-icon-theme:jupyter", name: "Jupyter" },
@@ -41,6 +48,11 @@ export const ICON_CARDS: Record<string, IconCard> = {
 	},
 	nodejs: { icon: "vscode-icons:file-type-node", name: "Node.js" },
 	neovim: { icon: "simple-icons:neovim", name: "Neovim", color: "#57A143" },
+	nextjs: {
+		icon: "material-icon-theme:next",
+		name: "Next.js",
+		// color: "#cfd8dc",
+	},
 	nuxt: { icon: "material-icon-theme:nuxt", name: "Nuxt.js" },
 	opencv: { icon: "devicon:opencv", name: "OpenCV" },
 	obsidian: {
@@ -66,5 +78,10 @@ export const ICON_CARDS: Record<string, IconCard> = {
 	vue: { icon: "material-icon-theme:vue", name: "Vue.js" },
 	vuetify: { icon: "simple-icons:vuetify", name: "Vuetify", color: "#1867C0" },
 	zenn: { icon: "material-icon-theme:zenn", name: "Zenn" },
+	zod: {
+		icon: "simple-icons:zod",
+		name: "Zod",
+		color: "#4087FF",
+	},
 	qiita: { icon: "material-icon-theme:qiita", name: "Qiita" },
 };

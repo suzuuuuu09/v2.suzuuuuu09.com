@@ -28,6 +28,8 @@ const frameworksAndLibraries = [
 	"selenium",
 	"flutter",
 	"leaflet",
+	// "drizzle",
+	"zod",
 	"astro",
 	"svelte",
 	"vue",
@@ -49,6 +51,7 @@ const toolAndOthers = [
 	"git",
 	"github",
 	"githubactions",
+	"biome",
 	"vscode",
 	"visualstudio",
 	"neovim",
@@ -58,14 +61,15 @@ const toolAndOthers = [
 	"unity",
 	"vercel",
 	"cloudflarepages",
+	"cloudflareworkers",
 ];
 ---
 
 <SectionLayout>
   <SectionTitle>Skills</SectionTitle>
-  <s.h2 mb="4" fontWeight="bold" fontSize="2xl" color="sz.text.main"
-    >プログラミング言語</s.h2
-  >
+	<s.h2 mb="4" fontWeight="bold" fontSize="2xl" color="sz.text.main">
+		プログラミング言語
+	</s.h2>
   <SkillGrid>
     {programmingLanguages.map((lang) => <IconCard iconKey={lang} />)}
   </SkillGrid>
