@@ -19,12 +19,12 @@ export default defineConfig({
 
 	globalCss: {
 		...baseStyles,
-		...emojiStyles,
 		".markdown-content": {
 			color: "sz.text.main",
 			...markdownStyles,
 			...embedStyles,
 		},
+		...emojiStyles,
 	},
 
 	// フォントの設定
