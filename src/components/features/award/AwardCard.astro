@@ -45,24 +45,17 @@ const titleText = `[${award.data.type}] ${award.data.title}`;
       <Flex direction="column" gap="4">
         <Flex align="start" gap="4">
           <!-- 絵文字 -->
-          <div
-            class={cx(
-              css({
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "3.5rem",
-                height: "3.5rem",
-                borderRadius: "xl",
-                bg: "sz.brand/10",
-                flexShrink: 0,
-                transition: "transform 0.3s",
-                _groupHover: { transform: "scale(1.05)" },
-              }),
-            )}
-          >
+					<Center
+						width="3.5rem"
+						height="3.5rem"
+						borderRadius="xl"
+						bg="sz.brand/10"
+						flexShrink={0}
+						transition="transform 0.3s"
+						_groupHover={{ transform: "scale(1.05)" }}
+					>
             <span class={css({ fontSize: "2xl" })}>🏆</span>
-          </div>
+					</Center>
 
           <!-- タイトル -->
           <div style={{ minWidth: 0, flex: 1 }}>

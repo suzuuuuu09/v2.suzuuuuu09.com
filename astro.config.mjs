@@ -14,8 +14,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
 
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
-// import remarkFileTree from "./src/lib/remark/remark-file-tree";
-// import remarkEmbedLinks from "./src/lib/remark/remark-embed-link";
 import remarkEmbedLinks from "./src/lib/remark/embed-links";
 import rehypeCaption from "./src/lib/rehype/rehype-caption";
 import rehypeBudoux from "./src/lib/rehype/rehype-budoux";

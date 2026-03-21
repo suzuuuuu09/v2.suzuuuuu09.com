@@ -1,5 +1,5 @@
 ---
-import { Flex, VStack, HStack, styled as s } from "styled-system/jsx";
+import { Center, Flex, VStack, HStack, styled as s } from "styled-system/jsx";
 import TagList from "@/components/features/blog/TagList.astro";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
@@ -32,17 +32,11 @@ const titleText = `[${type}] ${title}`;
 
 <VStack alignItems="center" mb="8" gap="4">
   <!-- 絵文字 -->
-  {
-    emoji && (
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        fontSize={{ base: "7xl", lg: "8xl" }}
-      >
-        {emoji}
-      </Flex>
-    )
-  }
+  {emoji && (
+		<Center fontSize={{ base: "7xl", lg: "8xl" }} >
+			{emoji}
+		</Center>
+	)}
 
   <!-- タイトル -->
   <s.h1
