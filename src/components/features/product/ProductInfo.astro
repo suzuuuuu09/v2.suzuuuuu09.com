@@ -1,18 +1,20 @@
 ---
-import { Flex, HStack, VStack, styled as s } from "styled-system/jsx";
+import { Flex, VStack, styled as s } from "styled-system/jsx";
 import TagList from "@/components/features/blog/TagList.astro";
-// import Thumbnail from "@/components/shared/Thumbnail";
 import Thumbnail from "@/components/shared/Thumbnail.astro";
+import ThumbnailCarousel from "@/components/features/blog/ThumbnailCarousel";
 import ReadingTime from "@/components/shared/ReadingTime.astro";
 import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText.astro";
+import { buildThumbnailUrl } from "@/lib/thumbnail";
 
 export interface Props {
 	title: string;
 	publishDate?: string | Date;
 	updateDate?: string | Date;
 	tags?: string[];
-	thumbnail?: string;
+	thumbnail?: string | null;
+	carousel?: string[] | null;
 	description?: string;
 	author?: string;
 	content?: string;
@@ -24,19 +26,30 @@ const {
 	updateDate,
 	tags = [],
 	thumbnail,
+	carousel,
 	description,
 	author,
 	content,
 } = Astro.props as Props;
+
+const carouselUrls = carousel
+	?.map((src) => buildThumbnailUrl(src))
+	.filter(Boolean);
 ---
 
 <VStack mb="8" gap="4">
-  <Thumbnail
-    thumbnailPath={thumbnail || ""}
-    title={title}
-    type="info"
-    loading="eager"
-  />
+  {
+    carouselUrls && carouselUrls.length > 0 ? (
+      <ThumbnailCarousel images={carouselUrls} client:load />
+    ) : (
+      <Thumbnail
+        thumbnailPath={thumbnail || ""}
+        title={title}
+        type="info"
+        loading="eager"
+      />
+    )
+  }
   <s.h1
     fontSize={{ base: "3xl", lg: "4xl" }}
     fontWeight="bold"

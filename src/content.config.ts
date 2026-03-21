@@ -17,17 +17,30 @@ const blogCollection = defineCollection({
 		publishDate: z.coerce.date(),
 		updateDate: z.coerce.date().optional(),
 		emoji: z.string().optional(),
-		category: z.string().optional(),
+		category: z.enum(["tech", "idea", "private", "work"]).optional(),
 	}),
 });
 
 const productCollection = defineCollection({
 	loader: glob({ base: "./src/content/product", pattern: "**/*.md" }),
-	schema: commonSchema.extend({
-		publishDate: z.coerce.date(),
-		updateDate: z.coerce.date().optional(),
-		thumbnail: z.string(),
-	}),
+	schema: commonSchema
+		.extend({
+			publishDate: z.coerce.date(),
+			updateDate: z.coerce.date().optional(),
+			thumbnail: z.string().nullable().optional(),
+			carousel: z.array(z.string()).nullable().optional(),
+		})
+		.refine(
+			(data) => {
+				const hasThumbnail = data.thumbnail != null; // null と undefined 両方除外
+				const hasCarousel = data.carousel != null && data.carousel.length > 0;
+				return hasThumbnail !== hasCarousel; // XOR
+			},
+			{
+				message: "thumbnail と carousel はどちらか一方のみ指定してください",
+				path: ["thumbnail"],
+			},
+		),
 });
 
 const awardCollection = defineCollection({

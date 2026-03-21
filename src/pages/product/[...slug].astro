@@ -40,7 +40,8 @@ const articleInfo = {
 	publishDate: entry.data.publishDate,
 	updateDate: entry.data.updateDate,
 	tags: entry.data.tags || [],
-	thumbnail: entry.data.thumbnail || "",
+	thumbnail: entry.data.thumbnail ?? (entry.data.carousel?.[0] || null),
+	carousel: entry.data.carousel,
 	description: entry.data.description || "",
 	content: entry.body, // 読了時間計算用
 };

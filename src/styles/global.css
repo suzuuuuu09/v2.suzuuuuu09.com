@@ -2,6 +2,7 @@
 
 @import "./embed.css";
 @import "./callout.css";
+@import "@mantine/carousel/styles.css";
 
 /* File Tree Container */
 .file-tree-container {

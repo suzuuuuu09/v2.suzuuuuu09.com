@@ -20,7 +20,8 @@ export interface Props {
 			publishDate: Date;
 			updateDate?: Date;
 			tags?: string[];
-			thumbnail: string;
+			thumbnail?: string | null;
+			carousel?: string[] | null;
 			content?: string;
 		};
 	};
@@ -28,6 +29,7 @@ export interface Props {
 }
 
 const { product, priority = false } = Astro.props;
+const thumbnailSrc = product.data.thumbnail ?? product.data.carousel![0] ?? "";
 ---
 
 <Card maxW="450px">
@@ -39,7 +41,7 @@ const { product, priority = false } = Astro.props;
     )}
   >
     <Thumbnail
-      thumbnailPath={product.data.thumbnail || ""}
+			thumbnailPath={thumbnailSrc}
       title={product.data.title}
       type="card"
       loading={priority ? "eager" : "lazy"}

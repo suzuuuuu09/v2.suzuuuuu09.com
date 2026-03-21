@@ -1,8 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { sva } from "styled-system/css";
-import { R2_URL } from "@/consts/base";
-import { cleanAssetPath } from "@/utils/cleanAssetPath";
+import { buildThumbnailUrl } from "@/lib/thumbnail";
 
 interface Props {
 	thumbnailPath: string;
@@ -20,22 +19,7 @@ const {
 	fetchpriority = "auto",
 } = Astro.props;
 
-const buildThumbnailUrl = (pathInput: string, titleStr: string) => {
-	if (!pathInput) return "";
-
-	const path = cleanAssetPath(pathInput);
-
-	if (path.startsWith("http://") || path.startsWith("https://")) return path;
-	if (path.startsWith("assets/")) return `${R2_URL}/${path}`;
-	if (/\.(jpe?g|png|gif|webp|avif|svg)$/i.test(path) && !path.includes("/")) {
-		const t = (titleStr || "assets").replace(/ /g, "_");
-		return `${R2_URL}/assets/${path}`;
-	}
-
-	return path;
-};
-
-const thumbnailUrl = buildThumbnailUrl(thumbnailPath, title);
+const thumbnailUrl = buildThumbnailUrl(thumbnailPath);
 
 const thumbnailStyles = sva({
 	slots: ["image", "wrapper"],
