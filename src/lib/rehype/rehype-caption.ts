@@ -1,12 +1,14 @@
 import { visit } from "unist-util-visit";
 
+type CaptionType = "image" | "video" | "table";
+
 export default function rehypeCaption() {
 	return (tree: any) => {
 		visit(
 			tree,
 			"element",
 			(node: any, index: number | undefined, parent: any) => {
-				// <em>[!image]text</em> か <em>[!table]text</em> を探す
+				// <em>[!image]text</em> か <em>[!table]text</em> <em>[!video]text</em>を探す
 				if (
 					node.tagName !== "em" ||
 					!node.children ||
@@ -21,14 +23,14 @@ export default function rehypeCaption() {
 					return;
 				}
 
-				const captionRegex = /\[!(image|table)\]\s*(.*)$/;
+				const captionRegex = /\[!(image|video|table)\]\s*(.*)$/;
 				const match = captionRegex.exec(textNode.value.trim());
 
 				if (!match) {
 					return;
 				}
 
-				const type = match[1] as "image" | "table"; // image か table
+				const type = match[1] as CaptionType; // image か table
 				const text = match[2].trim();
 
 				// mdiアイコン
@@ -61,8 +63,11 @@ export default function rehypeCaption() {
 	};
 }
 
-export function mdiIcon(type: "image" | "table"): string {
-	return type === "image"
-		? '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M8.5 13.5l2.5 3l3.5-4.5l4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2"></path></svg>'
-		: '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 4v4h6V8zm8 0v4h6V8zM5 14v4h6v-4zm8 0v4h6v-4z"></path></svg>';
+export function mdiIcon(type: CaptionType): string {
+	const icons: Record<CaptionType, string> = {
+		image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM5 19v-4l3.5-4.5L12 15l4.5-6L19 11v8H5z"/></svg>`,
+		video: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4z"/></svg>`,
+		table: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7 19H5v-4h2v4zm0-6H5v-4h2v4zm0-6H5V5h2v2zm4 12h-2v-4h2v4zm0-6h-2v-4h2v4zm0-6h-2V5h2v2zm4 12h-2v-4h2v4zm0-6h-2v-4h2v4zm0-6h-2V5h2v2z"/></svg>`,
+	};
+	return icons[type];
 }

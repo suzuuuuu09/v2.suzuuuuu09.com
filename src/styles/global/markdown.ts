@@ -226,7 +226,7 @@ export const markdownStyles: GlobalStyleObject = {
 			mt: "4",
 		},
 	},
-	".caption-image": {
+	".caption-image, .caption-video": {
 		mb: "8",
 		_sm: {
 			mb: "4",
