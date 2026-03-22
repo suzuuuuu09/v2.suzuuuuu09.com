@@ -3,6 +3,7 @@ import { baseStyles } from "./src/styles/global/base";
 import { embedStyles } from "./src/styles/global/embed";
 import { emojiStyles } from "./src/styles/global/emoji";
 import { markdownStyles } from "./src/styles/global/markdown";
+import { zoomImageStyles } from "./src/styles/global/zoom-image";
 
 export default defineConfig({
 	// Whether to use css reset
@@ -25,6 +26,7 @@ export default defineConfig({
 			...embedStyles,
 		},
 		...emojiStyles,
+		...zoomImageStyles,
 	},
 
 	// フォントの設定

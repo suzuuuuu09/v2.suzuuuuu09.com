@@ -290,8 +290,4 @@ export const markdownStyles: GlobalStyleObject = {
 
 	// Expressiveのコードブロック
 	".expressive-code": { my: "4" },
-
-	// medium-zoomのオーバーレイと拡大画像のz-indexを高く設定
-	".medium-zoom-overlay": { zIndex: 9998 },
-	".medium-zoom-image--opened": { zIndex: 9999 },
 };
