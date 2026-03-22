@@ -1,7 +1,8 @@
-import { fetchOGP } from "./ogs";
+import type { Html, Paragraph } from "mdast";
 import * as Detect from "./detect";
+import { fetchOGP } from "./ogs";
 import * as Templates from "./templates";
-import type { ProcessorContext, OgpData, OembedResponse } from "./types";
+import type { OembedResponse, OgpData, ProcessorContext } from "./types";
 
 // キャッシュ付きOGP取得ヘルパー
 async function fetchOgpWithCache(
@@ -23,23 +24,27 @@ function replaceWithHtml(
 	html: string,
 	wrapperClass?: string,
 ) {
-	const node = {
-		type: "html", // シンプルにhtmlノードにするか、元の構造に合わせてparagraph > htmlにするか
-		value: html,
-	};
-
 	// 元のコードが paragraph > div (className) > html 構造だった場合の再現
 	if (wrapperClass) {
-		ctx.parent.children[ctx.index] = {
+		const htmlNode: Html = {
+			type: "html",
+			value: html,
+		};
+		const paragraphNode: Paragraph = {
 			type: "paragraph",
 			data: {
 				hName: "div",
 				hProperties: { className: [wrapperClass] },
 			},
-			children: [{ type: "html", value: html }],
+			children: [htmlNode],
 		};
+		ctx.parent.children[ctx.index] = paragraphNode;
 	} else {
-		ctx.parent.children[ctx.index] = node;
+		const htmlNode: Html = {
+			type: "html",
+			value: html,
+		};
+		ctx.parent.children[ctx.index] = htmlNode;
 	}
 }
 
@@ -56,8 +61,8 @@ export async function processYoutube(ctx: ProcessorContext): Promise<void> {
 	let embedHtml = data.html as string;
 
 	embedHtml = embedHtml
-		.replace(/width=["']?\d+["']?/g, 'width="100%"')
-		.replace(/height=["']?\d+["']?/g, 'height="100%"');
+		.replaceAll(/width=["']?\d+["']?/g, 'width="100%"')
+		.replaceAll(/height=["']?\d+["']?/g, 'height="100%"');
 
 	replaceWithHtml(ctx, embedHtml, "youtube-embed");
 }
@@ -181,8 +186,8 @@ export async function processSpeakerDeck(ctx: ProcessorContext): Promise<void> {
 
 	// 幅と高さを100%に固定
 	embedHtml = embedHtml
-		.replace(/width=["']?\d+["']?/g, 'width="100%"')
-		.replace(/height=["']?\d+["']?/g, 'height="100%"');
+		.replaceAll(/width=["']?\d+["']?/g, 'width="100%"')
+		.replaceAll(/height=["']?\d+["']?/g, 'height="100%"');
 
 	replaceWithHtml(ctx, embedHtml, "speaker-deck-embed");
 }

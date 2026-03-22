@@ -1,14 +1,19 @@
-import { visit } from "unist-util-visit";
 import { loadDefaultJapaneseParser } from "budoux";
+import type { Root } from "hast";
+import type { Plugin } from "unified";
+import { visit } from "unist-util-visit";
 
-export default function rehypeBudoux() {
+const rehypeBudoux: Plugin<[], Root> = () => {
 	const parser = loadDefaultJapaneseParser();
-	return (tree: any) => {
+	return (tree: Root) => {
 		visit(tree, "text", (node, index, parent) => {
 			if (!node.value.trim()) return;
 
 			// コードブロック内のテキストはスキップ
-			if (parent && (parent.tagName === "code" || parent.tagName === "pre")) {
+			if (
+				parent?.type === "element" &&
+				(parent.tagName === "code" || parent.tagName === "pre")
+			) {
 				return;
 			}
 
@@ -16,16 +21,18 @@ export default function rehypeBudoux() {
 			const html = parser.translateHTMLString(node.value);
 
 			// Budouxが生成した<span>タグのみを削除
-			const textOnly = html.replace(/<span[^>]*>|<\/span>/g, "");
+			const textOnly = html.replaceAll(/<span[^>]*>|<\/span>/g, "");
 
 			// エスケープされた文字を元に戻す
 			const decoded = textOnly
-				.replace(/&lt;/g, "<")
-				.replace(/&gt;/g, ">")
-				.replace(/&amp;/g, "&")
-				.replace(/&quot;/g, '"')
-				.replace(/&#39;/g, "'");
+				.replaceAll("&lt;", "<")
+				.replaceAll("&gt;", ">")
+				.replaceAll("&amp;", "&")
+				.replaceAll("&quot;", '"')
+				.replaceAll("&#39;", "'");
 			node.value = decoded;
 		});
 	};
-}
+};
+
+export default rehypeBudoux;

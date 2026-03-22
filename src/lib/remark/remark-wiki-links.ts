@@ -1,39 +1,39 @@
 // https://github.com/nasubi-dev/portfoilo-v2/blob/main/astro.config.mjs
+import type { Html, Link, PhrasingContent, Root, Text } from "mdast";
+import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 import { R2_URL } from "../../consts/base";
 
 // WikiLinks形式の処理プラグイン
-export default function remarkWikiLinks() {
+const remarkWikiLinks: Plugin<[], Root> = () => {
 	// 画像/動画用: ![[xxx.webp]] - グループ1がパス
 	const mediaWikiLinkRegex = /!\[\[(.*?)(?:\|(.*?))?\]\]/g;
 
 	// 内部リンク用: [[xxx]] - グループ1がパス
 	const internalWikiLinkRegex = /(?<!!)\[\[(.*?)(?:\|(.*?))?\]\]/g;
 
-	return (tree: any, file: any) => {
-		// frontmatterからtitleを取得し、半角スペースをアンダースコアに置き換え
-		const rawTitle = file.data.astro?.frontmatter?.title || "assets";
-		const title = rawTitle.replaceAll(" ", "_");
+	return (tree: Root) => {
 		// メディア（画像・動画）を処理
 		visit(tree, "text", (node, index, parent) => {
-			if (!node.value.includes("![[")) return;
+			if (!node.value.includes("![[") || index === undefined || !parent) return;
 
-			const parts = [];
+			const parts: PhrasingContent[] = [];
 			let lastIndex = 0;
 			let match;
 
 			while ((match = mediaWikiLinkRegex.exec(node.value)) !== null) {
 				// マッチ前のテキスト
 				if (match.index > lastIndex) {
-					parts.push({
+					const textNode: Text = {
 						type: "text",
 						value: node.value.slice(lastIndex, match.index),
-					});
+					};
+					parts.push(textNode);
 				}
 
 				// パスとテキストを抽出 - '!'は含まない
-				const [fullMatch, path, text] = match;
-				const displayText = text || path;
+				const [fullMatch, path] = match;
+				const displayText = path;
 
 				// パス処理の改善: assets/で始まる場合もそうでない場合も処理
 				let r2Url = path;
@@ -53,18 +53,20 @@ export default function remarkWikiLinks() {
 
 				if (/\.(mp4|webm|mov)$/i.exec(path)) {
 					// 動画
-					parts.push({
+					const htmlNode: Html = {
 						type: "html",
 						value: `<video src="${r2Url}" controls width="100%" alt="${displayText}"></video>`,
-					});
+					};
+					parts.push(htmlNode);
 				} else {
 					// 画像 - 直接HTMLとして出力 ASTノードが悪さをする(原因不明)
 					// Note: Cloudflare Image Resizing is a paid feature
 					// Optimized with sizes attribute to help browser select appropriate size
-					parts.push({
+					const htmlNode: Html = {
 						type: "html",
-						value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" decoding="async" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px" style="max-width: 100%; height: auto;" />`,
-					});
+						value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" decoding="async" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px" style="max-width: 100%; height: auto;" data-zoomable />`,
+					};
+					parts.push(htmlNode);
 				}
 
 				lastIndex = match.index + fullMatch.length;
@@ -72,7 +74,11 @@ export default function remarkWikiLinks() {
 
 			// 残りのテキスト
 			if (lastIndex < node.value.length) {
-				parts.push({ type: "text", value: node.value.slice(lastIndex) });
+				const textNode: Text = {
+					type: "text",
+					value: node.value.slice(lastIndex),
+				};
+				parts.push(textNode);
 			}
 
 			// 元のノードを置き換え
@@ -84,19 +90,26 @@ export default function remarkWikiLinks() {
 
 		// 内部リンクを処理
 		visit(tree, "text", (node, index, parent) => {
-			if (!node.value.includes("[[") || node.value.includes("![[")) return;
+			if (
+				!node.value.includes("[[") ||
+				node.value.includes("![[") ||
+				index === undefined ||
+				!parent
+			)
+				return;
 
-			const parts = [];
+			const parts: PhrasingContent[] = [];
 			let lastIndex = 0;
 			let match;
 
 			while ((match = internalWikiLinkRegex.exec(node.value)) !== null) {
 				// マッチ前のテキスト
 				if (match.index > lastIndex) {
-					parts.push({
+					const textNode: Text = {
 						type: "text",
 						value: node.value.slice(lastIndex, match.index),
-					});
+					};
+					parts.push(textNode);
 				}
 
 				// パスとテキストを抽出
@@ -104,18 +117,23 @@ export default function remarkWikiLinks() {
 				const displayText = text || path;
 
 				// 内部リンク
-				parts.push({
+				const linkNode: Link = {
 					type: "link",
 					url: path,
 					children: [{ type: "text", value: displayText }],
-				});
+				};
+				parts.push(linkNode);
 
 				lastIndex = match.index + match[0].length;
 			}
 
 			// 残りのテキスト
 			if (lastIndex < node.value.length) {
-				parts.push({ type: "text", value: node.value.slice(lastIndex) });
+				const textNode: Text = {
+					type: "text",
+					value: node.value.slice(lastIndex),
+				};
+				parts.push(textNode);
 			}
 
 			// 元のノードを置き換え
@@ -126,4 +144,6 @@ export default function remarkWikiLinks() {
 			}
 		});
 	};
-}
+};
+
+export default remarkWikiLinks;

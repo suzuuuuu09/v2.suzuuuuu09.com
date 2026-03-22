@@ -1,13 +1,20 @@
+import type { Element, Root } from "hast";
+import type { Plugin } from "unified";
+import type { Parent } from "unist";
 import { visit } from "unist-util-visit";
 
 type CaptionType = "image" | "video" | "table";
 
-export default function rehypeCaption() {
-	return (tree: any) => {
+const rehypeCaption: Plugin<[], Root> = () => {
+	return (tree: Root) => {
 		visit(
 			tree,
 			"element",
-			(node: any, index: number | undefined, parent: any) => {
+			(
+				node: Element,
+				index: number | undefined,
+				parent: Parent | undefined,
+			) => {
 				// <em>[!image]text</em> か <em>[!table]text</em> <em>[!video]text</em>を探す
 				if (
 					node.tagName !== "em" ||
@@ -61,7 +68,9 @@ export default function rehypeCaption() {
 			},
 		);
 	};
-}
+};
+
+export default rehypeCaption;
 
 export function mdiIcon(type: CaptionType): string {
 	const icons: Record<CaptionType, string> = {

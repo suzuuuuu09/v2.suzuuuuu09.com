@@ -1,19 +1,21 @@
+import type { Link, Root } from "mdast";
+import type { Plugin } from "unified";
+import type { Parent } from "unist";
 import { visit } from "unist-util-visit";
-import type { Root, Link } from "mdast";
 import { detectUrlType } from "./detect";
 import * as Processors from "./processors";
 import type { OgpCache, ProcessorContext } from "./types";
 
-export default function remarkEmbedLinks() {
+const remarkEmbedLinks: Plugin<[], Root> = () => {
 	const cache: OgpCache = new Map();
 
-	return async function transformer(tree: Root) {
+	return async (tree: Root) => {
 		const promises: Promise<void>[] = [];
 
 		visit(
 			tree,
 			"link",
-			(node: Link, index: number | undefined, parent: any) => {
+			(node: Link, index: number | undefined, parent: Parent | undefined) => {
 				if (!parent || typeof index !== "number") return;
 
 				let url = node.url;
@@ -81,7 +83,7 @@ export default function remarkEmbedLinks() {
 						break;
 				}
 
-				if (promise) {
+				if (promise !== undefined) {
 					promises.push(promise);
 				}
 			},
@@ -89,4 +91,6 @@ export default function remarkEmbedLinks() {
 
 		await Promise.all(promises);
 	};
-}
+};
+
+export default remarkEmbedLinks;

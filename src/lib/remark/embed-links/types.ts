@@ -1,4 +1,4 @@
-import type { Node } from "unist";
+import type { Node, Parent } from "unist";
 
 export interface OgpData {
 	title?: string;
@@ -34,8 +34,7 @@ export interface ProcessorContext {
 	linkTitle: string;
 	node: Node;
 	index: number;
-	// NOTE: Parent型を使うのは難しいためanyを使う
-	parent: any;
+	parent: Parent;
 	cache: OgpCache;
 }
 
