@@ -1,9 +1,7 @@
+import Giscus from "@giscus/react";
 import { styled as s } from "styled-system/jsx";
 import { token } from "styled-system/tokens";
-import Giscus from "@giscus/react";
-import { useState, useEffect } from "react";
-
-type Theme = "light" | "dark";
+import { useTheme } from "@/lib/hooks/useTheme";
 
 const title = "Discussion";
 
@@ -42,32 +40,7 @@ function DiscussionIcon({
 }
 
 export default function Discussion() {
-	const [theme, setTheme] = useState<Theme>("light");
-
-	useEffect(() => {
-		// 初期テーマの取得
-		const currentTheme =
-			document.documentElement.dataset.theme ||
-			localStorage.getItem("theme") ||
-			"light";
-		setTheme(currentTheme as Theme);
-
-		const handleThemeChange = (e: CustomEvent<{ theme: string }>) => {
-			setTheme(e.detail.theme as Theme);
-		};
-
-		globalThis.addEventListener(
-			"themeChange",
-			handleThemeChange as EventListener,
-		);
-
-		return () => {
-			globalThis.removeEventListener(
-				"themeChange",
-				handleThemeChange as EventListener,
-			);
-		};
-	}, []);
+	const theme = useTheme();
 
 	const primaryColor = token("colors.sz.primary");
 	const secondaryColor = token("colors.sz.secondary");
