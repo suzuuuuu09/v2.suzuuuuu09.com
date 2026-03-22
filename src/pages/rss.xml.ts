@@ -1,9 +1,12 @@
 import rss, { type RSSFeedItem } from "@astrojs/rss";
+import type { APIContext } from "astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts/base";
 import { getAllPosts } from "../lib/post";
 
-export async function GET(context: any) {
+export async function GET(context: APIContext) {
 	const posts = await getAllPosts();
+
+	const siteUrl = context.site || new URL("https://suzuuuuu09.com");
 
 	const allItems: RSSFeedItem[] = posts.map((post): RSSFeedItem => {
 		const collection = post.collection;
@@ -18,7 +21,7 @@ export async function GET(context: any) {
 			enclosure: {
 				url: new URL(
 					`/api/og/${collection}/${post.data.slug}.png`,
-					context.site,
+					siteUrl,
 				).toString(),
 				length: 0,
 				type: "image/png",
@@ -29,7 +32,7 @@ export async function GET(context: any) {
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
-		site: context.site,
+		site: siteUrl,
 		items: allItems,
 	});
 }

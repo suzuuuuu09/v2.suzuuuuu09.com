@@ -1,9 +1,13 @@
-import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-type BlogEntry = CollectionEntry<"blog"> & { collection: "blog" };
-type AwardEntry = CollectionEntry<"award"> & { collection: "award" };
-type ProductEntry = CollectionEntry<"product"> & { collection: "product" };
+type PostEntry<T extends "blog" | "award" | "product"> = CollectionEntry<T> & {
+	collection: T;
+};
+
+type BlogEntry = PostEntry<"blog">;
+type AwardEntry = PostEntry<"award">;
+type ProductEntry = PostEntry<"product">;
 
 export type AllPost = BlogEntry | AwardEntry | ProductEntry;
 

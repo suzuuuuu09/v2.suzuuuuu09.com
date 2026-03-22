@@ -1,22 +1,21 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+
 import cloudflare from "@astrojs/cloudflare";
-import sitemap from "@astrojs/sitemap";
-import react from "@astrojs/react";
 import partytown from "@astrojs/partytown";
-import expressiveCode from "astro-expressive-code";
-
-import remarkMath from "remark-math";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import remarkCallout from "@r4ai/remark-callout";
-import rehypeKatex from "rehype-katex";
+import { defineConfig } from "astro/config";
+import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeSlug from "rehype-slug";
 import rehypeExternalLinks from "rehype-external-links";
-
-import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
-import remarkEmbedLinks from "./src/lib/remark/embed-links";
-import rehypeCaption from "./src/lib/rehype/rehype-caption";
+import rehypeKatex from "rehype-katex";
+import rehypeSlug from "rehype-slug";
+import remarkMath from "remark-math";
 import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
+import rehypeCaption from "./src/lib/rehype/rehype-caption";
+import remarkEmbedLinks from "./src/lib/remark/embed-links";
+import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 
 // https://astro.build/config
 export default defineConfig({
