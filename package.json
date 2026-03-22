@@ -13,6 +13,7 @@
 		"lint": "biome check ."
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.9.8",
 		"@astrojs/cloudflare": "^12.6.12",
 		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/react": "^4.4.2",
@@ -38,6 +39,7 @@
 		"gsap": "^3.13.0",
 		"mdast-util-from-markdown": "^2.0.2",
 		"mdast-util-to-string": "^4.0.0",
+		"medium-zoom": "^1.1.0",
 		"open-graph-scraper": "^6.10.0",
 		"pagefind": "^1.4.0",
 		"react": "^19.2.3",
@@ -52,6 +54,7 @@
 		"remark-math": "^6.0.0",
 		"satori": "^0.18.3",
 		"twemoji": "^14.0.2",
+		"typescript": "^5.9.3",
 		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {

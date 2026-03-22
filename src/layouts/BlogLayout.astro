@@ -128,9 +128,17 @@ const ogImageUrl = new URL(
 
     <script>
       import { initTwemoji } from "@/lib/twemoji";
+			import mediumZoom from 'medium-zoom';
+  
 
       document.addEventListener("DOMContentLoaded", initTwemoji);
       document.addEventListener("astro:page-load", initTwemoji);
+			
+			// ページロード後にzoom初期化
+			mediumZoom('[data-zoomable]', {
+				background: 'rgba(0, 0, 0, 0.9)',
+				margin: 24,
+			});
     </script>
   </body>
 </html>
