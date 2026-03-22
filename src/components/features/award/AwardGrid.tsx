@@ -1,12 +1,9 @@
-import { cva } from "styled-system/css";
-import { styled as s } from "styled-system/jsx";
+import { Grid } from "@/components/ui/Grid";
 
-export const awardGridRecipes = cva({
-	base: {
-		display: "grid",
-		gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
-		gap: "6",
-	},
-});
-
-export const AwardGrid = s("div", awardGridRecipes);
+export default function AwardGrid({ children }: { children: React.ReactNode }) {
+	return (
+		<Grid variant="award">
+			{children}
+		</Grid>
+	)
+}

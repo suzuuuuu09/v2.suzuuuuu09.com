@@ -1,10 +1,10 @@
 ---
-import { getAwardPosts } from "@/lib/post";
+import AwardCard from "@/components/features/award/AwardCard.astro";
+import AwardGrid from "@/components/features/award/AwardGrid.tsx";
+import { Expand } from "@/components/shared/Expand";
 import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
-import AwardCard from "@/components/features/award/AwardCard.astro";
-import { Expand } from "@/components/shared/Expand";
-import { AwardGrid } from "@/components/features/award/AwardGrid.tsx";
+import { getAwardPosts } from "@/lib/post";
 
 // awardをMarkdownファイルをすべて取得
 const awards = await getAwardPosts();

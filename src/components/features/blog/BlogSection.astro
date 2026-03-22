@@ -1,10 +1,10 @@
 ---
-import { getBlogPosts } from "@/lib/post";
+import ArticleGrid from "@/components/features/blog/ArticleGrid";
+import BlogCard from "@/components/features/blog/BlogCard.astro";
+import { Expand } from "@/components/shared/Expand";
 import { SectionLayout } from "@/components/shared/SectionLayout";
 import SectionTitle from "@/components/shared/SectionTitle.astro";
-import { Expand } from "@/components/shared/Expand";
-import BlogCard from "@/components/features/blog/BlogCard.astro";
-import { ArticleGrid } from "@/components/features/blog/ArticleGrid";
+import { getBlogPosts } from "@/lib/post";
 
 const posts = await getBlogPosts();
 ---

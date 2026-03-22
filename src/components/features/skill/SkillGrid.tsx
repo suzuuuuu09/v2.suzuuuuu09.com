@@ -1,14 +1,9 @@
-import { styled as s } from "styled-system/jsx";
+import { Grid } from "@/components/ui/Grid";
 
-export const SkillGrid = s("div", {
-	base: {
-		display: "grid",
-		gridTemplateColumns: "repeat(auto-fill,minmax(100px,1fr))",
-		alignItems: "start",
-		justifyContent: "center",
-		textAlign: "center",
-		alignContent: "stretch",
-		justifyItems: "center",
-		mb: "8",
-	},
-});
+export default function SkillGrid({ children }: { children: React.ReactNode }) {
+	return (
+		<Grid variant="skill">
+			{children}
+		</Grid>
+	);
+}

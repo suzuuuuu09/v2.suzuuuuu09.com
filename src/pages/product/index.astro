@@ -1,10 +1,10 @@
 ---
-import { getProductPosts } from "@/lib/post";
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import { ArticleGrid } from "@/components/features/blog/ArticleGrid";
-import SectionTitle from "@/components/shared/SectionTitle.astro";
-import { Expand } from "@/components/shared/Expand";
+import ArticleGrid from "@/components/features/blog/ArticleGrid";
 import ProductCard from "@/components/features/product/ProductCard.astro";
+import { Expand } from "@/components/shared/Expand";
+import SectionTitle from "@/components/shared/SectionTitle.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getProductPosts } from "@/lib/post";
 
 const products = await getProductPosts();
 ---
