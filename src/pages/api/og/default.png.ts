@@ -1,4 +1,4 @@
-import type { APIRoute, APIContext } from "astro";
+import type { APIContext, APIRoute } from "astro";
 import { generateOgImage } from "../../../components/features/og/OgImage";
 
 export const GET: APIRoute = async ({ params }: APIContext) => {

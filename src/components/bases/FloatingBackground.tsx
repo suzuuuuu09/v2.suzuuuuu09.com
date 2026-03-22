@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import React, { useEffect, useRef, useState } from "react";
 import { css } from "styled-system/css";
 
 const mobileShapesNumber = 10;

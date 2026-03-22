@@ -1,13 +1,13 @@
 ---
 import { render } from "astro:content";
 import { Flex, styled as s } from "styled-system/jsx";
-import BlogLayout from "@/layouts/BlogLayout.astro";
 import ArticleInfo from "@/components/features/blog/ArticleInfo.astro";
-import TableOfContents from "@/components/features/blog/TableOfContents.astro";
-import SideArticle from "@/components/features/blog/SideArticle.astro";
-import ShareMenu from "@/components/features/blog/ShareMenu.astro";
-import { getBlogPosts } from "@/lib/post";
 import Discussion from "@/components/features/blog/Discussion";
+import ShareMenu from "@/components/features/blog/ShareMenu.astro";
+import SideArticle from "@/components/features/blog/SideArticle.astro";
+import TableOfContents from "@/components/features/blog/TableOfContents.astro";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { getBlogPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
 	const blogEntries = await getBlogPosts();

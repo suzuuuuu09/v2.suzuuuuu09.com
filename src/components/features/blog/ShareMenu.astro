@@ -1,7 +1,7 @@
 ---
-import { styled as s, HStack } from "styled-system/jsx";
-import { css } from "styled-system/css";
 import Icon from "@suzuuuuu09/astro-iconify";
+import { css } from "styled-system/css";
+import { HStack, styled as s } from "styled-system/jsx";
 import Panel from "@/components/ui/Panel";
 
 interface Props {
@@ -86,7 +86,7 @@ const twitterShareUrl = () => {
   </HStack>
 </Panel>
 
-<script define:vars={{ title, description, url }}>
+<script is:inline define:vars={{ title, description, url }}>
   document.querySelectorAll("[data-action]").forEach((button) => {
     button.addEventListener("click", function () {
       const action = this.getAttribute("data-action");

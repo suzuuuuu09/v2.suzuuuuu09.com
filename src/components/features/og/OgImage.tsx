@@ -1,7 +1,7 @@
-import fs from "fs";
-import satori from "satori";
+import fs from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
 import { loadDefaultJapaneseParser } from "budoux";
+import satori from "satori";
 
 export const generateOgImage = async (
 	title: string,

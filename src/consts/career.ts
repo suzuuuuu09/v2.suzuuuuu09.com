@@ -1,5 +1,5 @@
-import type { CareerItem } from "@/types";
 import dayjs from "dayjs";
+import type { CareerItem } from "@/types";
 
 export const CAREER_ITEMS: CareerItem[] = [
 	{

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { sva } from "styled-system/css";
 
-interface Props {
+interface PanelProps {
 	title: string;
 	children?: ReactNode;
 	visible?: "lg" | "base" | "always";
@@ -49,7 +49,7 @@ const panelStyles = sva({
 	},
 });
 
-export default function Panel(props: Props) {
+export default function Panel(props: PanelProps) {
 	const { title, children, visible = "always" } = props;
 	const styles = panelStyles({ visible });
 

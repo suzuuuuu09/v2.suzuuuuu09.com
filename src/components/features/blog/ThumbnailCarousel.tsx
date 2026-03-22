@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import AutoPlay from "embla-carousel-autoplay";
-import { Center, styled as s } from "styled-system/jsx";
 import { Carousel } from "@mantine/carousel";
+import AutoPlay from "embla-carousel-autoplay";
+import { useRef, useState } from "react";
+import { Center, styled as s } from "styled-system/jsx";
 import CustomMantineProvider from "@/components/providers/MantineProvider";
 
 interface ThumbnailCarouselProps {
@@ -28,6 +28,27 @@ export default function ThumbnailCarousel({ images }: ThumbnailCarouselProps) {
 		</Carousel.Slide>
 	));
 
+	const carouselStyles = {
+		root: { overflow: "hidden", borderRadius: "1rem" },
+		indicator: {
+			width: "12px",
+			height: "12px",
+			borderRadius: "50%",
+			opacity: 0.1,
+			transition: "opacity 0.3s ease",
+		},
+		control: {
+			opacity: hovered ? 1 : 0,
+			transition: "opacity 0.3s ease",
+		},
+		viewport: { paddingBottom: "1rem" },
+		slide: {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+		},
+	};
+
 	return (
 		<CustomMantineProvider>
 			<Carousel
@@ -46,26 +67,7 @@ export default function ThumbnailCarousel({ images }: ThumbnailCarouselProps) {
 					loop: true,
 					dragFree: false,
 				}}
-				styles={{
-					root: { overflow: "hidden", borderRadius: "1rem" },
-					indicator: {
-						width: "12px",
-						height: "12px",
-						borderRadius: "50%",
-						opacity: 0.1,
-						transition: "opacity 0.3s ease",
-					},
-					control: {
-						opacity: hovered ? 1 : 0,
-						transition: "opacity 0.3s ease",
-					},
-					viewport: { paddingBottom: "1rem" },
-					slide: {
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					},
-				}}
+				styles={carouselStyles}
 			>
 				{slides}
 			</Carousel>

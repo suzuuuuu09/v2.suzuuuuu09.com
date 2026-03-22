@@ -1,11 +1,11 @@
 ---
-import { Flex, VStack, styled as s } from "styled-system/jsx";
+import { Flex, styled as s, VStack } from "styled-system/jsx";
 import TagList from "@/components/features/blog/TagList.astro";
-import Thumbnail from "@/components/shared/Thumbnail.astro";
 import ThumbnailCarousel from "@/components/features/blog/ThumbnailCarousel";
-import ReadingTime from "@/components/shared/ReadingTime.astro";
-import Date from "@/components/shared/Date.astro";
 import BudouxText from "@/components/shared/BudouxText.astro";
+import Date from "@/components/shared/Date.astro";
+import ReadingTime from "@/components/shared/ReadingTime.astro";
+import Thumbnail from "@/components/shared/Thumbnail.astro";
 import { buildThumbnailUrl } from "@/lib/thumbnail";
 
 export interface Props {

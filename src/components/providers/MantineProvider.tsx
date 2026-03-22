@@ -1,5 +1,5 @@
 // Mantineを使うために必要なやつ
-import { MantineProvider, createTheme } from "@mantine/core";
+import { createTheme, MantineProvider } from "@mantine/core";
 import type { ReactNode } from "react";
 
 const theme = createTheme({
@@ -12,10 +12,12 @@ const theme = createTheme({
 	},
 });
 
-interface Props {
+interface MantineProviderProps {
 	readonly children: ReactNode;
 }
 
-export default function CustomMantineProvider({ children }: Props) {
+export default function CustomMantineProvider({
+	children,
+}: MantineProviderProps) {
 	return <MantineProvider theme={theme}>{children}</MantineProvider>;
 }

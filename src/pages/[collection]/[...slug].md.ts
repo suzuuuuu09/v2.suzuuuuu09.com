@@ -1,4 +1,4 @@
-import { getAllPosts, type AllPost } from "@/lib/post";
+import { type AllPost, getAllPosts } from "@/lib/post";
 
 export async function getStaticPaths() {
 	const entries = await getAllPosts();

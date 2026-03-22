@@ -1,12 +1,12 @@
 ---
-import { Flex, HStack, Center, styled as s } from "styled-system/jsx";
-import { categories } from "@/consts/category";
-import TagList from "./TagList.astro";
-import CategoryBadge from "./CategoryBadge.astro";
-import { Card } from "@/components/ui/Card";
-import ReadingTime from "@/components/shared/ReadingTime.astro";
-import Date from "@/components/shared/Date.astro";
+import { Center, Flex, HStack, styled as s } from "styled-system/jsx";
 import BudouxText from "@/components/shared/BudouxText.astro";
+import Date from "@/components/shared/Date.astro";
+import ReadingTime from "@/components/shared/ReadingTime.astro";
+import { Card } from "@/components/ui/Card";
+import { categories } from "@/consts/category";
+import CategoryBadge from "./CategoryBadge.astro";
+import TagList from "./TagList.astro";
 
 export interface Props {
 	blog: {

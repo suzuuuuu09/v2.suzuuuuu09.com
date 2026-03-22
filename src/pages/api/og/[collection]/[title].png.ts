@@ -1,4 +1,4 @@
-import type { APIRoute, APIContext } from "astro";
+import type { APIContext, APIRoute } from "astro";
 import { generateOgImage } from "../../../../components/features/og/OgImage";
 import { getAllPosts } from "../../../../lib/post";
 
