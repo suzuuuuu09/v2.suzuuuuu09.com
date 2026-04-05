@@ -3,13 +3,13 @@ title: Neovimプラグインまとめ（2026年2月）
 slug: neovim-plugin-202602
 author: suzu
 emoji: 🗒️
-description: 2026年2月時点での使っているNeovimのプラグインをまとめる。
+description: 2026年時点での使っているNeovimのプラグインをまとめる。
 category: tech
 tags:
   - Neovim
 isPublish: false
 publishDate:
-updateDate: 2026-02-17T01:34
+updateDate: 2026-03-29T20:23
 ---
 ## 概要
 
