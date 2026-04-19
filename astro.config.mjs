@@ -15,6 +15,7 @@ import remarkMath from "remark-math";
 import rehypeBudoux from "./src/lib/rehype/rehype-budoux";
 import rehypeCaption from "./src/lib/rehype/rehype-caption";
 import remarkEmbedLinks from "./src/lib/remark/embed-links";
+import remarkFileTree from "./src/lib/remark/remark-file-tree";
 import remarkWikiLinks from "./src/lib/remark/remark-wiki-links";
 
 // https://astro.build/config
@@ -75,6 +76,12 @@ export default defineConfig({
 			remarkWikiLinks,
 			remarkCallout,
 			remarkEmbedLinks,
+			[
+				remarkFileTree,
+				{
+					iconThemeMode: "dark",
+				},
+			],
 		],
 		rehypePlugins: [
 			rehypeCaption,

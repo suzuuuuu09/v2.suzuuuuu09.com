@@ -211,7 +211,7 @@ export const markdownStyles: GlobalStyleObject = {
 		alignItems: "center",
 		justifyContent: "center",
 		gap: "1",
-		fontSize: "base",
+		fontSize: "medium",
 		fontWeight: "bold",
 		color: "sz.text.sub",
 		svg: {
@@ -286,6 +286,89 @@ export const markdownStyles: GlobalStyleObject = {
 		_lg: {
 			fontSize: "sm",
 		},
+	},
+	".file-tree-container": {
+		bg: "sz.bg-on",
+		borderWidth: "1",
+		borderColor: "sz.border",
+		borderRadius: "xl",
+		my: "6",
+		overflow: "hidden",
+		display: "flex",
+		flexDirection: "column",
+		fontFamily:
+			"var(--moralerspace-neon), 'JetBrains Mono', 'Fira Code', monospace",
+	},
+	".file-tree-header": {
+		bg: "sz.bg-on.500",
+		px: "5",
+		py: "3",
+		fontSize: "xs",
+		color: "sz.text.sub",
+		borderBottomWidth: "1",
+		borderBottomColor: "sz.border",
+		fontWeight: "800",
+		letterSpacing: "0.15em",
+		display: "flex",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
+	".file-tree-version": {
+		opacity: "0.5",
+		fontWeight: "400",
+	},
+	".file-tree-scroll-container": {
+		overflowX: "auto",
+		width: "full",
+	},
+	".file-tree-content": {
+		p: "4",
+		display: "inline-block",
+		minWidth: "full",
+	},
+	".tree-line": {
+		whiteSpace: "nowrap",
+		display: "flex",
+		alignItems: "center",
+		position: "relative",
+		minWidth: "max-content",
+	},
+	".tree-guide": {
+		position: "absolute",
+		top: "0",
+		bottom: "0",
+		borderLeftWidth: "1px",
+		borderLeftStyle: "solid",
+		borderLeftColor: "sz.border",
+	},
+	".tree-icon-wrapper": {
+		mr: "3",
+		display: "flex",
+		alignItems: "center",
+		flexShrink: "0",
+	},
+	".tree-icon": {
+		color: "var(--tree-icon-light)",
+		_dark: {
+			color: "var(--tree-icon-dark)",
+		},
+		fontFamily:
+			"var(--moralerspace-neon), 'Symbols Nerd Font Mono', 'JetBrainsMono Nerd Font', 'Hack Nerd Font', monospace",
+		fontSize: "1rem",
+		lineHeight: "1",
+	},
+	".tree-name": {
+		color: "sz.text.main",
+		fontSize: "13px",
+		flexShrink: "0",
+		fontFamily: "inherit",
+	},
+	".tree-comment": {
+		ml: "4",
+		color: "sz.text.sub",
+		fontStyle: "italic",
+		fontSize: "13px",
+		flexShrink: "0",
 	},
 
 	// Expressiveのコードブロック
