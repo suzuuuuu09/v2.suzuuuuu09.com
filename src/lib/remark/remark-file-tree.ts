@@ -118,7 +118,6 @@ const remarkFileTree: Plugin<[RemarkFileTreeOptions?], Root> = (
           <div class="file-tree-container">
             <div class="file-tree-header">
               <span>PROJECT STRUCTURE</span>
-              <span class="file-tree-version">v1.3</span>
             </div>
             <div class="file-tree-scroll-container">
               <div class="file-tree-content">

@@ -313,10 +313,6 @@ export const markdownStyles: GlobalStyleObject = {
 		justifyContent: "space-between",
 		alignItems: "center",
 	},
-	".file-tree-version": {
-		opacity: "0.5",
-		fontWeight: "400",
-	},
 	".file-tree-scroll-container": {
 		overflowX: "auto",
 		width: "full",
