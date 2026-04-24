@@ -20,7 +20,6 @@
         "@r4ai/remark-callout": "^0.6.2",
         "@resvg/resvg-js": "^2.6.2",
         "@suzuuuuu09/astro-iconify": "^1.0.0",
-        "@suzuuuuu09/remark-file-tree": "^0.1.2",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
         "astro": "^5.16.15",
@@ -45,6 +44,7 @@
         "rehype-raw": "^7.0.0",
         "rehype-slug": "^6.0.0",
         "remark-breaks": "^4.0.0",
+        "remark-file-tree": "^0.1.1",
         "remark-math": "^6.0.0",
         "satori": "^0.18.3",
         "twemoji": "^14.0.2",
@@ -531,8 +531,6 @@
     "@speed-highlight/core": ["@speed-highlight/core@1.2.14", "", {}, "sha512-G4ewlBNhUtlLvrJTb88d2mdy2KRijzs4UhnlrOSRT4bmjh/IqNElZa3zkrZ+TC47TwtlDWzVLFADljF1Ijp5hA=="],
 
     "@suzuuuuu09/astro-iconify": ["@suzuuuuu09/astro-iconify@1.0.0", "", { "dependencies": { "@iconify/tools": "latest", "node-fetch": "^3.1.0", "resolve-pkg": "^2.0.0", "svgo": "^3.0.1" } }, "sha512-1VO3NW1qFl+hI8rGV5oYmHKAPG8wNVEAcTlXhhQ1Ozqkqs5fmkabLdtHpCiADmwiJzX8nAxTwqjqQq9HPVjqbA=="],
-
-    "@suzuuuuu09/remark-file-tree": ["@suzuuuuu09/remark-file-tree@0.1.2", "", { "peerDependencies": { "unified": ">=10", "unist-util-visit": ">=4" } }, "sha512-jpgBtUP+w4rqJlfh1rMTrwgqArEKkqK7jimUf1WOCAHqBaPcCM/KevF4soL2PBL/pItECk6o9AGoMZ0sM7arhQ=="],
 
     "@trysound/sax": ["@trysound/sax@0.2.0", "", {}, "sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA=="],
 
@@ -1351,6 +1349,8 @@
     "rehype-stringify": ["rehype-stringify@10.0.1", "", { "dependencies": { "@types/hast": "^3.0.0", "hast-util-to-html": "^9.0.0", "unified": "^11.0.0" } }, "sha512-k9ecfXHmIPuFVI61B9DeLPN0qFHfawM6RsuX48hoqlaKSF61RskNjSm1lI8PhBEM0MRdLxVVm4WmTqJQccH9mA=="],
 
     "remark-breaks": ["remark-breaks@4.0.0", "", { "dependencies": { "@types/mdast": "^4.0.0", "mdast-util-newline-to-break": "^2.0.0", "unified": "^11.0.0" } }, "sha512-IjEjJOkH4FuJvHZVIW0QCDWxcG96kCq7An/KVH2NfJe6rKZU2AsHeB3OEjPNRxi4QC34Xdx7I2KGYn6IpT7gxQ=="],
+
+    "remark-file-tree": ["remark-file-tree@0.1.1", "", { "peerDependencies": { "unified": ">=10", "unist-util-visit": ">=4" } }, "sha512-2EbtdeEV759hVo84PmFMphgFsgTgkiZYcXORGh0ozU9VLEjMEnwJLGdM6qcZHMkqSb90WLgD4bke+ra7i/VSxw=="],
 
     "remark-gfm": ["remark-gfm@4.0.1", "", { "dependencies": { "@types/mdast": "^4.0.0", "mdast-util-gfm": "^3.0.0", "micromark-extension-gfm": "^3.0.0", "remark-parse": "^11.0.0", "remark-stringify": "^11.0.0", "unified": "^11.0.0" } }, "sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg=="],
 
