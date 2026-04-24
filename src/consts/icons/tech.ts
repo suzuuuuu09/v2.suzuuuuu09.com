@@ -12,20 +12,48 @@ const LANG_ICONS: Record<string, IconCard> = {
 	typescript: { icon: "material-icon-theme:typescript", name: "TypeScript" },
 };
 
+const DB_ORM_ICONS: Record<string, IconCard> = {
+	drizzle: { icon: "simple-icons:drizzle", name: "Drizzle", color: "#0EA5E9" },
+	zod: { icon: "simple-icons:zod", name: "Zod", color: "#4087FF" },
+};
+
+const GAME_ENGINE_ICONS: Record<string, IconCard> = {
+	unity: { icon: "material-icon-theme:unity", name: "Unity" },
+};
+
+const FRONTEND_FRAMEWORK_ICONS: Record<string, IconCard> = {
+	astro: { icon: "material-icon-theme:astro", name: "Astro" },
+	gsap: { icon: "simple-icons:gsap", name: "GSAP", color: "#0AE448" },
+	nextjs: { icon: "material-icon-theme:next", name: "Next.js" },
+	nuxt: { icon: "material-icon-theme:nuxt", name: "Nuxt.js" },
+	pandacss: { icon: "logos:pandacss-icon", name: "PandaCSS" },
+	react: { icon: "simple-icons:react", name: "React", color: "#61DAFB" },
+	svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
+	tailwind: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
+	unocss: { icon: "material-icon-theme:unocss", name: "UnoCSS" },
+	vue: { icon: "material-icon-theme:vue", name: "Vue.js" },
+	vuetify: { icon: "simple-icons:vuetify", name: "Vuetify", color: "#1867C0" },
+};
+
+const BACKEND_FRAMEWORK_ICONS: Record<string, IconCard> = {
+	bun: { icon: "material-icon-theme:bun", name: "Bun" },
+	django: { icon: "material-icon-theme:django", name: "Django" },
+	expressjs: { icon: "simple-icons:express", name: "Express.js" },
+	fastapi: { icon: "devicon:fastapi", name: "FastAPI" },
+	flask: { icon: "simple-icons:flask", name: "Flask" },
+	hono: { icon: "logos:hono", name: "Hono" },
+	nodejs: { icon: "vscode-icons:file-type-node", name: "Node.js" },
+};
+
 export const TECH_ICONS: Record<string, IconCard> = {
 	...LANG_ICONS,
-	astro: { icon: "material-icon-theme:astro", name: "Astro" },
-	bun: { icon: "material-icon-theme:bun", name: "Bun" },
+	...DB_ORM_ICONS,
+	...GAME_ENGINE_ICONS,
+	...FRONTEND_FRAMEWORK_ICONS,
+	...BACKEND_FRAMEWORK_ICONS,
 	biome: { icon: "simple-icons:biome", name: "Biome", color: "#007ACC" },
-	django: { icon: "material-icon-theme:django", name: "Django" },
-	drizzle: { icon: "simple-icons:drizzle", name: "Drizzle", color: "#0EA5E9" },
-	expressjs: { icon: "simple-icons:express", name: "Express.js" },
 	ffmpeg: { icon: "file-icons:ffmpeg", name: "FFmpeg", color: "#13802d" },
 	flutter: { icon: "devicon:flutter", name: "Flutter" },
-	flask: { icon: "simple-icons:flask", name: "Flask" },
-	fastapi: { icon: "devicon:fastapi", name: "FastAPI" },
-	gsap: { icon: "simple-icons:gsap", name: "GSAP", color: "#0AE448" },
-	hono: { icon: "logos:hono", name: "Hono" },
 	jupyter: { icon: "material-icon-theme:jupyter", name: "Jupyter" },
 	leaflet: { icon: "file-icons:leaflet", name: "Leaflet", color: "#199900" },
 	mantine: { icon: "simple-icons:mantine", name: "Mantine", color: "#339AF0" },
@@ -35,20 +63,14 @@ export const TECH_ICONS: Record<string, IconCard> = {
 		name: "MediaPipe",
 		color: "#0497A7",
 	},
-	nodejs: { icon: "vscode-icons:file-type-node", name: "Node.js" },
-	nextjs: { icon: "material-icon-theme:next", name: "Next.js" },
-	nuxt: { icon: "material-icon-theme:nuxt", name: "Nuxt.js" },
+	nix: { icon: "material-icon-theme:nix", name: "Nix" },
 	opencv: { icon: "devicon:opencv", name: "OpenCV" },
 	pandas: { icon: "devicon:pandas", name: "Pandas" },
-	pandacss: { icon: "logos:pandacss-icon", name: "PandaCSS" },
-	react: { icon: "simple-icons:react", name: "React", color: "#61DAFB" },
 	selenium: { icon: "logos:selenium", name: "Selenium" },
-	svelte: { icon: "material-icon-theme:svelte", name: "Svelte" },
-	tailwind: { icon: "material-icon-theme:tailwindcss", name: "Tailwind CSS" },
-	unocss: { icon: "material-icon-theme:unocss", name: "UnoCSS" },
-	unity: { icon: "material-icon-theme:unity", name: "Unity" },
 	vite: { icon: "material-icon-theme:vite", name: "Vite" },
-	vue: { icon: "material-icon-theme:vue", name: "Vue.js" },
-	vuetify: { icon: "simple-icons:vuetify", name: "Vuetify", color: "#1867C0" },
-	zod: { icon: "simple-icons:zod", name: "Zod", color: "#4087FF" },
+	archlinux: {
+		icon: "simple-icons:archlinux",
+		name: "Arch Linux",
+		color: "#1793D1",
+	},
 };

@@ -8,3 +8,5 @@ export const ICON_CARDS: Record<string, IconCard> = {
 	...PLATFORM_ICONS,
 	...EDITOR_ICONS,
 };
+
+export type IconCardKey = keyof typeof ICON_CARDS;

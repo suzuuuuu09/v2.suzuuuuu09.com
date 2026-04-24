@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "v2.suzuuuuu09.com",
@@ -10,6 +11,7 @@
         "@astrojs/react": "^4.4.2",
         "@astrojs/rss": "^4.0.13",
         "@astrojs/sitemap": "^3.6.0",
+        "@chenglou/pretext": "^0.0.3",
         "@giscus/react": "^3.1.0",
         "@mantine/carousel": "^8.3.18",
         "@mantine/core": "^8.3.8",
@@ -18,6 +20,7 @@
         "@r4ai/remark-callout": "^0.6.2",
         "@resvg/resvg-js": "^2.6.2",
         "@suzuuuuu09/astro-iconify": "^1.0.0",
+        "@suzuuuuu09/remark-file-tree": "^0.1.2",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
         "astro": "^5.16.15",
@@ -148,6 +151,8 @@
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.3.14", "", { "os": "win32", "cpu": "x64" }, "sha512-oizCjdyQ3WJEswpb3Chdngeat56rIdSYK12JI3iI11Mt5T5EXcZ7WLuowzEaFPNJ3zmOQFliMN8QY1Pi+qsfdQ=="],
 
     "@capsizecss/unpack": ["@capsizecss/unpack@4.0.0", "", { "dependencies": { "fontkitten": "^1.0.0" } }, "sha512-VERIM64vtTP1C4mxQ5thVT9fK0apjPFobqybMtA1UdUujWka24ERHbRHFGmpbbhp73MhV+KSsHQH9C6uOTdEQA=="],
+
+    "@chenglou/pretext": ["@chenglou/pretext@0.0.3", "", {}, "sha512-RQmqMqUAPRCyv4R3LlRi/ao6KbNWYclqLA+V1HS7sWgyUUbjn3JmmlfXZSY/BjM4rbmIaMSyIVisYocYGYftiQ=="],
 
     "@clack/core": ["@clack/core@0.4.1", "", { "dependencies": { "picocolors": "^1.0.0", "sisteransi": "^1.0.5" } }, "sha512-Pxhij4UXg8KSr7rPek6Zowm+5M22rbd2g1nfojHJkxp5YkFqiZ2+YLEM/XGVIzvGOcM0nqjIFxrpDwWRZYWYjA=="],
 
@@ -526,6 +531,8 @@
     "@speed-highlight/core": ["@speed-highlight/core@1.2.14", "", {}, "sha512-G4ewlBNhUtlLvrJTb88d2mdy2KRijzs4UhnlrOSRT4bmjh/IqNElZa3zkrZ+TC47TwtlDWzVLFADljF1Ijp5hA=="],
 
     "@suzuuuuu09/astro-iconify": ["@suzuuuuu09/astro-iconify@1.0.0", "", { "dependencies": { "@iconify/tools": "latest", "node-fetch": "^3.1.0", "resolve-pkg": "^2.0.0", "svgo": "^3.0.1" } }, "sha512-1VO3NW1qFl+hI8rGV5oYmHKAPG8wNVEAcTlXhhQ1Ozqkqs5fmkabLdtHpCiADmwiJzX8nAxTwqjqQq9HPVjqbA=="],
+
+    "@suzuuuuu09/remark-file-tree": ["@suzuuuuu09/remark-file-tree@0.1.2", "", { "peerDependencies": { "unified": ">=10", "unist-util-visit": ">=4" } }, "sha512-jpgBtUP+w4rqJlfh1rMTrwgqArEKkqK7jimUf1WOCAHqBaPcCM/KevF4soL2PBL/pItECk6o9AGoMZ0sM7arhQ=="],
 
     "@trysound/sax": ["@trysound/sax@0.2.0", "", {}, "sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA=="],
 

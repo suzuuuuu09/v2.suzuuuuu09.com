@@ -287,63 +287,39 @@ export const markdownStyles: GlobalStyleObject = {
 			fontSize: "sm",
 		},
 	},
-	".file-tree-container": {
+
+	".file-tree-container, .remark-file-tree": {
 		bg: "sz.bg-on",
 		borderWidth: "1",
 		borderColor: "sz.border",
 		borderRadius: "xl",
 		my: "6",
 		overflow: "hidden",
-		display: "flex",
-		flexDirection: "column",
+		display: "block",
 		fontFamily:
 			"var(--moralerspace-neon), 'JetBrains Mono', 'Fira Code', monospace",
 	},
-	".file-tree-header": {
-		bg: "sz.bg-on.500",
-		px: "5",
-		py: "3",
-		fontSize: "xs",
-		color: "sz.text.sub",
-		borderBottomWidth: "1",
-		borderBottomColor: "sz.border",
-		fontWeight: "800",
-		letterSpacing: "0.15em",
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-	},
-	".file-tree-scroll-container": {
-		overflowX: "auto",
-		width: "full",
-	},
-	".file-tree-content": {
+
+	".file-tree-content, .remark-file-tree__content": {
 		p: "4",
-		display: "inline-block",
-		minWidth: "full",
 	},
-	".tree-line": {
+
+	".tree-line, .remark-file-tree__line": {
 		whiteSpace: "nowrap",
 		display: "flex",
 		alignItems: "center",
-		position: "relative",
 		minWidth: "max-content",
+		pl: "calc(var(--tree-depth) * 1.5rem)",
 	},
-	".tree-guide": {
-		position: "absolute",
-		top: "0",
-		bottom: "0",
-		borderLeftWidth: "1px",
-		borderLeftStyle: "solid",
-		borderLeftColor: "sz.border",
-	},
-	".tree-icon-wrapper": {
+
+	".tree-icon-wrapper, .remark-file-tree__icon": {
 		mr: "3",
 		display: "flex",
 		alignItems: "center",
 		flexShrink: "0",
 	},
-	".tree-icon": {
+
+	".tree-icon, .remark-file-tree__icon-glyph": {
 		color: "var(--tree-icon-light)",
 		_dark: {
 			color: "var(--tree-icon-dark)",
@@ -353,17 +329,19 @@ export const markdownStyles: GlobalStyleObject = {
 		fontSize: "1rem",
 		lineHeight: "1",
 	},
-	".tree-name": {
+
+	".tree-name, .remark-file-tree__name": {
 		color: "sz.text.main",
-		fontSize: "13px",
+		fontSize: "15px",
 		flexShrink: "0",
 		fontFamily: "inherit",
 	},
-	".tree-comment": {
+
+	".tree-comment, .remark-file-tree__comment": {
 		ml: "4",
 		color: "sz.text.sub",
 		fontStyle: "italic",
-		fontSize: "13px",
+		fontSize: "15px",
 		flexShrink: "0",
 	},
 
