@@ -294,7 +294,8 @@ export const markdownStyles: GlobalStyleObject = {
 		borderColor: "sz.border",
 		borderRadius: "xl",
 		my: "6",
-		overflow: "hidden",
+		overflowX: "auto",
+		overflowY: "hidden",
 		display: "block",
 		fontFamily:
 			"var(--moralerspace-neon), 'JetBrains Mono', 'Fira Code', monospace",
@@ -302,6 +303,8 @@ export const markdownStyles: GlobalStyleObject = {
 
 	".file-tree-content, .remark-file-tree__content": {
 		p: "4",
+		display: "inline-block",
+		minWidth: "full",
 	},
 
 	".tree-line, .remark-file-tree__line": {
