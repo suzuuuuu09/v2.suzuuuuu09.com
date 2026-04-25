@@ -1,14 +1,14 @@
 ---
 title: Markdown記法の一覧
 tags:
-  - markdown
+  - Markdown
 emoji: 📝
 slug: markdown-guide
 description: このブログ内で使えるMarkdown記法をまとめる。
 category: tech
 isPublish: true
 publishDate: 2025-08-09
-updateDate: 2026-04-19T15:15
+updateDate: 2026-04-25T21:27
 ---
 
 # H1 見出し
@@ -393,26 +393,30 @@ src/pages/
 
 ````markdown
 ```tree
+.direnv/
 src/
-	components/
-		Header.tsx
-		Footer.tsx
-test/
-	test.ts
-package.json
-tsconfig.json
+	typst/
+		main.typ
+	java/
+		HelloWorld.java
+flake.nix
+flake.lock
+.direnv
+.gitignore
 ```
 ````
 
 ```tree
+.direnv/
 src/
-	components/
-		Header.tsx
-		Footer.tsx
-test/
-	test.ts
-package.json
-tsconfig.json
+	typst/
+		main.typ
+	java/
+		HelloWorld.java
+flake.nix
+flake.lock
+.direnv
+.gitignore
 ```
 
 ## 埋め込み
