@@ -1,6 +1,6 @@
 ---
 title: AeroSpaceでもピクチャ・イン・ピクチャを追従させたい！
-slug: aerospace-how-to-use-pip
+slug: aerospace-how-to-follow-pip
 author: suzu
 emoji: 🛸
 description: AeroSpaceでワークスペースを切り替えた際に、YouTube等のPiPウィンドウを自動追従させる設定方法を紹介する。
@@ -9,10 +9,10 @@ tags:
   - AeroSpace
 isPublish: true
 publishDate: 2026-04-26T00:46
-updateDate: 2026-04-26T00:46
+updateDate: 2026-04-26T02:13
 ---
 ## はじめに
-私は MacOS のタイル方ウィンドウマネージャーに [`AeroSpace`](https://nikitabobko.github.io/AeroSpace/guide) を使っています。非常に便利なツールですが、一つだけ不満がありました。それは、YouTube 等のアプリでピクチャー・イン・ピクチャー (PiP) を使用してワークスペースを切り替えると、PiP ウィンドウが元のワークスペースに取り残されてしまうことです。  
+私は MacOS のタイル型ウィンドウマネージャーに [`AeroSpace`](https://nikitabobko.github.io/AeroSpace/guide) を使っています。非常に便利なツールですが、一つだけ不満がありました。それは、YouTube 等のアプリでピクチャー・イン・ピクチャー (PiP) を使用してワークスペースを切り替えると、PiP ウィンドウが元のワークスペースに取り残されてしまうことです。  
 \
 なので、今回はそれを改善していけたらなと思います。
 ## 環境
