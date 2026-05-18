@@ -38,13 +38,12 @@ const layout = calculateCardLayout(size, showName);
   rounded="lg"
   gap="2"
   alignItems="center"
-  width={`${layout.containerWidth}px`}
-  height={`${layout.containerHeight}px`}
+  style={`width: ${layout.containerWidth}px; height: ${layout.containerHeight}px`}
 >
   <VStack
     alignItems="center"
     justifyContent="center"
-    height={`${layout.iconAreaHeight}px`}
+    style={`height: ${layout.iconAreaHeight}px`}
     p="2"
   >
     <Icon
@@ -61,7 +60,7 @@ const layout = calculateCardLayout(size, showName);
         color="sz.text.main"
         fontWeight="medium"
         textAlign="center"
-        height={`${layout.textAreaHeight}px`}
+        style={`height: ${layout.textAreaHeight}px`}
       >
         {displayName}
       </s.span>

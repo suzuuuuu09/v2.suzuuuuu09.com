@@ -25,10 +25,7 @@ const avatarStyles = cva({
 	base: {
 		display: "block",
 		maxWidth: "none",
-		minWidth: `${size}px`,
-		minHeight: `${size}px`,
-		width: `${size}px`,
-		height: `${size}px`,
+
 	},
 	variants: {
 		border: {
@@ -70,5 +67,6 @@ const avatarStyles = cva({
   height={size}
   loading="eager"
 	fetchpriority="high"
+  style={`width: ${size}px; height: ${size}px; min-width: ${size}px; min-height: ${size}px`}
   class={avatarStyles({ border, square, fit: objectFit })}
 />
