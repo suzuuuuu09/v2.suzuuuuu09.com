@@ -44,24 +44,21 @@ const badgeStyles = cva({
 
 {
   currentCategory && (
-    <div
-      class={cx(
-        css({
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "1",
-          px: "2.5",
-          py: "1",
-          borderRadius: "md",
-          fontSize: "xs",
-          fontWeight: "semibold",
-          borderWidth: "1",
-        }),
-				badgeStyles({ category: currentCategory.category }),
-      )}
+    <s.div
+      class={badgeStyles({ category: currentCategory.category })}
+      display="inline-flex"
+      alignItems="center"
+      gap="1"
+      px="2.5"
+      py="1"
+      borderRadius="md"
+      fontSize="xs"
+      fontWeight="semibold"
+      borderWidth="1"
     >
       <s.span>{currentCategory.emoji}</s.span>
       <s.span textTransform="capitalize">{currentCategory.category}</s.span>
-    </div>
+    </s.div>
   )
 }
+
