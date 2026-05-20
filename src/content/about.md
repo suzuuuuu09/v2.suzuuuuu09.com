@@ -1,6 +1,6 @@
 ---
 publishDate: 2025-09-25
-updateDate: 2026-02-07T23:56
+updateDate: 2026-05-20T10:15
 ---
 
 ## 注意書き
@@ -12,6 +12,7 @@ updateDate: 2026-02-07T23:56
 
 - [`愛知工業大学 情報科学科 コンピュータシステム専攻`](https://www.ait.ac.jp/faculty/info-science/computer/)
 - [`システム工学研究会`](https://www.sysken.net)
+- [`NxTEND`](https://www.nxtend.or.jp)
 
 ## 免許・資格
 
