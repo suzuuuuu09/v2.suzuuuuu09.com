@@ -9,7 +9,7 @@ tags:
   - AeroSpace
 isPublish: true
 publishDate: 2026-04-26T00:46
-updateDate: 2026-04-26T00:46
+updateDate: 2026-05-21T17:31
 ---
 ## はじめに
 私は MacOS のタイル方ウィンドウマネージャーに [`AeroSpace`](https://nikitabobko.github.io/AeroSpace/guide) を使っています。非常に便利なツールですが、一つだけ不満がありました。それは、YouTube 等のアプリでピクチャー・イン・ピクチャー (PiP) を使用してワークスペースを切り替えると、PiP ウィンドウが元のワークスペースに取り残されてしまうことです。  
@@ -90,3 +90,6 @@ run = ['layout floating']
 
 ## おわりに
 以上、AeroSpace の PiP を自動追従させる方法でした。
+
+## 参考
+[Keeping a window on all workspaces · Issue #139 · nikitabobko/AeroSpace](https://github.com/nikitabobko/AeroSpace/issues/139)
